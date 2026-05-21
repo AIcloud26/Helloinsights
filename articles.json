@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 83072,
+      "category": "technology",
+      "title": "AI and Machine Learning breakthroughs Explained: Everything You Need to Know",
+      "excerpt": "A comprehensive look at ai and machine learning breakthroughs and why it matters in today's world.",
+      "image": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&h=400&fit=crop",
+      "readTime": "4 min read"
+    },
+    {
+      "id": 83980,
+      "category": "ai-tools",
+      "title": "Top AI chatbots Tools Worth Your Attention",
+      "excerpt": "A comprehensive look at ai chatbots and why it matters in today's world.",
+      "image": "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&h=400&fit=crop",
+      "readTime": "5 min read"
+    },
+    {
+      "id": 43289,
+      "category": "finance",
+      "title": "Navigating ESG investing: A Beginner's Guide",
+      "excerpt": "A comprehensive look at esg investing and why it matters in today's world.",
+      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
+      "readTime": "9 min read"
+    },
+    {
       "id": 44538,
       "category": "technology",
       "title": "Top 5 Trends in Cybersecurity trends and threats for 2025",
@@ -375,34 +399,10 @@
       "excerpt": "Discover how web3 and blockchain technology is revolutionizing the industry and what it means for you.",
       "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
       "readTime": "7 min read"
-    },
-    {
-      "id": 99027,
-      "category": "ai-tools",
-      "title": "AI coding assistants: The Game-Changer You Need to Know",
-      "excerpt": "A comprehensive look at ai coding assistants and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1488229297570-58520851e68c?w=600&h=400&fit=crop",
-      "readTime": "11 min read"
-    },
-    {
-      "id": 56775,
-      "category": "finance",
-      "title": "Smart Money: Understanding Fintech innovations in 2025",
-      "excerpt": "A comprehensive look at fintech innovations and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1579621970795-6f224c840a2e?w=600&h=400&fit=crop",
-      "readTime": "5 min read"
-    },
-    {
-      "id": 6715,
-      "category": "technology",
-      "title": "The Future of Edge computing: What to Expect in 2025",
-      "excerpt": "How edge computing is shaping the future and creating new opportunities.",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop",
-      "readTime": "9 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-05-20T03:28:04.600Z",
+    "lastUpdated": "2026-05-21T03:34:40.429Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

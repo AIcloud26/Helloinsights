@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 95579,
+      "category": "finance",
+      "title": "How Wealth management Is Changing the Financial Landscape",
+      "excerpt": "Expert analysis on the latest wealth management trends and their impact on everyday life.",
+      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
+      "readTime": "4 min read"
+    },
+    {
+      "id": 56688,
+      "category": "health-lifestyle",
+      "title": "Science-Backed: How Mental health and mindfulness Improves Wellbeing",
+      "excerpt": "How mental health and mindfulness is shaping the future and creating new opportunities.",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop",
+      "readTime": "3 min read"
+    },
+    {
+      "id": 80119,
+      "category": "ai-tools",
+      "title": "The Rise of AI video creation: What It Means for You",
+      "excerpt": "Expert analysis on the latest ai video creation trends and their impact on everyday life.",
+      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
+      "readTime": "6 min read"
+    },
+    {
       "id": 40263,
       "category": "finance",
       "title": "Banking technology Strategies for the Modern Investor",
@@ -375,34 +399,10 @@
       "excerpt": "A comprehensive look at meditation practices and why it matters in today's world.",
       "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop",
       "readTime": "12 min read"
-    },
-    {
-      "id": 23026,
-      "category": "technology",
-      "title": "5G and 6G networks Explained: Everything You Need to Know",
-      "excerpt": "A comprehensive look at 5g and 6g networks and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop",
-      "readTime": "4 min read"
-    },
-    {
-      "id": 41548,
-      "category": "finance",
-      "title": "Market Watch: Real estate investment Trends to Watch",
-      "excerpt": "Discover how real estate investment is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop",
-      "readTime": "10 min read"
-    },
-    {
-      "id": 77362,
-      "category": "finance",
-      "title": "How ESG investing Is Changing the Financial Landscape",
-      "excerpt": "Breaking down esg investing: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1579621970795-6f224c840a2e?w=600&h=400&fit=crop",
-      "readTime": "8 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-05-25T03:40:47.952Z",
+    "lastUpdated": "2026-05-26T03:26:07.409Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

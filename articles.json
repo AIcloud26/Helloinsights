@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 18520,
+      "category": "technology",
+      "title": "5G and 6G networks: A Complete Guide for Tech Enthusiasts",
+      "excerpt": "Breaking down 5g and 6g networks: insights, trends, and practical applications.",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
+      "readTime": "9 min read"
+    },
+    {
+      "id": 40078,
+      "category": "health-lifestyle",
+      "title": "Expert Tips on Sleep optimization for Better Living",
+      "excerpt": "How sleep optimization is shaping the future and creating new opportunities.",
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop",
+      "readTime": "6 min read"
+    },
+    {
+      "id": 65813,
+      "category": "ai-tools",
+      "title": "AI video creation for Business: A Practical Guide",
+      "excerpt": "Everything you need to know about ai video creation to stay ahead of the curve.",
+      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
+      "readTime": "5 min read"
+    },
+    {
       "id": 95579,
       "category": "finance",
       "title": "How Wealth management Is Changing the Financial Landscape",
@@ -375,34 +399,10 @@
       "excerpt": "Get the inside scoop on work-life balance from industry experts and thought leaders.",
       "image": "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&h=400&fit=crop",
       "readTime": "9 min read"
-    },
-    {
-      "id": 59268,
-      "category": "finance",
-      "title": "Smart Money: Understanding Wealth management in 2025",
-      "excerpt": "How wealth management is shaping the future and creating new opportunities.",
-      "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop",
-      "readTime": "3 min read"
-    },
-    {
-      "id": 18741,
-      "category": "technology",
-      "title": "Breaking: Cybersecurity trends and threats Is Reshaping the Tech Industry",
-      "excerpt": "How cybersecurity trends and threats is shaping the future and creating new opportunities.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
-      "readTime": "12 min read"
-    },
-    {
-      "id": 66382,
-      "category": "health-lifestyle",
-      "title": "Meditation practices: The Trend Taking 2025 by Storm",
-      "excerpt": "A comprehensive look at meditation practices and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop",
-      "readTime": "12 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-05-26T03:26:07.409Z",
+    "lastUpdated": "2026-05-27T03:39:58.876Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

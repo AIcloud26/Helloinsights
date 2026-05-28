@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 99889,
+      "category": "health-lifestyle",
+      "title": "Wellness technology: Transform Your Life in 30 Days",
+      "excerpt": "How wellness technology is shaping the future and creating new opportunities.",
+      "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=400&fit=crop",
+      "readTime": "9 min read"
+    },
+    {
+      "id": 69924,
+      "category": "ai-tools",
+      "title": "The Rise of Voice and speech AI: What It Means for You",
+      "excerpt": "Discover how voice and speech ai is revolutionizing the industry and what it means for you.",
+      "image": "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&h=400&fit=crop",
+      "readTime": "9 min read"
+    },
+    {
+      "id": 95168,
+      "category": "finance",
+      "title": "Navigating Cryptocurrency and DeFi trends: A Beginner's Guide",
+      "excerpt": "A comprehensive look at cryptocurrency and defi trends and why it matters in today's world.",
+      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
+      "readTime": "5 min read"
+    },
+    {
       "id": 18520,
       "category": "technology",
       "title": "5G and 6G networks: A Complete Guide for Tech Enthusiasts",
@@ -375,34 +399,10 @@
       "excerpt": "Breaking down ai writing assistants: insights, trends, and practical applications.",
       "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
       "readTime": "5 min read"
-    },
-    {
-      "id": 77004,
-      "category": "technology",
-      "title": "Web3 and blockchain technology: A Complete Guide for Tech Enthusiasts",
-      "excerpt": "The definitive guide to understanding web3 and blockchain technology in the current landscape.",
-      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop",
-      "readTime": "5 min read"
-    },
-    {
-      "id": 56632,
-      "category": "health-lifestyle",
-      "title": "Stress management: The Trend Taking 2025 by Storm",
-      "excerpt": "The definitive guide to understanding stress management in the current landscape.",
-      "image": "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&h=400&fit=crop",
-      "readTime": "4 min read"
-    },
-    {
-      "id": 98896,
-      "category": "health-lifestyle",
-      "title": "Work-life balance: Transform Your Life in 30 Days",
-      "excerpt": "Get the inside scoop on work-life balance from industry experts and thought leaders.",
-      "image": "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&h=400&fit=crop",
-      "readTime": "9 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-05-27T03:39:58.876Z",
+    "lastUpdated": "2026-05-28T03:28:53.424Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

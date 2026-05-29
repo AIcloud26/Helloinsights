@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 47465,
+      "category": "finance",
+      "title": "Fintech innovations Strategies for the Modern Investor",
+      "excerpt": "The definitive guide to understanding fintech innovations in the current landscape.",
+      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
+      "readTime": "6 min read"
+    },
+    {
+      "id": 54927,
+      "category": "finance",
+      "title": "Navigating Retirement planning: A Beginner's Guide",
+      "excerpt": "Discover how retirement planning is revolutionizing the industry and what it means for you.",
+      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop",
+      "readTime": "12 min read"
+    },
+    {
+      "id": 48235,
+      "category": "finance",
+      "title": "The Future of Wealth management: Expert Predictions",
+      "excerpt": "The definitive guide to understanding wealth management in the current landscape.",
+      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
+      "readTime": "5 min read"
+    },
+    {
       "id": 99889,
       "category": "health-lifestyle",
       "title": "Wellness technology: Transform Your Life in 30 Days",
@@ -375,34 +399,10 @@
       "excerpt": "Expert analysis on the latest ai coding assistants trends and their impact on everyday life.",
       "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
       "readTime": "6 min read"
-    },
-    {
-      "id": 37292,
-      "category": "finance",
-      "title": "Navigating Wealth management: A Beginner's Guide",
-      "excerpt": "Expert analysis on the latest wealth management trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop",
-      "readTime": "4 min read"
-    },
-    {
-      "id": 6579,
-      "category": "ai-tools",
-      "title": "The Rise of AI writing assistants: What It Means for You",
-      "excerpt": "A comprehensive look at ai writing assistants and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1488229297570-58520851e68c?w=600&h=400&fit=crop",
-      "readTime": "9 min read"
-    },
-    {
-      "id": 50984,
-      "category": "ai-tools",
-      "title": "Mastering AI writing assistants: Tips and Best Practices",
-      "excerpt": "Breaking down ai writing assistants: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
-      "readTime": "5 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-05-28T03:28:53.424Z",
+    "lastUpdated": "2026-05-29T03:29:21.960Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

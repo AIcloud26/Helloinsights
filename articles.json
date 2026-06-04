@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 33879,
+      "category": "finance",
+      "title": "Smart Money: Understanding Tax optimization tips in 2025",
+      "excerpt": "Everything you need to know about tax optimization tips to stay ahead of the curve.",
+      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop",
+      "readTime": "9 min read"
+    },
+    {
+      "id": 74265,
+      "category": "finance",
+      "title": "The Future of Tax optimization tips: Expert Predictions",
+      "excerpt": "Breaking down tax optimization tips: insights, trends, and practical applications.",
+      "image": "https://images.unsplash.com/photo-1579621970795-6f224c840a2e?w=600&h=400&fit=crop",
+      "readTime": "7 min read"
+    },
+    {
+      "id": 17907,
+      "category": "ai-tools",
+      "title": "AI productivity apps Explained: A Complete Beginner's Guide",
+      "excerpt": "The definitive guide to understanding ai productivity apps in the current landscape.",
+      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+      "readTime": "12 min read"
+    },
+    {
       "id": 26351,
       "category": "ai-tools",
       "title": "AI image generation tools Explained: A Complete Beginner's Guide",
@@ -375,34 +399,10 @@
       "excerpt": "Breaking down ai productivity apps: insights, trends, and practical applications.",
       "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
       "readTime": "7 min read"
-    },
-    {
-      "id": 36002,
-      "category": "technology",
-      "title": "Sustainable technology Explained: Everything You Need to Know",
-      "excerpt": "Everything you need to know about sustainable technology to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop",
-      "readTime": "6 min read"
-    },
-    {
-      "id": 52172,
-      "category": "finance",
-      "title": "Navigating Fintech innovations: A Beginner's Guide",
-      "excerpt": "Breaking down fintech innovations: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop",
-      "readTime": "8 min read"
-    },
-    {
-      "id": 69448,
-      "category": "finance",
-      "title": "Navigating Real estate investment: A Beginner's Guide",
-      "excerpt": "A comprehensive look at real estate investment and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
-      "readTime": "5 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-06-03T03:58:08.267Z",
+    "lastUpdated": "2026-06-04T03:53:33.875Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

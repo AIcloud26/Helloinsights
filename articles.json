@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 65350,
+      "category": "finance",
+      "title": "Wealth Building: The Role of ESG investing",
+      "excerpt": "Breaking down esg investing: insights, trends, and practical applications.",
+      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
+      "readTime": "9 min read"
+    },
+    {
+      "id": 70259,
+      "category": "ai-tools",
+      "title": "Mastering AI for business: Tips and Best Practices",
+      "excerpt": "Breaking down ai for business: insights, trends, and practical applications.",
+      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
+      "readTime": "4 min read"
+    },
+    {
+      "id": 54377,
+      "category": "ai-tools",
+      "title": "AI video creation for Business: A Practical Guide",
+      "excerpt": "Breaking down ai video creation: insights, trends, and practical applications.",
+      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+      "readTime": "12 min read"
+    },
+    {
       "id": 33879,
       "category": "finance",
       "title": "Smart Money: Understanding Tax optimization tips in 2025",
@@ -375,34 +399,10 @@
       "excerpt": "The definitive guide to understanding retirement planning in the current landscape.",
       "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop",
       "readTime": "9 min read"
-    },
-    {
-      "id": 73581,
-      "category": "technology",
-      "title": "Robotics and automation Explained: Everything You Need to Know",
-      "excerpt": "A comprehensive look at robotics and automation and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
-      "readTime": "9 min read"
-    },
-    {
-      "id": 63672,
-      "category": "ai-tools",
-      "title": "Tool Review: Best Voice and speech AI Solutions in 2025",
-      "excerpt": "Breaking down voice and speech ai: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
-      "readTime": "3 min read"
-    },
-    {
-      "id": 9548,
-      "category": "ai-tools",
-      "title": "How AI productivity apps Can Boost Your Productivity",
-      "excerpt": "Breaking down ai productivity apps: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
-      "readTime": "7 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-06-04T03:53:33.875Z",
+    "lastUpdated": "2026-06-05T03:38:14.164Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

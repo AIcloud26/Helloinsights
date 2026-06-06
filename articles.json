@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 4491,
+      "category": "health-lifestyle",
+      "title": "Expert Tips on Mental health and mindfulness for Better Living",
+      "excerpt": "Breaking down mental health and mindfulness: insights, trends, and practical applications.",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop",
+      "readTime": "5 min read"
+    },
+    {
+      "id": 23995,
+      "category": "health-lifestyle",
+      "title": "Mental health and mindfulness Myths Debunked: What Really Works",
+      "excerpt": "Expert analysis on the latest mental health and mindfulness trends and their impact on everyday life.",
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop",
+      "readTime": "7 min read"
+    },
+    {
+      "id": 63121,
+      "category": "technology",
+      "title": "Why Cybersecurity trends and threats Matters More Than Ever in 2025",
+      "excerpt": "Everything you need to know about cybersecurity trends and threats to stay ahead of the curve.",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
+      "readTime": "4 min read"
+    },
+    {
       "id": 65350,
       "category": "finance",
       "title": "Wealth Building: The Role of ESG investing",
@@ -375,34 +399,10 @@
       "excerpt": "A comprehensive look at ai chatbots and why it matters in today's world.",
       "image": "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&h=400&fit=crop",
       "readTime": "5 min read"
-    },
-    {
-      "id": 43289,
-      "category": "finance",
-      "title": "Navigating ESG investing: A Beginner's Guide",
-      "excerpt": "A comprehensive look at esg investing and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
-      "readTime": "9 min read"
-    },
-    {
-      "id": 44538,
-      "category": "technology",
-      "title": "Top 5 Trends in Cybersecurity trends and threats for 2025",
-      "excerpt": "Breaking down cybersecurity trends and threats: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
-      "readTime": "12 min read"
-    },
-    {
-      "id": 72976,
-      "category": "finance",
-      "title": "How Retirement planning Is Changing the Financial Landscape",
-      "excerpt": "The definitive guide to understanding retirement planning in the current landscape.",
-      "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop",
-      "readTime": "9 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-06-05T03:38:14.164Z",
+    "lastUpdated": "2026-06-06T03:21:19.605Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

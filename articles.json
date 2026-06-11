@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 9052,
+      "category": "finance",
+      "title": "How Retirement planning Is Changing the Financial Landscape",
+      "excerpt": "Discover how retirement planning is revolutionizing the industry and what it means for you.",
+      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
+      "readTime": "8 min read"
+    },
+    {
+      "id": 30839,
+      "category": "technology",
+      "title": "Top 5 Trends in Web3 and blockchain technology for 2025",
+      "excerpt": "Get the inside scoop on web3 and blockchain technology from industry experts and thought leaders.",
+      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop",
+      "readTime": "7 min read"
+    },
+    {
+      "id": 2686,
+      "category": "technology",
+      "title": "Robotics and automation Explained: Everything You Need to Know",
+      "excerpt": "Expert analysis on the latest robotics and automation trends and their impact on everyday life.",
+      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop",
+      "readTime": "12 min read"
+    },
+    {
       "id": 83893,
       "category": "ai-tools",
       "title": "ChatGPT and language models Explained: A Complete Beginner's Guide",
@@ -375,34 +399,10 @@
       "excerpt": "How mental health and mindfulness is shaping the future and creating new opportunities.",
       "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop",
       "readTime": "3 min read"
-    },
-    {
-      "id": 80119,
-      "category": "ai-tools",
-      "title": "The Rise of AI video creation: What It Means for You",
-      "excerpt": "Expert analysis on the latest ai video creation trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
-      "readTime": "6 min read"
-    },
-    {
-      "id": 40263,
-      "category": "finance",
-      "title": "Banking technology Strategies for the Modern Investor",
-      "excerpt": "Everything you need to know about banking technology to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
-      "readTime": "9 min read"
-    },
-    {
-      "id": 48992,
-      "category": "technology",
-      "title": "Mobile and app development Explained: Everything You Need to Know",
-      "excerpt": "How mobile and app development is shaping the future and creating new opportunities.",
-      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop",
-      "readTime": "11 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-06-10T03:36:11.692Z",
+    "lastUpdated": "2026-06-11T03:51:43.513Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

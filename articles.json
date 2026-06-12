@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 25910,
+      "category": "technology",
+      "title": "Top 5 Trends in Edge computing for 2025",
+      "excerpt": "How edge computing is shaping the future and creating new opportunities.",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
+      "readTime": "12 min read"
+    },
+    {
+      "id": 7269,
+      "category": "finance",
+      "title": "The Future of Budget and savings: Expert Predictions",
+      "excerpt": "Expert analysis on the latest budget and savings trends and their impact on everyday life.",
+      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
+      "readTime": "9 min read"
+    },
+    {
+      "id": 27494,
+      "category": "finance",
+      "title": "Wealth Building: The Role of Stock market analysis",
+      "excerpt": "Discover how stock market analysis is revolutionizing the industry and what it means for you.",
+      "image": "https://images.unsplash.com/photo-1579621970795-6f224c840a2e?w=600&h=400&fit=crop",
+      "readTime": "8 min read"
+    },
+    {
       "id": 9052,
       "category": "finance",
       "title": "How Retirement planning Is Changing the Financial Landscape",
@@ -375,34 +399,10 @@
       "excerpt": "How sleep optimization is shaping the future and creating new opportunities.",
       "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop",
       "readTime": "6 min read"
-    },
-    {
-      "id": 65813,
-      "category": "ai-tools",
-      "title": "AI video creation for Business: A Practical Guide",
-      "excerpt": "Everything you need to know about ai video creation to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
-      "readTime": "5 min read"
-    },
-    {
-      "id": 95579,
-      "category": "finance",
-      "title": "How Wealth management Is Changing the Financial Landscape",
-      "excerpt": "Expert analysis on the latest wealth management trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
-      "readTime": "4 min read"
-    },
-    {
-      "id": 56688,
-      "category": "health-lifestyle",
-      "title": "Science-Backed: How Mental health and mindfulness Improves Wellbeing",
-      "excerpt": "How mental health and mindfulness is shaping the future and creating new opportunities.",
-      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop",
-      "readTime": "3 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-06-11T03:51:43.513Z",
+    "lastUpdated": "2026-06-12T03:50:59.504Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

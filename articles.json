@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 23260,
+      "category": "health-lifestyle",
+      "title": "Science-Backed: How Productivity hacks Improves Wellbeing",
+      "excerpt": "A comprehensive look at productivity hacks and why it matters in today's world.",
+      "image": "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&h=400&fit=crop",
+      "readTime": "3 min read"
+    },
+    {
+      "id": 6969,
+      "category": "technology",
+      "title": "Breaking: Sustainable technology Is Reshaping the Tech Industry",
+      "excerpt": "Expert analysis on the latest sustainable technology trends and their impact on everyday life.",
+      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop",
+      "readTime": "11 min read"
+    },
+    {
+      "id": 87755,
+      "category": "health-lifestyle",
+      "title": "The Complete Wellness technology Handbook",
+      "excerpt": "Everything you need to know about wellness technology to stay ahead of the curve.",
+      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop",
+      "readTime": "8 min read"
+    },
+    {
       "id": 18923,
       "category": "health-lifestyle",
       "title": "The Ultimate Guide to Wellness technology for Beginners",
@@ -375,34 +399,10 @@
       "excerpt": "Discover how chatgpt and language models is revolutionizing the industry and what it means for you.",
       "image": "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&h=400&fit=crop",
       "readTime": "5 min read"
-    },
-    {
-      "id": 22500,
-      "category": "ai-tools",
-      "title": "AI image generation tools: The Game-Changer You Need to Know",
-      "excerpt": "Everything you need to know about ai image generation tools to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
-      "readTime": "5 min read"
-    },
-    {
-      "id": 7699,
-      "category": "health-lifestyle",
-      "title": "The Complete Productivity hacks Handbook",
-      "excerpt": "Discover how productivity hacks is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&h=400&fit=crop",
-      "readTime": "7 min read"
-    },
-    {
-      "id": 95590,
-      "category": "ai-tools",
-      "title": "Machine learning platforms Explained: A Complete Beginner's Guide",
-      "excerpt": "Expert analysis on the latest machine learning platforms trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
-      "readTime": "3 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-06-16T03:58:43.345Z",
+    "lastUpdated": "2026-06-17T04:00:00.269Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

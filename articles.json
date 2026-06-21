@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 73262,
+      "category": "health-lifestyle",
+      "title": "Personal development: Transform Your Life in 30 Days",
+      "excerpt": "A comprehensive look at personal development and why it matters in today's world.",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop",
+      "readTime": "11 min read"
+    },
+    {
+      "id": 11989,
+      "category": "technology",
+      "title": "Mobile and app development Explained: Everything You Need to Know",
+      "excerpt": "Breaking down mobile and app development: insights, trends, and practical applications.",
+      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop",
+      "readTime": "11 min read"
+    },
+    {
+      "id": 21964,
+      "category": "finance",
+      "title": "Retirement planning: What Investors Need to Know",
+      "excerpt": "A comprehensive look at retirement planning and why it matters in today's world.",
+      "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop",
+      "readTime": "6 min read"
+    },
+    {
       "id": 49132,
       "category": "health-lifestyle",
       "title": "Expert Tips on Meditation practices for Better Living",
@@ -375,34 +399,10 @@
       "excerpt": "Breaking down ai for business: insights, trends, and practical applications.",
       "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
       "readTime": "4 min read"
-    },
-    {
-      "id": 54377,
-      "category": "ai-tools",
-      "title": "AI video creation for Business: A Practical Guide",
-      "excerpt": "Breaking down ai video creation: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
-      "readTime": "12 min read"
-    },
-    {
-      "id": 33879,
-      "category": "finance",
-      "title": "Smart Money: Understanding Tax optimization tips in 2025",
-      "excerpt": "Everything you need to know about tax optimization tips to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop",
-      "readTime": "9 min read"
-    },
-    {
-      "id": 74265,
-      "category": "finance",
-      "title": "The Future of Tax optimization tips: Expert Predictions",
-      "excerpt": "Breaking down tax optimization tips: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1579621970795-6f224c840a2e?w=600&h=400&fit=crop",
-      "readTime": "7 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-06-20T03:33:13.015Z",
+    "lastUpdated": "2026-06-21T04:04:59.385Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

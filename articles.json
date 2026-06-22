@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 52882,
+      "category": "ai-tools",
+      "title": "AI video creation: The Game-Changer You Need to Know",
+      "excerpt": "Everything you need to know about ai video creation to stay ahead of the curve.",
+      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+      "readTime": "8 min read"
+    },
+    {
+      "id": 16720,
+      "category": "health-lifestyle",
+      "title": "Why Productivity hacks Should Be Part of Your Routine",
+      "excerpt": "Get the inside scoop on productivity hacks from industry experts and thought leaders.",
+      "image": "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&h=400&fit=crop",
+      "readTime": "5 min read"
+    },
+    {
+      "id": 98263,
+      "category": "finance",
+      "title": "Market Watch: Real estate investment Trends to Watch",
+      "excerpt": "Expert analysis on the latest real estate investment trends and their impact on everyday life.",
+      "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop",
+      "readTime": "4 min read"
+    },
+    {
       "id": 73262,
       "category": "health-lifestyle",
       "title": "Personal development: Transform Your Life in 30 Days",
@@ -375,34 +399,10 @@
       "excerpt": "Expert analysis on the latest mental health and mindfulness trends and their impact on everyday life.",
       "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop",
       "readTime": "7 min read"
-    },
-    {
-      "id": 63121,
-      "category": "technology",
-      "title": "Why Cybersecurity trends and threats Matters More Than Ever in 2025",
-      "excerpt": "Everything you need to know about cybersecurity trends and threats to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
-      "readTime": "4 min read"
-    },
-    {
-      "id": 65350,
-      "category": "finance",
-      "title": "Wealth Building: The Role of ESG investing",
-      "excerpt": "Breaking down esg investing: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
-      "readTime": "9 min read"
-    },
-    {
-      "id": 70259,
-      "category": "ai-tools",
-      "title": "Mastering AI for business: Tips and Best Practices",
-      "excerpt": "Breaking down ai for business: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
-      "readTime": "4 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-06-21T04:04:59.385Z",
+    "lastUpdated": "2026-06-22T04:05:34.828Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

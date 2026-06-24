@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 34083,
+      "category": "finance",
+      "title": "Navigating Retirement planning: A Beginner's Guide",
+      "excerpt": "The definitive guide to understanding retirement planning in the current landscape.",
+      "image": "https://images.unsplash.com/photo-1579621970795-6f224c840a2e?w=600&h=400&fit=crop",
+      "readTime": "5 min read"
+    },
+    {
+      "id": 32467,
+      "category": "health-lifestyle",
+      "title": "Productivity hacks: Transform Your Life in 30 Days",
+      "excerpt": "Everything you need to know about productivity hacks to stay ahead of the curve.",
+      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop",
+      "readTime": "10 min read"
+    },
+    {
+      "id": 64818,
+      "category": "technology",
+      "title": "How IoT and smart devices Is Transforming Our Digital World",
+      "excerpt": "The definitive guide to understanding iot and smart devices in the current landscape.",
+      "image": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&h=400&fit=crop",
+      "readTime": "7 min read"
+    },
+    {
       "id": 78472,
       "category": "finance",
       "title": "Navigating Global economic outlook: A Beginner's Guide",
@@ -375,34 +399,10 @@
       "excerpt": "Breaking down ai productivity apps: insights, trends, and practical applications.",
       "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
       "readTime": "7 min read"
-    },
-    {
-      "id": 28119,
-      "category": "health-lifestyle",
-      "title": "Productivity hacks: Transform Your Life in 30 Days",
-      "excerpt": "Expert analysis on the latest productivity hacks trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop",
-      "readTime": "4 min read"
-    },
-    {
-      "id": 12700,
-      "category": "technology",
-      "title": "How IoT and smart devices Is Transforming Our Digital World",
-      "excerpt": "Breaking down iot and smart devices: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop",
-      "readTime": "7 min read"
-    },
-    {
-      "id": 67560,
-      "category": "ai-tools",
-      "title": "Machine learning platforms for Business: A Practical Guide",
-      "excerpt": "Everything you need to know about machine learning platforms to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
-      "readTime": "4 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-06-23T03:27:07.284Z",
+    "lastUpdated": "2026-06-24T03:28:47.953Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 87123,
+      "category": "ai-tools",
+      "title": "Tool Review: Best Voice and speech AI Solutions in 2025",
+      "excerpt": "A comprehensive look at voice and speech ai and why it matters in today's world.",
+      "image": "https://images.unsplash.com/photo-1488229297570-58520851e68c?w=600&h=400&fit=crop",
+      "readTime": "11 min read"
+    },
+    {
+      "id": 67551,
+      "category": "health-lifestyle",
+      "title": "The Ultimate Guide to Nutrition and diet trends for Beginners",
+      "excerpt": "Get the inside scoop on nutrition and diet trends from industry experts and thought leaders.",
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop",
+      "readTime": "9 min read"
+    },
+    {
+      "id": 59406,
+      "category": "ai-tools",
+      "title": "The Rise of Machine learning platforms: What It Means for You",
+      "excerpt": "How machine learning platforms is shaping the future and creating new opportunities.",
+      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+      "readTime": "5 min read"
+    },
+    {
       "id": 34083,
       "category": "finance",
       "title": "Navigating Retirement planning: A Beginner's Guide",
@@ -375,34 +399,10 @@
       "excerpt": "Discover how ai chatbots is revolutionizing the industry and what it means for you.",
       "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
       "readTime": "12 min read"
-    },
-    {
-      "id": 82486,
-      "category": "finance",
-      "title": "Market Watch: Global economic outlook Trends to Watch",
-      "excerpt": "Get the inside scoop on global economic outlook from industry experts and thought leaders.",
-      "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop",
-      "readTime": "8 min read"
-    },
-    {
-      "id": 84030,
-      "category": "finance",
-      "title": "Market Watch: Tax optimization tips Trends to Watch",
-      "excerpt": "Discover how tax optimization tips is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
-      "readTime": "12 min read"
-    },
-    {
-      "id": 40774,
-      "category": "ai-tools",
-      "title": "Mastering AI productivity apps: Tips and Best Practices",
-      "excerpt": "Breaking down ai productivity apps: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
-      "readTime": "7 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-06-24T03:28:47.953Z",
+    "lastUpdated": "2026-06-25T03:26:18.602Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

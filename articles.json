@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 18750,
+      "category": "ai-tools",
+      "title": "The Rise of Voice and speech AI: What It Means for You",
+      "excerpt": "Breaking down voice and speech ai: insights, trends, and practical applications.",
+      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop",
+      "readTime": "5 min read"
+    },
+    {
+      "id": 12219,
+      "category": "health-lifestyle",
+      "title": "Why Mental health and mindfulness Should Be Part of Your Routine",
+      "excerpt": "Discover how mental health and mindfulness is revolutionizing the industry and what it means for you.",
+      "image": "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&h=400&fit=crop",
+      "readTime": "12 min read"
+    },
+    {
+      "id": 82745,
+      "category": "technology",
+      "title": "Expert Insights: The Rise of Tech startups and innovation",
+      "excerpt": "A comprehensive look at tech startups and innovation and why it matters in today's world.",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
+      "readTime": "3 min read"
+    },
+    {
       "id": 87123,
       "category": "ai-tools",
       "title": "Tool Review: Best Voice and speech AI Solutions in 2025",
@@ -375,34 +399,10 @@
       "excerpt": "Breaking down healthy recipes: insights, trends, and practical applications.",
       "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
       "readTime": "11 min read"
-    },
-    {
-      "id": 46653,
-      "category": "finance",
-      "title": "How Budget and savings Is Changing the Financial Landscape",
-      "excerpt": "Expert analysis on the latest budget and savings trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop",
-      "readTime": "8 min read"
-    },
-    {
-      "id": 68926,
-      "category": "technology",
-      "title": "Why AI and Machine Learning breakthroughs Matters More Than Ever in 2025",
-      "excerpt": "A comprehensive look at ai and machine learning breakthroughs and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
-      "readTime": "6 min read"
-    },
-    {
-      "id": 65425,
-      "category": "ai-tools",
-      "title": "How AI chatbots Can Boost Your Productivity",
-      "excerpt": "Discover how ai chatbots is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
-      "readTime": "12 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-06-25T03:26:18.602Z",
+    "lastUpdated": "2026-06-26T03:34:22.414Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

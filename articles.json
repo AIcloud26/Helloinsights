@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 22480,
+      "category": "health-lifestyle",
+      "title": "Fitness and exercise routines Myths Debunked: What Really Works",
+      "excerpt": "Get the inside scoop on fitness and exercise routines from industry experts and thought leaders.",
+      "image": "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&h=400&fit=crop",
+      "readTime": "4 min read"
+    },
+    {
+      "id": 57083,
+      "category": "ai-tools",
+      "title": "The Rise of AI writing assistants: What It Means for You",
+      "excerpt": "Expert analysis on the latest ai writing assistants trends and their impact on everyday life.",
+      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
+      "readTime": "8 min read"
+    },
+    {
+      "id": 75553,
+      "category": "ai-tools",
+      "title": "Voice and speech AI for Business: A Practical Guide",
+      "excerpt": "Breaking down voice and speech ai: insights, trends, and practical applications.",
+      "image": "https://images.unsplash.com/photo-1488229297570-58520851e68c?w=600&h=400&fit=crop",
+      "readTime": "3 min read"
+    },
+    {
       "id": 12718,
       "category": "finance",
       "title": "Market Watch: Real estate investment Trends to Watch",
@@ -375,34 +399,10 @@
       "excerpt": "Expert analysis on the latest stress management trends and their impact on everyday life.",
       "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop",
       "readTime": "5 min read"
-    },
-    {
-      "id": 29362,
-      "category": "health-lifestyle",
-      "title": "Science-Backed: How Meditation practices Improves Wellbeing",
-      "excerpt": "Expert analysis on the latest meditation practices trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop",
-      "readTime": "5 min read"
-    },
-    {
-      "id": 17570,
-      "category": "finance",
-      "title": "Market Watch: Budget and savings Trends to Watch",
-      "excerpt": "A comprehensive look at budget and savings and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop",
-      "readTime": "12 min read"
-    },
-    {
-      "id": 97196,
-      "category": "finance",
-      "title": "Smart Money: Understanding Real estate investment in 2025",
-      "excerpt": "Everything you need to know about real estate investment to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop",
-      "readTime": "5 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-07-05T02:56:42.313Z",
+    "lastUpdated": "2026-07-06T03:23:25.103Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

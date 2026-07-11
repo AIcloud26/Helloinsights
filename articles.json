@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 12408,
+      "category": "technology",
+      "title": "Expert Insights: The Rise of Web3 and blockchain technology",
+      "excerpt": "The definitive guide to understanding web3 and blockchain technology in the current landscape.",
+      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop",
+      "readTime": "10 min read"
+    },
+    {
+      "id": 50370,
+      "category": "health-lifestyle",
+      "title": "Expert Tips on Wellness technology for Better Living",
+      "excerpt": "Everything you need to know about wellness technology to stay ahead of the curve.",
+      "image": "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&h=400&fit=crop",
+      "readTime": "12 min read"
+    },
+    {
+      "id": 41098,
+      "category": "technology",
+      "title": "Edge computing Explained: Everything You Need to Know",
+      "excerpt": "Everything you need to know about edge computing to stay ahead of the curve.",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
+      "readTime": "11 min read"
+    },
+    {
       "id": 21740,
       "category": "technology",
       "title": "Tech startups and innovation: A Complete Guide for Tech Enthusiasts",
@@ -375,34 +399,10 @@
       "excerpt": "Get the inside scoop on nutrition and diet trends from industry experts and thought leaders.",
       "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop",
       "readTime": "9 min read"
-    },
-    {
-      "id": 59406,
-      "category": "ai-tools",
-      "title": "The Rise of Machine learning platforms: What It Means for You",
-      "excerpt": "How machine learning platforms is shaping the future and creating new opportunities.",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
-      "readTime": "5 min read"
-    },
-    {
-      "id": 34083,
-      "category": "finance",
-      "title": "Navigating Retirement planning: A Beginner's Guide",
-      "excerpt": "The definitive guide to understanding retirement planning in the current landscape.",
-      "image": "https://images.unsplash.com/photo-1579621970795-6f224c840a2e?w=600&h=400&fit=crop",
-      "readTime": "5 min read"
-    },
-    {
-      "id": 32467,
-      "category": "health-lifestyle",
-      "title": "Productivity hacks: Transform Your Life in 30 Days",
-      "excerpt": "Everything you need to know about productivity hacks to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop",
-      "readTime": "10 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-07-10T02:53:27.623Z",
+    "lastUpdated": "2026-07-11T02:31:04.754Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Browse articles by category - Technology, Finance, AI Tools, and Health & Lifestyle on Insightinfo.">
-    <title>Category - Insightinfo</title>
+    <meta name="description" content="Browse articles by category - Technology, Finance, AI Tools, and Health & Lifestyle on HelloInsights.">
+    <title>Category - HelloInsights</title>
     <link rel="stylesheet" href="style.css">
     <script src="config-loader.js"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <div class="logo-icon">I</div>
-                Insight<span>info</span>
+                <img src="logo.png" alt="HelloInsights" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="logo-text">HelloInsights</span>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -35,24 +37,36 @@
             </div>
         </div>
     </header>
-
     <main class="container">
+        <!-- AdSense Header Ad -->
+        <div class="adsense-slot adsense-header" data-ad-slot="1111111111">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-size">728 x 90</div>
+            </div>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+        </div>
         <div class="page-header">
             <h1 id="categoryTitle">All Articles</h1>
             <p id="categoryDesc">Browse all articles across different categories</p>
         </div>
-
         <div class="article-grid" id="articleGrid">
             <div class="loading" id="loading"></div>
         </div>
-
         <div class="pagination" id="pagination"></div>
+        <!-- AdSense In-Feed Ad -->
+        <div class="adsense-slot adsense-infeed" data-ad-slot="3333333333">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-size">Responsive In-Feed</div>
+            </div>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-full-width-responsive="true"></ins>
+        </div>
     </main>
-
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>About Insightinfo</h4>
+                <h4>About HelloInsights</h4>
                 <p>Your trusted source for the latest insights in Technology, Finance, AI Tools, and Health & Lifestyle.</p>
             </div>
             <div class="footer-section">
@@ -76,25 +90,20 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© <script>document.write(new Date().getFullYear())</script> Insightinfo. All rights reserved.</p>
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> HelloInsights. All rights reserved.</p>
         </div>
     </footer>
-
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
-
     <script>
         var ARTICLES_PER_PAGE = 9;
         var allArticles = [];
         var currentPage = 1;
         var currentCategory = 'all';
         var filteredArticles = [];
-
         var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
-
         var categoryInfo = {
             'all': { title: 'All Articles', desc: 'Browse all articles across different categories' }
         };
-
         var categoryNames = {};
         var fallbackImages = {
             'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
@@ -102,212 +111,36 @@
             'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
             'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
         };
-
         function buildCategoryInfo(config) {
             var info = { 'all': { title: 'All Articles', desc: 'Browse all articles across different categories' } };
             if (config && config.categories) {
                 for (var i = 0; i < config.categories.length; i++) {
-                    var cat = config.categories[i];
-                    info[cat.id] = { title: cat.name, desc: cat.desc || cat.name };
-                }
-            }
-            return info;
-        }
-
-        function buildCategoryNames(config) {
-            var names = {};
-            if (config && config.categories) {
-                for (var i = 0; i < config.categories.length; i++) {
-                    names[config.categories[i].id] = config.categories[i].name;
-                }
-            } else {
-                names = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
-            }
-            return names;
-        }
-
-        function getFallbackImage(category) {
-            return fallbackImages[category] || defaultFallback;
-        }
-
-        function generateViews() {
-            var views = Math.floor(Math.random() * 25000) + 1000;
-            return views >= 1000 ? (views / 1000).toFixed(1) + 'K' : views.toString();
-        }
-
-        function generateDate(index) {
-            var today = new Date();
-            var date = new Date(today);
-            date.setDate(date.getDate() - Math.floor(index / 3));
-            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        }
-
-        function createArticleCard(article, index) {
-            var fallbackImg = getFallbackImage(article.category);
-            var catName = categoryNames[article.category] || article.category;
-            return '<article class="article-card">' +
-                '<div class="card-image">' +
-                '<img src="' + article.image + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + fallbackImg + '\'">' +
-                '</div>' +
-                '<div class="card-content">' +
-                '<span class="card-category">' + catName + '</span>' +
-                '<h3 class="card-title">' +
-                '<a href="article.html?id=' + article.id + '">' + article.title + '</a>' +
-                '</h3>' +
-                '<p class="card-excerpt">' + article.excerpt + '</p>' +
-                '<div class="card-meta">' +
-                '<span>📅 ' + generateDate(index) + '</span>' +
-                '<span>👁 ' + generateViews() + ' views</span>' +
-                '</div>' +
-                '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
-                '</div>' +
-                '</article>';
-        }
-
-        function renderArticles(articles) {
-            var grid = document.getElementById('articleGrid');
-            var loading = document.getElementById('loading');
-            if (loading) loading.remove();
-            if (!grid) return;
-            
-            if (articles.length === 0) {
-                grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 3rem;">No articles found in this category.</p>';
-                return;
-            }
-            
-            var startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
-            var pageArticles = articles.slice(startIndex, startIndex + ARTICLES_PER_PAGE);
-            var html = '';
-            for (var i = 0; i < pageArticles.length; i++) {
-                html += createArticleCard(pageArticles[i], startIndex + i);
-            }
-            grid.innerHTML = html;
-            renderPagination(articles.length);
-        }
-
-        function renderPagination(total) {
-            var totalPages = Math.ceil(total / ARTICLES_PER_PAGE);
-            var pagination = document.getElementById('pagination');
-            if (!pagination) return;
-            if (totalPages <= 1) { pagination.innerHTML = ''; return; }
-            
-            var html = '<a href="#" class="' + (currentPage === 1 ? 'disabled' : '') + '" onclick="changePage(' + (currentPage - 1) + '); return false;">«</a>';
-            for (var i = 1; i <= totalPages; i++) {
-                html += i === currentPage 
-                    ? '<a href="#" class="active">' + i + '</a>'
-                    : '<a href="#" onclick="changePage(' + i + '); return false;">' + i + '</a>';
-            }
-            html += '<a href="#" class="' + (currentPage === totalPages ? 'disabled' : '') + '" onclick="changePage(' + (currentPage + 1) + '); return false;">»</a>';
-            pagination.innerHTML = html;
-        }
-
-        function changePage(page) {
-            var totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
-            if (page < 1 || page > totalPages) return;
-            currentPage = page;
-            renderArticles(filteredArticles);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function filterCategory(category) {
-            currentCategory = category;
-            currentPage = 1;
-            
-            var titleEl = document.getElementById('categoryTitle');
-            var descEl = document.getElementById('categoryDesc');
-            var catInfo = categoryInfo[category] || { title: category, desc: '' };
-            if (titleEl) titleEl.textContent = catInfo.title;
-            if (descEl) descEl.textContent = catInfo.desc;
-            
-            filteredArticles = category === 'all' 
-                ? allArticles.slice() 
-                : allArticles.filter(function(a) { return a.category === category; });
-            
-            filteredArticles.sort(function(a, b) { return b.id - a.id; });
-            renderArticles(filteredArticles);
-            
-            var url = new URL(window.location);
-            if (category === 'all') {
-                url.searchParams.delete('cat');
-            } else {
-                url.searchParams.set('cat', category);
-            }
-            history.pushState({}, '', url);
-        }
-
-        function handleSearch() {
-            var input = document.getElementById('searchInput');
-            if (!input) return;
-            var query = input.value.toLowerCase().trim();
-            
-            if (!query) {
-                filteredArticles = currentCategory === 'all' 
-                    ? allArticles.slice() 
-                    : allArticles.filter(function(a) { return a.category === currentCategory; });
-            } else {
-                filteredArticles = allArticles.filter(function(a) { 
-                    var catName = categoryNames[a.category] || a.category;
-                    return (currentCategory === 'all' || a.category === currentCategory) &&
-                           (a.title.toLowerCase().indexOf(query) !== -1 || a.excerpt.toLowerCase().indexOf(query) !== -1 || catName.toLowerCase().indexOf(query) !== -1);
-                });
-            }
-            currentPage = 1;
-            renderArticles(filteredArticles);
-        }
-
-        function initSearch() {
-            var searchInput = document.getElementById('searchInput');
-            var searchBtn = document.getElementById('searchBtn');
-            if (searchInput) {
-                searchInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') { e.preventDefault(); handleSearch(); }
-                });
-            }
-            if (searchBtn) {
-                searchBtn.addEventListener('click', function(e) { e.preventDefault(); handleSearch(); });
-            }
-        }
-
+                    var cat = config.categories[i href="category.html?cat=technology">Technology</a></li>
+                    <li><a href="category.html?cat=finance">Finance</a></li>
+                    <li><a href="category.html?cat=ai-tools">AI Tools</a></li>
+                    <li><a href="category.html?cat=health-lifestyle">Health & Lifestyle</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="currentYear"></span> HelloInsights. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
         function toggleMenu() {
-            var nav = document.getElementById('navContainer');
-            if (nav) nav.classList.toggle('active');
+            const navContainer = document.getElementById('navContainer');
+            navContainer.classList.toggle('active');
         }
-
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-
-        async function loadArticles() {
-            await new Promise(function(resolve) {
-                loadSiteConfig(function(config) {
-                    if (config) {
-                        categoryInfo = buildCategoryInfo(config);
-                        categoryNames = buildCategoryNames(config);
-                    } else {
-                        categoryNames = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
-                    }
-                    resolve();
-                });
-            });
-
-            try {
-                var response = await fetch('articles-list.json');
-                var data = await response.json();
-                allArticles = data.articles;
-                var urlParams = new URLSearchParams(window.location.search);
-                var cat = urlParams.get('cat') || 'all';
-                filterCategory(cat);
-                initSearch();
-            } catch (error) {
-                var grid = document.getElementById('articleGrid');
-                if (grid) grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 3rem;">Unable to load articles.</p>';
-            }
-        }
-
-        window.addEventListener('scroll', function() {
-            var btn = document.getElementById('backToTop');
-            if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            const mailtoLink = `mailto:support@HelloInsights.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            window.location.href = mailtoLink;
         });
-
-        document.addEventListener('DOMContentLoaded', loadArticles);
     </script>
 </body>
 </html>

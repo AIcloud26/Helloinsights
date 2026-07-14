@@ -1,5 +1,5 @@
 /* ========================================
-   Insightinfo - Global Styles (Optimized)
+   HelloInsights - Global Styles (Optimized)
    ======================================== */
 
 /* CSS Reset & Base */
@@ -1072,4 +1072,62 @@ body {
         box-shadow: none;
         break-inside: avoid;
     }
+}
+/* ===== Logo ===== */
+.logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: contain;
+}
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+.logo:hover .logo-text {
+    color: var(--primary-color);
+}
+
+/* ===== Ad Containers (样式由 ID 选择器控制) ===== */
+.adsense-slot {
+    width: 100%;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: 2px dashed #dee2e6;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    text-align: center;
+}
+/* 未加载广告时显示提示 */
+.adsense-slot:empty::after {
+    content: "Advertisement";
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.4;
+}
+#id-banner {
+    min-height: 100px;
+    max-width: 728px;
+    margin: 0 auto 2rem;
+}
+#id-rectangle {
+    min-height: 250px;
+}
+#id-fluid {
+    min-height: 120px;
+}
+#id-auto {
+    min-height: 100px;
+    margin: 2rem 0;
+}
+@media (max-width: 768px) {
+    #id-banner { min-height: 60px; }
+    #id-rectangle { min-height: 100px; }
 }

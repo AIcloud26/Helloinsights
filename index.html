@@ -7,13 +7,15 @@
     <title>Insightinfo - Latest Articles & Insights</title>
     <link rel="stylesheet" href="style.css">
     <script src="config-loader.js"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <div class="logo-icon">I</div>
-                Insight<span>info</span>
+                <img src="logo.png" alt="Insightinfo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="logo-text">Insightinfo</span>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -35,25 +37,36 @@
             </div>
         </div>
     </header>
-
     <main class="container">
+        <!-- AdSense Header Ad -->
+        <div class="adsense-slot adsense-header" data-ad-slot="1111111111">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-size">728 x 90</div>
+            </div>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+        </div>
         <div class="page-header">
             <h2 class="site-tagline">YOUR TRUSTED SOURCE FOR INSIGHTS</h2>
             <p class="site-description">Expert analysis and curated intelligence at the intersection of technology, finance, AI innovation, and modern wellness. We deliver clarity, depth, and actionable perspectives to help you navigate our rapidly changing world.</p>
         </div>
-
         <div id="searchInfo" style="display: none; margin-bottom: 1rem; padding: 0.5rem 1rem; background: #fff3cd; border-radius: 8px;">
             <span id="searchText"></span>
             <button onclick="clearSearch()" style="margin-left: 10px; background: #ff6b35; color: white; border: none; padding: 2px 10px; border-radius: 4px; cursor: pointer;">Clear</button>
         </div>
-
         <div class="article-grid" id="articleGrid">
             <div class="loading" id="loading"></div>
         </div>
-
         <div class="pagination" id="pagination"></div>
+        <!-- AdSense In-Feed Ad -->
+        <div class="adsense-slot adsense-infeed" data-ad-slot="3333333333">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-size">Responsive In-Feed</div>
+            </div>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-full-width-responsive="true"></ins>
+        </div>
     </main>
-
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -81,12 +94,10 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© <script>document.write(new Date().getFullYear())</script> Insightinfo. All rights reserved.</p>
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Insightinfo. All rights reserved.</p>
         </div>
     </footer>
-
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
-
     <script>
         var ARTICLES_PER_PAGE = 6;
         var allArticles = [];
@@ -94,18 +105,14 @@
         var filteredArticles = [];
         var isSearching = false;
         var searchQuery = '';
-
         var categoryNames = {};
         var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
-
-        // 备用图片
         var fallbackImages = {
             'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
             'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
             'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
             'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
         };
-
         function buildCategoryNames(config) {
             var names = {};
             if (config && config.categories) {
@@ -117,23 +124,19 @@
             }
             return names;
         }
-
         function getFallbackImage(category) {
             return fallbackImages[category] || defaultFallback;
         }
-
         function generateViews() {
             var views = Math.floor(Math.random() * 25000) + 1000;
             return views >= 1000 ? (views / 1000).toFixed(1) + 'K' : views.toString();
         }
-
         function generateDate(index) {
             var today = new Date();
             var date = new Date(today);
             date.setDate(date.getDate() - Math.floor(index / 3));
             return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         }
-
         function createArticleCard(article, index) {
             var views = generateViews();
             var date = generateDate(index);
@@ -150,7 +153,6 @@
                 '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
                 '</div></article>';
         }
-
         function renderArticles(articles) {
             var grid = document.getElementById('articleGrid');
             var loading = document.getElementById('loading');
@@ -174,7 +176,6 @@
             grid.innerHTML = html;
             renderPagination(articles.length);
         }
-
         function renderPagination(totalArticles) {
             var totalPages = Math.ceil(totalArticles / ARTICLES_PER_PAGE);
             var pagination = document.getElementById('pagination');
@@ -189,7 +190,6 @@
             html += '<a href="#" class="' + (currentPage === totalPages ? 'disabled' : '') + '" onclick="changePage(' + (currentPage + 1) + ');return false;">»</a>';
             pagination.innerHTML = html;
         }
-
         function changePage(page) {
             var totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
             if (page < 1 || page > totalPages) return;
@@ -197,7 +197,6 @@
             renderArticles(filteredArticles);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
         function handleSearch() {
             var input = document.getElementById('searchInput');
             var searchInfo = document.getElementById('searchInfo');
@@ -226,7 +225,6 @@
             }
             renderArticles(filteredArticles);
         }
-
         function clearSearch() {
             var input = document.getElementById('searchInput');
             var searchInfo = document.getElementById('searchInfo');
@@ -238,14 +236,11 @@
             filteredArticles = allArticles.slice();
             renderArticles(filteredArticles);
         }
-
         function toggleMenu() {
             var nav = document.getElementById('navContainer');
             if (nav) nav.classList.toggle('active');
         }
-
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-
         function initSearch() {
             var searchInput = document.getElementById('searchInput');
             var searchBtn = document.getElementById('searchBtn');
@@ -258,9 +253,7 @@
                 searchBtn.addEventListener('click', function(e) { e.preventDefault(); handleSearch(); });
             }
         }
-
         async function loadArticles() {
-            // Load config first
             await new Promise(function(resolve) {
                 loadSiteConfig(function(config) {
                     if (config) {
@@ -271,7 +264,6 @@
                     resolve();
                 });
             });
-
             try {
                 var response = await fetch('articles-list.json');
                 var data = await response.json();
@@ -285,12 +277,10 @@
                 if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles.</p>';
             }
         }
-
         window.addEventListener('scroll', function() {
             var btn = document.getElementById('backToTop');
             if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
         });
-
         document.addEventListener('DOMContentLoaded', loadArticles);
     </script>
 </body>

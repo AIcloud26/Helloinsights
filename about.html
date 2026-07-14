@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact Us - Send us a message and we'll get back to you within 24-48 hours.">
-    <title>Contact Us - Insightinfo</title>
+    <meta name="description" content="About HelloInsights - Learn about our mission and commitment to delivering quality insights.">
+    <title>About Us - HelloInsights</title>
     <link rel="stylesheet" href="style.css">
     <script src="config-loader.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <div class="logo-icon">I</div>
-                Insight<span>info</span>
+                <img src="logo.png" alt="HelloInsights" class="logo-img">
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -35,41 +35,76 @@
             </div>
         </div>
     </header>
-
     <main class="container">
         <div class="static-content">
-            <h1>Contact Us</h1>
-            <p class="lead">Have a question or feedback? Fill out the form below and our team will respond within 24-48 hours.</p>
-            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-medium);">You can also reach us directly at: <strong>support@insightinfo.com</strong></p>
-
-            <form id="contactForm" style="max-width: 600px; margin: 0 auto;">
-                <div style="margin-bottom: 1rem;">
-                    <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Name *</label>
-                    <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+            <h1>About HelloInsights</h1>
+            <p class="lead">Your trusted source for curated insights at the intersection of technology, finance, AI innovation, and modern wellness.</p>
+            <div class="about-sections" style="margin-top: 2.5rem;">
+                <div class="about-section" style="margin-bottom: 2.5rem;">
+                    <h2 style="color: var(--accent-color); font-size: 1.5rem; margin-bottom: 1rem;">Our Mission</h2>
+                    <p style="color: var(--text-medium); line-height: 1.8; max-width: 700px;">At HelloInsights, we believe that informed decisions start with clear, reliable information. Our mission is to deliver expert analysis and actionable insights across the domains that matter most — technology, finance, artificial intelligence, and personal wellness.</p>
                 </div>
-                <div style="margin-bottom: 1rem;">
-                    <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email *</label>
-                    <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                <div class="about-section" style="margin-bottom: 2.5rem;">
+                    <h2 style="color: var(--accent-color); font-size: 1.5rem; margin-bottom: 1rem;">What We Cover</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">🔧 Technology</h3>
+                            <p style="color: var(--text-medium); font-size: 0.95rem;">The latest in tech innovation, digital trends, cybersecurity, and cutting-edge research shaping our future.</p>
+                        </div>
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">📈 Finance</h3>
+                            <p style="color: var(--text-medium); font-size: 0.95rem;">Investment strategies, market analysis, personal finance tips, and the evolving landscape of global economics.</p>
+                        </div>
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">🤖 AI Tools</h3>
+                            <p style="color: var(--text-medium); font-size: 0.95rem;">Discover the latest artificial intelligence tools, reviews, and practical guides to boost your productivity.</p>
+                        </div>
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">🌿 Health & Lifestyle</h3>
+                            <p style="color: var(--text-medium); font-size: 0.95rem;">Wellness tips, healthy recipes, mental health insights, and lifestyle improvements for modern living.</p>
+                        </div>
+                    </div>
                 </div>
-                <div style="margin-bottom: 1rem;">
-                    <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Subject *</label>
-                    <input type="text" id="subject" name="subject" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                <div class="about-section" style="margin-bottom: 2.5rem;">
+                    <h2 style="color: var(--accent-color); font-size: 1.5rem; margin-bottom: 1rem;">Our Commitment</h2>
+                    <p style="color: var(--text-medium); line-height: 1.8; max-width: 700px;">We are committed to editorial integrity, factual accuracy, and providing perspectives that help our readers navigate complexity. Every article is researched, reviewed, and crafted with care.</p>
                 </div>
-                <div style="margin-bottom: 1.5rem;">
-                    <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Message *</label>
-                    <textarea id="message" name="message" rows="6" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box; resize: vertical;"></textarea>
-                </div>
-                <button type="submit" style="background: var(--accent-color); color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%;">Send Message</button>
-            </form>
+            </div>
+            <div style="margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid #eee;">
+                <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Contact Us</h2>
+                <p style="color: var(--text-medium); margin-bottom: 1.5rem;">Have a question or feedback? Fill out the form below and our team will respond within 24-48 hours.</p>
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-medium);">You can also reach us directly at: <strong>support@helloinsights.online</strong></p>
+                <form id="contactForm" style="max-width: 600px; margin: 0 auto;">
+                    <div style="margin-bottom: 1rem;">
+                        <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Name *</label>
+                        <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email *</label>
+                        <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Subject *</label>
+                        <input type="text" id="subject" name="subject" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Message *</label>
+                        <textarea id="message" name="message" rows="6" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" style="background: var(--accent-color); color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+        <div class="adsense-slot adsense-sidebar" data-ad-slot="2222222222">
+            <div><div class="ad-label">Advertisement</div><div class="ad-size">300 x 250</div></div>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
         </div>
     </main>
-
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <div class="logo" style="margin-bottom: 1rem;">
-                    <div class="logo-icon">I</div>
-                    Insight<span>info</span>
+                    <img src="logo.png" alt="HelloInsights" class="logo-img">
                 </div>
                 <p>Your trusted source for curated insights at the intersection of technology, finance, and modern wellness.</p>
             </div>
@@ -94,30 +129,19 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <span id="currentYear"></span> Insightinfo. All rights reserved.</p>
+            <p>&copy; <span id="currentYear"></span> HelloInsights. All rights reserved.</p>
         </div>
     </footer>
-
     <script>
-        // 动态年份
         document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        // 移动菜单切换
-        function toggleMenu() {
-            const navContainer = document.getElementById('navContainer');
-            navContainer.classList.toggle('active');
-        }
-
-        // 联系表单提交 - 打开邮件客户端
+        function toggleMenu() { document.getElementById('navContainer').classList.toggle('active'); }
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            const mailtoLink = `mailto:support@insightinfo.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-            window.location.href = mailtoLink;
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var subject = document.getElementById('subject').value;
+            var message = document.getElementById('message').value;
+            window.location.href = 'mailto:support@helloinsights.online?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message);
         });
     </script>
 </body>

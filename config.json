@@ -1,5 +1,5 @@
 {
-  "siteName": "Insightinfo",
+  "siteName": "HelloInsights",
   "tagline": "Your Trusted Source for Insights",
   "logoLetter": "I",
   "accentColor": "#ff6b35",
@@ -11,10 +11,49 @@
   ],
   "footer": {
     "about": "Your trusted source for the latest insights in Technology, Finance, AI Tools, and Health & Lifestyle.",
-    "email": "contact@insightinfo.com"
+    "email": "contact@HelloInsights.com"
   },
   "seo": {
-    "description": "Insightinfo - Your trusted source for Technology, Finance, AI Tools, and Health & Lifestyle news and insights.",
+    "description": "HelloInsights - Your trusted source for Technology, Finance, AI Tools, and Health & Lifestyle news and insights.",
     "keywords": "technology, finance, ai tools, health, lifestyle, news, insights"
+  }
+}
+{
+  "siteName": "HelloInsights",
+  "tagline": "Your Trusted Source for Insights",
+  "logoImage": "logo.png",
+  "accentColor": "#ff6b35",
+  "categories": [
+    { "id": "technology", "name": "Technology", "desc": "The latest in tech innovation, digital trends, and cutting-edge research" },
+    { "id": "finance", "name": "Finance", "desc": "Investment strategies, market insights, and personal finance tips" },
+    { "id": "ai-tools", "name": "AI Tools", "desc": "Discover the latest artificial intelligence tools and how to use them" },
+    { "id": "health-lifestyle", "name": "Health & Lifestyle", "desc": "Wellness tips, healthy recipes, and lifestyle improvements" }
+  ],
+  "footer": {
+    "about": "Your trusted source for the latest insights in Technology, Finance, AI Tools, and Health & Lifestyle.",
+    "email": "contact@helloinsights.online"
+  },
+  "seo": {
+    "description": "HelloInsights - Your trusted source for Technology, Finance, AI Tools, and Health & Lifestyle news and insights.",
+    "keywords": "technology, finance, ai tools, health, lifestyle, news, insights, helloinsights"
+  },
+  "adsense": {
+    "enabled": true,
+    "clientId": "ca-pub-XXXXXXXXXXXXXXXX",
+    "slots": {
+      "banner":    { "id": "1111111111", "format": "horizontal" },
+      "rectangle": { "id": "2222222222", "format": "rectangle" },
+      "fluid":     { "id": "3333333333", "format": "fluid", "layoutKey": "-fb+5w+4e-db+86" },
+      "auto":      { "id": "3333333333", "format": "auto" }
+    },
+    "pageAds": {
+      "index.html":    ["banner", "fluid"],
+      "article.html":  ["banner", "auto"],
+      "category.html": ["banner", "fluid"],
+      "about.html":    ["rectangle"],
+      "contact.html":  ["rectangle"],
+      "privacy.html":  [],
+      "terms.html":    []
+    }
   }
 }

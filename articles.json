@@ -1,6 +1,30 @@
 {
   "articles": [
     {
+      "id": 64299,
+      "category": "health-lifestyle",
+      "title": "Meditation practices: The Trend Taking 2025 by Storm",
+      "excerpt": "Expert analysis on the latest meditation practices trends and their impact on everyday life.",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop",
+      "readTime": "9 min read"
+    },
+    {
+      "id": 85087,
+      "category": "technology",
+      "title": "Expert Insights: The Rise of AI and Machine Learning breakthroughs",
+      "excerpt": "A comprehensive look at ai and machine learning breakthroughs and why it matters in today's world.",
+      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop",
+      "readTime": "9 min read"
+    },
+    {
+      "id": 37479,
+      "category": "finance",
+      "title": "The Future of Global economic outlook: Expert Predictions",
+      "excerpt": "A comprehensive look at global economic outlook and why it matters in today's world.",
+      "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop",
+      "readTime": "7 min read"
+    },
+    {
       "id": 64655,
       "category": "ai-tools",
       "title": "The Rise of AI video creation: What It Means for You",
@@ -375,34 +399,10 @@
       "excerpt": "Discover how ai chatbots is revolutionizing the industry and what it means for you.",
       "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
       "readTime": "6 min read"
-    },
-    {
-      "id": 90809,
-      "category": "ai-tools",
-      "title": "Voice and speech AI Explained: A Complete Beginner's Guide",
-      "excerpt": "Expert analysis on the latest voice and speech ai trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
-      "readTime": "12 min read"
-    },
-    {
-      "id": 48391,
-      "category": "health-lifestyle",
-      "title": "The Complete Work-life balance Handbook",
-      "excerpt": "How work-life balance is shaping the future and creating new opportunities.",
-      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop",
-      "readTime": "12 min read"
-    },
-    {
-      "id": 89124,
-      "category": "finance",
-      "title": "The Future of Global economic outlook: Expert Predictions",
-      "excerpt": "Expert analysis on the latest global economic outlook trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop",
-      "readTime": "8 min read"
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-07-13T02:38:26.157Z",
+    "lastUpdated": "2026-07-14T02:22:34.066Z",
     "totalArticles": 50,
     "newToday": 3,
     "generator": "Template"

@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Read the full article on Insightinfo">
-    <title>Article - Insightinfo</title>
+    <meta name="description" content="Read the latest insights and articles on HelloInsights.">
+    <title>Article - HelloInsights</title>
     <link rel="stylesheet" href="style.css">
     <script src="config-loader.js"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <div class="logo-icon">I</div>
-                Insight<span>info</span>
+                <img src="logo.png" alt="HelloInsights" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="logo-text">HelloInsights</span>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -35,22 +37,35 @@
             </div>
         </div>
     </header>
-
     <main class="container">
+        <!-- AdSense In-Article Ad (Top) -->
+        <div class="adsense-slot article-ad-container" data-ad-slot="1111111111">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-size">728 x 90</div>
+            </div>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+        </div>
         <article class="article-detail" id="articleDetail">
             <div class="loading" id="loading"></div>
         </article>
-
+        <!-- AdSense In-Article Ad (Bottom) -->
+        <div class="adsense-slot article-ad-container" data-ad-slot="3333333333">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-size">Responsive</div>
+            </div>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        </div>
         <section class="mb-4" style="margin-top: 3rem;" id="relatedSection">
             <h2 class="mb-2">Related Articles</h2>
             <div class="article-grid" id="relatedGrid"></div>
         </section>
     </main>
-
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>About Insightinfo</h4>
+                <h4>About HelloInsights</h4>
                 <p>Your trusted source for the latest insights in Technology, Finance, AI Tools, and Health & Lifestyle.</p>
             </div>
             <div class="footer-section">
@@ -74,24 +89,20 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© <script>document.write(new Date().getFullYear())</script> Insightinfo. All rights reserved.</p>
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> HelloInsights. All rights reserved.</p>
         </div>
     </footer>
-
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
-
     <script>
         var categoryNames = {};
         var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
         var maxArticleId = 48;
-
         var fallbackImages = {
             'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
             'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
             'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
             'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
         };
-
         function buildCategoryNames(config) {
             var names = {};
             if (config && config.categories) {
@@ -103,23 +114,19 @@
             }
             return names;
         }
-
         function getFallbackImage(category) {
             return fallbackImages[category] || defaultFallback;
         }
-
         function generateViews() {
             var views = Math.floor(Math.random() * 25000) + 5000;
             return views.toLocaleString();
         }
-
         function generateDate(articleId, maxId) {
             var today = new Date();
             var date = new Date(today);
             date.setDate(date.getDate() - Math.floor((maxId - articleId) / 3));
             return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
         }
-
         function renderArticle(article, maxId) {
             var container = document.getElementById('articleDetail');
             var loading = document.getElementById('loading');
@@ -130,7 +137,6 @@
             var catName = categoryNames[article.category] || article.category;
             var fallbackImg = getFallbackImage(article.category);
             var heroImg = article.image.replace('w=600&h=400', 'w=1200&h=600');
-
             var articleContent = article.content
                 ? article.content
                 : '<p>' + article.excerpt + '</p><p><em>This article is being updated. Check back soon for the full content.</em></p>';
@@ -158,10 +164,9 @@
                 '</div>' +
                 '</div>';
             
-            var siteName = (siteConfig && siteConfig.siteName) ? siteConfig.siteName : 'Insightinfo';
+            var siteName = (siteConfig && siteConfig.siteName) ? siteConfig.siteName : 'HelloInsights';
             document.title = article.title + ' - ' + siteName;
         }
-
         function renderRelated(currentArticle, allArticles) {
             var related = allArticles.filter(function(a) { 
                 return a.category === currentArticle.category && a.id !== currentArticle.id; 
@@ -201,19 +206,15 @@
             
             grid.innerHTML = html;
         }
-
         function toggleMenu() {
             var nav = document.getElementById('navContainer');
             if (nav) nav.classList.toggle('active');
         }
-
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-
         window.addEventListener('scroll', function() {
             var btn = document.getElementById('backToTop');
             if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
         });
-
         async function loadArticle() {
             await new Promise(function(resolve) {
                 loadSiteConfig(function(config) {
@@ -225,7 +226,6 @@
                     resolve();
                 });
             });
-
             try {
                 var response = await fetch('articles.json');
                 var data = await response.json();
@@ -250,7 +250,6 @@
                 }
             }
         }
-
         document.addEventListener('DOMContentLoaded', loadArticle);
     </script>
 </body>

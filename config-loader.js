@@ -1,97 +1,3 @@
-// HelloInsights Site Config Loader
-// All pages include this script to load site configuration
-var siteConfig = null;
-
-function applyConfig(config) {
-  siteConfig = config;
-
-  // Apply accent color
-  document.documentElement.style.setProperty('--accent-color', config.accentColor);
-
-  // Apply site name and logo
-  var logoEl = document.querySelector('.logo');
-  if (logoEl) {
-    var iconEl = logoEl.querySelector('.logo-icon');
-    var nameEl = logoEl.querySelector('span');
-    if (iconEl) iconEl.textContent = config.logoLetter;
-    // Split siteName: last 3 chars in <span>, rest before
-    if (nameEl && config.siteName.length > 3) {
-      logoEl.innerHTML = '<div class="logo-icon">' + config.logoLetter + '</div>' +
-        config.siteName.slice(0, -3) + '<span>' + config.siteName.slice(-3) + '</span>';
-    } else if (nameEl) {
-      logoEl.innerHTML = '<div class="logo-icon">' + config.logoLetter + '</div>' +
-        config.siteName;
-    }
-  }
-
-  // Build category navigation
-  var navUl = document.querySelector('ul.nav');
-  if (navUl) {
-    var isActive = navUl.querySelector('a.active');
-    var currentPath = window.location.pathname;
-    var firstLi = navUl.querySelector('li:first-child a');
-    var homeHtml = firstLi ? '<li><a href="index.html"' + (firstLi.classList.contains('active') ? ' class="active"' : '') + '>All</a></li>' : '<li><a href="index.html">All</a></li>';
-    var catHtml = '';
-    for (var i = 0; i < config.categories.length; i++) {
-      var cat = config.categories[i];
-      catHtml += '<li><a href="category.html?cat=' + cat.id + '">' + cat.name + '</a></li>';
-    }
-    navUl.innerHTML = homeHtml + catHtml;
-  }
-
-  // Build footer quick links
-  var footerSections = document.querySelectorAll('.footer-section');
-  if (footerSections.length >= 2) {
-    // About section
-    var aboutH4 = footerSections[0].querySelector('h4');
-    var aboutP = footerSections[0].querySelector('p');
-    if (aboutH4) aboutH4.textContent = 'About ' + config.siteName;
-    if (aboutP) aboutP.textContent = config.footer.about;
-
-    // Quick links section
-    var quickLinksUl = footerSections[1].querySelector('ul');
-    if (quickLinksUl) {
-      var linksHtml = '<li><a href="index.html">Home</a></li>';
-      for (var i = 0; i < config.categories.length; i++) {
-        var cat = config.categories[i];
-        linksHtml += '<li><a href="category.html?cat=' + cat.id + '">' + cat.name + '</a></li>';
-      }
-      quickLinksUl.innerHTML = linksHtml;
-    }
-
-    // Footer bottom
-    var footerBottom = document.querySelector('.footer-bottom p');
-    if (footerBottom) {
-      footerBottom.innerHTML = '© <script>document.write(new Date().getFullYear())<\/script> ' + config.siteName + '. All rights reserved.';
-    }
-  }
-
-  // Update page title
-  var titleSuffix = config.siteName;
-  var currentTitle = document.title;
-  if (currentTitle.indexOf('HelloInsights') !== -1) {
-    document.title = currentTitle.replace(/HelloInsights/g, titleSuffix);
-  }
-
-  // Update meta description
-  var metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc && config.seo && config.seo.description) {
-    metaDesc.setAttribute('content', config.seo.description);
-  }
-}
-
-function loadSiteConfig(callback) {
-  fetch('config.json')
-    .then(function(res) { return res.json(); })
-    .then(function(config) {
-      applyConfig(config);
-      if (callback) callback(config);
-    })
-    .catch(function(err) {
-      console.warn('Failed to load config.json:', err);
-      if (callback) callback(null);
-    });
-}
 // HelloInsights — Site Config Loader & Ad Manager
 var siteConfig = null;
 
@@ -99,13 +5,20 @@ function applyConfig(config) {
   siteConfig = config;
   document.documentElement.style.setProperty('--accent-color', config.accentColor);
 
-  // Logo
+  // Logo — clear everything, keep only image
   var logoEl = document.querySelector('.logo');
   if (logoEl) {
+    while (logoEl.firstChild) logoEl.removeChild(logoEl.firstChild);
     var src = config.logoImage || '';
-    logoEl.innerHTML = src
-      ? '<img src="' + src + '" alt="' + config.siteName + '" class="logo-img">'
-      : '<span class="logo-text">' + config.siteName + '</span>';
+    if (src) {
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = config.siteName;
+      img.className = 'logo-img';
+      logoEl.appendChild(img);
+    } else {
+      logoEl.innerHTML = '<span class="logo-text">' + config.siteName + '</span>';
+    }
   }
 
   // Navigation
@@ -135,7 +48,7 @@ function applyConfig(config) {
       ul.innerHTML = links;
     }
     var bottom = document.querySelector('.footer-bottom p');
-    if (bottom) bottom.innerHTML = '&copy; <script>document.write(new Date().getFullYear())<\/script> ' + config.siteName + '. All rights reserved.';
+    if (bottom) bottom.innerHTML = '&copy; <script>document.write(new Date().getFullYear())</script> ' + config.siteName + '. All rights reserved.';
   }
 
   // Title & Meta
@@ -154,8 +67,7 @@ function loadSiteConfig(callback) {
 }
 
 // ==========================================
-// 广告统一管理
-// 读 config.adsense → 注入脚本 + 生成广告位
+// AdSense Manager — inject ads, hide unfilled
 // ==========================================
 function loadAdSense(config) {
   if (!config || !config.adsense || !config.adsense.enabled) return;
@@ -166,49 +78,84 @@ function loadAdSense(config) {
   var adSlots = pageAds[page];
   if (!adSlots || !adSlots.length) return;
 
-  // 注入 AdSense 脚本
+  // 注入 AdSense 脚本（延迟执行）
   var s = document.createElement('script');
   s.async = true;
   s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + clientId;
   s.crossOrigin = 'anonymous';
   document.head.appendChild(s);
 
-  // 按 pageAds 配置自动创建广告容器并注入 <ins>
-  function buildAds() {
-    for (var i = 0; i < adSlots.length; i++) {
-      var key = adSlots[i];
-      var def = slots[key];
-      if (!def) continue;
+  // 构建广告容器（不立即填充）
+  var containers = [];
+  for (var i = 0; i < adSlots.length; i++) {
+    var key = adSlots[i];
+    var def = slots[key];
+    if (!def) continue;
+    var anchor = document.getElementById('ad-' + key);
+    if (!anchor) continue;
+    anchor.className = 'ad-container';
+    var ins = document.createElement('ins');
+    ins.className = 'adsbygoogle';
+    ins.style.display = 'block';
+    ins.setAttribute('data-ad-client', clientId);
+    ins.setAttribute('data-ad-slot', def.id);
+    ins.setAttribute('data-ad-format', def.format || 'auto');
+    ins.setAttribute('data-full-width-responsive', 'true');
+    if (def.layoutKey) ins.setAttribute('data-ad-layout-key', def.layoutKey);
+    anchor.appendChild(ins);
+    containers.push({ el: anchor, ins: ins, isFirst: i === 0 });
+  }
 
-      var anchor = document.getElementById('ad-' + key);
-      if (!anchor) continue;
+  // 懒加载：用 IntersectionObserver，广告滚入视口时才请求
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      for (var e = 0; e < entries.length; e++) {
+        if (entries[e].isIntersecting) {
+          var target = entries[e].target;
+          var item = containers.filter(function(c) { return c.el === target; })[0];
+          if (item && !item.loaded) {
+            item.loaded = true;
+            try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(ex) {}
+          }
+          observer.unobserve(target);
+        }
+      }
+    }, { rootMargin: '200px 0px' }); // 提前 200px 开始加载
 
-      var ins = document.createElement('ins');
-      ins.className = 'adsbygoogle';
-      ins.style.display = 'block';
-      ins.setAttribute('data-ad-client', clientId);
-      ins.setAttribute('data-ad-slot', def.id);
-      ins.setAttribute('data-ad-format', def.format || 'auto');
-      ins.setAttribute('data-full-width-responsive', 'true');
-      if (def.layoutKey) ins.setAttribute('data-ad-layout-key', def.layoutKey);
-      anchor.appendChild(ins);
+    for (var i = 0; i < containers.length; i++) {
+      // 首屏广告立即加载（banner 通常在顶部）
+      if (containers[i].isFirst) {
+        try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(ex) {}
+        containers[i].loaded = true;
+      } else {
+        observer.observe(containers[i].el);
+      }
     }
-
+  } else {
+    // 降级：不支持 Observer 就全部立即加载
     try {
       var ads = document.querySelectorAll('.adsbygoogle');
       for (var j = 0; j < ads.length; j++) { (window.adsbygoogle = window.adsbygoogle || []).push({}); }
     } catch(e) {}
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', buildAds);
-  } else {
-    buildAds();
-  }
+  // 隐藏未填充广告
+  setTimeout(hideUnfilledAds, 3000);
+  setTimeout(hideUnfilledAds, 8000);
 }
 
+function hideUnfilledAds() {
+  var allIns = document.querySelectorAll('ins.adsbygoogle');
+  for (var i = 0; i < allIns.length; i++) {
+    var status = allIns[i].getAttribute('data-ad-status');
+    if (status === 'unfilled') {
+      var container = allIns[i].closest('.ad-container');
+      if (container) container.style.display = 'none';
+    }
+  }
+}
 // ==========================================
-// 通用工具函数
+// Utilities
 // ==========================================
 function toggleMenu() {
   var nav = document.getElementById('navContainer');
@@ -222,19 +169,10 @@ window.addEventListener('scroll', function() {
   if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
 });
 
-// 统一入口
+// Entry
 function initSite() {
   loadSiteConfig(function(config) {
     if (config) loadAdSense(config);
   });
 }
 document.addEventListener('DOMContentLoaded', initSite);
-var logoEl = document.querySelector('.logo');
-if (logoEl) {
-  while (logoEl.firstChild) logoEl.removeChild(logoEl.firstChild);
-  var img = document.createElement('img');
-  img.src = config.logoImage;
-  img.alt = config.siteName;
-  img.className = 'logo-img';
-  logoEl.appendChild(img);
-}

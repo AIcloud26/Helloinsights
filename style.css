@@ -1182,3 +1182,26 @@ body {
     #id-banner:not(:empty) { min-height: 60px; }
     #id-rectangle:not(:empty) { min-height: 100px; }
 }
+/* ========================================
+   Ad Containers — hide when empty
+   ======================================== */
+.ad-container {
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden;
+  border: none !important;
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transition: all 0.3s ease;
+}
+.ad-container:not(:empty) {
+  min-height: auto !important;
+  max-height: none !important;
+  margin: 2rem auto !important;
+  padding: 1rem !important;
+}
+.ad-container ins.adsbygoogle[data-ad-status="unfilled"],
+.ad-container:has(ins.adsbygoogle[data-ad-status="unfilled"]) {
+  display: none !important;
+}

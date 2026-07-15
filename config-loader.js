@@ -229,3 +229,12 @@ function initSite() {
   });
 }
 document.addEventListener('DOMContentLoaded', initSite);
+var logoEl = document.querySelector('.logo');
+if (logoEl) {
+  while (logoEl.firstChild) logoEl.removeChild(logoEl.firstChild);
+  var img = document.createElement('img');
+  img.src = config.logoImage;
+  img.alt = config.siteName;
+  img.className = 'logo-img';
+  logoEl.appendChild(img);
+}

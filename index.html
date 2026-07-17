@@ -117,8 +117,13 @@
             date.setDate(date.getDate() - Math.floor(index / 3));
             return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
         }
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            var d = new Date(dateStr);
+            return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
         function createArticleCard(article, index) {
-            var date = generateDate(index);
+            var date = article.date ? formatDate(article.date) : generateDate(index);
             var fallbackImg = getFallbackImage(article.category);
             var catName = categoryNames[article.category] || article.category;
             return '<article class="article-card">' +

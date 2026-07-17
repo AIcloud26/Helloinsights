@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Read the latest insights and articles on HelloInsights.">
     <title>Article - HelloInsights</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link rel="stylesheet" href="style.css">
     <script src="config-loader.js"></script>
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
                 <img src="logo.png" alt="HelloInsights" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
-                <span class="logo-text">HelloInsights</span>
+                <span class="logo-text" style="display:none;">HelloInsights</span>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -38,25 +40,11 @@
         </div>
     </header>
     <main class="container">
-        <!-- AdSense In-Article Ad (Top) -->
-        <div class="adsense-slot article-ad-container" data-ad-slot="1111111111">
-            <div>
-                <div class="ad-label">Advertisement</div>
-                <div class="ad-size">728 x 90</div>
-            </div>
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
-        </div>
+        <div class="ad-container" id="ad-banner"></div>
         <article class="article-detail" id="articleDetail">
             <div class="loading" id="loading"></div>
         </article>
-        <!-- AdSense In-Article Ad (Bottom) -->
-        <div class="adsense-slot article-ad-container" data-ad-slot="3333333333">
-            <div>
-                <div class="ad-label">Advertisement</div>
-                <div class="ad-size">Responsive</div>
-            </div>
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
+        <div class="ad-container" id="ad-auto"></div>
         <section class="mb-4" style="margin-top: 3rem;" id="relatedSection">
             <h2 class="mb-2">Related Articles</h2>
             <div class="article-grid" id="relatedGrid"></div>
@@ -95,8 +83,8 @@
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
     <script>
         var categoryNames = {};
+        var maxArticleId = 0;
         var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
-        var maxArticleId = 48;
         var fallbackImages = {
             'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
             'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
@@ -117,9 +105,13 @@
         function getFallbackImage(category) {
             return fallbackImages[category] || defaultFallback;
         }
-        function generateViews() {
-            var views = Math.floor(Math.random() * 25000) + 5000;
-            return views.toLocaleString();
+        function formatDate(dateStr) {
+            // Use article date if available, otherwise calculate
+            if (dateStr) {
+                var d = new Date(dateStr);
+                return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            }
+            return '';
         }
         function generateDate(articleId, maxId) {
             var today = new Date();
@@ -132,8 +124,7 @@
             var loading = document.getElementById('loading');
             if (loading) loading.remove();
             
-            var views = generateViews();
-            var date = generateDate(article.id, maxId);
+            var date = article.date ? formatDate(article.date) : generateDate(article.id, maxId);
             var catName = categoryNames[article.category] || article.category;
             var fallbackImg = getFallbackImage(article.category);
             var heroImg = article.image.replace('w=600&h=400', 'w=1200&h=600');
@@ -143,7 +134,7 @@
             
             container.innerHTML = 
                 '<div class="article-hero">' +
-                '<img src="' + heroImg + '" alt="' + article.title + '" onerror="this.src=\'' + fallbackImg.replace('w=600&h=400', 'w=1200&h=600') + '\'">' +
+                '<img src="' + heroImg + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + fallbackImg.replace('w=600&h=400', 'w=1200&h=600') + '\'">' +
                 '</div>' +
                 '<div class="article-body">' +
                 '<header class="article-header">' +
@@ -151,7 +142,6 @@
                 '<h1>' + article.title + '</h1>' +
                 '<div class="article-meta">' +
                 '<span>' + date + '</span>' +
-                '<span>' + views + ' views</span>' +
                 '</div>' +
                 '</header>' +
                 '<div class="article-content">' +
@@ -177,7 +167,6 @@
                 return;
             }
             
-            var fallbackImg = getFallbackImage(currentArticle.category);
             var grid = document.getElementById('relatedGrid');
             var html = '';
             
@@ -185,6 +174,7 @@
                 var article = related[i];
                 var articleFallback = getFallbackImage(article.category);
                 var catName = categoryNames[article.category] || article.category;
+                var date = article.date ? formatDate(article.date) : generateDate(article.id, maxArticleId);
                 html += '<article class="article-card">' +
                     '<div class="card-image">' +
                     '<img src="' + article.image + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + articleFallback + '\'">' +
@@ -196,8 +186,7 @@
                     '</h3>' +
                     '<p class="card-excerpt">' + article.excerpt + '</p>' +
                     '<div class="card-meta">' +
-                    '<span>📅 ' + generateDate(article.id, maxArticleId) + '</span>' +
-                    '<span>👁 ' + Math.floor(Math.random() * 15 + 5) + 'K views</span>' +
+                    '<span>📅 ' + date + '</span>' +
                     '</div>' +
                     '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
                     '</div>' +

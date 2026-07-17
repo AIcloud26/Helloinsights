@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Browse articles by category - Technology, Finance, AI Tools, and Health & Lifestyle on HelloInsights.">
     <title>Category - HelloInsights</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <script src="config-loader.js"></script>
 </head>
 <body>
@@ -15,7 +17,7 @@
         <div class="header-content">
             <a href="index.html" class="logo">
                 <img src="logo.png" alt="HelloInsights" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
-                <span class="logo-text">HelloInsights</span>
+                <span class="logo-text" style="display:none;">HelloInsights</span>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -38,17 +40,13 @@
         </div>
     </header>
     <main class="container">
-        <div id="ad-banner"></div>
-        <div class="page-header">
-            <h1 id="categoryTitle">All Articles</h1>
-            <p id="categoryDesc">Browse all articles across different categories</p>
-        </div>
+        <div class="ad-container" id="ad-banner"></div>
         <div class="category-filter" id="categoryFilter"></div>
         <div class="article-grid" id="articleGrid">
             <div class="loading" id="loading"></div>
         </div>
         <div class="pagination" id="pagination"></div>
-        <div id="ad-fluid"></div>
+        <div class="ad-container" id="ad-fluid"></div>
     </main>
     <footer class="footer">
         <div class="footer-content">
@@ -88,9 +86,6 @@
         var currentCategory = 'all';
         var filteredArticles = [];
         var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
-        var categoryInfo = {
-            'all': { title: 'All Articles', desc: 'Browse all articles across different categories' }
-        };
         var categoryNames = {};
         var fallbackImages = {
             'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
@@ -98,26 +93,17 @@
             'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
             'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
         };
-
-        // 从 config 构建分类信息
-        function buildCategoryInfo(config) {
-            categoryInfo = { 'all': { title: 'All Articles', desc: 'Browse all articles across different categories' } };
+        function buildCategoryNames(config) {
             if (config && config.categories) {
                 for (var i = 0; i < config.categories.length; i++) {
-                    var cat = config.categories[i];
-                    categoryNames[cat.id] = cat.name;
-                    categoryInfo[cat.id] = { title: cat.name, desc: 'Browse the latest articles in ' + cat.name };
+                    categoryNames[config.categories[i].id] = config.categories[i].name;
                 }
             }
         }
-
-        // 读取 URL 参数
         function getUrlParam(name) {
             var params = new URLSearchParams(window.location.search);
             return params.get(name);
         }
-
-        // 加载文章列表
         function loadArticles(callback) {
             fetch('articles-list.json?t=' + Date.now())
                 .then(function(r) { return r.json(); })
@@ -131,8 +117,6 @@
                     if (callback) callback();
                 });
         }
-
-        // 过滤文章
         function filterArticles() {
             if (currentCategory === 'all') {
                 filteredArticles = allArticles.slice();
@@ -141,55 +125,56 @@
                     return a.category === currentCategory;
                 });
             }
-            // 按日期倒序
+            // Sort by date descending
             filteredArticles.sort(function(a, b) {
-                return new Date(b.date) - new Date(a.date);
+                if (a.date && b.date) return new Date(b.date) - new Date(a.date);
+                return b.id - a.id;
             });
         }
-
-        // 渲染文章卡片
+        function formatDate(dateStr) {
+            if (dateStr) {
+                var d = new Date(dateStr);
+                return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            }
+            return '';
+        }
         function renderArticles() {
             var grid = document.getElementById('articleGrid');
             var loading = document.getElementById('loading');
             if (loading) loading.style.display = 'none';
             grid.innerHTML = '';
-
             var start = (currentPage - 1) * ARTICLES_PER_PAGE;
             var end = start + ARTICLES_PER_PAGE;
             var pageArticles = filteredArticles.slice(start, end);
-
             if (pageArticles.length === 0) {
                 grid.innerHTML = '<p style="text-align:center;color:#999;grid-column:1/-1;padding:3rem;">No articles found in this category.</p>';
                 return;
             }
-
             for (var i = 0; i < pageArticles.length; i++) {
                 var article = pageArticles[i];
                 var imgSrc = article.image || fallbackImages[article.category] || defaultFallback;
                 var catName = categoryNames[article.category] || article.category;
+                var date = formatDate(article.date);
                 var card = document.createElement('div');
                 card.className = 'article-card';
-                card.innerHTML = '<div class="card-image"><img src="' + imgSrc + '" alt="' + (article.title || '') + '" onerror="this.src=\'' + defaultFallback + '\'"></div>' +
+                card.innerHTML = '<div class="card-image"><img src="' + imgSrc + '" alt="' + (article.title || '') + '" loading="lazy" onerror="this.src=\'' + defaultFallback + '\'"></div>' +
                     '<div class="card-content">' +
                     '<span class="card-category">' + catName + '</span>' +
                     '<h2 class="card-title"><a href="article.html?id=' + article.id + '">' + article.title + '</a></h2>' +
-                    '<p class="card-excerpt">' + (article.summary || '') + '</p>' +
-                    '<div class="card-meta"><span>📅 ' + (article.date || '') + '</span><span>⏱ ' + (article.readTime || '3 min') + '</span></div>' +
+                    '<p class="card-excerpt">' + (article.excerpt || '') + '</p>' +
+                    '<div class="card-meta"><span>📅 ' + date + '</span></div>' +
                     '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More</a>' +
                     '</div>';
                 grid.appendChild(card);
             }
         }
-
-        // 渲染分页
         function renderPagination() {
             var pag = document.getElementById('pagination');
             pag.innerHTML = '';
             var totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
             if (totalPages <= 1) return;
-
             if (currentPage > 1) {
-                pag.innerHTML += '<a href="#" onclick="goToPage(' + (currentPage - 1) + ');return false;">←</a>';
+                pag.innerHTML += '<a href="#" onclick="goToPage(' + (currentPage - 1) + ');return false;">&larr;</a>';
             }
             for (var p = 1; p <= totalPages; p++) {
                 if (p === currentPage) {
@@ -199,18 +184,15 @@
                 }
             }
             if (currentPage < totalPages) {
-                pag.innerHTML += '<a href="#" onclick="goToPage(' + (currentPage + 1) + ');return false;">→</a>';
+                pag.innerHTML += '<a href="#" onclick="goToPage(' + (currentPage + 1) + ');return false;">&rarr;</a>';
             }
         }
-
         function goToPage(page) {
             currentPage = page;
             renderArticles();
             renderPagination();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        // 渲染分类筛选按钮
         function renderFilter() {
             var filterDiv = document.getElementById('categoryFilter');
             filterDiv.innerHTML = '';
@@ -232,25 +214,17 @@
                         renderArticles();
                         renderPagination();
                         renderFilter();
-                        // 更新 URL 参数（不刷新页面）
                         var url = catId === 'all' ? 'category.html' : 'category.html?cat=' + catId;
                         history.replaceState(null, '', url);
-                        // 更新标题
-                        var info = categoryInfo[catId] || categoryInfo['all'];
-                        document.getElementById('categoryTitle').textContent = info.title;
-                        document.getElementById('categoryDesc').textContent = info.desc;
                     };
                 })(id);
                 filterDiv.appendChild(btn);
             }
         }
-
-        // 搜索功能
         function initSearch() {
             var searchBtn = document.getElementById('searchBtn');
             var searchInput = document.getElementById('searchInput');
             if (!searchBtn || !searchInput) return;
-
             function doSearch() {
                 var keyword = searchInput.value.trim().toLowerCase();
                 if (!keyword) {
@@ -258,7 +232,7 @@
                 } else {
                     filteredArticles = allArticles.filter(function(a) {
                         return (a.title && a.title.toLowerCase().indexOf(keyword) !== -1) ||
-                               (a.summary && a.summary.toLowerCase().indexOf(keyword) !== -1) ||
+                               (a.excerpt && a.excerpt.toLowerCase().indexOf(keyword) !== -1) ||
                                (a.category && a.category.toLowerCase().indexOf(keyword) !== -1);
                     });
                 }
@@ -266,33 +240,24 @@
                 renderArticles();
                 renderPagination();
             }
-
             searchBtn.addEventListener('click', doSearch);
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') doSearch();
             });
         }
-
-        // 初始化
         function initCategory() {
             var cat = getUrlParam('cat');
-            if (cat && categoryInfo[cat]) {
+            if (cat) {
                 currentCategory = cat;
             }
-            var info = categoryInfo[currentCategory] || categoryInfo['all'];
-            document.getElementById('categoryTitle').textContent = info.title;
-            document.getElementById('categoryDesc').textContent = info.desc;
-
             filterArticles();
             renderArticles();
             renderPagination();
             renderFilter();
             initSearch();
         }
-
-        // 启动
         loadSiteConfig(function(config) {
-            buildCategoryInfo(config);
+            buildCategoryNames(config);
             loadArticles(function() {
                 initCategory();
             });

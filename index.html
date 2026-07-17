@@ -3,23 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HelloInsights - Your trusted source for Technology, Finance, AI Tools, and Health & Lifestyle news and insights.">
-    <title>HelloInsights - Latest Articles & Insights</title>
+    <meta name="description" content="Contact Us - Send us a message and we'll get back to you within 24-48 hours.">
+    <title>Contact Us - HelloInsights</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
     <script src="config-loader.js"></script>
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
-<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-<link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
-<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
                 <img src="logo.png" alt="HelloInsights" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
-                
+                <span class="logo-text" style="display:none;">HelloInsights</span>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -27,7 +23,7 @@
             <div class="nav-container" id="navContainer">
                 <nav>
                     <ul class="nav">
-                        <li><a href="index.html" class="active">All</a></li>
+                        <li><a href="index.html">All</a></li>
                         <li><a href="category.html?cat=technology">Technology</a></li>
                         <li><a href="category.html?cat=finance">Finance</a></li>
                         <li><a href="category.html?cat=ai-tools">AI Tools</a></li>
@@ -42,250 +38,77 @@
         </div>
     </header>
     <main class="container">
-        <!-- AdSense Header Ad -->
-        <div class="adsense-slot adsense-header" data-ad-slot="1111111111">
-            <div>
-                <div class="ad-label">Advertisement</div>
-                <div class="ad-size">728 x 90</div>
-            </div>
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
-        </div>
-        <div class="page-header">
-            <h2 class="site-tagline">YOUR TRUSTED SOURCE FOR INSIGHTS</h2>
-            <p class="site-description">Expert analysis and curated intelligence at the intersection of technology, finance, AI innovation, and modern wellness. We deliver clarity, depth, and actionable perspectives to help you navigate our rapidly changing world.</p>
-        </div>
-        <div id="searchInfo" style="display: none; margin-bottom: 1rem; padding: 0.5rem 1rem; background: #fff3cd; border-radius: 8px;">
-            <span id="searchText"></span>
-            <button onclick="clearSearch()" style="margin-left: 10px; background: #ff6b35; color: white; border: none; padding: 2px 10px; border-radius: 4px; cursor: pointer;">Clear</button>
-        </div>
-        <div class="article-grid" id="articleGrid">
-            <div class="loading" id="loading"></div>
-        </div>
-        <div class="pagination" id="pagination"></div>
-        <!-- AdSense In-Feed Ad -->
-        <div class="adsense-slot adsense-infeed" data-ad-slot="3333333333">
-            <div>
-                <div class="ad-label">Advertisement</div>
-                <div class="ad-size">Responsive In-Feed</div>
-            </div>
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-full-width-responsive="true"></ins>
+        <div class="static-content">
+            <h1>Contact Us</h1>
+            <p class="lead">Have a question or feedback? Fill out the form below and our team will respond within 24-48 hours.</p>
+            <form id="contactForm" style="max-width: 600px; margin-top: 2rem;">
+                <div style="margin-bottom: 1rem;">
+                    <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Name *</label>
+                    <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email *</label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Subject *</label>
+                    <input type="text" id="subject" name="subject" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Message *</label>
+                    <textarea id="message" name="message" rows="6" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box; resize: vertical;"></textarea>
+                </div>
+                <button type="submit" style="background: var(--accent-color); color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer;">Send Message</button>
+            </form>
         </div>
     </main>
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>About HelloInsights</h4>
-                <p>Your trusted source for the latest insights in Technology, Finance, AI Tools, and Health & Lifestyle.</p>
+                <div class="logo" style="margin-bottom: 1rem;">
+                    <img src="logo.png" alt="HelloInsights" class="logo-img">
+                </div>
+                <p>Your trusted source for curated insights at the intersection of technology, finance, and modern wellness.</p>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
                     <li><a href="category.html?cat=technology">Technology</a></li>
                     <li><a href="category.html?cat=finance">Finance</a></li>
                     <li><a href="category.html?cat=ai-tools">AI Tools</a></li>
                     <li><a href="category.html?cat=health-lifestyle">Health & Lifestyle</a></li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                </ul>
-            </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> HelloInsights. All rights reserved.</p>
+            <p>&copy; <span id="currentYear"></span> HelloInsights. All rights reserved.</p>
         </div>
     </footer>
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
     <script>
-        var ARTICLES_PER_PAGE = 6;
-        var allArticles = [];
-        var currentPage = 1;
-        var filteredArticles = [];
-        var isSearching = false;
-        var searchQuery = '';
-        var categoryNames = {};
-        var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
-        var fallbackImages = {
-            'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
-            'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
-            'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
-            'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
-        };
-        function buildCategoryNames(config) {
-            var names = {};
-            if (config && config.categories) {
-                for (var i = 0; i < config.categories.length; i++) {
-                    names[config.categories[i].id] = config.categories[i].name;
-                }
-            } else {
-                names = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
-            }
-            return names;
-        }
-        function getFallbackImage(category) {
-            return fallbackImages[category] || defaultFallback;
-        }
-        function generateViews() {
-            var views = Math.floor(Math.random() * 25000) + 1000;
-            return views >= 1000 ? (views / 1000).toFixed(1) + 'K' : views.toString();
-        }
-        function generateDate(index) {
-            var today = new Date();
-            var date = new Date(today);
-            date.setDate(date.getDate() - Math.floor(index / 3));
-            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        }
-        function createArticleCard(article, index) {
-            var views = generateViews();
-            var date = generateDate(index);
-            var fallbackImg = getFallbackImage(article.category);
-            var catName = categoryNames[article.category] || article.category;
-            
-            return '<article class="article-card">' +
-                '<div class="card-image"><img src="' + article.image + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + fallbackImg + '\'"></div>' +
-                '<div class="card-content">' +
-                '<span class="card-category">' + catName + '</span>' +
-                '<h3 class="card-title"><a href="article.html?id=' + article.id + '">' + article.title + '</a></h3>' +
-                '<p class="card-excerpt">' + article.excerpt + '</p>' +
-                '<div class="card-meta"><span>📅 ' + date + '</span><span>👁 ' + views + ' views</span></div>' +
-                '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
-                '</div></article>';
-        }
-        function renderArticles(articles) {
-            var grid = document.getElementById('articleGrid');
-            var loading = document.getElementById('loading');
-            if (loading) loading.remove();
-            if (!grid) return;
-            
-            if (articles.length === 0) {
-                grid.innerHTML = isSearching 
-                    ? '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#666;">No articles found for "' + searchQuery + '".</p>'
-                    : '<p style="text-align:center;grid-column:1/-1;padding:3rem;">No articles found.</p>';
-                document.getElementById('pagination').innerHTML = '';
-                return;
-            }
-            
-            var startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
-            var pageArticles = articles.slice(startIndex, startIndex + ARTICLES_PER_PAGE);
-            var html = '';
-            for (var i = 0; i < pageArticles.length; i++) {
-                html += createArticleCard(pageArticles[i], startIndex + i);
-            }
-            grid.innerHTML = html;
-            renderPagination(articles.length);
-        }
-        function renderPagination(totalArticles) {
-            var totalPages = Math.ceil(totalArticles / ARTICLES_PER_PAGE);
-            var pagination = document.getElementById('pagination');
-            if (!pagination || totalPages <= 1) { if(pagination) pagination.innerHTML = ''; return; }
-            
-            var html = '<a href="#" class="' + (currentPage === 1 ? 'disabled' : '') + '" onclick="changePage(' + (currentPage - 1) + ');return false;">«</a>';
-            for (var i = 1; i <= totalPages; i++) {
-                html += i === currentPage 
-                    ? '<a href="#" class="active">' + i + '</a>'
-                    : '<a href="#" onclick="changePage(' + i + ');return false;">' + i + '</a>';
-            }
-            html += '<a href="#" class="' + (currentPage === totalPages ? 'disabled' : '') + '" onclick="changePage(' + (currentPage + 1) + ');return false;">»</a>';
-            pagination.innerHTML = html;
-        }
-        function changePage(page) {
-            var totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
-            if (page < 1 || page > totalPages) return;
-            currentPage = page;
-            renderArticles(filteredArticles);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        function handleSearch() {
-            var input = document.getElementById('searchInput');
-            var searchInfo = document.getElementById('searchInfo');
-            var searchText = document.getElementById('searchText');
-            if (!input) return;
-            
-            var query = input.value.trim();
-            searchQuery = query;
-            
-            if (query === '') { clearSearch(); return; }
-            
-            isSearching = true;
-            currentPage = 1;
-            var lowerQuery = query.toLowerCase();
-            filteredArticles = allArticles.filter(function(a) {
-                var catName = categoryNames[a.category] || a.category;
-                return a.title.toLowerCase().indexOf(lowerQuery) !== -1 ||
-                       a.excerpt.toLowerCase().indexOf(lowerQuery) !== -1 ||
-                       a.category.toLowerCase().indexOf(lowerQuery) !== -1 ||
-                       catName.toLowerCase().indexOf(lowerQuery) !== -1;
-            });
-            
-            if (searchInfo && searchText) {
-                searchInfo.style.display = 'block';
-                searchText.textContent = 'Found ' + filteredArticles.length + ' results for "' + query + '"';
-            }
-            renderArticles(filteredArticles);
-        }
-        function clearSearch() {
-            var input = document.getElementById('searchInput');
-            var searchInfo = document.getElementById('searchInfo');
-            isSearching = false;
-            searchQuery = '';
-            currentPage = 1;
-            if (input) input.value = '';
-            if (searchInfo) searchInfo.style.display = 'none';
-            filteredArticles = allArticles.slice();
-            renderArticles(filteredArticles);
-        }
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
         function toggleMenu() {
-            var nav = document.getElementById('navContainer');
-            if (nav) nav.classList.toggle('active');
+            var navContainer = document.getElementById('navContainer');
+            navContainer.classList.toggle('active');
         }
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        function initSearch() {
-            var searchInput = document.getElementById('searchInput');
-            var searchBtn = document.getElementById('searchBtn');
-            if (searchInput) {
-                searchInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter' || e.keyCode === 13) { e.preventDefault(); handleSearch(); }
-                });
-            }
-            if (searchBtn) {
-                searchBtn.addEventListener('click', function(e) { e.preventDefault(); handleSearch(); });
-            }
-        }
-        async function loadArticles() {
-            await new Promise(function(resolve) {
-                loadSiteConfig(function(config) {
-                    if (config) {
-                        categoryNames = buildCategoryNames(config);
-                    } else {
-                        categoryNames = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
-                    }
-                    resolve();
-                });
-            });
-            try {
-                var response = await fetch('articles-list.json');
-                var data = await response.json();
-                allArticles = data.articles || [];
-                filteredArticles = allArticles.slice();
-                filteredArticles.sort(function(a, b) { return b.id - a.id; });
-                renderArticles(filteredArticles);
-                initSearch();
-            } catch (error) {
-                var grid = document.getElementById('articleGrid');
-                if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles.</p>';
-            }
-        }
-        window.addEventListener('scroll', function() {
-            var btn = document.getElementById('backToTop');
-            if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var subject = document.getElementById('subject').value;
+            var message = document.getElementById('message').value;
+            window.location.href = 'mailto:support@helloinsights.online?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message);
         });
-        document.addEventListener('DOMContentLoaded', loadArticles);
     </script>
 </body>
 </html>

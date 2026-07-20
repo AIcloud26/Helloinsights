@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Read the latest insights and articles on HelloInsights.">
     <title>Article - HelloInsights</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <link rel="stylesheet" href="style.css">
-    <script src="config-loader.js"></script>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preload" href="articles.json" as="fetch" crossorigin>
+    <style>
+    *{margin:0;padding:0;box-sizing:border-box}:root{--accent-color:#ff6b35;--primary-color:var(--accent-color);--primary-hover:#e85a2a;--text-dark:#333;--text-medium:#666;--text-light:#999;--bg-light:#f5f5f5;--white:#fff;--shadow:0 2px 10px rgba(0,0,0,.08);--shadow-hover:0 4px 20px rgba(0,0,0,.12);--border-radius:12px;--transition:all .3s ease}html{font-size:16px;scroll-behavior:smooth}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.7;color:var(--text-dark);background:var(--bg-light);min-height:100vh}.header{background:var(--white);box-shadow:var(--shadow);position:sticky;top:0;z-index:1000}.header-content{max-width:1400px;margin:0 auto;padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}.logo{font-size:2rem;font-weight:700;color:var(--text-dark);text-decoration:none;display:flex;align-items:center;gap:.6rem}.logo-img{width:64px;height:64px;border-radius:10px;object-fit:contain}.nav-container{display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}.nav{display:flex;gap:.5rem;list-style:none}.nav a{text-decoration:none;color:var(--text-medium);padding:.6rem 1.2rem;border-radius:8px;font-weight:500;transition:var(--transition)}.nav a:hover,.nav a.active{color:var(--primary-color);background:rgba(255,107,53,.1)}.container{max-width:1400px;margin:0 auto;padding:2.5rem 3rem}.search-box{display:flex;align-items:center;background:var(--bg-light);border-radius:10px;padding:.6rem 1.2rem;border:1px solid transparent;transition:var(--transition)}.search-box input{border:none;background:transparent;outline:none;width:200px;font-size:1rem;color:var(--text-dark)}.search-box input::placeholder{color:var(--text-light)}.search-box button{background:none;border:none;cursor:pointer;color:var(--text-light);font-size:1.1rem}.menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem}.menu-toggle span{width:28px;height:3px;background:var(--text-dark);border-radius:2px}.article-detail{background:var(--white);border-radius:var(--border-radius);box-shadow:var(--shadow);overflow:hidden}.article-hero{width:100%;aspect-ratio:2/1;overflow:hidden;background:linear-gradient(110deg,#f0f0f0 8%,#e8e8e8 18%,#f0f0f0 33%);background-size:200% 100%;animation:shimmer 1.5s linear infinite}.article-hero img{width:100%;height:100%;object-fit:cover;decoding:async}.article-body{padding:3.5rem;max-width:900px;margin:0 auto}.article-header{margin-bottom:2.5rem}.article-header .card-category{display:inline-block;background:rgba(255,107,53,.1);color:var(--primary-color);padding:.3rem .9rem;border-radius:5px;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:1.2rem}.article-header h1{font-size:2.5rem;color:var(--text-dark);line-height:1.3;margin-bottom:1.2rem}.article-meta{display:flex;align-items:center;gap:2rem;color:var(--text-light);font-size:1rem;padding-bottom:1.5rem;border-bottom:1px solid #eee;flex-wrap:wrap}.article-content{font-size:1.15rem;line-height:1.9;color:var(--text-medium)}.article-content h2{color:var(--text-dark);font-size:1.75rem;margin:2.5rem 0 1.2rem}.article-content h3{color:var(--text-dark);font-size:1.4rem;margin:2rem 0 1rem}.article-content p{margin-bottom:1.5rem}.article-content ul,.article-content ol{margin:1.5rem 0;padding-left:2rem}.article-content li{margin-bottom:.8rem}.article-content blockquote{border-left:4px solid var(--primary-color);padding-left:1.5rem;margin:2rem 0;font-style:italic;color:var(--text-medium);font-size:1.1rem}.article-tags{display:flex;gap:.6rem;margin-top:2.5rem;flex-wrap:wrap}.tag{background:var(--bg-light);color:var(--text-medium);padding:.5rem 1.2rem;border-radius:25px;font-size:.9rem;text-decoration:none;transition:var(--transition)}.tag:hover{background:var(--primary-color);color:var(--white)}.article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}.article-card{background:var(--white);border-radius:var(--border-radius);box-shadow:var(--shadow);overflow:hidden;transition:var(--transition);display:flex;flex-direction:column;contain:layout style}.article-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-hover)}.card-image{width:100%;aspect-ratio:3/2;overflow:hidden;background:linear-gradient(110deg,#f0f0f0 8%,#e8e8e8 18%,#f0f0f0 33%);background-size:200% 100%;animation:shimmer 1.5s linear infinite}.card-image img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}.article-card:hover .card-image img{transform:scale(1.05)}.card-content{padding:1.75rem;flex:1;display:flex;flex-direction:column}.card-category{display:inline-block;background:rgba(255,107,53,.1);color:var(--primary-color);padding:.3rem .9rem;border-radius:5px;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.9rem;width:fit-content}.card-title{font-size:1.25rem;font-weight:600;color:var(--text-dark);margin-bottom:.9rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.card-title a{text-decoration:none;color:inherit;transition:var(--transition)}.card-title a:hover{color:var(--primary-color)}.card-excerpt{color:var(--text-medium);font-size:.95rem;line-height:1.65;margin-bottom:1.2rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:1}.card-meta{display:flex;align-items:center;font-size:.9rem;color:var(--text-light);margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid #eee}.read-more-btn{display:flex;align-items:center;justify-content:center;background:var(--primary-color);color:var(--white);text-decoration:none;padding:.85rem 1.75rem;border-radius:10px;font-weight:500;font-size:.95rem;transition:var(--transition);width:100%;margin-top:auto}.read-more-btn:hover{background:var(--primary-hover);transform:translateY(-3px);box-shadow:0 4px 12px rgba(255,107,53,.3)}.footer{background:var(--text-dark);color:var(--white);padding:3.5rem 3rem;margin-top:4rem}.footer-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:3rem}.footer-section h4{font-size:1.2rem;margin-bottom:1.2rem}.footer-section p,.footer-section a{color:#aaa;font-size:.95rem;line-height:1.85;text-decoration:none}.footer-section a:hover{color:var(--primary-color)}.footer-section ul{list-style:none}.footer-section ul li{margin-bottom:.6rem}.footer-bottom{max-width:1400px;margin:2.5rem auto 0;padding-top:2rem;border-top:1px solid #444;text-align:center;color:#777;font-size:.9rem}.ad-container{min-height:0!important;max-height:0!important;overflow:hidden;border:none!important;background:transparent!important;margin:0!important;padding:0!important;transition:all .3s ease}.ad-container:not(:empty){min-height:auto!important;max-height:none!important;margin:2rem auto!important;padding:1rem!important}.back-to-top{position:fixed;bottom:2.5rem;right:2.5rem;width:55px;height:55px;background:var(--primary-color);color:white;border:none;border-radius:50%;cursor:pointer;font-size:1.6rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-hover);transition:var(--transition);opacity:0;visibility:hidden;z-index:999}.back-to-top.visible{opacity:1;visibility:visible}.loading{display:flex;justify-content:center;align-items:center;padding:3rem}.loading::after{content:'';width:45px;height:45px;border:3px solid #eee;border-top-color:var(--primary-color);border-radius:50%;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}.mb-4{margin-bottom:2rem}.mb-2{margin-bottom:1rem}@media(max-width:1200px){.header-content{padding:1rem 2rem}.container{padding:2rem}.article-grid{grid-template-columns:repeat(2,1fr);gap:2rem}.footer-content{grid-template-columns:repeat(2,1fr)}}@media(max-width:768px){html{font-size:15px}.header-content{padding:1rem 1.25rem}.menu-toggle{display:flex}.nav-container{display:none;width:100%;flex-direction:column;gap:1rem;padding-top:1rem}.nav-container.active{display:flex}.nav{flex-direction:column;width:100%}.nav a{padding:.8rem 1rem;text-align:center;border-bottom:1px solid #eee}.search-box{width:100%}.search-box input{width:100%}.container{padding:1.5rem 1.25rem}.article-grid{grid-template-columns:1fr;gap:1.75rem}.article-hero{aspect-ratio:16/9}.article-body{padding:2rem 1.5rem}.article-header h1{font-size:1.75rem}.article-content{font-size:1rem}.article-content h2{font-size:1.4rem}.card-image{aspect-ratio:3/2}.card-content{padding:1.5rem}.card-title{font-size:1.15rem}.footer{padding:2.5rem 1.5rem}.footer-content{grid-template-columns:1fr;text-align:center;gap:2rem}.logo-img{width:40px;height:40px}.back-to-top{bottom:1.5rem;right:1.5rem;width:48px;height:48px;font-size:1.4rem}}@media(max-width:480px){html{font-size:14px}.logo{font-size:1.6rem}.logo-img{width:36px;height:36px}.container{padding:1.25rem 1rem}.card-content{padding:1.25rem}.card-title{font-size:1.05rem}.read-more-btn{padding:.7rem 1.4rem;font-size:.9rem}.article-hero{aspect-ratio:16/9}.article-body{padding:1.5rem 1.25rem}.article-header h1{font-size:1.5rem}.article-content{font-size:.95rem}}
+    </style>
+    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    <script src="config-loader.js" async></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <img src="logo.png" alt="HelloInsights" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
-                <span class="logo-text" style="display:none;">HelloInsights</span>
+                <img src="logo.png" alt="HelloInsights" class="logo-img" width="64" height="64">
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -34,17 +38,17 @@
                 </nav>
                 <div class="search-box">
                     <input type="text" placeholder="Search articles..." id="searchInput">
-                    <button type="button" id="searchBtn">🔍</button>
+                    <button type="button" id="searchBtn"></button>
                 </div>
             </div>
         </div>
     </header>
     <main class="container">
-        <div class="ad-container" id="ad-banner"></div>
+        <div id="ad-banner"></div>
         <article class="article-detail" id="articleDetail">
             <div class="loading" id="loading"></div>
         </article>
-        <div class="ad-container" id="ad-auto"></div>
+        <div id="ad-auto"></div>
         <section class="mb-4" style="margin-top: 3rem;" id="relatedSection">
             <h2 class="mb-2">Related Articles</h2>
             <div class="article-grid" id="relatedGrid"></div>
@@ -82,164 +86,113 @@
     </footer>
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
     <script>
-        var categoryNames = {};
-        var maxArticleId = 0;
-        var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
-        var fallbackImages = {
-            'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
-            'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
-            'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
-            'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
-        };
-        function buildCategoryNames(config) {
-            var names = {};
-            if (config && config.categories) {
-                for (var i = 0; i < config.categories.length; i++) {
-                    names[config.categories[i].id] = config.categories[i].name;
-                }
-            } else {
-                names = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
-            }
-            return names;
-        }
-        function getFallbackImage(category) {
-            return fallbackImages[category] || defaultFallback;
-        }
-        function formatDate(dateStr) {
-            // Use article date if available, otherwise calculate
-            if (dateStr) {
-                var d = new Date(dateStr);
-                return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-            }
-            return '';
-        }
-        function generateDate(articleId, maxId) {
-            var today = new Date();
-            var date = new Date(today);
-            date.setDate(date.getDate() - Math.floor((maxId - articleId) / 3));
-            return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-        }
-        function renderArticle(article, maxId) {
-            var container = document.getElementById('articleDetail');
-            var loading = document.getElementById('loading');
-            if (loading) loading.remove();
-            
-            var date = article.date ? formatDate(article.date) : generateDate(article.id, maxId);
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(function() {}); }
+    var categoryNames = {
+        'technology': 'Technology', 'finance': 'Finance',
+        'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle'
+    };
+    var maxArticleId = 0;
+    var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
+    var fallbackImages = {
+        'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
+        'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
+        'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
+        'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
+    };
+    function generateArticleDate(id) {
+        var start = new Date('2026-01-01').getTime();
+        var offset = (id % 180) * 86400000;
+        var d = new Date(start + offset);
+        var m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    }
+    function getFallbackImage(cat) { return fallbackImages[cat] || defaultFallback; }
+    function formatDate(dateStr) {
+        if (dateStr) { var d = new Date(dateStr); return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }); }
+        return '';
+    }
+    function renderArticle(article) {
+        var container = document.getElementById('articleDetail');
+        var loading = document.getElementById('loading');
+        if (loading) loading.remove();
+        var date = article.date ? formatDate(article.date) : generateArticleDate(article.id);
+        var catName = categoryNames[article.category] || article.category;
+        var fallbackImg = getFallbackImage(article.category);
+        var heroImg = article.image.replace('w=600&h=400', 'w=1200&h=600');
+        var fallbackHero = fallbackImg.replace('w=600&h=400', 'w=1200&h=600');
+        var articleContent = article.content
+            ? article.content
+            : '<p>' + article.excerpt + '</p><p><em>This article is being updated. Check back soon for the full content.</em></p>';
+        container.innerHTML =
+            '<div class="article-hero">' +
+            '<img src="' + heroImg + '" alt="' + article.title + '" width="1200" height="600" decoding="async" onerror="this.src=\'' + fallbackHero + '\'">' +
+            '</div>' +
+            '<div class="article-body">' +
+            '<header class="article-header">' +
+            '<span class="card-category">' + catName + '</span>' +
+            '<h1>' + article.title + '</h1>' +
+            '<div class="article-meta"><span>' + date + '</span></div>' +
+            '</header>' +
+            '<div class="article-content">' + articleContent + '</div>' +
+            '<div class="article-tags">' +
+            '<a href="category.html?cat=' + article.category + '" class="tag">' + catName + '</a>' +
+            '<a href="#" class="tag">Trending</a>' +
+            '<a href="#" class="tag">2026</a>' +
+            '</div></div>';
+        var siteName = (typeof siteConfig !== 'undefined' && siteConfig && siteConfig.siteName) ? siteConfig.siteName : 'HelloInsights';
+        document.title = article.title + ' - ' + siteName;
+    }
+    function renderRelated(currentArticle, allArticles) {
+        var related = allArticles.filter(function(a) { return a.category === currentArticle.category && a.id !== currentArticle.id; }).slice(0, 3);
+        if (related.length === 0) { var s = document.getElementById('relatedSection'); if (s) s.style.display = 'none'; return; }
+        var grid = document.getElementById('relatedGrid');
+        var html = '';
+        for (var i = 0; i < related.length; i++) {
+            var article = related[i];
+            var articleFallback = getFallbackImage(article.category);
             var catName = categoryNames[article.category] || article.category;
-            var fallbackImg = getFallbackImage(article.category);
-            var heroImg = article.image.replace('w=600&h=400', 'w=1200&h=600');
-            var articleContent = article.content
-                ? article.content
-                : '<p>' + article.excerpt + '</p><p><em>This article is being updated. Check back soon for the full content.</em></p>';
-            
-            container.innerHTML = 
-                '<div class="article-hero">' +
-                '<img src="' + heroImg + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + fallbackImg.replace('w=600&h=400', 'w=1200&h=600') + '\'">' +
-                '</div>' +
-                '<div class="article-body">' +
-                '<header class="article-header">' +
+            var date = article.date ? formatDate(article.date) : generateArticleDate(article.id);
+            html += '<article class="article-card">' +
+                '<div class="card-image"><img src="' + article.image + '" alt="' + article.title + '" width="600" height="400" loading="lazy" decoding="async" onerror="this.src=\'' + articleFallback + '\'"></div>' +
+                '<div class="card-content">' +
                 '<span class="card-category">' + catName + '</span>' +
-                '<h1>' + article.title + '</h1>' +
-                '<div class="article-meta">' +
-                '<span>' + date + '</span>' +
-                '</div>' +
-                '</header>' +
-                '<div class="article-content">' +
-                articleContent +
-                '</div>' +
-                '<div class="article-tags">' +
-                '<a href="category.html?cat=' + article.category + '" class="tag">' + catName + '</a>' +
-                '<a href="#" class="tag">Trending</a>' +
-                '<a href="#" class="tag">2025</a>' +
-                '</div>' +
-                '</div>';
-            
-            var siteName = (siteConfig && siteConfig.siteName) ? siteConfig.siteName : 'HelloInsights';
-            document.title = article.title + ' - ' + siteName;
+                '<h3 class="card-title"><a href="article.html?id=' + article.id + '">' + article.title + '</a></h3>' +
+                '<p class="card-excerpt">' + article.excerpt + '</p>' +
+                '<div class="card-meta"><span>' + date + '</span></div>' +
+                '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
+                '</div></article>';
         }
-        function renderRelated(currentArticle, allArticles) {
-            var related = allArticles.filter(function(a) { 
-                return a.category === currentArticle.category && a.id !== currentArticle.id; 
-            }).slice(0, 3);
-            
-            if (related.length === 0) {
-                document.getElementById('relatedSection').style.display = 'none';
-                return;
-            }
-            
-            var grid = document.getElementById('relatedGrid');
-            var html = '';
-            
-            for (var i = 0; i < related.length; i++) {
-                var article = related[i];
-                var articleFallback = getFallbackImage(article.category);
-                var catName = categoryNames[article.category] || article.category;
-                var date = article.date ? formatDate(article.date) : generateDate(article.id, maxArticleId);
-                html += '<article class="article-card">' +
-                    '<div class="card-image">' +
-                    '<img src="' + article.image + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + articleFallback + '\'">' +
-                    '</div>' +
-                    '<div class="card-content">' +
-                    '<span class="card-category">' + catName + '</span>' +
-                    '<h3 class="card-title">' +
-                    '<a href="article.html?id=' + article.id + '">' + article.title + '</a>' +
-                    '</h3>' +
-                    '<p class="card-excerpt">' + article.excerpt + '</p>' +
-                    '<div class="card-meta">' +
-                    '<span>📅 ' + date + '</span>' +
-                    '</div>' +
-                    '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
-                    '</div>' +
-                    '</article>';
-            }
-            
-            grid.innerHTML = html;
-        }
-        function toggleMenu() {
-            var nav = document.getElementById('navContainer');
-            if (nav) nav.classList.toggle('active');
-        }
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        window.addEventListener('scroll', function() {
-            var btn = document.getElementById('backToTop');
-            if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
+        grid.innerHTML = html;
+    }
+    function toggleMenu() { var nav = document.getElementById('navContainer'); if (nav) nav.classList.toggle('active'); }
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    window.addEventListener('scroll', function() {
+        var btn = document.getElementById('backToTop');
+        if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
+    });
+    fetch('articles.json', { cache: 'force-cache' })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            var articles = data.articles || [];
+            if (articles.length > 0) maxArticleId = Math.max.apply(null, articles.map(function(a) { return a.id; }));
+            var urlParams = new URLSearchParams(window.location.search);
+            var articleId = parseInt(urlParams.get('id')) || 1;
+            var article = articles.find(function(a) { return a.id === articleId; }) || articles[0];
+            renderArticle(article);
+            renderRelated(article, articles);
+        })
+        .catch(function() {
+            var container = document.getElementById('articleDetail');
+            if (container) container.innerHTML = '<p style="text-align:center;padding:3rem;">Unable to load article. <a href="index.html">Return to homepage</a></p>';
         });
-        async function loadArticle() {
-            await new Promise(function(resolve) {
-                loadSiteConfig(function(config) {
-                    if (config) {
-                        categoryNames = buildCategoryNames(config);
-                    } else {
-                        categoryNames = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
-                    }
-                    resolve();
-                });
-            });
-            try {
-                var response = await fetch('articles.json');
-                var data = await response.json();
-                var articles = data.articles;
-                
-                if (articles && articles.length > 0) {
-                    maxArticleId = Math.max.apply(null, articles.map(function(a) { return a.id; }));
-                }
-                
-                var urlParams = new URLSearchParams(window.location.search);
-                var articleId = parseInt(urlParams.get('id')) || 1;
-                
-                var article = articles.find(function(a) { return a.id === articleId; }) || articles[0];
-                
-                renderArticle(article, maxArticleId);
-                renderRelated(article, articles);
-            } catch (error) {
-                console.error('Error:', error);
-                var container = document.getElementById('articleDetail');
-                if (container) {
-                    container.innerHTML = '<p style="text-align: center; padding: 3rem;">Unable to load article. <a href="index.html">Return to homepage</a></p>';
-                }
+    if (typeof loadSiteConfig === 'function') {
+        loadSiteConfig(function(config) {
+            if (config && config.categories) {
+                for (var i = 0; i < config.categories.length; i++)
+                    categoryNames[config.categories[i].id] = config.categories[i].name;
             }
-        }
-        document.addEventListener('DOMContentLoaded', loadArticle);
+        });
+    }
     </script>
 </body>
 </html>

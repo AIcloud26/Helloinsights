@@ -31,7 +31,7 @@ body {
 }
 .logo { font-size: 1.3rem; font-weight: 700; color: var(--text-dark); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
 .logo span { color: var(--primary-color); }
-.logo-img { width: 32px; height: 32px; border-radius: 8px; object-fit: contain; }
+.logo-img { width: 64px; height: 64px; border-radius: 10px; object-fit: contain; }
 .logo-text { font-size: 1.3rem; font-weight: 700; color: var(--text-dark); }
 .logo:hover .logo-text { color: var(--primary-color); }
 .logo-icon {

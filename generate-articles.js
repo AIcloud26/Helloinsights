@@ -85,11 +85,11 @@ function randomChoice(arr) { return arr[Math.floor(Math.random() * arr.length)];
 function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function getImageUrl(cat) {
   var ids = IMAGE_IDS[cat] || IMAGE_IDS['technology'];
-  return 'https://images.unsplash.com/' + randomChoice(ids) + '?w=600&h=400&fit=crop';
+  return 'https://images.unsplash.com/' + randomChoice(ids) + '?w=600&h=400&fit=crop&fm=webp';
 }
 function getImageUrlLarge(cat) {
   var ids = IMAGE_IDS[cat] || IMAGE_IDS['technology'];
-  return 'https://images.unsplash.com/' + randomChoice(ids) + '?w=1200&h=600&fit=crop';
+  return 'https://images.unsplash.com/' + randomChoice(ids) + '?w=1200&h=600&fit=crop&fm=webp';
 }
 
 // ============================================
@@ -392,7 +392,6 @@ async function generateArticle(existingIds) {
     excerpt: generated.excerpt,
     content: generated.content,
     image: getImageUrl(category.id),
-    readTime: randomInt(3, 8) + ' min read',
     date: generateArticleDate()
   };
 }
@@ -446,7 +445,7 @@ async function main() {
   // 写入 articles-list.json（仅摘要，供首页/分类页/搜索使用）
   var listOutput = {
     articles: finalArticles.map(function(a) {
-      return { id: a.id, category: a.category, title: a.title, excerpt: a.excerpt, image: a.image, readTime: a.readTime, date: a.date };
+      return { id: a.id, category: a.category, title: a.title, excerpt: a.excerpt, image: a.image, date: a.date };
     }),
     metadata: fullOutput.metadata
   };

@@ -175,16 +175,27 @@ content="global news, technology news, AI news, finance news, real-time insights
     var pages = Math.ceil(total / ARTICLES_PER_PAGE);
     var el = document.getElementById('pagination');
     if (!el || pages <= 1) { if (el) el.innerHTML = ''; return; }
+    
     var h = '';
+    // 上一页箭头
     if (currentPage > 1) {
-        h += '<a href="#" class="nav-btn" onclick="changePage(' + (currentPage - 1) + ');return false;">←</a>';
+        h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage - 1) + ');return false;">←</a>';
     } else {
-        h += '<span class="nav-btn disabled">←</span>';
+        h += '<span class="page-btn disabled">←</span>';
     }
+    // 数字页码
+    for (var i = 1; i <= pages; i++) {
+        if (i === currentPage) {
+            h += '<span class="page-btn active">' + i + '</span>';
+        } else {
+            h += '<a href="#" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>';
+        }
+    }
+    // 下一页箭头
     if (currentPage < pages) {
-        h += '<a href="#" class="nav-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">→</a>';
+        h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">→</a>';
     } else {
-        h += '<span class="nav-btn disabled">→</span>';
+        h += '<span class="page-btn disabled">→</span>';
     }
     el.innerHTML = h;
 }

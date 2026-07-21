@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Favicon -->
+<link rel="icon" type="image/png" href="favicon-16x16.png">
+<link rel="icon" type="image/x-icon" href="favicon-16x16.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="HelloInsights - Your trusted source for Technology, Finance, AI Tools, and Health & Lifestyle news and insights.">
     <title>HelloInsights | Newest Global News & Insights</title>
     <meta name="description"
-content="Stay informed with real-time global news and insights across technology, AI, finance, health, and lifestyle.">
+content="Stay informed with newest global news and insights across technology, AI, finance, health, and lifestyle.">
 
 <meta name="keywords"
 content="global news, technology news, AI news, finance news, real-time insights"> 
@@ -26,7 +29,7 @@ content="global news, technology news, AI news, finance news, real-time insights
     <!-- ============ Config loader (async) ============ -->
     <script src="config-loader.js" async></script>
 </head>
-    <link rel="icon" type="image/x-icon" href="favicon-16x16.ico">
+  
 <body>
     <header class="header">
         <div class="header-content">
@@ -168,39 +171,51 @@ content="global news, technology news, AI news, finance news, real-time insights
         grid.innerHTML = html;
         renderPagination(articles.length);
     }
-    function renderPagination(total) {
-        var pages = Math.ceil(total / ARTICLES_PER_PAGE);
-        var el = document.getElementById('pagination');
-        if (!el || pages <= 1) { if (el) el.innerHTML = ''; return; }
-        var h = '';
-        // 首页 + 上一页
-        h += '<a href="#" class="nav-btn ' + (currentPage === 1 ? 'disabled' : '') + '" onclick="changePage(1);return false;">« First</a>';
-        h += '<a href="#" class="nav-btn ' + (currentPage === 1 ? 'disabled' : '') + '" onclick="changePage(' + (currentPage - 1) + ');return false;">‹ Prev</a>';
-        // 计算显示的页码
-        var maxVisible = 3;
-        if (pages <= maxVisible + 2) {
-            for (var i = 1; i <= pages; i++)
-                h += i === currentPage ? '<a href="#" class="active">' + i + '</a>' : '<a href="#" onclick="changePage(' + i + ');return false;">' + i + '</a>';
-        } else {
-            var startP = 2, endP = pages - 1;
-            var half = Math.floor((maxVisible - 1) / 2);
-            startP = Math.max(2, currentPage - half);
-            endP = Math.min(pages - 1, startP + maxVisible - 1);
-            startP = Math.max(2, endP - maxVisible + 1);
-            // 第1页
-            h += currentPage === 1 ? '<a href="#" class="active">1</a>' : '<a href="#" onclick="changePage(1);return false;">1</a>';
-            if (startP > 2) h += '<span class="page-dots">…</span>';
-            for (var i = startP; i <= endP; i++)
-                h += i === currentPage ? '<a href="#" class="active">' + i + '</a>' : '<a href="#" onclick="changePage(' + i + ');return false;">' + i + '</a>';
-            if (endP < pages - 1) h += '<span class="page-dots">…</span>';
-            // 最后一页
-            h += currentPage === pages ? '<a href="#" class="active">' + pages + '</a>' : '<a href="#" onclick="changePage(' + pages + ');return false;">' + pages + '</a>';
-        }
-        // 下一页 + 末页
-        h += '<a href="#" class="nav-btn ' + (currentPage === pages ? 'disabled' : '') + '" onclick="changePage(' + (currentPage + 1) + ');return false;">Next ›</a>';
-        h += '<a href="#" class="nav-btn ' + (currentPage === pages ? 'disabled' : '') + '" onclick="changePage(' + pages + ');return false;">Last »</a>';
-        el.innerHTML = h;
+    function renderPagination(totalArticles, currentPage) {
+    const totalPages = Math.ceil(totalArticles / ARTICLES_PER_PAGE);
+    const pagination = document.getElementById('pagination');
+    
+    if (totalPages <= 1) {
+        pagination.style.display = 'none';
+        return;
     }
+    
+    pagination.style.display = 'block';
+    
+    const maxVisible = 4;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+    
+    // 调整 startPage，确保显示足够的页码
+    if (endPage - startPage + 1 < maxVisible) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
+    }
+    
+    let html = '';
+    
+    // 如果起始页不是第1页，显示第1页和省略号
+    if (startPage > 1) {
+        html += `<a href="#" onclick="changePage(1, event); return false;" ${currentPage === 1 ? 'class="active"' : ''}>1</a>`;
+        if (startPage > 2) {
+            html += `<span class="page-dots">...</span>`;
+        }
+    }
+    
+    // 显示中间页码
+    for (let i = startPage; i <= endPage; i++) {
+        html += `<a href="#" onclick="changePage(${i}, event); return false;" ${currentPage === i ? 'class="active"' : ''}>${i}</a>`;
+    }
+    
+    // 如果结束页不是最后一页，显示省略号和最后一页
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+            html += `<span class="page-dots">...</span>`;
+        }
+        html += `<a href="#" onclick="changePage(${totalPages}, event); return false;" ${currentPage === totalPages ? 'class="active"' : ''}>${totalPages}</a>`;
+    }
+    
+    pagination.innerHTML = html;
+}
     function changePage(p) {
         var t = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
         if (p < 1 || p > t) return;

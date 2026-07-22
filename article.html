@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!-- Favicon -->
 <link rel="icon" type="image/png" href="favicon-16x16.png">
-<link rel="icon" type="image/x-icon" href="favicon-16x16.ico">
+<link rel="icon" type="image/x-icon" href="favicon-16.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Read the latest insights and articles on HelloInsights.">
     <title>Article - HelloInsights</title>
@@ -43,11 +43,15 @@
         </div>
     </header>
     <main class="container">
-        <div class="ad-container" id="ad-banner"></div>
+        <!-- AdSense: article-banner -->
+        <div data-ad-slot="article-banner"></div>
         <article class="article-detail" id="articleDetail">
             <div class="loading" id="loading"></div>
         </article>
-        <div class="ad-container" id="ad-auto"></div>
+        <!-- MGID: article-mgid -->
+        <div data-ad-slot="article-mgid"></div>
+        <!-- AdSense: article-interstitial -->
+        <div data-ad-slot="article-interstitial"></div>
         <section class="mb-4" style="margin-top: 3rem;" id="relatedSection">
             <h2 class="mb-2">Related Articles</h2>
             <div class="article-grid" id="relatedGrid"></div>
@@ -109,7 +113,6 @@
             return fallbackImages[category] || defaultFallback;
         }
         function formatDate(dateStr) {
-            // Use article date if available, otherwise calculate
             if (dateStr) {
                 var d = new Date(dateStr);
                 return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -197,7 +200,7 @@
             var nav = document.getElementById('navContainer');
             if (nav) nav.classList.toggle('active');
         }
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth'); }
         window.addEventListener('scroll', function() {
             var btn = document.getElementById('backToTop');
             if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);

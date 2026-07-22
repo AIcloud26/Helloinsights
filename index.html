@@ -2,24 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Favicon -->
-<link rel="icon" type="image/png" href="favicon-16x16.png">
-<link rel="icon" type="image/x-icon" href="favicon-16.ico">
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="favicon-16.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="HelloInsights - Your trusted source for Technology, Finance, AI Tools, and Health & Lifestyle news and insights.">
     <title>HelloInsights | Newest Global News & Insights</title>
     <meta name="description" content="Stay informed with newest global news and insights across technology, AI, finance, health, and lifestyle.">
-    <meta name="keywords" content="global news, technology news, AI news, finance news, real-time insights"> 
-    <!-- ============ Resource Hints ============ -->
+    <meta name="keywords" content="global news, technology news, AI news, finance news, real-time insights">
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <link rel="preload" href="articles-list.json" as="fetch" crossorigin>
-    <!-- ============ Non-critical CSS (async, non-blocking) ============ -->
     <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="style.css"></noscript>
-    <!-- ============ Config loader (async) ============ -->
     <script src="config-loader.js" async></script>
 </head>
 <body>
@@ -49,13 +45,11 @@
         </div>
     </header>
     <main class="container">
-        <!-- MGID: zone-top -->
         <div data-ad-slot="zone-top"></div>
         <div class="page-header">
             <h2 class="site-tagline">YOUR TRUSTED SOURCE FOR INSIGHTS</h2>
             <p class="site-description">Expert analysis and curated intelligence at the intersection of technology, finance, AI innovation, and modern wellness.</p>
         </div>
-        <!-- AdSense: index-banner-top -->
         <div data-ad-slot="index-banner-top"></div>
         <div id="searchInfo" style="display:none;margin-bottom:1rem;padding:.5rem 1rem;background:#fff3cd;border-radius:8px;">
             <span id="searchText"></span>
@@ -64,14 +58,10 @@
         <div class="article-grid" id="articleGrid">
             <div class="loading" id="loading"></div>
         </div>
-        <!-- MGID: zone-mid -->
         <div data-ad-slot="zone-mid"></div>
         <div class="pagination" id="pagination"></div>
-        <!-- MGID: zone-bottom -->
         <div data-ad-slot="zone-bottom"></div>
-        <!-- AdSense: index-banner-bottom -->
         <div data-ad-slot="index-banner-bottom"></div>
-        <!-- AdSense: index-anchor (fixed) -->
         <div data-ad-slot="index-anchor"></div>
     </main>
     <footer class="footer">
@@ -106,15 +96,9 @@
     </footer>
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
     <script>
-    // ==========================================
-    // Service Worker Registration
-    // ==========================================
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(function() {});
     }
-    // ==========================================
-    // Core Logic
-    // ==========================================
     var ARTICLES_PER_PAGE = 6;
     var allArticles = [];
     var currentPage = 1;
@@ -182,12 +166,31 @@
         } else {
             h += '<span class="page-btn disabled">‹</span>';
         }
-        for (var i = 1; i <= pages; i++) {
+        var range = 2;
+        var start = Math.max(2, currentPage - range);
+        var end = Math.min(pages - 1, currentPage + range);
+        if (currentPage === 1) {
+            h += '<span class="page-btn active">1</span>';
+        } else {
+            h += '<a href="#" class="page-btn" onclick="changePage(1);return false;">1</a>';
+        }
+        if (start > 2) {
+            h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
+        }
+        for (var i = start; i <= end; i++) {
             if (i === currentPage) {
                 h += '<span class="page-btn active">' + i + '</span>';
             } else {
                 h += '<a href="#" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>';
             }
+        }
+        if (end < pages - 1) {
+            h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
+        }
+        if (currentPage === pages) {
+            h += '<span class="page-btn active">' + pages + '</span>';
+        } else {
+            h += '<a href="#" class="page-btn" onclick="changePage(' + pages + ');return false;">' + pages + '</a>';
         }
         if (currentPage < pages) {
             h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">›</a>';
@@ -234,10 +237,6 @@
         if (input) input.addEventListener('keypress', function(e) { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } });
         if (btn) btn.addEventListener('click', function(e) { e.preventDefault(); handleSearch(); });
     }
-    // ==========================================
-    // Fetch articles immediately — don't wait for config.json
-    // config-loader.js handles logo/nav/footer/ads asynchronously
-    // ==========================================
     fetch('articles-list.json', { cache: 'force-cache' })
         .then(function(r) { return r.json(); })
         .then(function(data) {
@@ -250,7 +249,6 @@
             var grid = document.getElementById('articleGrid');
             if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles.</p>';
         });
-    // Update category names after config loads (for search matching)
     if (typeof loadSiteConfig === 'function') {
         loadSiteConfig(function(config) {
             if (config && config.categories) {

@@ -136,7 +136,7 @@ body {
 .static-content a { color: var(--primary-color); text-decoration: none; }
 .static-content a:hover { text-decoration: underline; }
 
-/* ========== Pagination (v3 — final design) ========== */
+/* ========== Pagination (v3) ========== */
 .pagination {
     display: flex;
     justify-content: center;

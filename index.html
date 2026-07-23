@@ -13,7 +13,7 @@
     <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-    <link rel="preload" href="articles-list.json" as="fetch" crossorigin>
+    <link rel="preload" href="articles-index.json" as="fetch" crossorigin>
     <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="style.css"></noscript>
     <script src="config-loader.js" async></script>
@@ -99,8 +99,7 @@
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(function() {});
     }
-    var ARTICLES_PER_PAGE = 6;
-    var allArticles = [];
+    var ARTICLES_PER_PAGE = 9;
     var currentPage = 1;
     var filteredArticles = [];
     var isSearching = false;
@@ -136,25 +135,6 @@
             '<div class="card-meta"><span>' + generateArticleDate(article.id) + '</span></div>' +
             '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
             '</div></article>';
-    }
-    function renderArticles(articles) {
-        var grid = document.getElementById('articleGrid');
-        var loading = document.getElementById('loading');
-        if (loading) loading.remove();
-        if (!grid) return;
-        if (articles.length === 0) {
-            grid.innerHTML = isSearching
-                ? '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#666;">No articles found for "' + searchQuery + '".</p>'
-                : '<p style="text-align:center;grid-column:1/-1;padding:3rem;">No articles found.</p>';
-            document.getElementById('pagination').innerHTML = '';
-            return;
-        }
-        var start = (currentPage - 1) * ARTICLES_PER_PAGE;
-        var page = articles.slice(start, start + ARTICLES_PER_PAGE);
-        var html = '';
-        for (var i = 0; i < page.length; i++) html += createArticleCard(page[i]);
-        grid.innerHTML = html;
-        renderPagination(articles.length);
     }
     function renderPagination(total) {
         var pages = Math.ceil(total / ARTICLES_PER_PAGE);
@@ -200,10 +180,17 @@
         el.innerHTML = h;
     }
     function changePage(p) {
-        var t = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
-        if (p < 1 || p > t) return;
-        currentPage = p;
-        renderArticles(filteredArticles);
+        if (isSearching) {
+            var t = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
+            if (p < 1 || p > t) return;
+            currentPage = p;
+            renderSearchResults(filteredArticles);
+        } else {
+            var t = Math.ceil(articleIds.length / ARTICLES_PER_PAGE);
+            if (p < 1 || p > t) return;
+            currentPage = p;
+            fetchArticlesForPage(p);
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     function handleSearch() {
@@ -214,14 +201,19 @@
         if (!q) { clearSearch(); return; }
         isSearching = true; currentPage = 1;
         var lq = q.toLowerCase();
-        filteredArticles = allArticles.filter(function(a) {
-            var cn = categoryNames[a.category] || a.category;
-            return a.title.toLowerCase().indexOf(lq) !== -1 || a.excerpt.toLowerCase().indexOf(lq) !== -1 ||
-                   a.category.toLowerCase().indexOf(lq) !== -1 || cn.toLowerCase().indexOf(lq) !== -1;
-        });
-        var si = document.getElementById('searchInfo'), st = document.getElementById('searchText');
-        if (si && st) { si.style.display = 'block'; st.textContent = 'Found ' + filteredArticles.length + ' results for "' + q + '"'; }
-        renderArticles(filteredArticles);
+        fetch('articles-list.json', { cache: 'force-cache' })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                var allArticles = data.articles || [];
+                filteredArticles = allArticles.filter(function(a) {
+                    var cn = categoryNames[a.category] || a.category;
+                    return a.title.toLowerCase().indexOf(lq) !== -1 || a.excerpt.toLowerCase().indexOf(lq) !== -1 ||
+                           a.category.toLowerCase().indexOf(lq) !== -1 || cn.toLowerCase().indexOf(lq) !== -1;
+                });
+                var si = document.getElementById('searchInfo'), st = document.getElementById('searchText');
+                if (si && st) { si.style.display = 'block'; st.textContent = 'Found ' + filteredArticles.length + ' results for "' + q + '"'; }
+                renderSearchResults(filteredArticles);
+            });
     }
     function clearSearch() {
         isSearching = false; searchQuery = ''; currentPage = 1;
@@ -229,20 +221,73 @@
         if (input) input.value = '';
         var si = document.getElementById('searchInfo');
         if (si) si.style.display = 'none';
-        filteredArticles = allArticles.slice();
-        renderArticles(filteredArticles);
+        fetchArticlesForPage(1);
     }
     function initSearch() {
         var input = document.getElementById('searchInput'), btn = document.getElementById('searchBtn');
         if (input) input.addEventListener('keypress', function(e) { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } });
         if (btn) btn.addEventListener('click', function(e) { e.preventDefault(); handleSearch(); });
     }
-    fetch('articles-list.json', { cache: 'force-cache' })
+    var articleIds = [];
+    var articlesCache = {};
+    function fetchArticlesForPage(page) {
+        var start = (page - 1) * ARTICLES_PER_PAGE;
+        var pageIds = articleIds.slice(start, start + ARTICLES_PER_PAGE);
+        var uncached = pageIds.filter(function(id) { return !articlesCache[id]; });
+        if (uncached.length === 0) {
+            var cached = pageIds.map(function(id) { return articlesCache[id]; });
+            renderPageArticles(cached);
+            return;
+        }
+        Promise.all(uncached.map(function(id) {
+            return fetch('articles/' + id + '.json', { cache: 'force-cache' })
+                .then(function(r) { return r.json(); })
+                .then(function(article) { articlesCache[id] = article; return article; });
+        })).then(function() {
+            var articles = pageIds.map(function(id) { return articlesCache[id]; }).filter(Boolean);
+            renderPageArticles(articles);
+        }).catch(function() {
+            var grid = document.getElementById('articleGrid');
+            if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles.</p>';
+        });
+    }
+    function renderPageArticles(articles) {
+        var grid = document.getElementById('articleGrid');
+        var loading = document.getElementById('loading');
+        if (loading) loading.remove();
+        if (!grid) return;
+        if (articles.length === 0) {
+            grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;">No articles found.</p>';
+            document.getElementById('pagination').innerHTML = '';
+            return;
+        }
+        var html = '';
+        for (var i = 0; i < articles.length; i++) html += createArticleCard(articles[i]);
+        grid.innerHTML = html;
+        renderPagination(articleIds.length);
+    }
+    function renderSearchResults(articles) {
+        var grid = document.getElementById('articleGrid');
+        var loading = document.getElementById('loading');
+        if (loading) loading.remove();
+        if (!grid) return;
+        if (articles.length === 0) {
+            grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#666;">No articles found for "' + searchQuery + '".</p>';
+            document.getElementById('pagination').innerHTML = '';
+            return;
+        }
+        var start = (currentPage - 1) * ARTICLES_PER_PAGE;
+        var page = articles.slice(start, start + ARTICLES_PER_PAGE);
+        var html = '';
+        for (var i = 0; i < page.length; i++) html += createArticleCard(page[i]);
+        grid.innerHTML = html;
+        renderPagination(articles.length);
+    }
+    fetch('articles-index.json', { cache: 'force-cache' })
         .then(function(r) { return r.json(); })
         .then(function(data) {
-            allArticles = (data.articles || []).sort(function(a, b) { return b.id - a.id; });
-            filteredArticles = allArticles.slice();
-            renderArticles(filteredArticles);
+            articleIds = data.ids || [];
+            fetchArticlesForPage(1);
             initSearch();
         })
         .catch(function() {

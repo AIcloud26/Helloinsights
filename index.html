@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
     <meta name="description" content="HelloInsights - Your trusted source for Technology, Finance, AI Tools, and Health & Lifestyle news and insights.">
     <title>HelloInsights - Latest Articles & Insights</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +16,8 @@
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <svg viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#FE5911"/><text x="16" y="22" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">HI</text></svg>
+                <img src="logo.png" alt="HelloInsights" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="logo-text" style="display:none;">HelloInsights</span>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -129,7 +127,7 @@
             var fallbackImg = getFallbackImage(article.category);
             var catName = categoryNames[article.category] || article.category;
             return '<article class="article-card">' +
-                '<div class="card-image"><img src="' + article.image + '" alt="' + article.title + '" loading="lazy"></div>' +
+                '<div class="card-image"><img src="' + article.image + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + fallbackImg + '\'"></div>' +
                 '<div class="card-content">' +
                 '<span class="card-category">' + catName + '</span>' +
                 '<h3 class="card-title"><a href="article.html?id=' + article.id + '">' + article.title + '</a></h3>' +

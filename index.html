@@ -2,18 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="favicon-16x16.png">
-    <link rel="icon" type="image/x-icon" href="favicon-16.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HelloInsights - Your trusted source for Technology, Finance, AI Tools, and Health & Lifestyle news and insights.">
-    <title>HelloInsights | Newest Global News & Insights</title>
     <meta name="description" content="Stay informed with newest global news and insights across technology, AI, finance, health, and lifestyle.">
     <meta name="keywords" content="global news, technology news, AI news, finance news, real-time insights">
+    <title>HelloInsights | Newest Global News & Insights</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6b35'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold' font-size='22'%3EH%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-    <link rel="preload" href="articles-index.json" as="fetch" crossorigin>
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="style.css"></noscript>
     <script src="config-loader.js" async></script>
@@ -22,7 +19,7 @@
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <img src="logo.png" alt="HelloInsights" class="logo-img" width="64" height="64">
+                <svg class="logo-svg" viewBox="0 0 48 48" width="48" height="48" aria-label="HelloInsights"><rect width="48" height="48" rx="10" fill="#ff6b35"/><text x="24" y="33" text-anchor="middle" fill="white" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-weight="bold" font-size="30">H</text></svg>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -45,12 +42,17 @@
         </div>
     </header>
     <main class="container">
-        <div data-ad-slot="zone-top"></div>
+        <!-- AdSense Top Banner -->
+        <div class="ad-slot" id="ad-top">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
         <div class="page-header">
             <h2 class="site-tagline">YOUR TRUSTED SOURCE FOR INSIGHTS</h2>
             <p class="site-description">Expert analysis and curated intelligence at the intersection of technology, finance, AI innovation, and modern wellness.</p>
         </div>
-        <div data-ad-slot="index-banner-top"></div>
+
         <div id="searchInfo" style="display:none;margin-bottom:1rem;padding:.5rem 1rem;background:#fff3cd;border-radius:8px;">
             <span id="searchText"></span>
             <button onclick="clearSearch()" style="margin-left:10px;background:#ff6b35;color:white;border:none;padding:2px 10px;border-radius:4px;cursor:pointer;">Clear</button>
@@ -58,11 +60,25 @@
         <div class="article-grid" id="articleGrid">
             <div class="loading" id="loading"></div>
         </div>
-        <div data-ad-slot="zone-mid"></div>
+
+        <!-- MGID Mid Content -->
+        <div class="ad-slot" id="ad-mgid-mid">
+            <!-- MGID widget code here -->
+            <!-- <script src="https://widget.mgid.com/..." async></script> -->
+        </div>
+
         <div class="pagination" id="pagination"></div>
-        <div data-ad-slot="zone-bottom"></div>
-        <div data-ad-slot="index-banner-bottom"></div>
-        <div data-ad-slot="index-anchor"></div>
+
+        <!-- AdSense Bottom -->
+        <div class="ad-slot" id="ad-bottom">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- MGID Bottom -->
+        <div class="ad-slot" id="ad-mgid-bottom">
+            <!-- MGID widget code here -->
+        </div>
     </main>
     <footer class="footer">
         <div class="footer-content">
@@ -99,15 +115,19 @@
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(function() {});
     }
+
     var ARTICLES_PER_PAGE = 9;
     var currentPage = 1;
+    var allArticles = [];
     var filteredArticles = [];
     var isSearching = false;
     var searchQuery = '';
+
     var categoryNames = {
         'technology': 'Technology', 'finance': 'Finance',
         'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle'
     };
+
     var fallbackImages = {
         'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
         'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
@@ -115,185 +135,150 @@
         'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
     };
     var defaultFallback = fallbackImages['technology'];
-    function generateArticleDate(id) {
-        var start = new Date('2026-01-01').getTime();
-        var offset = (id % 180) * 86400000;
-        var d = new Date(start + offset);
+
+    function formatDate(dateStr) {
+        if (!dateStr) return '';
+        var d = new Date(dateStr + 'T00:00:00');
         var m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
         return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
     }
+
     function getFallbackImage(cat) { return fallbackImages[cat] || defaultFallback; }
+
     function createArticleCard(article) {
         var catName = categoryNames[article.category] || article.category;
         var fb = getFallbackImage(article.category);
+        var date = article.date ? formatDate(article.date) : '';
         return '<article class="article-card">' +
             '<div class="card-image"><img src="' + article.image + '" alt="' + article.title + '" width="600" height="400" loading="lazy" decoding="async" onerror="this.src=\'' + fb + '\'"></div>' +
             '<div class="card-content">' +
             '<span class="card-category">' + catName + '</span>' +
             '<h3 class="card-title"><a href="article.html?id=' + article.id + '">' + article.title + '</a></h3>' +
             '<p class="card-excerpt">' + article.excerpt + '</p>' +
-            '<div class="card-meta"><span>' + generateArticleDate(article.id) + '</span></div>' +
+            (date ? '<div class="card-meta"><span>' + date + '</span></div>' : '') +
             '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
             '</div></article>';
     }
+
     function renderPagination(total) {
         var pages = Math.ceil(total / ARTICLES_PER_PAGE);
         var el = document.getElementById('pagination');
         if (!el || pages <= 1) { if (el) el.innerHTML = ''; return; }
         var h = '';
-        if (currentPage > 1) {
-            h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage - 1) + ');return false;">‹</a>';
-        } else {
-            h += '<span class="page-btn disabled">‹</span>';
-        }
+        if (currentPage > 1) h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage - 1) + ');return false;">‹</a>';
+        else h += '<span class="page-btn disabled">‹</span>';
         var range = 2;
         var start = Math.max(2, currentPage - range);
         var end = Math.min(pages - 1, currentPage + range);
-        if (currentPage === 1) {
-            h += '<span class="page-btn active">1</span>';
-        } else {
-            h += '<a href="#" class="page-btn" onclick="changePage(1);return false;">1</a>';
-        }
-        if (start > 2) {
-            h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
-        }
+        if (currentPage === 1) h += '<span class="page-btn active">1</span>';
+        else h += '<a href="#" class="page-btn" onclick="changePage(1);return false;">1</a>';
+        if (start > 2) h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
         for (var i = start; i <= end; i++) {
-            if (i === currentPage) {
-                h += '<span class="page-btn active">' + i + '</span>';
-            } else {
-                h += '<a href="#" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>';
-            }
+            if (i === currentPage) h += '<span class="page-btn active">' + i + '</span>';
+            else h += '<a href="#" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>';
         }
-        if (end < pages - 1) {
-            h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
-        }
-        if (currentPage === pages) {
-            h += '<span class="page-btn active">' + pages + '</span>';
-        } else {
-            h += '<a href="#" class="page-btn" onclick="changePage(' + pages + ');return false;">' + pages + '</a>';
-        }
-        if (currentPage < pages) {
-            h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">›</a>';
-        } else {
-            h += '<span class="page-btn disabled">›</span>';
-        }
+        if (end < pages - 1) h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
+        if (currentPage === pages) h += '<span class="page-btn active">' + pages + '</span>';
+        else h += '<a href="#" class="page-btn" onclick="changePage(' + pages + ');return false;">' + pages + '</a>';
+        if (currentPage < pages) h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">›</a>';
+        else h += '<span class="page-btn disabled">›</span>';
         el.innerHTML = h;
     }
-    function changePage(p) {
-        if (isSearching) {
-            var t = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
-            if (p < 1 || p > t) return;
-            currentPage = p;
-            renderSearchResults(filteredArticles);
-        } else {
-            var t = Math.ceil(articleIds.length / ARTICLES_PER_PAGE);
-            if (p < 1 || p > t) return;
-            currentPage = p;
-            fetchArticlesForPage(p);
+
+    function renderPage(page) {
+        currentPage = page;
+        var source = isSearching ? filteredArticles : allArticles;
+        var totalPages = Math.ceil(source.length / ARTICLES_PER_PAGE);
+        if (page < 1) page = 1;
+        if (page > totalPages && totalPages > 0) page = totalPages;
+        currentPage = page;
+        var startIdx = (page - 1) * ARTICLES_PER_PAGE;
+        var pageArticles = source.slice(startIdx, startIdx + ARTICLES_PER_PAGE);
+        var grid = document.getElementById('articleGrid');
+        var loading = document.getElementById('loading');
+        if (loading) loading.remove();
+        if (!grid) return;
+        if (pageArticles.length === 0) {
+            grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#666;">No articles found.</p>';
+            document.getElementById('pagination').innerHTML = '';
+            return;
         }
+        var html = '';
+        for (var i = 0; i < pageArticles.length; i++) html += createArticleCard(pageArticles[i]);
+        grid.innerHTML = html;
+        renderPagination(source.length);
+    }
+
+    function changePage(p) {
+        var source = isSearching ? filteredArticles : allArticles;
+        var t = Math.ceil(source.length / ARTICLES_PER_PAGE);
+        if (p < 1 || p > t) return;
+        renderPage(p);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
     function handleSearch() {
         var input = document.getElementById('searchInput');
         if (!input) return;
         var q = input.value.trim();
-        searchQuery = q;
         if (!q) { clearSearch(); return; }
-        isSearching = true; currentPage = 1;
+        isSearching = true;
+        searchQuery = q;
+        currentPage = 1;
         var lq = q.toLowerCase();
-        fetch('articles-list.json', { cache: 'force-cache' })
-            .then(function(r) { return r.json(); })
-            .then(function(data) {
-                var allArticles = data.articles || [];
-                filteredArticles = allArticles.filter(function(a) {
-                    var cn = categoryNames[a.category] || a.category;
-                    return a.title.toLowerCase().indexOf(lq) !== -1 || a.excerpt.toLowerCase().indexOf(lq) !== -1 ||
-                           a.category.toLowerCase().indexOf(lq) !== -1 || cn.toLowerCase().indexOf(lq) !== -1;
-                });
-                var si = document.getElementById('searchInfo'), st = document.getElementById('searchText');
-                if (si && st) { si.style.display = 'block'; st.textContent = 'Found ' + filteredArticles.length + ' results for "' + q + '"'; }
-                renderSearchResults(filteredArticles);
-            });
+        filteredArticles = allArticles.filter(function(a) {
+            var cn = categoryNames[a.category] || a.category;
+            return a.title.toLowerCase().indexOf(lq) !== -1 ||
+                   a.excerpt.toLowerCase().indexOf(lq) !== -1 ||
+                   a.category.toLowerCase().indexOf(lq) !== -1 ||
+                   cn.toLowerCase().indexOf(lq) !== -1;
+        });
+        var si = document.getElementById('searchInfo'), st = document.getElementById('searchText');
+        if (si && st) { si.style.display = 'block'; st.textContent = 'Found ' + filteredArticles.length + ' results for "' + q + '"'; }
+        renderPage(1);
     }
+
     function clearSearch() {
-        isSearching = false; searchQuery = ''; currentPage = 1;
+        isSearching = false;
+        searchQuery = '';
+        currentPage = 1;
         var input = document.getElementById('searchInput');
         if (input) input.value = '';
         var si = document.getElementById('searchInfo');
         if (si) si.style.display = 'none';
-        fetchArticlesForPage(1);
+        renderPage(1);
     }
+
     function initSearch() {
         var input = document.getElementById('searchInput'), btn = document.getElementById('searchBtn');
         if (input) input.addEventListener('keypress', function(e) { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } });
         if (btn) btn.addEventListener('click', function(e) { e.preventDefault(); handleSearch(); });
     }
-    var articleIds = [];
-    var articlesCache = {};
-    function fetchArticlesForPage(page) {
-        var start = (page - 1) * ARTICLES_PER_PAGE;
-        var pageIds = articleIds.slice(start, start + ARTICLES_PER_PAGE);
-        var uncached = pageIds.filter(function(id) { return !articlesCache[id]; });
-        if (uncached.length === 0) {
-            var cached = pageIds.map(function(id) { return articlesCache[id]; });
-            renderPageArticles(cached);
-            return;
-        }
-        Promise.all(uncached.map(function(id) {
-            return fetch('articles/' + id + '.json', { cache: 'force-cache' })
-                .then(function(r) { return r.json(); })
-                .then(function(article) { articlesCache[id] = article; return article; });
-        })).then(function() {
-            var articles = pageIds.map(function(id) { return articlesCache[id]; }).filter(Boolean);
-            renderPageArticles(articles);
-        }).catch(function() {
-            var grid = document.getElementById('articleGrid');
-            if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles.</p>';
-        });
+
+    function toggleMenu() {
+        var nav = document.getElementById('navContainer');
+        if (nav) nav.classList.toggle('active');
     }
-    function renderPageArticles(articles) {
-        var grid = document.getElementById('articleGrid');
-        var loading = document.getElementById('loading');
-        if (loading) loading.remove();
-        if (!grid) return;
-        if (articles.length === 0) {
-            grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;">No articles found.</p>';
-            document.getElementById('pagination').innerHTML = '';
-            return;
-        }
-        var html = '';
-        for (var i = 0; i < articles.length; i++) html += createArticleCard(articles[i]);
-        grid.innerHTML = html;
-        renderPagination(articleIds.length);
-    }
-    function renderSearchResults(articles) {
-        var grid = document.getElementById('articleGrid');
-        var loading = document.getElementById('loading');
-        if (loading) loading.remove();
-        if (!grid) return;
-        if (articles.length === 0) {
-            grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#666;">No articles found for "' + searchQuery + '".</p>';
-            document.getElementById('pagination').innerHTML = '';
-            return;
-        }
-        var start = (currentPage - 1) * ARTICLES_PER_PAGE;
-        var page = articles.slice(start, start + ARTICLES_PER_PAGE);
-        var html = '';
-        for (var i = 0; i < page.length; i++) html += createArticleCard(page[i]);
-        grid.innerHTML = html;
-        renderPagination(articles.length);
-    }
-    fetch('articles-index.json', { cache: 'force-cache' })
+
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    window.addEventListener('scroll', function() {
+        var btn = document.getElementById('backToTop');
+        if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
+    });
+
+    /* Load single articles.json */
+    fetch('articles.json', { cache: 'force-cache' })
         .then(function(r) { return r.json(); })
         .then(function(data) {
-            articleIds = data.ids || [];
-            fetchArticlesForPage(1);
+            allArticles = data.articles || [];
+            renderPage(1);
             initSearch();
         })
         .catch(function() {
             var grid = document.getElementById('articleGrid');
             if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles.</p>';
         });
+
     if (typeof loadSiteConfig === 'function') {
         loadSiteConfig(function(config) {
             if (config && config.categories) {

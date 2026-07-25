@@ -2,34 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Favicon -->
-<link rel="icon" type="image/png" href="favicon-16x16.png">
-<link rel="icon" type="image/x-icon" href="favicon-16.ico">
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="favicon-16.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="HelloInsights - Your trusted source for Technology, Finance, AI Tools, and Health & Lifestyle news and insights.">
     <title>HelloInsights | Newest Global News & Insights</title>
-    <meta name="description"
-content="Stay informed with newest global news and insights across technology, AI, finance, health, and lifestyle.">
-<meta name="keywords"
-content="global news, technology news, AI news, finance news, real-time insights"> 
-    <!-- ============ Resource Hints ============ -->
+    <meta name="description" content="Stay informed with newest global news and insights across technology, AI, finance, health, and lifestyle.">
+    <meta name="keywords" content="global news, technology news, AI news, finance news, real-time insights">
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     <link rel="preload" href="articles-index.json" as="fetch" crossorigin>
-    <!-- ============ Non-critical CSS (async, non-blocking) ============ -->
     <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="style.css"></noscript>
-    <!-- ============ Config loader (async) ============ -->
+    <style>[data-ad-slot]{height:0;overflow:hidden;transition:height .3s ease}</style>
     <script src="config-loader.js" async></script>
 </head>
-  
 <body>
+    <script>document.querySelectorAll('[data-ad-slot]').forEach(function(s){new MutationObserver(function(){if(s.querySelector('iframe')){s.style.height='auto';s.style.overflow='visible'}}).observe(s,{childList:true,subtree:true})});</script>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <img src="logo.png" alt="HelloInsights" class="logo-img" width="64" height="64">
+                <img src="logo.svg" alt="HelloInsights" class="logo-img" width="64" height="64">
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -52,13 +47,11 @@ content="global news, technology news, AI news, finance news, real-time insights
         </div>
     </header>
     <main class="container">
-        <!-- MGID: zone-top -->
         <div data-ad-slot="zone-top"></div>
         <div class="page-header">
             <h2 class="site-tagline">YOUR TRUSTED SOURCE FOR INSIGHTS</h2>
             <p class="site-description">Expert analysis and curated intelligence at the intersection of technology, finance, AI innovation, and modern wellness.</p>
         </div>
-        <!-- AdSense: index-banner-top -->
         <div data-ad-slot="index-banner-top"></div>
         <div id="searchInfo" style="display:none;margin-bottom:1rem;padding:.5rem 1rem;background:#fff3cd;border-radius:8px;">
             <span id="searchText"></span>
@@ -67,14 +60,10 @@ content="global news, technology news, AI news, finance news, real-time insights
         <div class="article-grid" id="articleGrid">
             <div class="loading" id="loading"></div>
         </div>
-        <!-- MGID: zone-mid -->
         <div data-ad-slot="zone-mid"></div>
         <div class="pagination" id="pagination"></div>
-        <!-- MGID: zone-bottom -->
         <div data-ad-slot="zone-bottom"></div>
-        <!-- AdSense: index-banner-bottom -->
         <div data-ad-slot="index-banner-bottom"></div>
-        <!-- AdSense: index-anchor (fixed) -->
         <div data-ad-slot="index-anchor"></div>
     </main>
     <footer class="footer">
@@ -109,15 +98,9 @@ content="global news, technology news, AI news, finance news, real-time insights
     </footer>
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
     <script>
-    // ==========================================
-    // Service Worker Registration
-    // ==========================================
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(function() {});
     }
-    // ==========================================
-    // Core Logic
-    // ==========================================
     var ARTICLES_PER_PAGE = 9;
     var currentPage = 1;
     var filteredArticles = [];
@@ -134,6 +117,9 @@ content="global news, technology news, AI news, finance news, real-time insights
         'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
     };
     var defaultFallback = fallbackImages['technology'];
+    var articleIds = [];
+    var allArticlesCache = [];
+
     function generateArticleDate(id) {
         var start = new Date('2026-01-01').getTime();
         var offset = (id % 180) * 86400000;
@@ -160,45 +146,27 @@ content="global news, technology news, AI news, finance news, real-time insights
         var el = document.getElementById('pagination');
         if (!el || pages <= 1) { if (el) el.innerHTML = ''; return; }
         var h = '';
-        // Prev arrow
         if (currentPage > 1) {
             h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage - 1) + ');return false;">‹</a>';
         } else {
             h += '<span class="page-btn disabled">‹</span>';
         }
-        // Smart page number truncation
-        var range = 2; // show ±2 around current
+        var range = 2;
         var start = Math.max(2, currentPage - range);
         var end = Math.min(pages - 1, currentPage + range);
-        // Always show page 1
         if (currentPage === 1) {
             h += '<span class="page-btn active">1</span>';
         } else {
             h += '<a href="#" class="page-btn" onclick="changePage(1);return false;">1</a>';
         }
-        // Ellipsis before current range
-        if (start > 2) {
-            h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
-        }
-        // Pages around current
+        if (start > 2) { h += '<span class="page-btn disabled" style="cursor:default;">…</span>'; }
         for (var i = start; i <= end; i++) {
-            if (i === currentPage) {
-                h += '<span class="page-btn active">' + i + '</span>';
-            } else {
-                h += '<a href="#" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>';
-            }
+            if (i === currentPage) { h += '<span class="page-btn active">' + i + '</span>'; }
+            else { h += '<a href="#" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>'; }
         }
-        // Ellipsis after current range
-        if (end < pages - 1) {
-            h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
-        }
-        // Always show last page
-        if (currentPage === pages) {
-            h += '<span class="page-btn active">' + pages + '</span>';
-        } else {
-            h += '<a href="#" class="page-btn" onclick="changePage(' + pages + ');return false;">' + pages + '</a>';
-        }
-        // Next arrow
+        if (end < pages - 1) { h += '<span class="page-btn disabled" style="cursor:default;">…</span>'; }
+        if (currentPage === pages) { h += '<span class="page-btn active">' + pages + '</span>'; }
+        else { h += '<a href="#" class="page-btn" onclick="changePage(' + pages + ');return false;">' + pages + '</a>'; }
         if (currentPage < pages) {
             h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">›</a>';
         } else {
@@ -213,8 +181,8 @@ content="global news, technology news, AI news, finance news, real-time insights
             currentPage = p;
             renderSearchResults(filteredArticles);
         } else {
-            var t = Math.ceil(articleIds.length / ARTICLES_PER_PAGE);
-            if (p < 1 || p > t) return;
+            var t2 = Math.ceil(allArticlesCache.length / ARTICLES_PER_PAGE);
+            if (p < 1 || p > t2) return;
             currentPage = p;
             fetchArticlesForPage(p);
         }
@@ -228,20 +196,14 @@ content="global news, technology news, AI news, finance news, real-time insights
         if (!q) { clearSearch(); return; }
         isSearching = true; currentPage = 1;
         var lq = q.toLowerCase();
-        // Load articles-list.json for search
-        fetch('articles-list.json', { cache: 'force-cache' })
-            .then(function(r) { return r.json(); })
-            .then(function(data) {
-                var allArticles = data.articles || [];
-                filteredArticles = allArticles.filter(function(a) {
-                    var cn = categoryNames[a.category] || a.category;
-                    return a.title.toLowerCase().indexOf(lq) !== -1 || a.excerpt.toLowerCase().indexOf(lq) !== -1 ||
-                           a.category.toLowerCase().indexOf(lq) !== -1 || cn.toLowerCase().indexOf(lq) !== -1;
-                });
-                var si = document.getElementById('searchInfo'), st = document.getElementById('searchText');
-                if (si && st) { si.style.display = 'block'; st.textContent = 'Found ' + filteredArticles.length + ' results for "' + q + '"'; }
-                renderSearchResults(filteredArticles);
-            });
+        filteredArticles = allArticlesCache.filter(function(a) {
+            var cn = categoryNames[a.category] || a.category;
+            return a.title.toLowerCase().indexOf(lq) !== -1 || a.excerpt.toLowerCase().indexOf(lq) !== -1 ||
+                   a.category.toLowerCase().indexOf(lq) !== -1 || cn.toLowerCase().indexOf(lq) !== -1;
+        });
+        var si = document.getElementById('searchInfo'), st = document.getElementById('searchText');
+        if (si && st) { si.style.display = 'block'; st.textContent = 'Found ' + filteredArticles.length + ' results for "' + q + '"'; }
+        renderSearchResults(filteredArticles);
     }
     function clearSearch() {
         isSearching = false; searchQuery = ''; currentPage = 1;
@@ -256,35 +218,11 @@ content="global news, technology news, AI news, finance news, real-time insights
         if (input) input.addEventListener('keypress', function(e) { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } });
         if (btn) btn.addEventListener('click', function(e) { e.preventDefault(); handleSearch(); });
     }
-    // ==========================================
-    // On-demand loading: load index first, then fetch articles per page
-    // config-loader.js handles logo/nav/footer/ads asynchronously
-    // ==========================================
-    var articleIds = [];
-    var articlesCache = {};
-
     function fetchArticlesForPage(page) {
         var start = (page - 1) * ARTICLES_PER_PAGE;
-        var pageIds = articleIds.slice(start, start + ARTICLES_PER_PAGE);
-        var uncached = pageIds.filter(function(id) { return !articlesCache[id]; });
-        if (uncached.length === 0) {
-            var cached = pageIds.map(function(id) { return articlesCache[id]; });
-            renderPageArticles(cached);
-            return;
-        }
-        Promise.all(uncached.map(function(id) {
-            return fetch('articles/' + id + '.json', { cache: 'force-cache' })
-                .then(function(r) { return r.json(); })
-                .then(function(article) { articlesCache[id] = article; return article; });
-        })).then(function() {
-            var articles = pageIds.map(function(id) { return articlesCache[id]; }).filter(Boolean);
-            renderPageArticles(articles);
-        }).catch(function() {
-            var grid = document.getElementById('articleGrid');
-            if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles.</p>';
-        });
+        var pageArticles = allArticlesCache.slice(start, start + ARTICLES_PER_PAGE);
+        renderPageArticles(pageArticles);
     }
-
     function renderPageArticles(articles) {
         var grid = document.getElementById('articleGrid');
         var loading = document.getElementById('loading');
@@ -298,9 +236,8 @@ content="global news, technology news, AI news, finance news, real-time insights
         var html = '';
         for (var i = 0; i < articles.length; i++) html += createArticleCard(articles[i]);
         grid.innerHTML = html;
-        renderPagination(articleIds.length);
+        renderPagination(allArticlesCache.length);
     }
-
     function renderSearchResults(articles) {
         var grid = document.getElementById('articleGrid');
         var loading = document.getElementById('loading');
@@ -319,18 +256,38 @@ content="global news, technology news, AI news, finance news, real-time insights
         renderPagination(articles.length);
     }
 
-    fetch('articles-index.json', { cache: 'force-cache' })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            articleIds = data.ids || [];
+    // Load data: fetch index, then 4 category files in parallel
+    fetch('articles-index.json?v=' + Date.now())
+        .then(function(r) {
+            if (!r.ok) throw new Error('index HTTP ' + r.status);
+            return r.json();
+        })
+        .then(function(index) {
+            articleIds = index.ids || [];
+            var v = index.v || Date.now();
+            return Promise.all([
+                fetch('articles-technology.json?v=' + v).then(function(r) { return r.json(); }),
+                fetch('articles-finance.json?v=' + v).then(function(r) { return r.json(); }),
+                fetch('articles-ai-tools.json?v=' + v).then(function(r) { return r.json(); }),
+                fetch('articles-health-lifestyle.json?v=' + v).then(function(r) { return r.json(); })
+            ]);
+        })
+        .then(function(results) {
+            for (var i = 0; i < results.length; i++) {
+                var arts = results[i].articles || [];
+                for (var j = 0; j < arts.length; j++) allArticlesCache.push(arts[j]);
+            }
+            // Sort by ID descending (newest first)
+            allArticlesCache.sort(function(a, b) { return b.id - a.id; });
             fetchArticlesForPage(1);
             initSearch();
         })
-        .catch(function() {
+        .catch(function(err) {
+            console.error('Load error:', err.message);
             var grid = document.getElementById('articleGrid');
-            if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles.</p>';
+            if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles: ' + err.message + '</p>';
         });
-    // Update category names after config loads (for search matching)
+
     if (typeof loadSiteConfig === 'function') {
         loadSiteConfig(function(config) {
             if (config && config.categories) {

@@ -3,26 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
-    <link rel="icon" type="image/png" sizes="128x128" href="favicon-128.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="favicon-192.png">
     <meta name="description" content="Read the latest insights and articles on HelloInsights.">
     <title>Article - HelloInsights</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6b35'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold' font-size='22'%3EH%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <link rel="stylesheet" href="style.css">
-    <script src="config-loader.js"></script>
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    <script src="config-loader.js" async></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <svg viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#FE5911"/><text x="16" y="22" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">HI</text></svg>
+                <svg class="logo-svg" viewBox="0 0 48 48" width="48" height="48" aria-label="HelloInsights"><rect width="48" height="48" rx="10" fill="#ff6b35"/><text x="24" y="33" text-anchor="middle" fill="white" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-weight="bold" font-size="30">H</text></svg>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -45,15 +41,36 @@
         </div>
     </header>
     <main class="container">
-        <div class="ad-container" id="ad-banner"></div>
+        <!-- AdSense Article Top -->
+        <div class="ad-slot" id="ad-article-top">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
         <article class="article-detail" id="articleDetail">
             <div class="loading" id="loading"></div>
         </article>
-        <div class="ad-container" id="ad-auto"></div>
+
+        <!-- MGID In-Article -->
+        <div class="ad-slot" id="ad-mgid-article">
+            <!-- MGID widget code here -->
+        </div>
+
+        <!-- AdSense Article Bottom -->
+        <div class="ad-slot" id="ad-article-bottom">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
         <section class="mb-4" style="margin-top: 3rem;" id="relatedSection">
             <h2 class="mb-2">Related Articles</h2>
             <div class="article-grid" id="relatedGrid"></div>
         </section>
+
+        <!-- MGID Related Bottom -->
+        <div class="ad-slot" id="ad-mgid-related">
+            <!-- MGID widget code here -->
+        </div>
     </main>
     <footer class="footer">
         <div class="footer-content">
@@ -87,195 +104,140 @@
     </footer>
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
     <script>
-        var categoryNames = {};
-        var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
-        var fallbackImages = {
-            'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
-            'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
-            'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
-            'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
-        };
-        function buildCategoryNames(config) {
-            var names = {};
-            if (config && config.categories) {
-                for (var i = 0; i < config.categories.length; i++) {
-                    names[config.categories[i].id] = config.categories[i].name;
-                }
-            } else {
-                names = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
-            }
-            return names;
-        }
-        function getFallbackImage(category) {
-            return fallbackImages[category] || defaultFallback;
-        }
-        function formatDate(dateStr) {
-            if (dateStr) {
-                var d = new Date(dateStr);
-                return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-            }
-            return '';
-        }
-        function renderArticle(article) {
-            var container = document.getElementById('articleDetail');
-            var loading = document.getElementById('loading');
-            if (loading) loading.remove();
-            
-            var date = article.date ? formatDate(article.date) : '';
-            var catName = categoryNames[article.category] || article.category;
-            var fallbackImg = getFallbackImage(article.category);
-            var heroImg = article.image.replace('w=600&h=400', 'w=1200&h=600');
-            var articleContent = article.content
-                ? article.content
-                : '<p>' + article.excerpt + '</p><p><em>This article is being updated. Check back soon for the full content.</em></p>';
-            
-            container.innerHTML = 
-                '<div class="article-hero">' +
-                '<img src="' + heroImg + '" alt="' + article.title + '" loading="lazy">' +
-                '</div>' +
-                '<div class="article-body">' +
-                '<header class="article-header">' +
-                '<span class="card-category">' + catName + '</span>' +
-                '<h1>' + article.title + '</h1>' +
-                '<div class="article-meta">' +
-                '<span>' + date + '</span>' +
-                '</div>' +
-                '</header>' +
-                '<div class="article-content">' +
-                articleContent +
-                '</div>' +
-                '</div>';
-            
-            var siteName = (siteConfig && siteConfig.siteName) ? siteConfig.siteName : 'HelloInsights';
-            document.title = article.title + ' - ' + siteName;
-        }
-        function renderRelated(currentArticle, relatedArticles) {
-            var related = relatedArticles.filter(function(a) { 
-                return a.id !== currentArticle.id; 
-            }).slice(0, 3);
-            
-            if (related.length === 0) {
-                document.getElementById('relatedSection').style.display = 'none';
-                return;
-            }
-            
-            var grid = document.getElementById('relatedGrid');
-            var html = '';
-            
-            for (var i = 0; i < related.length; i++) {
-                var article = related[i];
-                var articleFallback = getFallbackImage(article.category || currentArticle.category);
-                var catName = categoryNames[article.category || currentArticle.category] || article.category || currentArticle.category;
-                var date = article.date ? formatDate(article.date) : '';
-                html += '<article class="article-card">' +
-                    '<div class="card-image">' +
-                    '<img src="' + article.image + '" alt="' + article.title + '" loading="lazy">' +
-                    '</div>' +
-                    '<div class="card-content">' +
-                    '<span class="card-category">' + catName + '</span>' +
-                    '<h3 class="card-title">' +
-                    '<a href="article.html?id=' + article.id + '">' + article.title + '</a>' +
-                    '</h3>' +
-                    '<p class="card-excerpt">' + article.excerpt + '</p>' +
-                    '<div class="card-meta">' +
-                    '<span>📅 ' + date + '</span>' +
-                    '</div>' +
-                    '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
-                    '</div>' +
-                    '</article>';
-            }
-            
-            grid.innerHTML = html;
-        }
-        function toggleMenu() {
-            var nav = document.getElementById('navContainer');
-            if (nav) nav.classList.toggle('active');
-        }
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        window.addEventListener('scroll', function() {
-            var btn = document.getElementById('backToTop');
-            if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
-        });
-        async function loadArticle() {
-            await new Promise(function(resolve) {
-                loadSiteConfig(function(config) {
-                    if (config) {
-                        categoryNames = buildCategoryNames(config);
-                    } else {
-                        categoryNames = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
-                    }
-                    resolve();
-                });
-            });
+    var categoryNames = {
+        'technology': 'Technology', 'finance': 'Finance',
+        'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle'
+    };
 
-            var urlParams = new URLSearchParams(window.location.search);
-            var articleId = parseInt(urlParams.get('id'));
-            if (!articleId) {
-                document.getElementById('articleDetail').innerHTML = '<p style="text-align:center;padding:3rem;">Invalid article ID. <a href="index.html">Return to homepage</a></p>';
-                return;
-            }
-            
-            try {
-                // Step 1: Get article category from lightweight index (~4.5KB)
-                var indexResp = await fetch('articles-index.json');
-                if (!indexResp.ok) throw new Error('Index not found');
-                var index = await indexResp.json();
-                var category = index[String(articleId)];
-                if (!category) throw new Error('Article not found in index');
-                
-                // Step 2: Check localStorage cache first
-                var cacheKey = 'hi_cat_' + category;
-                var cacheTimeKey = 'hi_cat_' + category + '_time';
-                var CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
-                var articles = null;
-                
-                try {
-                    var cached = localStorage.getItem(cacheKey);
-                    var cachedTime = parseInt(localStorage.getItem(cacheTimeKey) || '0');
-                    if (cached && (Date.now() - cachedTime < CACHE_DURATION)) {
-                        articles = JSON.parse(cached).articles;
-                    }
-                } catch(e) { /* cache miss */ }
-                
-                // Step 3: Fetch from network if cache miss
-                if (!articles) {
-                    var catResp = await fetch('articles/' + category + '.json');
-                    if (!catResp.ok) throw new Error('Category data not found');
-                    var catData = await catResp.json();
-                    articles = catData.articles;
-                    
-                    // Cache for future visits
-                    try {
-                        localStorage.setItem(cacheKey, JSON.stringify(catData));
-                        localStorage.setItem(cacheTimeKey, String(Date.now()));
-                    } catch(e) { /* storage full */ }
-                }
-                
-                // Step 4: Find the target article
-                var article = null;
-                for (var i = 0; i < articles.length; i++) {
-                    if (articles[i].id === articleId) {
-                        article = articles[i];
-                        break;
-                    }
-                }
-                if (!article) throw new Error('Article content not found');
-                
-                // Step 5: Render article immediately
-                renderArticle(article);
-                
-                // Step 6: Render related articles from same data (no extra fetch!)
-                renderRelated(article, articles);
-                
-            } catch (error) {
-                console.error('Error loading article:', error);
-                var container = document.getElementById('articleDetail');
-                if (container) {
-                    container.innerHTML = '<p style="text-align:center;padding:3rem;">Unable to load article. <a href="index.html">Return to homepage</a></p>';
-                }
-            }
+    var fallbackImages = {
+        'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
+        'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
+        'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecf995?w=600&h=400&fit=crop',
+        'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
+    };
+    var defaultFallback = fallbackImages['technology'];
+
+    function formatDate(dateStr) {
+        if (!dateStr) return '';
+        var d = new Date(dateStr + 'T00:00:00');
+        var m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    }
+
+    function getFallbackImage(cat) { return fallbackImages[cat] || defaultFallback; }
+
+    function renderArticle(article, allArticles) {
+        var container = document.getElementById('articleDetail');
+        var loading = document.getElementById('loading');
+        if (loading) loading.remove();
+
+        var date = article.date ? formatDate(article.date) : '';
+        var catName = categoryNames[article.category] || article.category;
+        var fallbackImg = getFallbackImage(article.category);
+        var heroImg = (article.image || '').replace('w=600&h=400', 'w=1200&h=600');
+        var articleContent = article.content
+            ? article.content
+            : '<p>' + (article.excerpt || '') + '</p><p><em>Full content coming soon.</em></p>';
+
+        container.innerHTML =
+            '<div class="article-hero">' +
+                '<img src="' + heroImg + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + fallbackImg.replace('w=600&h=400', 'w=1200&h=600') + '\'">' +
+            '</div>' +
+            '<div class="article-body">' +
+                '<header class="article-header">' +
+                    '<span class="card-category">' + catName + '</span>' +
+                    '<h1>' + article.title + '</h1>' +
+                    '<div class="article-meta"><span>' + date + '</span></div>' +
+                '</header>' +
+                '<div class="article-content">' + articleContent + '</div>' +
+            '</div>';
+
+        document.title = article.title + ' - HelloInsights';
+        renderRelated(article, allArticles);
+    }
+
+    function renderRelated(currentArticle, allArticles) {
+        var related = allArticles.filter(function(a) {
+            return a.category === currentArticle.category && a.id !== currentArticle.id;
+        }).slice(0, 3);
+
+        if (related.length === 0) {
+            document.getElementById('relatedSection').style.display = 'none';
+            return;
         }
-        document.addEventListener('DOMContentLoaded', loadArticle);
+
+        var grid = document.getElementById('relatedGrid');
+        var html = '';
+        for (var i = 0; i < related.length; i++) {
+            var a = related[i];
+            var fb = getFallbackImage(a.category);
+            var cn = categoryNames[a.category] || a.category;
+            var dt = a.date ? formatDate(a.date) : '';
+            html += '<article class="article-card">' +
+                '<div class="card-image"><img src="' + a.image + '" alt="' + a.title + '" loading="lazy" onerror="this.src=\'' + fb + '\'"></div>' +
+                '<div class="card-content">' +
+                '<span class="card-category">' + cn + '</span>' +
+                '<h3 class="card-title"><a href="article.html?id=' + a.id + '">' + a.title + '</a></h3>' +
+                '<p class="card-excerpt">' + a.excerpt + '</p>' +
+                (dt ? '<div class="card-meta"><span>' + dt + '</span></div>' : '') +
+                '<a href="article.html?id=' + a.id + '" class="read-more-btn">Read More...</a>' +
+                '</div></article>';
+        }
+        grid.innerHTML = html;
+    }
+
+    function toggleMenu() {
+        var nav = document.getElementById('navContainer');
+        if (nav) nav.classList.toggle('active');
+    }
+
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    window.addEventListener('scroll', function() {
+        var btn = document.getElementById('backToTop');
+        if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
+    });
+
+    /* Get article ID from URL */
+    var urlParams = new URLSearchParams(window.location.search);
+    var articleId = parseInt(urlParams.get('id')) || 0;
+
+    /* Load articles.json, find article by ID */
+    fetch('articles.json', { cache: 'force-cache' })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            var articles = data.articles || [];
+            var currentArticle = null;
+
+            for (var i = 0; i < articles.length; i++) {
+                if (articles[i].id === articleId) {
+                    currentArticle = articles[i];
+                    break;
+                }
+            }
+
+            if (currentArticle) {
+                renderArticle(currentArticle, articles);
+            } else if (articles.length > 0) {
+                renderArticle(articles[0], articles);
+            } else {
+                var container = document.getElementById('articleDetail');
+                if (container) container.innerHTML = '<p style="text-align:center;padding:3rem;">Article not found. <a href="index.html">Return to homepage</a></p>';
+            }
+        })
+        .catch(function(err) {
+            console.error('Error loading article:', err);
+            var container = document.getElementById('articleDetail');
+            if (container) container.innerHTML = '<p style="text-align:center;padding:3rem;">Unable to load article. <a href="index.html">Return to homepage</a></p>';
+        });
+
+    if (typeof loadSiteConfig === 'function') {
+        loadSiteConfig(function(config) {
+            if (config && config.categories) {
+                for (var i = 0; i < config.categories.length; i++)
+                    categoryNames[config.categories[i].id] = config.categories[i].name;
+            }
+        });
+    }
     </script>
 </body>
 </html>

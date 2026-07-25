@@ -1,10 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aicloud26.github.io/insightinfo/sitemap.xml
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
+Sitemap: https://www.helloinsights.online/sitemap.xml

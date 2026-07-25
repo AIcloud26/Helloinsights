@@ -5,7 +5,7 @@ const https = require('https');
 // ============================================
 const CONFIG = {
   articlesPerDay: 5,
-  siteUrl: 'https://www.helloinsights.online',
+  maxArticles: 200,
   useAI: false,
   openaiApiKey: process.env.OPENAI_API_KEY,
   openaiModel: 'gpt-3.5-turbo'
@@ -337,68 +337,68 @@ async function main() {
     console.log('   ' + (i + 1) + '. [' + article.category + '] ' + article.title);
   }
   var allArticles = newArticles.concat(existingArticles);
-  // 按 ID 降序排序（最新的在前），不限制数量
-  allArticles.sort(function(a, b) { return b.id - a.id; });
+  var finalArticles = allArticles.slice(0, CONFIG.maxArticles);
   var metadata = {
     lastUpdated: new Date().toISOString(),
-    totalArticles: allArticles.length,
+    totalArticles: finalArticles.length,
     newToday: newArticles.length,
     generator: CONFIG.useAI ? 'AI (OpenAI)' : 'Template'
   };
-  // 写入单文件 articles-list.json（含完整内容，首页+详情页共用）
+  // 确保 articles 目录存在
+  if (!fs.existsSync('articles')) fs.mkdirSync('articles', { recursive: true });
+  
+  // 按 ID 降序排序（最新的在前）
+  finalArticles.sort(function(a, b) { return b.id - a.id; });
+  
+  // 写入 articles-index.json（只有 ID 列表，供首页按需加载）
+  var indexOutput = {
+    ids: finalArticles.map(function(a) { return a.id; }),
+    metadata: metadata
+  };
+  fs.writeFileSync('articles-index.json', JSON.stringify(indexOutput, null, 2));
+  
+  // 写入 articles-list.json（完整元数据，供搜索使用）
   var listOutput = {
-    articles: allArticles.map(function(a) {
-      return { id: a.id, category: a.category, title: a.title, excerpt: a.excerpt, image: a.image, date: a.date, content: a.content };
+    articles: finalArticles.map(function(a) {
+      return { id: a.id, category: a.category, title: a.title, excerpt: a.excerpt, image: a.image, date: a.date };
     }),
     metadata: metadata
   };
-  fs.writeFileSync('articles-list.json', JSON.stringify(listOutput));
-  // 生成 sitemap.xml
-  generateSitemap(allArticles);
-  // 生成 robots.txt
-  generateRobots();
+  fs.writeFileSync('articles-list.json', JSON.stringify(listOutput, null, 2));
+  // 写入每篇文章的独立 JSON 文件（供 article.html 按需加载）
+  var newArticleIds = {};
+  newArticles.forEach(function(a) { newArticleIds[a.id] = true; });
+  for (var i = 0; i < finalArticles.length; i++) {
+    var a = finalArticles[i];
+    var articleFile = 'articles/' + a.id + '.json';
+    if (newArticleIds[a.id] || !fs.existsSync(articleFile)) {
+      var articleData = {
+        id: a.id,
+        category: a.category,
+        title: a.title,
+        excerpt: a.excerpt,
+        image: a.image,
+        date: a.date,
+        content: a.content
+      };
+      fs.writeFileSync(articleFile, JSON.stringify(articleData, null, 2));
+    }
+  }
+  // 删除超出 maxArticles 限制的旧文章文件
+  var existingFiles = fs.readdirSync('articles').filter(function(f) { return f.endsWith('.json'); });
+  var validIds = {};
+  finalArticles.forEach(function(a) { validIds[String(a.id)] = true; });
+  for (var i = 0; i < existingFiles.length; i++) {
+    var fileId = existingFiles[i].replace('.json', '');
+    if (!validIds[fileId]) {
+      fs.unlinkSync('articles/' + existingFiles[i]);
+      console.log('   🗑️ Removed old article: ' + fileId);
+    }
+  }
   console.log('\n✅ Done!');
   console.log('   New: ' + newArticles.length + ' articles');
-  console.log('   Total: ' + allArticles.length + ' articles');
-  console.log('   Output: articles-list.json (single file) + sitemap.xml + robots.txt\n');
-}
-function generateSitemap(articles) {
-  var siteUrl = CONFIG.siteUrl;
-  var xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-  // Homepage
-  xml += '  <url>\n    <loc>' + siteUrl + '/</loc>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n';
-  // Article pages
-  for (var i = 0; i < articles.length; i++) {
-    var a = articles[i];
-    xml += '  <url>\n    <loc>' + siteUrl + '/article.html?id=' + a.id + '</loc>\n';
-    if (a.date) xml += '    <lastmod>' + a.date + '</lastmod>\n';
-    xml += '    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n';
-  }
-  // Category pages
-  var categories = ['technology', 'finance', 'ai-tools', 'health-lifestyle'];
-  for (var i = 0; i < categories.length; i++) {
-    xml += '  <url>\n    <loc>' + siteUrl + '/category.html?cat=' + categories[i] + '</loc>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>\n';
-  }
-  // Static pages
-  var staticPages = [
-    { path: '/about.html', freq: 'monthly', pri: '0.7' },
-    { path: '/contact.html', freq: 'monthly', pri: '0.7' },
-    { path: '/privacy.html', freq: 'yearly', pri: '0.5' },
-    { path: '/terms.html', freq: 'yearly', pri: '0.5' }
-  ];
-  for (var i = 0; i < staticPages.length; i++) {
-    var p = staticPages[i];
-    xml += '  <url>\n    <loc>' + siteUrl + p.path + '</loc>\n    <changefreq>' + p.freq + '</changefreq>\n    <priority>' + p.pri + '</priority>\n  </url>\n';
-  }
-  xml += '</urlset>\n';
-  fs.writeFileSync('sitemap.xml', xml);
-  console.log('   📄 sitemap.xml: ' + (articles.length + 1 + categories.length + staticPages.length) + ' URLs');
-}
-function generateRobots() {
-  var content = 'User-agent: *\nAllow: /\n\nSitemap: ' + CONFIG.siteUrl + '/sitemap.xml\n';
-  fs.writeFileSync('robots.txt', content);
-  console.log('   📄 robots.txt generated');
+  console.log('   Total: ' + finalArticles.length + ' articles');
+  console.log('   Output: articles-list.json (list) + articles/*.json (individual)\n');
 }
 main().catch(function(error) {
   console.error('❌ Error:', error.message);

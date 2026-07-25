@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Favicon -->
-<link rel="icon" type="image/png" href="favicon-16x16.png">
-<link rel="icon" type="image/x-icon" href="favicon-16.ico">
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="favicon-16.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Read the latest insights and articles on HelloInsights.">
     <title>Article - HelloInsights</title>
@@ -13,13 +12,15 @@
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link rel="stylesheet" href="style.css">
+    <style>[data-ad-slot]{height:0;overflow:hidden;transition:height .3s ease}</style>
     <script src="config-loader.js"></script>
 </head>
 <body>
+    <script>document.querySelectorAll('[data-ad-slot]').forEach(function(s){new MutationObserver(function(){if(s.querySelector('iframe')){s.style.height='auto';s.style.overflow='visible'}}).observe(s,{childList:true,subtree:true})});</script>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <img loading="lazy" decoding="async" src="logo.webp" alt="HelloInsights" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <img loading="lazy" decoding="async" src="logo.svg" alt="HelloInsights" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
                 <span class="logo-text" style="display:none;">HelloInsights</span>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
@@ -43,14 +44,11 @@
         </div>
     </header>
     <main class="container">
-        <!-- AdSense: article-banner -->
         <div data-ad-slot="article-banner"></div>
         <article class="article-detail" id="articleDetail">
             <div class="loading" id="loading"></div>
         </article>
-        <!-- MGID: article-mgid -->
         <div data-ad-slot="article-mgid"></div>
-        <!-- AdSense: article-interstitial -->
         <div data-ad-slot="article-interstitial"></div>
         <section class="mb-4" style="margin-top: 3rem;" id="relatedSection">
             <h2 class="mb-2">Related Articles</h2>
@@ -129,7 +127,6 @@
             var container = document.getElementById('articleDetail');
             var loading = document.getElementById('loading');
             if (loading) loading.remove();
-            
             var date = article.date ? formatDate(article.date) : generateDate(article.id, maxId);
             var catName = categoryNames[article.category] || article.category;
             var fallbackImg = getFallbackImage(article.category);
@@ -137,8 +134,7 @@
             var articleContent = article.content
                 ? article.content
                 : '<p>' + article.excerpt + '</p><p><em>This article is being updated. Check back soon for the full content.</em></p>';
-            
-            container.innerHTML = 
+            container.innerHTML =
                 '<div class="article-hero">' +
                 '<img src="' + heroImg + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + fallbackImg.replace('w=600&h=400', 'w=1200&h=600') + '\'">' +
                 '</div>' +
@@ -154,23 +150,19 @@
                 articleContent +
                 '</div>' +
                 '</div>';
-            
             var siteName = (siteConfig && siteConfig.siteName) ? siteConfig.siteName : 'HelloInsights';
             document.title = article.title + ' - ' + siteName;
         }
         function renderRelated(currentArticle, allArticles) {
-            var related = allArticles.filter(function(a) { 
-                return a.category === currentArticle.category && a.id !== currentArticle.id; 
+            var related = allArticles.filter(function(a) {
+                return a.category === currentArticle.category && a.id !== currentArticle.id;
             }).slice(0, 3);
-            
             if (related.length === 0) {
                 document.getElementById('relatedSection').style.display = 'none';
                 return;
             }
-            
             var grid = document.getElementById('relatedGrid');
             var html = '';
-            
             for (var i = 0; i < related.length; i++) {
                 var article = related[i];
                 var articleFallback = getFallbackImage(article.category);
@@ -193,18 +185,8 @@
                     '</div>' +
                     '</article>';
             }
-            
             grid.innerHTML = html;
         }
-        function toggleMenu() {
-            var nav = document.getElementById('navContainer');
-            if (nav) nav.classList.toggle('active');
-        }
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth'); }
-        window.addEventListener('scroll', function() {
-            var btn = document.getElementById('backToTop');
-            if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
-        });
         async function loadArticle() {
             // Step 1: Load config for category names
             await new Promise(function(resolve) {
@@ -217,86 +199,34 @@
                     resolve();
                 });
             });
-
             // Step 2: Get article ID from URL
             var urlParams = new URLSearchParams(window.location.search);
             var articleId = parseInt(urlParams.get('id')) || 1;
-
-            // Step 3: Fetch the single article file (fast!) and articles list (for related)
             try {
-                var results = await Promise.all([
-                    fetch('articles/' + articleId + '.json').then(function(r) { return r.json(); }).catch(function() { return null; }),
-                    fetch('articles-list.json', { cache: 'force-cache' }).then(function(r) { return r.json(); }).catch(function() { return { articles: [] }; })
-                ]);
-
-                var article = results[0];
-                var listData = results[1];
-                var allArticlesList = listData.articles || [];
-
-                // Calculate maxArticleId from list
-                if (allArticlesList.length > 0) {
-                    maxArticleId = Math.max.apply(null, allArticlesList.map(function(a) { return a.id; }));
-                }
-
-                if (!article) {
-                    // Fallback: try to find in list and show excerpt-only
-                    var fallback = allArticlesList.find(function(a) { return a.id === articleId; });
-                    if (fallback) {
-                        article = {
-                            id: fallback.id,
-                            category: fallback.category,
-                            title: fallback.title,
-                            excerpt: fallback.excerpt,
-                            image: fallback.image,
-                            date: fallback.date,
-                            content: '<p>' + fallback.excerpt + '</p><p><em>This article is being updated. Check back soon for the full content.</em></p>'
-                        };
-                    } else {
-                        throw new Error('Article not found');
-                    }
-                }
-
+                // Step 3: Fetch index (lightweight, fresh each time, contains version)
+                var index = await fetch('articles-index.json?v=' + Date.now()).then(function(r) {
+                    if (!r.ok) throw new Error('index HTTP ' + r.status);
+                    return r.json();
+                });
+                var category = index.articles[articleId];
+                if (!category) throw new Error('Article ' + articleId + ' not in index');
+                // Step 4: Fetch category file using version from index (long-term cache)
+                var catData = await fetch('articles-' + category + '.json?v=' + index.v).then(function(r) {
+                    if (!r.ok) throw new Error('category file HTTP ' + r.status);
+                    return r.json();
+                });
+                var catArticles = catData.articles || [];
+                var article = catArticles.find(function(a) { return a.id === articleId; });
+                if (!article) throw new Error('Article ' + articleId + ' not found in ' + category + ' (' + catArticles.length + ' articles)');
+                // Step 5: Render article + related
+                maxArticleId = Math.max.apply(null, catArticles.map(function(a) { return a.id; }));
                 renderArticle(article, maxArticleId);
-
-                // Step 4: Render related articles from list
-                var related = allArticlesList.filter(function(a) {
-                    return a.category === article.category && a.id !== article.id;
-                }).slice(0, 3);
-
-                if (related.length === 0) {
-                    document.getElementById('relatedSection').style.display = 'none';
-                } else {
-                    var grid = document.getElementById('relatedGrid');
-                    var html = '';
-                    for (var i = 0; i < related.length; i++) {
-                        var ra = related[i];
-                        var articleFallback = getFallbackImage(ra.category);
-                        var catName = categoryNames[ra.category] || ra.category;
-                        var date = ra.date ? formatDate(ra.date) : generateDate(ra.id, maxArticleId);
-                        html += '<article class="article-card">' +
-                            '<div class="card-image">' +
-                            '<img src="' + ra.image + '" alt="' + ra.title + '" loading="lazy" onerror="this.src=\'' + articleFallback + '\'">' +
-                            '</div>' +
-                            '<div class="card-content">' +
-                            '<span class="card-category">' + catName + '</span>' +
-                            '<h3 class="card-title">' +
-                            '<a href="article.html?id=' + ra.id + '">' + ra.title + '</a>' +
-                            '</h3>' +
-                            '<p class="card-excerpt">' + ra.excerpt + '</p>' +
-                            '<div class="card-meta">' +
-                            '<span>📅 ' + date + '</span>' +
-                            '</div>' +
-                            '<a href="article.html?id=' + ra.id + '" class="read-more-btn">Read More...</a>' +
-                            '</div>' +
-                            '</article>';
-                    }
-                    grid.innerHTML = html;
-                }
+                renderRelated(article, catArticles);
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Article load error:', error.message);
                 var container = document.getElementById('articleDetail');
                 if (container) {
-                    container.innerHTML = '<p style="text-align: center; padding: 3rem;">Unable to load article. <a href="index.html">Return to homepage</a></p>';
+                    container.innerHTML = '<p style="text-align:center;padding:3rem;">Unable to load article: ' + error.message + '. <a href="index.html">Return to homepage</a></p>';
                 }
             }
         }

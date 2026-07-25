@@ -33,22 +33,22 @@
   },
   "adsense": {
     "enabled": true,
-    "clientId": "ca-pub-6035677038335141",
+    "clientId": "ca-pub-XXXXXXXXXXXXXXXX",
     "slots": {
-      "index-banner-top":     { "id": "1111111111", "format": "horizontal", "height": "90px" },
-      "index-banner-bottom":  { "id": "2222222222", "format": "horizontal", "height": "90px" },
-      "index-anchor":         { "id": "3333333333", "format": "auto", "layoutKey": "-fb+5w+4e-db+86" },
-      "article-banner":       { "id": "4444444444", "format": "horizontal", "height": "90px" },
-      "article-interstitial": { "id": "5555555555", "format": "interstitial" }
+      "index-banner-top":    { "id": "1111111111", "format": "horizontal", "height": "90px" },
+      "index-banner-bottom": { "id": "2222222222", "format": "horizontal", "height": "90px" },
+      "index-anchor":        { "id": "3333333333", "format": "auto", "layoutKey": "-fb+5w+4e-db+86" },
+      "article-banner":      { "id": "4444444444", "format": "horizontal", "height": "90px" },
+      "article-interstitial":{ "id": "5555555555", "format": "interstitial" }
     },
     "pageAds": {
-      "index.html":    ["index-banner-top", "index-banner-bottom", "index-anchor"],
-      "article.html":  ["article-banner", "article-interstitial"],
-      "category.html": ["index-banner-top", "index-banner-bottom"],
-      "about.html":    [],
-      "contact.html":  [],
-      "privacy.html":  [],
-      "terms.html":    []
+      "index.html":   ["index-banner-top", "index-banner-bottom", "index-anchor"],
+      "article.html": ["article-banner", "article-interstitial"],
+      "category.html":["index-banner-top", "index-banner-bottom"],
+      "about.html":   [],
+      "contact.html": [],
+      "privacy.html": [],
+      "terms.html":   []
     }
   }
 }

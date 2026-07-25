@@ -352,7 +352,7 @@ async function main() {
     }),
     metadata: metadata
   };
-  fs.writeFileSync('articles-list.json', JSON.stringify(listOutput, null, 2));
+  fs.writeFileSync('articles-list.json', JSON.stringify(listOutput));
   // 生成 sitemap.xml
   generateSitemap(allArticles);
   // 生成 robots.txt

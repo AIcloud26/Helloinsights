@@ -224,7 +224,7 @@
 
             // Step 3: Fetch articles-list.json (single file, contains all data)
             try {
-                var listData = await fetch('articles-list.json', { cache: 'force-cache' }).then(function(r) { return r.json(); });
+                var listData = await fetch('articles-list.json?v=' + Date.now()).then(function(r) { return r.json(); });
                 var allArticlesList = listData.articles || [];
 
                 // Find target article by ID

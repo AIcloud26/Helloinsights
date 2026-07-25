@@ -222,20 +222,38 @@
             var urlParams = new URLSearchParams(window.location.search);
             var articleId = parseInt(urlParams.get('id')) || 1;
 
-            // Step 3: Fetch articles-list.json (single file, contains all data)
+            // Step 3: Fetch the single article file (fast!) and articles list (for related)
             try {
-                var listData = await fetch('articles-list.json?v=' + Date.now()).then(function(r) { return r.json(); });
-                var allArticlesList = listData.articles || [];
+                var results = await Promise.all([
+                    fetch('articles/' + articleId + '.json').then(function(r) { return r.json(); }).catch(function() { return null; }),
+                    fetch('articles-list.json', { cache: 'force-cache' }).then(function(r) { return r.json(); }).catch(function() { return { articles: [] }; })
+                ]);
 
-                // Find target article by ID
-                var article = allArticlesList.find(function(a) { return a.id === articleId; });
-                if (!article) {
-                    throw new Error('Article not found');
-                }
+                var article = results[0];
+                var listData = results[1];
+                var allArticlesList = listData.articles || [];
 
                 // Calculate maxArticleId from list
                 if (allArticlesList.length > 0) {
                     maxArticleId = Math.max.apply(null, allArticlesList.map(function(a) { return a.id; }));
+                }
+
+                if (!article) {
+                    // Fallback: try to find in list and show excerpt-only
+                    var fallback = allArticlesList.find(function(a) { return a.id === articleId; });
+                    if (fallback) {
+                        article = {
+                            id: fallback.id,
+                            category: fallback.category,
+                            title: fallback.title,
+                            excerpt: fallback.excerpt,
+                            image: fallback.image,
+                            date: fallback.date,
+                            content: '<p>' + fallback.excerpt + '</p><p><em>This article is being updated. Check back soon for the full content.</em></p>'
+                        };
+                    } else {
+                        throw new Error('Article not found');
+                    }
                 }
 
                 renderArticle(article, maxArticleId);

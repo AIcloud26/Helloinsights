@@ -17,7 +17,7 @@ content="global news, technology news, AI news, finance news, real-time insights
     <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-    <link rel="preload" href="articles-list.json" as="fetch" crossorigin>
+    <link rel="preload" href="articles-index.json" as="fetch" crossorigin>
     <!-- ============ Non-critical CSS (async, non-blocking) ============ -->
     <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="style.css"></noscript>
@@ -257,15 +257,32 @@ content="global news, technology news, AI news, finance news, real-time insights
         if (btn) btn.addEventListener('click', function(e) { e.preventDefault(); handleSearch(); });
     }
     // ==========================================
-    // Single-file loading: load articles-list.json once, paginate in JS
+    // On-demand loading: load index first, then fetch articles per page
     // config-loader.js handles logo/nav/footer/ads asynchronously
     // ==========================================
-    var allArticles = [];
+    var articleIds = [];
+    var articlesCache = {};
 
     function fetchArticlesForPage(page) {
         var start = (page - 1) * ARTICLES_PER_PAGE;
-        var pageArticles = allArticles.slice(start, start + ARTICLES_PER_PAGE);
-        renderPageArticles(pageArticles);
+        var pageIds = articleIds.slice(start, start + ARTICLES_PER_PAGE);
+        var uncached = pageIds.filter(function(id) { return !articlesCache[id]; });
+        if (uncached.length === 0) {
+            var cached = pageIds.map(function(id) { return articlesCache[id]; });
+            renderPageArticles(cached);
+            return;
+        }
+        Promise.all(uncached.map(function(id) {
+            return fetch('articles/' + id + '.json', { cache: 'force-cache' })
+                .then(function(r) { return r.json(); })
+                .then(function(article) { articlesCache[id] = article; return article; });
+        })).then(function() {
+            var articles = pageIds.map(function(id) { return articlesCache[id]; }).filter(Boolean);
+            renderPageArticles(articles);
+        }).catch(function() {
+            var grid = document.getElementById('articleGrid');
+            if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles.</p>';
+        });
     }
 
     function renderPageArticles(articles) {
@@ -281,7 +298,7 @@ content="global news, technology news, AI news, finance news, real-time insights
         var html = '';
         for (var i = 0; i < articles.length; i++) html += createArticleCard(articles[i]);
         grid.innerHTML = html;
-        renderPagination(allArticles.length);
+        renderPagination(articleIds.length);
     }
 
     function renderSearchResults(articles) {
@@ -302,10 +319,10 @@ content="global news, technology news, AI news, finance news, real-time insights
         renderPagination(articles.length);
     }
 
-    fetch('articles-list.json', { cache: 'force-cache' })
+    fetch('articles-index.json', { cache: 'force-cache' })
         .then(function(r) { return r.json(); })
         .then(function(data) {
-            allArticles = data.articles || [];
+            articleIds = data.ids || [];
             fetchArticlesForPage(1);
             initSearch();
         })

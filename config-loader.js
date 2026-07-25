@@ -1,9 +1,7 @@
 // HelloInsights — Unified Config & Ad Manager v3
 // Supports: MGID content widgets + Google AdSense banners
 // All ad positions/sizes controlled by config.json — no HTML code changes needed
-
 var siteConfig = null;
-
 // ==========================================
 // 1. Site Config (logo / nav / footer / seo)
 // ==========================================
@@ -46,7 +44,7 @@ function applyConfig(config) {
       ul.innerHTML = links;
     }
     var bottom = document.querySelector('.footer-bottom p');
-    if (bottom) bottom.innerHTML = '&copy; <script>document.write(new Date().getFullYear())</script> ' + config.siteName + '. All rights reserved.';
+    if (bottom) bottom.innerHTML = '&copy; <script>document.write(new Date().getFullYear())<\/script> ' + config.siteName + '. All rights reserved.';
   }
   // Title & Meta
   if (document.title.indexOf('HelloInsights') !== -1)
@@ -54,29 +52,22 @@ function applyConfig(config) {
   var meta = document.querySelector('meta[name="description"]');
   if (meta && config.seo && config.seo.description) meta.setAttribute('content', config.seo.description);
 }
-
 function loadSiteConfig(callback) {
-  // 改成：
-fetch('config.json?v=' + Date.now())
+  fetch('config.json?v=' + Date.now())
     .then(function(r) { return r.json(); })
     .then(function(c) { applyConfig(c); if (callback) callback(c); })
     .catch(function(e) { console.warn('Config load failed:', e); if (callback) callback(null); });
 }
-
 // ==========================================
 // 2. MGID Manager — Content Widgets
 // ==========================================
 var _mgidLoaded = false;
-
 function loadMGID(config) {
   var mgid = config.mgid;
   if (!mgid || !mgid.enabled) return;
-
   var page = location.pathname.split('/').pop() || 'index.html';
   var widgets = (mgid.widgets && mgid.widgets[page]) || [];
   if (!widgets.length) return;
-
-  // Load MGID base script once
   if (!_mgidLoaded && !document.querySelector('script[src*="jsc.mgid.com"]')) {
     var s = document.createElement('script');
     s.src = 'https://jsc.mgid.com/site/' + mgid.siteId + '.js';
@@ -84,51 +75,38 @@ function loadMGID(config) {
     document.head.appendChild(s);
     _mgidLoaded = true;
   }
-
-  // Place widget divs at anchor positions
   var placed = [];
   for (var i = 0; i < widgets.length; i++) {
     var w = widgets[i];
     var anchor = document.querySelector('[data-ad-slot="' + w.slot + '"]');
     if (!anchor) continue;
-
-    // Apply size & spacing from config
     if (w.height) anchor.style.minHeight = w.height;
     if (w.marginTop !== undefined) anchor.style.marginTop = w.marginTop;
     if (w.marginBottom !== undefined) anchor.style.marginBottom = w.marginBottom;
     anchor.className = 'ad-container';
-
     var div = document.createElement('div');
     div.setAttribute('data-type', '_mgwidget');
     div.setAttribute('data-widget-id', w.widgetId);
     anchor.appendChild(div);
     placed.push(div);
   }
-
-  // Trigger MGID load after widgets are placed
   if (placed.length > 0) {
-    try {
-      (window._mgq = window._mgq || []).push(["_mgc.load"]);
-    } catch(e) { console.warn('MGID trigger error:', e); }
+    try { (window._mgq = window._mgq || []).push(["_mgc.load"]); }
+    catch(e) { console.warn('MGID trigger error:', e); }
   }
 }
-
 // ==========================================
 // 3. AdSense Manager — Lazy Load
 // ==========================================
 function loadAdSense(config) {
   if (!config.adsense || !config.adsense.enabled) return;
-
   var clientId = config.adsense.clientId;
-  if (!clientId || clientId.indexOf('XXXX') !== -1) return; // Skip placeholders
-
+  if (!clientId || clientId.indexOf('XXXX') !== -1) return;
   var slots = config.adsense.slots || {};
   var pageAds = config.adsense.pageAds || {};
   var page = location.pathname.split('/').pop() || 'index.html';
   var adSlots = pageAds[page];
   if (!adSlots || !adSlots.length) return;
-
-  // Inject AdSense script
   if (!document.querySelector('script[src*="adsbygoogle"]')) {
     var s = document.createElement('script');
     s.async = true;
@@ -136,8 +114,6 @@ function loadAdSense(config) {
     s.crossOrigin = 'anonymous';
     document.head.appendChild(s);
   }
-
-  // Collect slots with valid anchors
   var pendingSlots = [];
   for (var i = 0; i < adSlots.length; i++) {
     var key = adSlots[i];
@@ -145,17 +121,13 @@ function loadAdSense(config) {
     if (!def) continue;
     var anchor = document.querySelector('[data-ad-slot="' + key + '"]');
     if (!anchor) continue;
-    // Apply size from config
     if (def.height) anchor.style.minHeight = def.height;
     if (def.marginTop !== undefined) anchor.style.marginTop = def.marginTop;
     if (def.marginBottom !== undefined) anchor.style.marginBottom = def.marginBottom;
     anchor.className = 'ad-container';
     pendingSlots.push({ anchor: anchor, def: def });
   }
-
   if (pendingSlots.length === 0) return;
-
-  // Lazy load via IntersectionObserver
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function(entries) {
       var triggered = false;
@@ -179,7 +151,6 @@ function loadAdSense(config) {
     scheduleUnfilledCheck();
   }
 }
-
 function createAdIns(anchor, def, clientId) {
   if (anchor._adCreated) return;
   anchor._adCreated = true;
@@ -194,7 +165,6 @@ function createAdIns(anchor, def, clientId) {
   anchor.appendChild(ins);
   try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
 }
-
 var _unfilledTimer = null;
 function scheduleUnfilledCheck() {
   if (_unfilledTimer) return;
@@ -203,7 +173,6 @@ function scheduleUnfilledCheck() {
     setTimeout(hideUnfilledAds, 5000);
   }, 4000);
 }
-
 function hideUnfilledAds() {
   var allIns = document.querySelectorAll('ins.adsbygoogle');
   for (var i = 0; i < allIns.length; i++) {
@@ -213,7 +182,6 @@ function hideUnfilledAds() {
     }
   }
 }
-
 // ==========================================
 // 4. Utilities
 // ==========================================
@@ -221,16 +189,13 @@ function toggleMenu() {
   var nav = document.getElementById('navContainer');
   if (nav) nav.classList.toggle('active');
 }
-
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 window.addEventListener('scroll', function() {
   var btn = document.getElementById('backToTop');
   if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
 });
-
 // ==========================================
 // 5. Auto Init
 // ==========================================

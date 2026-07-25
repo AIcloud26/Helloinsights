@@ -5,7 +5,6 @@ const https = require('https');
 // ============================================
 const CONFIG = {
   articlesPerDay: 5,
-  maxArticles: 200,
   useAI: false,
   openaiApiKey: process.env.OPENAI_API_KEY,
   openaiModel: 'gpt-3.5-turbo'
@@ -58,7 +57,7 @@ const IMAGE_IDS = {
   ],
   'ai-tools': [
     'photo-1677442136019-21780ecf9952', 'photo-1676299081847-824916de030a',
-    'photo-1488229297570-58520851e68c', 'photo-1555949963-aa79dcee981c',
+    'photo-1488229297570-58520851e843', 'photo-1555949963-aa79dcee981c',
     'photo-1547891654-e66ed7ebb968', 'photo-1620712943543-bcc4688e7485',
     'photo-1535378917042-10a22c95931a', 'photo-1655393000402-6b8b8a16f7d0',
     'photo-1677698793853-2f721ed17092', 'photo-1507003211169-0a1dd7228f2d',
@@ -324,7 +323,7 @@ async function main() {
     var json = JSON.parse(data);
     existingArticles = json.articles || [];
     existingIds = existingArticles.map(function(a) { return a.id; });
-    console.log(' Found ' + existingArticles.length + ' existing articles\n');
+    console.log('📁 Found ' + existingArticles.length + ' existing articles\n');
   } catch(e) {
     console.log('📝 No existing articles, starting fresh\n');
   }
@@ -344,20 +343,55 @@ async function main() {
     newToday: newArticles.length,
     generator: CONFIG.useAI ? 'AI (OpenAI)' : 'Template'
   };
-  // 确保 articles 目录存在
-  if (!fs.existsSync('articles')) fs.mkdirSync('articles', { recursive: true });
-  
+
   // 按 ID 降序排序（最新的在前）
   finalArticles.sort(function(a, b) { return b.id - a.id; });
-  
-  // 写入 articles-index.json（只有 ID 列表，供首页按需加载）
+
+  // 版本号（时间戳），用作类别文件的 cache key
+  var version = Date.now();
+
+  // ============================================
+  // 1. 写入 articles-index.json
+  //    结构: { v, articles: {id: category}, ids: [降序排列] }
+  // ============================================
+  var articlesMap = {};
+  finalArticles.forEach(function(a) { articlesMap[String(a.id)] = a.category; });
   var indexOutput = {
-    ids: finalArticles.map(function(a) { return a.id; }),
-    metadata: metadata
+    v: version,
+    articles: articlesMap,
+    ids: finalArticles.map(function(a) { return a.id; })
   };
   fs.writeFileSync('articles-index.json', JSON.stringify(indexOutput, null, 2));
-  
-  // 写入 articles-list.json（完整元数据，供搜索使用）
+  console.log('\n✅ articles-index.json written (v=' + version + ', ' + finalArticles.length + ' articles)');
+
+  // ============================================
+  // 2. 写入 4 个类别文件
+  //    每个: { articles: [完整文章对象], metadata }
+  // ============================================
+  CATEGORIES.forEach(function(cat) {
+    var catArticles = finalArticles.filter(function(a) { return a.category === cat.id; });
+    var catOutput = {
+      articles: catArticles.map(function(a) {
+        return {
+          id: a.id,
+          category: a.category,
+          title: a.title,
+          excerpt: a.excerpt,
+          image: a.image,
+          date: a.date,
+          content: a.content
+        };
+      }),
+      metadata: metadata
+    };
+    var filename = 'articles-' + cat.id + '.json';
+    fs.writeFileSync(filename, JSON.stringify(catOutput, null, 2));
+    console.log('✅ ' + filename + ' written (' + catArticles.length + ' articles)');
+  });
+
+  // ============================================
+  // 3. 写入 articles-list.json（供 category.html 等页面使用）
+  // ============================================
   var listOutput = {
     articles: finalArticles.map(function(a) {
       return { id: a.id, category: a.category, title: a.title, excerpt: a.excerpt, image: a.image, date: a.date };
@@ -365,7 +399,12 @@ async function main() {
     metadata: metadata
   };
   fs.writeFileSync('articles-list.json', JSON.stringify(listOutput, null, 2));
-  // 写入每篇文章的独立 JSON 文件（供 article.html 按需加载）
+  console.log('✅ articles-list.json written');
+
+  // ============================================
+  // 4. 写入每篇文章的独立 JSON 文件（向后兼容）
+  // ============================================
+  if (!fs.existsSync('articles')) fs.mkdirSync('articles', { recursive: true });
   var newArticleIds = {};
   newArticles.forEach(function(a) { newArticleIds[a.id] = true; });
   for (var i = 0; i < finalArticles.length; i++) {
@@ -395,10 +434,11 @@ async function main() {
       console.log('   🗑️ Removed old article: ' + fileId);
     }
   }
+
   console.log('\n✅ Done!');
   console.log('   New: ' + newArticles.length + ' articles');
   console.log('   Total: ' + finalArticles.length + ' articles');
-  console.log('   Output: articles-list.json (list) + articles/*.json (individual)\n');
+  console.log('   Output: articles-index.json + 4 category files + articles-list.json + articles/*.json\n');
 }
 main().catch(function(error) {
   console.error('❌ Error:', error.message);

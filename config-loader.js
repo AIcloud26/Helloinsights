@@ -56,7 +56,8 @@ function applyConfig(config) {
 }
 
 function loadSiteConfig(callback) {
-  fetch('config.json', { cache: 'force-cache' })
+  // 改成：
+fetch('config.json?v=' + Date.now())
     .then(function(r) { return r.json(); })
     .then(function(c) { applyConfig(c); if (callback) callback(c); })
     .catch(function(e) { console.warn('Config load failed:', e); if (callback) callback(null); });

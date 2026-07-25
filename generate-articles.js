@@ -1,36 +1,55 @@
 const fs = require('fs');
 const https = require('https');
+
+// ============================================
+// 配置
+// ============================================
 const CONFIG = {
   articlesPerDay: 5,
-  maxArticles: 200,
+  // maxArticles 已移除，不再限制文章数量
   useAI: false,
   openaiApiKey: process.env.OPENAI_API_KEY,
-  openaiModel: 'gpt-3.5-turbo'
+  openaiModel: 'gpt-3.5-turbo',
+  siteUrl: 'https://www.helloinsights.online'
 };
+
+// ============================================
+// 分类和主题
+// ============================================
 const CATEGORIES = [
   { id: 'technology', name: 'Technology', topics: ['AI and Machine Learning', 'Quantum Computing', 'Cybersecurity', 'Web3 and Blockchain', 'Cloud Computing', 'IoT and Smart Devices', 'Robotics and Automation', '5G Networks', 'Edge Computing', 'Sustainable Technology'] },
   { id: 'finance', name: 'Finance', topics: ['Cryptocurrency and DeFi', 'Stock Market Analysis', 'Personal Finance', 'Real Estate Investment', 'Retirement Planning', 'Banking Technology', 'Global Economic Outlook', 'ESG Investing', 'Fintech Innovation', 'Wealth Management'] },
   { id: 'ai-tools', name: 'AI Tools', topics: ['ChatGPT and Language Models', 'AI Image Generation', 'AI Coding Assistants', 'AI Productivity Apps', 'Machine Learning Platforms', 'AI Automation', 'Voice and Speech AI', 'AI for Business', 'AI Writing Assistants', 'AI Video Creation'] },
   { id: 'health-lifestyle', name: 'Health & Lifestyle', topics: ['Nutrition and Diet', 'Fitness and Exercise', 'Mental Health', 'Sleep Optimization', 'Productivity', 'Work-Life Balance', 'Healthy Recipes', 'Wellness Technology', 'Stress Management', 'Meditation Practices'] }
 ];
+
+// ============================================
+// 图片
+// ============================================
 const IMAGE_IDS = {
   'technology': ['photo-1518770660439-4636190af475','photo-1526374965328-7f61d4dc18c5','photo-1531297484001-80022131f5a1','photo-1550751827-4bd374c3f58b','photo-1485827404703-89b55fcc595e','photo-1517694712202-14dd9538aa97','photo-1461749280684-dccba630e2f6','photo-1504639725590-34d0984388bd','photo-1498050108023-c5249f4df085','photo-1519389950473-47ba0277781c','photo-1558618666-fcd25c85f82e','photo-1535378917042-10a22c95931a','photo-1605810230434-7631ac76ec81','photo-1515879218367-8466d910aaa4','photo-1531297484001-80022131f5a1','photo-1581091226825-a6a2a5aee158','photo-1562408590-e32931084e23','photo-1486312336033-3b2be87e275e'],
   'finance': ['photo-1611974789855-9c2a0a7236a3','photo-1554224155-6726b3ff858f','photo-1579621970563-ebec7560ff3e','photo-1553729459-efe14ef6055d','photo-1639762681485-074b7f938ba0','photo-1460925895917-afdab827c52f','photo-1611974789855-9c2a0a7236a3','photo-1590283603385-17ffb3a7f29f','photo-1579532537598-459ecdaf39cc','photo-1642797102903-74f2fa8468c9a','photo-1591696205602-2f950c41789b','photo-1633158829585-23ba8f7c8caf','photo-1639322537228-f710d8468c9a','photo-1526304640581-d334cdbbf45e','photo-1554224155-6726b3ff858f','photo-1635348729498-da31a45174d5'],
   'ai-tools': ['photo-1677442136019-21780ecf9952','photo-1676299081847-824916de030a','photo-1488229297570-58520851e68c','photo-1555949963-aa79dcee981c','photo-1547891654-e66ed7ebb968','photo-1620712943543-bcc4688e7485','photo-1535378917042-10a22c95931a','photo-1655393000402-6b8b8a16f7d0','photo-1677698793853-2f721ed17092','photo-1507003211169-0a1dd7228f2d','photo-1587620962725-abab7fe55159','photo-1633493784811-2f2e79ac7f30','photo-1516110833967-0b5716ca1387','photo-1560421683-6856ea585f8c','photo-1551288049-bebda4e38f71'],
   'health-lifestyle': ['photo-1490645935967-10de6ba17061','photo-1571019613454-1cb2f99b2d8b','photo-1506126613408-eca07ce68773','photo-1512438248247-f0f2a5a8b7f0','photo-1498837167922-ddd27525d352','photo-1505576399279-565b52d4ac71','photo-1544367567-0f2fcb009e0b','photo-1571019614242-c5c6dee1f0b9','photo-1498837167922-ddd27525d352','photo-1511688878353-3a2f5be94cd7','photo-1434030216411-0b793f4b4173','photo-1540189549336-e6e99c3679fe','photo-1556909114-f6e7ad7d3136','photo-1515894274780-0de5a3aade51','photo-1476224203421-9ac39bcb3327','photo-1490645935967-10de6ba17061']
 };
+
 function randomChoice(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function getImageUrl(cat) {
   var ids = IMAGE_IDS[cat] || IMAGE_IDS['technology'];
   return 'https://images.unsplash.com/' + randomChoice(ids) + '?w=600&h=400&fit=crop&fm=webp';
 }
+
+// ============================================
+// 标题和摘要模板
+// ============================================
 const TITLE_TEMPLATES = {
   'technology': ['Breaking: {topic} Is Reshaping the Tech Industry','The Future of {topic}: What to Expect in 2025','How {topic} Is Transforming Our Digital World','{topic}: A Complete Guide for Tech Enthusiasts','Why {topic} Matters More Than Ever in 2025','Expert Insights: The Rise of {topic}'],
   'finance': ['Market Watch: {topic} Trends to Watch','Smart Money: Understanding {topic} in 2025','How {topic} Is Changing the Financial Landscape','{topic}: What Investors Need to Know','Wealth Building: The Role of {topic}','Navigating {topic}: A Beginner\'s Guide'],
   'ai-tools': ['Tool Review: Best {topic} Solutions in 2025','How {topic} Can Boost Your Productivity','{topic} Explained: A Complete Beginner\'s Guide','The Rise of {topic}: What It Means for You','Top {topic} Tools Worth Your Attention','Mastering {topic}: Tips and Best Practices'],
   'health-lifestyle': ['Science-Backed: How {topic} Improves Wellbeing','The Ultimate Guide to {topic} for Beginners','{topic}: The Trend Taking 2025 by Storm','Why {topic} Should Be Part of Your Routine','Expert Tips on {topic} for Better Living','The Complete {topic} Handbook']
 };
+
 const EXCERPT_TEMPLATES = [
   'Discover how {topic} is revolutionizing the industry and what it means for you.',
   'Expert analysis on the latest {topic} trends and their impact on everyday life.',
@@ -38,6 +57,10 @@ const EXCERPT_TEMPLATES = [
   'Everything you need to know about {topic} to stay ahead of the curve.',
   'Breaking down {topic}: insights, trends, and practical applications.'
 ];
+
+// ============================================
+// 段落模板库
+// ============================================
 const PARAGRAPH_TEMPLATES = {
   'technology': [
     'The rapid advancement of {topic} has captured the attention of industry leaders, researchers, and technology enthusiasts worldwide. Over the past year, we have witnessed unprecedented developments that are fundamentally changing how businesses operate and how individuals interact with digital systems. From startup incubators in Silicon Valley to enterprise boardrooms across the globe, {topic} has emerged as a central topic of discussion. Companies are investing heavily in research and development, pouring billions of dollars into infrastructure and talent acquisition to stay competitive in this fast-evolving landscape.',
@@ -68,6 +91,10 @@ const PARAGRAPH_TEMPLATES = {
     'The future of {topic} looks promising, with ongoing research continuing to uncover new insights and more effective approaches to health and wellness. Advances in personalized medicine and nutritional science are enabling increasingly tailored recommendations that account for individual genetic profiles, microbiome composition, and lifestyle factors. The integration of technology with traditional wellness practices is creating new possibilities for monitoring, optimization, and prevention. As our understanding of the complex interactions between lifestyle, environment, and health continues to deepen, {topic} will undoubtedly remain at the forefront of efforts to help people live longer, healthier, and more fulfilling lives.'
   ]
 };
+
+// ============================================
+// 原创观点库
+// ============================================
 const ORIGINAL_INSIGHTS = {
   'technology': [
     '<p><strong>Our Analysis:</strong> According to a recent study by the Global Technology Institute, companies investing in {topic} are seeing an average ROI of 340% within the first 18 months. What surprised researchers was not just the financial returns, but the unexpected secondary benefits: improved employee satisfaction (up 27%), reduced operational downtime (down 43%), and faster time-to-market for new products. These findings challenge the conventional wisdom that technology investments require years to show meaningful results.</p>',
@@ -87,201 +114,4 @@ const ORIGINAL_INSIGHTS = {
     '<p><strong>Productivity Data:</strong> A Stanford University study tracking 10,000 knowledge workers found that those using {topic} tools completed complex tasks 47% faster while maintaining 94% accuracy—compared to 89% without AI assistance. The productivity gains were most pronounced in research, analysis, and creative work. "We expected improvement, but not at this scale," admitted study lead Dr. Jennifer Walsh. The implications for workforce planning are substantial: companies not providing AI tools may find themselves at a severe competitive disadvantage in attracting and retaining talent.</p>',
     '<p><strong>Adoption Trends:</strong> Analysis of software procurement data from 5,000 mid-market companies reveals that {topic} tool adoption has increased 340% year-over-year. What\'s striking is the shift in buyer personas: 62% of purchases are now initiated by department heads rather than IT, indicating mainstream acceptance. "This isn\'t an IT experiment anymore—it\'s a business necessity," observes industry analyst Mark Stevens. The average company now uses 4.7 different AI tools across departments, up from 1.2 just eighteen months ago.</p>',
     '<p><strong>Quality Benchmark:</strong> Independent testing by Consumer Reports evaluated 23 leading {topic} platforms across 47 performance metrics. The results were illuminating: the top three platforms delivered results indistinguishable from human experts in 73% of use cases, while costing 80% less and operating 100x faster. "The quality gap that existed two years ago has essentially closed," noted senior tester Michael Torres. For businesses still skeptical about AI reliability, these benchmarks provide compelling evidence that the technology has reached production-ready maturity.</p>',
-    '<p><strong>User Experience:</strong> Our own testing of {topic} tools over a 90-day period revealed unexpected insights about user adoption patterns. Contrary to expectations, the biggest barrier wasn\'t technical complexity—it was change management. Teams that invested in proper training and workflow integration saw adoption rates of 89%, while those who simply deployed tools without support struggled to reach 30%. The lesson is clear: success with AI tools requires human-centered design thinking, not just technical implementation.</p>',
-    '<p><strong>Cost Analysis:</strong> A detailed total cost of ownership analysis by McKinsey compared traditional workflows with {topic}-enhanced alternatives across five industries. The findings: average cost reduction of 34% in the first year, rising to 52% by year three. But the more significant finding was qualitative—employees reported 41% higher job satisfaction when freed from repetitive tasks. "The ROI calculation changes dramatically when you factor in retention and engagement," noted McKinsey partner Lisa Park. Companies are beginning to view AI tools not as cost centers, but as strategic investments in human capital.</p>'
-  ],
-  'health-lifestyle': [
-    '<p><strong>Clinical Evidence:</strong> A landmark study published in the New England Journal of Medicine tracked 12,000 participants over five years, examining the long-term effects of {topic} practices. The results were compelling: those consistently engaging in evidence-based {topic} routines showed 38% lower rates of chronic disease, 29% better cognitive function in later years, and 2.3 years longer life expectancy on average. "These aren\'t marginal improvements—they\'re transformative," stated lead researcher Dr. Amanda Foster. The study has prompted several national health organizations to update their guidelines.</p>',
-    '<p><strong>Lifestyle Integration:</strong> Survey data from 8,500 adults across 15 countries reveals that 67% of those who successfully integrated {topic} into their daily routines did so through what researchers call "habit stacking"—linking new practices to existing habits. For example, combining morning meditation with coffee preparation, or pairing exercise with podcast listening. "The brain doesn\'t create new neural pathways easily," explained behavioral scientist Dr. Robert Kim. "By anchoring new habits to established ones, we reduce the cognitive load and increase success rates from 23% to 78%."</p>',
-    '<p><strong>Workplace Wellness:</strong> Corporations implementing comprehensive {topic} programs are seeing remarkable returns. A study of 200 companies by the WHO found that for every $1 invested in evidence-based wellness initiatives, companies received $3.80 in reduced healthcare costs and $2.70 in productivity gains. But the most successful programs weren\'t just offering gym memberships—they were creating cultural shifts. "The difference between programs that work and those that don\'t comes down to leadership participation," noted wellness consultant Sarah Martinez. When executives visibly engage in {topic} practices, participation rates triple.</p>',
-    '<p><strong>Mental Health Connection:</strong> Recent research from Johns Hopkins University has established a strong correlation between consistent {topic} practices and mental health outcomes. The study, involving 6,000 participants, found that those maintaining regular wellness routines showed 44% lower rates of anxiety and 37% lower rates of depression. The mechanism appears to involve both physiological changes (reduced cortisol levels, improved sleep architecture) and psychological factors (increased self-efficacy, better stress coping). "We\'re seeing {topic} prescribed alongside traditional therapy with excellent results," commented psychiatrist Dr. Michael Chang.</p>',
-    '<p><strong>Technology Integration:</strong> The convergence of wearable technology and {topic} is creating unprecedented opportunities for personalized health optimization. Data from 50,000 users of leading health platforms shows that those combining biometric tracking with evidence-based wellness practices achieved their goals 2.8x faster than those using either approach alone. "The feedback loop is powerful," explained digital health pioneer Dr. Lisa Wang. "When people can see immediate data on how their practices affect their physiology, adherence increases dramatically." This personalized approach is democratizing access to what was previously available only to elite athletes and executives.</p>'
-  ]
-};
-function generateArticleDate() {
-  var start = new Date('2025-09-01');
-  var end = new Date();
-  var diff = end.getTime() - start.getTime();
-  var randomDays = Math.floor(Math.random() * (diff / (1000 * 60 * 60 * 24)));
-  var date = new Date(start.getTime() + randomDays * (1000 * 60 * 60 * 24));
-  return date.toISOString().split('T')[0];
-}
-function generateArticleContent(category, topic) {
-  var paragraphs = [];
-  var count = randomInt(4, 5);
-  var indices = [];
-  while (indices.length < count) {
-    var idx = randomInt(0, 4);
-    if (indices.indexOf(idx) === -1) indices.push(idx);
-  }
-  indices.sort(function(a, b) { return a - b; });
-  for (var i = 0; i < indices.length; i++) {
-    var tpl = PARAGRAPH_TEMPLATES[category][indices[i]];
-    paragraphs.push('<p>' + tpl.replace(/\{topic\}/g, topic) + '</p>');
-  }
-  var insights = ORIGINAL_INSIGHTS[category] || ORIGINAL_INSIGHTS['technology'];
-  var insightCount = randomInt(1, 2);
-  var insightIndices = [];
-  while (insightIndices.length < insightCount) {
-    var idx = randomInt(0, insights.length - 1);
-    if (insightIndices.indexOf(idx) === -1) insightIndices.push(idx);
-  }
-  for (var j = 0; j < insightIndices.length; j++) {
-    var insightTpl = insights[insightIndices[j]];
-    var insertPos = randomInt(1, paragraphs.length - 1);
-    var insightHtml = '<p>' + insightTpl.replace(/\{topic\}/g, topic) + '</p>';
-    paragraphs.splice(insertPos, 0, insightHtml);
-  }
-  return paragraphs.join('\n');
-}
-function generateFromTemplate(category) {
-  var catInfo = CATEGORIES.find(function(c) { return c.id === category; });
-  var topic = randomChoice(catInfo.topics);
-  var titles = TITLE_TEMPLATES[category] || TITLE_TEMPLATES['technology'];
-  var title = randomChoice(titles).replace('{topic}', topic);
-  var excerpt = randomChoice(EXCERPT_TEMPLATES).replace('{topic}', topic.toLowerCase());
-  var content = generateArticleContent(category, topic);
-  return { title: title, excerpt: excerpt, topic: topic, content: content };
-}
-async function generateWithAI(category) {
-  if (!CONFIG.openaiApiKey) return generateFromTemplate(category);
-  var catInfo = CATEGORIES.find(function(c) { return c.id === category; });
-  var topic = randomChoice(catInfo.topics);
-  var prompt = 'Generate a blog article (500-800 words) about ' + topic + ' in the ' + catInfo.name + ' category.\n\nReturn ONLY valid JSON:\n{"title": "...", "excerpt": "...", "content": "<p>...</p><p>...</p>"}';
-  return new Promise(function(resolve) {
-    var data = JSON.stringify({
-      model: CONFIG.openaiModel,
-      messages: [
-        { role: 'system', content: 'You are a professional writer. Return ONLY valid JSON, no markdown.' },
-        { role: 'user', content: prompt }
-      ],
-      temperature: 0.8,
-      max_tokens: 1200
-    });
-    var options = {
-      hostname: 'api.openai.com',
-      path: '/v1/chat/completions',
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + CONFIG.openaiApiKey }
-    };
-    var req = https.request(options, function(res) {
-      var body = '';
-      res.on('data', function(chunk) { body += chunk; });
-      res.on('end', function() {
-        try {
-          var resp = JSON.parse(body);
-          var content = resp.choices[0].message.content.trim().replace(/^```json\s*/i, '').replace(/\s*```$/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
-          var parsed = JSON.parse(content);
-          resolve({ title: parsed.title.substring(0, 100), excerpt: parsed.excerpt.substring(0, 200), topic: topic, content: parsed.content });
-        } catch(e) { resolve(generateFromTemplate(category)); }
-      });
-    });
-    req.on('error', function() { resolve(generateFromTemplate(category)); });
-    req.setTimeout(30000, function() { req.destroy(); resolve(generateFromTemplate(category)); });
-    req.write(data);
-    req.end();
-  });
-}
-async function generateArticle(existingIds) {
-  var category = randomChoice(CATEGORIES);
-  var id;
-  do { id = randomInt(100, 99999); } while (existingIds.indexOf(id) !== -1);
-  var generated;
-  if (CONFIG.useAI && CONFIG.openaiApiKey) {
-    generated = await generateWithAI(category.id);
-  } else {
-    generated = generateFromTemplate(category.id);
-  }
-  return {
-    id: id,
-    category: category.id,
-    title: generated.title,
-    excerpt: generated.excerpt,
-    content: generated.content,
-    image: getImageUrl(category.id),
-    date: generateArticleDate()
-  };
-}
-async function main() {
-  console.log('\n🚀 HelloInsights Article Generator');
-  console.log('================================');
-  console.log('📝 Mode: ' + (CONFIG.useAI ? 'AI-powered' : 'Template-based'));
-  console.log('📊 Generating ' + CONFIG.articlesPerDay + ' new articles\n');
-  var existingArticles = [];
-  var existingIds = [];
-  try {
-    var data = fs.readFileSync('articles-list.json', 'utf8');
-    var json = JSON.parse(data);
-    existingArticles = json.articles || [];
-    existingIds = existingArticles.map(function(a) { return a.id; });
-    console.log(' Found ' + existingArticles.length + ' existing articles\n');
-  } catch(e) {
-    console.log('📝 No existing articles, starting fresh\n');
-  }
-  console.log('✨ Generating new articles...\n');
-  var newArticles = [];
-  for (var i = 0; i < CONFIG.articlesPerDay; i++) {
-    var article = await generateArticle(existingIds);
-    newArticles.push(article);
-    existingIds.push(article.id);
-    console.log('   ' + (i + 1) + '. [' + article.category + '] ' + article.title);
-  }
-  var allArticles = newArticles.concat(existingArticles);
-  var finalArticles = allArticles.slice(0, CONFIG.maxArticles);
-  var metadata = {
-    lastUpdated: new Date().toISOString(),
-    totalArticles: finalArticles.length,
-    newToday: newArticles.length,
-    generator: CONFIG.useAI ? 'AI (OpenAI)' : 'Template'
-  };
-  if (!fs.existsSync('articles')) fs.mkdirSync('articles', { recursive: true });
-  finalArticles.sort(function(a, b) { return b.id - a.id; });
-  var indexOutput = {
-    ids: finalArticles.map(function(a) { return a.id; }),
-    metadata: metadata
-  };
-  fs.writeFileSync('articles-index.json', JSON.stringify(indexOutput, null, 2));
-  var listOutput = {
-    articles: finalArticles.map(function(a) {
-      return { id: a.id, category: a.category, title: a.title, excerpt: a.excerpt, image: a.image, date: a.date };
-    }),
-    metadata: metadata
-  };
-  fs.writeFileSync('articles-list.json', JSON.stringify(listOutput, null, 2));
-  var newArticleIds = {};
-  newArticles.forEach(function(a) { newArticleIds[a.id] = true; });
-  for (var i = 0; i < finalArticles.length; i++) {
-    var a = finalArticles[i];
-    var articleFile = 'articles/' + a.id + '.json';
-    if (newArticleIds[a.id] || !fs.existsSync(articleFile)) {
-      var articleData = {
-        id: a.id,
-        category: a.category,
-        title: a.title,
-        excerpt: a.excerpt,
-        image: a.image,
-        date: a.date,
-        content: a.content
-      };
-      fs.writeFileSync(articleFile, JSON.stringify(articleData, null, 2));
-    }
-  }
-  var existingFiles = fs.readdirSync('articles').filter(function(f) { return f.endsWith('.json'); });
-  var validIds = {};
-  finalArticles.forEach(function(a) { validIds[String(a.id)] = true; });
-  for (var i = 0; i < existingFiles.length; i++) {
-    var fileId = existingFiles[i].replace('.json', '');
-    if (!validIds[fileId]) {
-      fs.unlinkSync('articles/' + existingFiles[i]);
-      console.log('   🗑️ Removed old article: ' + fileId);
-    }
-  }
-  console.log('\n✅ Done!');
-  console.log('   New: ' + newArticles.length + ' articles');
-  console.log('   Total: ' + finalArticles.length + ' articles');
-  console.log('   Output: articles-index.json + articles-list.json + articles/*.json\n');
-}
-main().catch(function(error) {
-  console.error('❌ Error:', error.message);
-  process.exit(1);
-});
+    '<p><strong>User Experience:</strong

@@ -2,20 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Favicon -->
-<link rel="icon" type="image/png" href="favicon-16x16.png">
-<link rel="icon" type="image/x-icon" href="favicon-16x16.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Browse articles by category - Technology, Finance, AI Tools, and Health & Lifestyle on HelloInsights.">
+    <meta name="description" content="Browse articles by category on HelloInsights.">
     <title>Category - HelloInsights</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6b35'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold' font-size='22'%3EH%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-    <link rel="preload" href="articles-list.json" as="fetch" crossorigin>
-    <style>
-    *{margin:0;padding:0;box-sizing:border-box}:root{--accent-color:#ff6b35;--primary-color:var(--accent-color);--primary-hover:#e85a2a;--text-dark:#333;--text-medium:#666;--text-light:#999;--bg-light:#f5f5f5;--white:#fff;--shadow:0 2px 10px rgba(0,0,0,.08);--shadow-hover:0 4px 20px rgba(0,0,0,.12);--border-radius:12px;--transition:all .3s ease}html{font-size:16px;scroll-behavior:smooth}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.7;color:var(--text-dark);background:var(--bg-light);min-height:100vh}.header{background:var(--white);box-shadow:var(--shadow);position:sticky;top:0;z-index:1000}.header-content{max-width:1400px;margin:0 auto;padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}.logo{font-size:2rem;font-weight:700;color:var(--text-dark);text-decoration:none;display:flex;align-items:center;gap:.6rem}.logo-img{width:64px;height:64px;border-radius:10px;object-fit:contain}.nav-container{display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}.nav{display:flex;gap:.5rem;list-style:none}.nav a{text-decoration:none;color:var(--text-medium);padding:.6rem 1.2rem;border-radius:8px;font-weight:500;transition:var(--transition)}.nav a:hover,.nav a.active{color:var(--primary-color);background:rgba(255,107,53,.1)}.container{max-width:1400px;margin:0 auto;padding:2.5rem 3rem}.search-box{display:flex;align-items:center;background:var(--bg-light);border-radius:10px;padding:.6rem 1.2rem;border:1px solid transparent;transition:var(--transition)}.search-box input{border:none;background:transparent;outline:none;width:200px;font-size:1rem;color:var(--text-dark)}.search-box input::placeholder{color:var(--text-light)}.search-box button{background:none;border:none;cursor:pointer;color:var(--text-light);font-size:1.1rem}.menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem}.menu-toggle span{width:28px;height:3px;background:var(--text-dark);border-radius:2px}.article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}.article-card{background:var(--white);border-radius:var(--border-radius);box-shadow:var(--shadow);overflow:hidden;transition:var(--transition);display:flex;flex-direction:column;contain:layout style}.article-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-hover)}.card-image{width:100%;aspect-ratio:3/2;overflow:hidden;background:linear-gradient(110deg,#f0f0f0 8%,#e8e8e8 18%,#f0f0f0 33%);background-size:200% 100%;animation:shimmer 1.5s linear infinite}.card-image img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}.article-card:hover .card-image img{transform:scale(1.05)}.card-content{padding:1.75rem;flex:1;display:flex;flex-direction:column}.card-category{display:inline-block;background:rgba(255,107,53,.1);color:var(--primary-color);padding:.3rem .9rem;border-radius:5px;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.9rem;width:fit-content}.card-title{font-size:1.25rem;font-weight:600;color:var(--text-dark);margin-bottom:.9rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.card-title a{text-decoration:none;color:inherit;transition:var(--transition)}.card-title a:hover{color:var(--primary-color)}.card-excerpt{color:var(--text-medium);font-size:.95rem;line-height:1.65;margin-bottom:1.2rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:1}.card-meta{display:flex;align-items:center;font-size:.9rem;color:var(--text-light);margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid #eee}.read-more-btn{display:flex;align-items:center;justify-content:center;background:var(--primary-color);color:var(--white);text-decoration:none;padding:.85rem 1.75rem;border-radius:10px;font-weight:500;font-size:.95rem;transition:var(--transition);width:100%;margin-top:auto}.read-more-btn:hover{background:var(--primary-hover);transform:translateY(-3px);box-shadow:0 4px 12px rgba(255,107,53,.3)}.footer{background:var(--text-dark);color:var(--white);padding:3.5rem 3rem;margin-top:4rem}.footer-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:3rem}.footer-section h4{font-size:1.2rem;margin-bottom:1.2rem}.footer-section p,.footer-section a{color:#aaa;font-size:.95rem;line-height:1.85;text-decoration:none}.footer-section a:hover{color:var(--primary-color)}.footer-section ul{list-style:none}.footer-section ul li{margin-bottom:.6rem}.footer-bottom{max-width:1400px;margin:2.5rem auto 0;padding-top:2rem;border-top:1px solid #444;text-align:center;color:#777;font-size:.9rem}.ad-container{min-height:0!important;max-height:0!important;overflow:hidden;border:none!important;background:transparent!important;margin:0!important;padding:0!important;transition:all .3s ease}.ad-container:not(:empty){min-height:auto!important;max-height:none!important;margin:2rem auto!important;padding:1rem!important}.pagination{display:flex;justify-content:center;align-items:center;gap:.6rem;margin-top:3rem}.pagination a{display:flex;align-items:center;justify-content:center;width:45px;height:45px;border-radius:10px;background:var(--white);color:var(--text-medium);text-decoration:none;font-weight:500;box-shadow:var(--shadow)}.pagination a:hover,.pagination a.active{background:var(--primary-color);color:var(--white)}.pagination a.disabled{opacity:.5;cursor:not-allowed}.back-to-top{position:fixed;bottom:2.5rem;right:2.5rem;width:55px;height:55px;background:var(--primary-color);color:white;border:none;border-radius:50%;cursor:pointer;font-size:1.6rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-hover);transition:var(--transition);opacity:0;visibility:hidden;z-index:999}.back-to-top.visible{opacity:1;visibility:visible}.loading{display:flex;justify-content:center;align-items:center;padding:3rem}.loading::after{content:'';width:45px;height:45px;border:3px solid #eee;border-top-color:var(--primary-color);border-radius:50%;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}@media(max-width:1200px){.header-content{padding:1rem 2rem}.container{padding:2rem}.article-grid{grid-template-columns:repeat(2,1fr);gap:2rem}.footer-content{grid-template-columns:repeat(2,1fr)}}@media(max-width:768px){html{font-size:15px}.header-content{padding:1rem 1.25rem}.menu-toggle{display:flex}.nav-container{display:none;width:100%;flex-direction:column;gap:1rem;padding-top:1rem}.nav-container.active{display:flex}.nav{flex-direction:column;width:100%}.nav a{padding:.8rem 1rem;text-align:center;border-bottom:1px solid #eee}.search-box{width:100%}.search-box input{width:100%}.container{padding:1.5rem 1.25rem}.article-grid{grid-template-columns:1fr;gap:1.75rem}.card-image{aspect-ratio:3/2}.card-content{padding:1.5rem}.card-title{font-size:1.15rem}.footer{padding:2.5rem 1.5rem}.footer-content{grid-template-columns:1fr;text-align:center;gap:2rem}.logo-img{width:40px;height:40px}.pagination{gap:.4rem}.pagination a{width:40px;height:40px;font-size:.9rem}.back-to-top{bottom:1.5rem;right:1.5rem;width:48px;height:48px;font-size:1.4rem}}@media(max-width:480px){html{font-size:14px}.logo{font-size:1.6rem}.logo-img{width:36px;height:36px}.container{padding:1.25rem 1rem}.card-content{padding:1.25rem}.card-title{font-size:1.05rem}.card-excerpt{font-size:.9rem}.read-more-btn{padding:.7rem 1.4rem;font-size:.9rem}}
-    </style>
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="style.css"></noscript>
     <script src="config-loader.js" async></script>
@@ -24,7 +18,7 @@
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <img src="logo.png" alt="HelloInsights" class="logo-img" width="64" height="64">
+                <svg class="logo-svg" viewBox="0 0 48 48" width="48" height="48" aria-label="HelloInsights"><rect width="48" height="48" rx="10" fill="#ff6b35"/><text x="24" y="33" text-anchor="middle" fill="white" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-weight="bold" font-size="30">H</text></svg>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -47,12 +41,33 @@
         </div>
     </header>
     <main class="container">
-        <div id="ad-banner"></div>
+        <!-- AdSense Top -->
+        <div class="ad-slot" id="ad-top">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <div class="page-header" id="categoryHeader">
+            <h2 class="site-tagline" id="categoryTitle">Category</h2>
+            <p class="site-description" id="categoryDesc">Browse articles in this category.</p>
+        </div>
+
         <div class="article-grid" id="articleGrid">
             <div class="loading" id="loading"></div>
         </div>
+
+        <!-- MGID Mid -->
+        <div class="ad-slot" id="ad-mgid-mid">
+            <!-- MGID widget code here -->
+        </div>
+
         <div class="pagination" id="pagination"></div>
-        <div id="ad-fluid"></div>
+
+        <!-- AdSense Bottom -->
+        <div class="ad-slot" id="ad-bottom">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
     </main>
     <footer class="footer">
         <div class="footer-content">
@@ -87,134 +102,165 @@
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
     <script>
     if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(function() {}); }
+
     var ARTICLES_PER_PAGE = 9;
     var allArticles = [];
     var currentPage = 1;
-    var currentCategory = 'all';
-    var filteredArticles = [];
-    var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
+    var currentCategory = '';
+
     var categoryNames = {
         'technology': 'Technology', 'finance': 'Finance',
         'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle'
     };
+
+    var categoryDescs = {
+        'technology': 'Latest innovations in software, hardware, cloud, and emerging tech.',
+        'finance': 'Market trends, investment strategies, and financial insights.',
+        'ai-tools': 'AI-powered tools and platforms to boost your productivity.',
+        'health-lifestyle': 'Wellness tips, fitness guides, and healthy living advice.'
+    };
+
     var fallbackImages = {
         'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
         'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
-        'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
+        'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecf995?w=600&h=400&fit=crop',
         'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
     };
-    function generateArticleDate(id) {
-        var start = new Date('2026-01-01').getTime();
-        var offset = (id % 180) * 86400000;
-        var d = new Date(start + offset);
+    var defaultFallback = fallbackImages['technology'];
+
+    function formatDate(dateStr) {
+        if (!dateStr) return '';
+        var d = new Date(dateStr + 'T00:00:00');
         var m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
         return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
     }
+
     function getFallbackImage(cat) { return fallbackImages[cat] || defaultFallback; }
     function getUrlParam(name) { return new URLSearchParams(window.location.search).get(name); }
-    function formatDate(dateStr) {
-        if (dateStr) { var d = new Date(dateStr); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
-        return '';
+
+    function createArticleCard(article) {
+        var catName = categoryNames[article.category] || article.category;
+        var fb = getFallbackImage(article.category);
+        var date = article.date ? formatDate(article.date) : '';
+        return '<article class="article-card">' +
+            '<div class="card-image"><img src="' + article.image + '" alt="' + article.title + '" width="600" height="400" loading="lazy" decoding="async" onerror="this.src=\'' + fb + '\'"></div>' +
+            '<div class="card-content">' +
+            '<span class="card-category">' + catName + '</span>' +
+            '<h3 class="card-title"><a href="article.html?id=' + article.id + '">' + article.title + '</a></h3>' +
+            '<p class="card-excerpt">' + article.excerpt + '</p>' +
+            (date ? '<div class="card-meta"><span>' + date + '</span></div>' : '') +
+            '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
+            '</div></article>';
     }
-    function filterArticles() {
-        if (currentCategory === 'all') { filteredArticles = allArticles.slice(); }
-        else { filteredArticles = allArticles.filter(function(a) { return a.category === currentCategory; }); }
-        filteredArticles.sort(function(a, b) { if (a.date && b.date) return new Date(b.date) - new Date(a.date); return b.id - a.id; });
-    }
-    function renderArticles() {
+
+    function renderPage(page) {
+        currentPage = page;
+        var totalPages = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);
+        if (page < 1) page = 1;
+        if (page > totalPages && totalPages > 0) page = totalPages;
+        currentPage = page;
+        var startIdx = (page - 1) * ARTICLES_PER_PAGE;
+        var pageArticles = allArticles.slice(startIdx, startIdx + ARTICLES_PER_PAGE);
         var grid = document.getElementById('articleGrid');
         var loading = document.getElementById('loading');
-        if (loading) loading.style.display = 'none';
-        grid.innerHTML = '';
-        var start = (currentPage - 1) * ARTICLES_PER_PAGE;
-        var pageArticles = filteredArticles.slice(start, start + ARTICLES_PER_PAGE);
+        if (loading) loading.remove();
+        if (!grid) return;
         if (pageArticles.length === 0) {
-            grid.innerHTML = '<p style="text-align:center;color:#999;grid-column:1/-1;padding:3rem;">No articles found in this category.</p>';
+            grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#666;">No articles found in this category.</p>';
+            document.getElementById('pagination').innerHTML = '';
             return;
         }
-        for (var i = 0; i < pageArticles.length; i++) {
-            var article = pageArticles[i];
-            var imgSrc = article.image || fallbackImages[article.category] || defaultFallback;
-            var catName = categoryNames[article.category] || article.category;
-            var date = article.date ? formatDate(article.date) : generateArticleDate(article.id);
-            var card = document.createElement('div');
-            card.className = 'article-card';
-            card.innerHTML = '<div class="card-image"><img src="' + imgSrc + '" alt="' + (article.title || '') + '" width="600" height="400" loading="lazy" decoding="async" onerror="this.src=\'' + defaultFallback + '\'"></div>' +
-                '<div class="card-content">' +
-                '<span class="card-category">' + catName + '</span>' +
-                '<h2 class="card-title"><a href="article.html?id=' + article.id + '">' + article.title + '</a></h2>' +
-                '<p class="card-excerpt">' + (article.excerpt || '') + '</p>' +
-                '<div class="card-meta"><span>' + date + '</span></div>' +
-                '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More</a>' +
-                '</div>';
-            grid.appendChild(card);
-        }
+        var html = '';
+        for (var i = 0; i < pageArticles.length; i++) html += createArticleCard(pageArticles[i]);
+        grid.innerHTML = html;
+        renderPagination(allArticles.length);
     }
-    function renderPagination() {
-        var pag = document.getElementById('pagination');
-        pag.innerHTML = '';
-        var totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
-        if (totalPages <= 1) return;
-        if (currentPage > 1) pag.innerHTML += '<a href="#" onclick="goToPage(' + (currentPage - 1) + ');return false;">&larr;</a>';
-        for (var p = 1; p <= totalPages; p++) {
-            pag.innerHTML += p === currentPage
-                ? '<a class="active">' + p + '</a>'
-                : '<a href="#" onclick="goToPage(' + p + ');return false;">' + p + '</a>';
+
+    function renderPagination(total) {
+        var pages = Math.ceil(total / ARTICLES_PER_PAGE);
+        var el = document.getElementById('pagination');
+        if (!el || pages <= 1) { if (el) el.innerHTML = ''; return; }
+        var h = '';
+        if (currentPage > 1) h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage - 1) + ');return false;">‹</a>';
+        else h += '<span class="page-btn disabled">‹</span>';
+        var range = 2;
+        var start = Math.max(2, currentPage - range);
+        var end = Math.min(pages - 1, currentPage + range);
+        if (currentPage === 1) h += '<span class="page-btn active">1</span>';
+        else h += '<a href="#" class="page-btn" onclick="changePage(1);return false;">1</a>';
+        if (start > 2) h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
+        for (var i = start; i <= end; i++) {
+            if (i === currentPage) h += '<span class="page-btn active">' + i + '</span>';
+            else h += '<a href="#" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>';
         }
-        if (currentPage < totalPages) pag.innerHTML += '<a href="#" onclick="goToPage(' + (currentPage + 1) + ');return false;">&rarr;</a>';
+        if (end < pages - 1) h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
+        if (currentPage === pages) h += '<span class="page-btn active">' + pages + '</span>';
+        else h += '<a href="#" class="page-btn" onclick="changePage(' + pages + ');return false;">' + pages + '</a>';
+        if (currentPage < pages) h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">›</a>';
+        else h += '<span class="page-btn disabled">›</span>';
+        el.innerHTML = h;
     }
-    function goToPage(page) { currentPage = page; renderArticles(); renderPagination(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-    function initSearch() {
-        var searchBtn = document.getElementById('searchBtn');
-        var searchInput = document.getElementById('searchInput');
-        if (!searchBtn || !searchInput) return;
-        function doSearch() {
-            var keyword = searchInput.value.trim().toLowerCase();
-            if (!keyword) { filteredArticles = allArticles.slice(); }
-            else {
-                filteredArticles = allArticles.filter(function(a) {
-                    return (a.title && a.title.toLowerCase().indexOf(keyword) !== -1) ||
-                           (a.excerpt && a.excerpt.toLowerCase().indexOf(keyword) !== -1) ||
-                           (a.category && a.category.toLowerCase().indexOf(keyword) !== -1);
-                });
-            }
-            currentPage = 1; renderArticles(); renderPagination();
-        }
-        searchBtn.addEventListener('click', doSearch);
-        searchInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') doSearch(); });
+
+    function changePage(p) {
+        var t = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);
+        if (p < 1 || p > t) return;
+        renderPage(p);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    function toggleMenu() { var nav = document.getElementById('navContainer'); if (nav) nav.classList.toggle('active'); }
+
+    function toggleMenu() {
+        var nav = document.getElementById('navContainer');
+        if (nav) nav.classList.toggle('active');
+    }
+
     function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     window.addEventListener('scroll', function() {
         var btn = document.getElementById('backToTop');
         if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
     });
-    var cat = getUrlParam('cat');
-    if (cat) { currentCategory = cat; }
-    if (currentCategory !== 'all') {
-        var navLinks = document.querySelectorAll('.nav a');
-        for (var i = 0; i < navLinks.length; i++) {
-            navLinks[i].classList.remove('active');
-            if (navLinks[i].getAttribute('href') === 'category.html?cat=' + currentCategory) navLinks[i].classList.add('active');
+
+    /* Get category from URL and filter */
+    currentCategory = getUrlParam('cat') || 'technology';
+    var catName = categoryNames[currentCategory] || currentCategory;
+    var catDesc = categoryDescs[currentCategory] || '';
+    document.title = catName + ' - HelloInsights';
+    var titleEl = document.getElementById('categoryTitle');
+    var descEl = document.getElementById('categoryDesc');
+    if (titleEl) titleEl.textContent = catName;
+    if (descEl) descEl.textContent = catDesc;
+
+    /* Highlight active nav */
+    var navLinks = document.querySelectorAll('.nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        navLinks[i].classList.remove('active');
+        if (navLinks[i].getAttribute('href') === 'category.html?cat=' + currentCategory) {
+            navLinks[i].classList.add('active');
         }
     }
-    fetch('articles-list.json', { cache: 'force-cache' })
+
+    /* Load articles.json, then filter by category */
+    fetch('articles.json', { cache: 'force-cache' })
         .then(function(r) { return r.json(); })
         .then(function(data) {
-            allArticles = data.articles || [];
-            filterArticles(); renderArticles(); renderPagination(); initSearch();
+            var all = data.articles || [];
+            /* Filter by category */
+            allArticles = all.filter(function(a) { return a.category === currentCategory; });
+            allArticles.sort(function(a, b) {
+                if (a.date && b.date) return new Date(b.date) - new Date(a.date);
+                return (b.id || 0) - (a.id || 0);
+            });
+            renderPage(1);
         })
-        .catch(function(e) {
-            console.warn('Failed to load articles:', e);
+        .catch(function() {
             var grid = document.getElementById('articleGrid');
-            if (grid) grid.innerHTML = '<p style="text-align:center;color:#999;grid-column:1/-1;padding:3rem;">Unable to load articles.</p>';
+            if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles.</p>';
         });
+
     if (typeof loadSiteConfig === 'function') {
         loadSiteConfig(function(config) {
             if (config && config.categories) {
                 for (var i = 0; i < config.categories.length; i++)
                     categoryNames[config.categories[i].id] = config.categories[i].name;
-                if (allArticles.length > 0) renderArticles();
             }
         });
     }

@@ -2,23 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Favicon -->
+<link rel="icon" type="image/png" href="favicon-16x16.png">
+<link rel="icon" type="image/x-icon" href="favicon-16.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Read the latest insights and articles on HelloInsights.">
     <title>Article - HelloInsights</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6b35'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold' font-size='22'%3EH%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <!-- AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="style.css"></noscript>
-    <script src="config-loader.js" async></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="config-loader.js"></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <svg class="logo-svg" viewBox="0 0 48 48" width="48" height="48" aria-label="HelloInsights"><rect width="48" height="48" rx="10" fill="#ff6b35"/><text x="24" y="33" text-anchor="middle" fill="white" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-weight="bold" font-size="30">H</text></svg>
+                <img loading="lazy" decoding="async" src="logo.webp" alt="HelloInsights" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="logo-text" style="display:none;">HelloInsights</span>
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -41,36 +43,19 @@
         </div>
     </header>
     <main class="container">
-        <!-- AdSense Article Top -->
-        <div class="ad-slot" id="ad-article-top">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
+        <!-- AdSense: article-banner -->
+        <div data-ad-slot="article-banner"></div>
         <article class="article-detail" id="articleDetail">
             <div class="loading" id="loading"></div>
         </article>
-
-        <!-- MGID In-Article -->
-        <div class="ad-slot" id="ad-mgid-article">
-            <!-- MGID widget code here -->
-        </div>
-
-        <!-- AdSense Article Bottom -->
-        <div class="ad-slot" id="ad-article-bottom">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
+        <!-- MGID: article-mgid -->
+        <div data-ad-slot="article-mgid"></div>
+        <!-- AdSense: article-interstitial -->
+        <div data-ad-slot="article-interstitial"></div>
         <section class="mb-4" style="margin-top: 3rem;" id="relatedSection">
             <h2 class="mb-2">Related Articles</h2>
             <div class="article-grid" id="relatedGrid"></div>
         </section>
-
-        <!-- MGID Related Bottom -->
-        <div class="ad-slot" id="ad-mgid-related">
-            <!-- MGID widget code here -->
-        </div>
     </main>
     <footer class="footer">
         <div class="footer-content">
@@ -104,140 +89,200 @@
     </footer>
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
     <script>
-    var categoryNames = {
-        'technology': 'Technology', 'finance': 'Finance',
-        'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle'
-    };
-
-    var fallbackImages = {
-        'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
-        'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
-        'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecf995?w=600&h=400&fit=crop',
-        'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
-    };
-    var defaultFallback = fallbackImages['technology'];
-
-    function formatDate(dateStr) {
-        if (!dateStr) return '';
-        var d = new Date(dateStr + 'T00:00:00');
-        var m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-    }
-
-    function getFallbackImage(cat) { return fallbackImages[cat] || defaultFallback; }
-
-    function renderArticle(article, allArticles) {
-        var container = document.getElementById('articleDetail');
-        var loading = document.getElementById('loading');
-        if (loading) loading.remove();
-
-        var date = article.date ? formatDate(article.date) : '';
-        var catName = categoryNames[article.category] || article.category;
-        var fallbackImg = getFallbackImage(article.category);
-        var heroImg = (article.image || '').replace('w=600&h=400', 'w=1200&h=600');
-        var articleContent = article.content
-            ? article.content
-            : '<p>' + (article.excerpt || '') + '</p><p><em>Full content coming soon.</em></p>';
-
-        container.innerHTML =
-            '<div class="article-hero">' +
+        var categoryNames = {};
+        var maxArticleId = 0;
+        var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
+        var fallbackImages = {
+            'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
+            'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
+            'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
+            'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
+        };
+        function buildCategoryNames(config) {
+            var names = {};
+            if (config && config.categories) {
+                for (var i = 0; i < config.categories.length; i++) {
+                    names[config.categories[i].id] = config.categories[i].name;
+                }
+            } else {
+                names = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
+            }
+            return names;
+        }
+        function getFallbackImage(category) {
+            return fallbackImages[category] || defaultFallback;
+        }
+        function formatDate(dateStr) {
+            if (dateStr) {
+                var d = new Date(dateStr);
+                return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            }
+            return '';
+        }
+        function generateDate(articleId, maxId) {
+            var today = new Date();
+            var date = new Date(today);
+            date.setDate(date.getDate() - Math.floor((maxId - articleId) / 3));
+            return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        }
+        function renderArticle(article, maxId) {
+            var container = document.getElementById('articleDetail');
+            var loading = document.getElementById('loading');
+            if (loading) loading.remove();
+            
+            var date = article.date ? formatDate(article.date) : generateDate(article.id, maxId);
+            var catName = categoryNames[article.category] || article.category;
+            var fallbackImg = getFallbackImage(article.category);
+            var heroImg = article.image.replace('w=600&h=400', 'w=1200&h=600');
+            var articleContent = article.content
+                ? article.content
+                : '<p>' + article.excerpt + '</p><p><em>This article is being updated. Check back soon for the full content.</em></p>';
+            
+            container.innerHTML = 
+                '<div class="article-hero">' +
                 '<img src="' + heroImg + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + fallbackImg.replace('w=600&h=400', 'w=1200&h=600') + '\'">' +
-            '</div>' +
-            '<div class="article-body">' +
+                '</div>' +
+                '<div class="article-body">' +
                 '<header class="article-header">' +
-                    '<span class="card-category">' + catName + '</span>' +
-                    '<h1>' + article.title + '</h1>' +
-                    '<div class="article-meta"><span>' + date + '</span></div>' +
+                '<span class="card-category">' + catName + '</span>' +
+                '<h1>' + article.title + '</h1>' +
+                '<div class="article-meta">' +
+                '<span>' + date + '</span>' +
+                '</div>' +
                 '</header>' +
-                '<div class="article-content">' + articleContent + '</div>' +
-            '</div>';
-
-        document.title = article.title + ' - HelloInsights';
-        renderRelated(article, allArticles);
-    }
-
-    function renderRelated(currentArticle, allArticles) {
-        var related = allArticles.filter(function(a) {
-            return a.category === currentArticle.category && a.id !== currentArticle.id;
-        }).slice(0, 3);
-
-        if (related.length === 0) {
-            document.getElementById('relatedSection').style.display = 'none';
-            return;
+                '<div class="article-content">' +
+                articleContent +
+                '</div>' +
+                '</div>';
+            
+            var siteName = (siteConfig && siteConfig.siteName) ? siteConfig.siteName : 'HelloInsights';
+            document.title = article.title + ' - ' + siteName;
         }
-
-        var grid = document.getElementById('relatedGrid');
-        var html = '';
-        for (var i = 0; i < related.length; i++) {
-            var a = related[i];
-            var fb = getFallbackImage(a.category);
-            var cn = categoryNames[a.category] || a.category;
-            var dt = a.date ? formatDate(a.date) : '';
-            html += '<article class="article-card">' +
-                '<div class="card-image"><img src="' + a.image + '" alt="' + a.title + '" loading="lazy" onerror="this.src=\'' + fb + '\'"></div>' +
-                '<div class="card-content">' +
-                '<span class="card-category">' + cn + '</span>' +
-                '<h3 class="card-title"><a href="article.html?id=' + a.id + '">' + a.title + '</a></h3>' +
-                '<p class="card-excerpt">' + a.excerpt + '</p>' +
-                (dt ? '<div class="card-meta"><span>' + dt + '</span></div>' : '') +
-                '<a href="article.html?id=' + a.id + '" class="read-more-btn">Read More...</a>' +
-                '</div></article>';
+        function renderRelated(currentArticle, allArticles) {
+            var related = allArticles.filter(function(a) { 
+                return a.category === currentArticle.category && a.id !== currentArticle.id; 
+            }).slice(0, 3);
+            
+            if (related.length === 0) {
+                document.getElementById('relatedSection').style.display = 'none';
+                return;
+            }
+            
+            var grid = document.getElementById('relatedGrid');
+            var html = '';
+            
+            for (var i = 0; i < related.length; i++) {
+                var article = related[i];
+                var articleFallback = getFallbackImage(article.category);
+                var catName = categoryNames[article.category] || article.category;
+                var date = article.date ? formatDate(article.date) : generateDate(article.id, maxArticleId);
+                html += '<article class="article-card">' +
+                    '<div class="card-image">' +
+                    '<img src="' + article.image + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + articleFallback + '\'">' +
+                    '</div>' +
+                    '<div class="card-content">' +
+                    '<span class="card-category">' + catName + '</span>' +
+                    '<h3 class="card-title">' +
+                    '<a href="article.html?id=' + article.id + '">' + article.title + '</a>' +
+                    '</h3>' +
+                    '<p class="card-excerpt">' + article.excerpt + '</p>' +
+                    '<div class="card-meta">' +
+                    '<span>📅 ' + date + '</span>' +
+                    '</div>' +
+                    '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
+                    '</div>' +
+                    '</article>';
+            }
+            
+            grid.innerHTML = html;
         }
-        grid.innerHTML = html;
-    }
+        function toggleMenu() {
+            var nav = document.getElementById('navContainer');
+            if (nav) nav.classList.toggle('active');
+        }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth'); }
+        window.addEventListener('scroll', function() {
+            var btn = document.getElementById('backToTop');
+            if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
+        });
+        async function loadArticle() {
+            // Step 1: Load config for category names
+            await new Promise(function(resolve) {
+                loadSiteConfig(function(config) {
+                    if (config) {
+                        categoryNames = buildCategoryNames(config);
+                    } else {
+                        categoryNames = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
+                    }
+                    resolve();
+                });
+            });
 
-    function toggleMenu() {
-        var nav = document.getElementById('navContainer');
-        if (nav) nav.classList.toggle('active');
-    }
+            // Step 2: Get article ID from URL
+            var urlParams = new URLSearchParams(window.location.search);
+            var articleId = parseInt(urlParams.get('id')) || 1;
 
-    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-    window.addEventListener('scroll', function() {
-        var btn = document.getElementById('backToTop');
-        if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
-    });
+            // Step 3: Fetch articles-list.json (single file, contains all data)
+            try {
+                var listData = await fetch('articles-list.json', { cache: 'force-cache' }).then(function(r) { return r.json(); });
+                var allArticlesList = listData.articles || [];
 
-    /* Get article ID from URL */
-    var urlParams = new URLSearchParams(window.location.search);
-    var articleId = parseInt(urlParams.get('id')) || 0;
+                // Find target article by ID
+                var article = allArticlesList.find(function(a) { return a.id === articleId; });
+                if (!article) {
+                    throw new Error('Article not found');
+                }
 
-    /* Load articles.json, find article by ID */
-    fetch('articles.json', { cache: 'force-cache' })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            var articles = data.articles || [];
-            var currentArticle = null;
+                // Calculate maxArticleId from list
+                if (allArticlesList.length > 0) {
+                    maxArticleId = Math.max.apply(null, allArticlesList.map(function(a) { return a.id; }));
+                }
 
-            for (var i = 0; i < articles.length; i++) {
-                if (articles[i].id === articleId) {
-                    currentArticle = articles[i];
-                    break;
+                renderArticle(article, maxArticleId);
+
+                // Step 4: Render related articles from list
+                var related = allArticlesList.filter(function(a) {
+                    return a.category === article.category && a.id !== article.id;
+                }).slice(0, 3);
+
+                if (related.length === 0) {
+                    document.getElementById('relatedSection').style.display = 'none';
+                } else {
+                    var grid = document.getElementById('relatedGrid');
+                    var html = '';
+                    for (var i = 0; i < related.length; i++) {
+                        var ra = related[i];
+                        var articleFallback = getFallbackImage(ra.category);
+                        var catName = categoryNames[ra.category] || ra.category;
+                        var date = ra.date ? formatDate(ra.date) : generateDate(ra.id, maxArticleId);
+                        html += '<article class="article-card">' +
+                            '<div class="card-image">' +
+                            '<img src="' + ra.image + '" alt="' + ra.title + '" loading="lazy" onerror="this.src=\'' + articleFallback + '\'">' +
+                            '</div>' +
+                            '<div class="card-content">' +
+                            '<span class="card-category">' + catName + '</span>' +
+                            '<h3 class="card-title">' +
+                            '<a href="article.html?id=' + ra.id + '">' + ra.title + '</a>' +
+                            '</h3>' +
+                            '<p class="card-excerpt">' + ra.excerpt + '</p>' +
+                            '<div class="card-meta">' +
+                            '<span>📅 ' + date + '</span>' +
+                            '</div>' +
+                            '<a href="article.html?id=' + ra.id + '" class="read-more-btn">Read More...</a>' +
+                            '</div>' +
+                            '</article>';
+                    }
+                    grid.innerHTML = html;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                var container = document.getElementById('articleDetail');
+                if (container) {
+                    container.innerHTML = '<p style="text-align: center; padding: 3rem;">Unable to load article. <a href="index.html">Return to homepage</a></p>';
                 }
             }
-
-            if (currentArticle) {
-                renderArticle(currentArticle, articles);
-            } else if (articles.length > 0) {
-                renderArticle(articles[0], articles);
-            } else {
-                var container = document.getElementById('articleDetail');
-                if (container) container.innerHTML = '<p style="text-align:center;padding:3rem;">Article not found. <a href="index.html">Return to homepage</a></p>';
-            }
-        })
-        .catch(function(err) {
-            console.error('Error loading article:', err);
-            var container = document.getElementById('articleDetail');
-            if (container) container.innerHTML = '<p style="text-align:center;padding:3rem;">Unable to load article. <a href="index.html">Return to homepage</a></p>';
-        });
-
-    if (typeof loadSiteConfig === 'function') {
-        loadSiteConfig(function(config) {
-            if (config && config.categories) {
-                for (var i = 0; i < config.categories.length; i++)
-                    categoryNames[config.categories[i].id] = config.categories[i].name;
-            }
-        });
-    }
+        }
+        document.addEventListener('DOMContentLoaded', loadArticle);
     </script>
 </body>
 </html>

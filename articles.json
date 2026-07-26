@@ -1,1608 +1,202 @@
 {
-  "meta": {
-    "version": "1.0",
-    "lastUpdated": "2026-07-25",
-  },
-  "articles": [
-    {
-      "id": 58910,
-      "category": "ai-tools",
-      "title": "The Rise of AI Productivity Apps: What It Means for You",
-      "excerpt": "A comprehensive look at ai productivity apps and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-07-18"
-    },
-    {
-      "id": 30568,
-      "category": "technology",
-      "title": "Why Cloud Computing Matters More Than Ever in 2025",
-      "excerpt": "Expert analysis on the latest cloud computing trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-07-17"
-    },
-    {
-      "id": 37462,
-      "category": "finance",
-      "title": "Market Watch: Stock Market Analysis Trends to Watch",
-      "excerpt": "Everything you need to know about stock market analysis to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-07-15"
-    },
-    {
-      "id": 20131,
-      "category": "health-lifestyle",
-      "title": "The Complete Fitness and Exercise Handbook",
-      "excerpt": "Discover how fitness and exercise is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-07-15"
-    },
-    {
-      "id": 78284,
-      "category": "finance",
-      "title": "Navigating Personal Finance: A Beginner's Guide",
-      "excerpt": "Everything you need to know about personal finance to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-07-14"
-    },
-    {
-      "id": 88607,
-      "category": "technology",
-      "title": "Cybersecurity: A Complete Guide for Tech Enthusiasts",
-      "excerpt": "Discover how cybersecurity is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-07-13"
-    },
-    {
-      "id": 26867,
-      "category": "finance",
-      "title": "How Global Economic Outlook Is Changing the Financial Landscape",
-      "excerpt": "Expert analysis on the latest global economic outlook trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-07-08"
-    },
-    {
-      "id": 41067,
-      "category": "ai-tools",
-      "title": "The Rise of AI for Business: What It Means for You",
-      "excerpt": "Expert analysis on the latest ai for business trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-07-06"
-    },
-    {
-      "id": 33465,
-      "category": "health-lifestyle",
-      "title": "Science-Backed: How Meditation Practices Improves Wellbeing",
-      "excerpt": "Expert analysis on the latest meditation practices trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-07-01"
-    },
-    {
-      "id": 5434,
-      "category": "ai-tools",
-      "title": "The Rise of AI Video Creation: What It Means for You",
-      "excerpt": "Everything you need to know about ai video creation to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-30"
-    },
-    {
-      "id": 73147,
-      "category": "finance",
-      "title": "How Banking Technology Is Changing the Financial Landscape",
-      "excerpt": "Discover how banking technology is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-27"
-    },
-    {
-      "id": 34739,
-      "category": "ai-tools",
-      "title": "Mastering AI Video Creation: Tips and Best Practices",
-      "excerpt": "Discover how ai video creation is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1560421683-6856ea585f8c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-26"
-    },
-    {
-      "id": 86399,
-      "category": "health-lifestyle",
-      "title": "The Complete Stress Management Handbook",
-      "excerpt": "Everything you need to know about stress management to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1515894274780-0de5a3aade51?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-17"
-    },
-    {
-      "id": 88481,
-      "category": "health-lifestyle",
-      "title": "Expert Tips on Work-Life Balance for Better Living",
-      "excerpt": "Discover how work-life balance is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-14"
-    },
-    {
-      "id": 84611,
-      "category": "health-lifestyle",
-      "title": "Expert Tips on Work-Life Balance for Better Living",
-      "excerpt": "A comprehensive look at work-life balance and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-12"
-    },
-    {
-      "id": 22437,
-      "category": "health-lifestyle",
-      "title": "The Ultimate Guide to Fitness and Exercise for Beginners",
-      "excerpt": "A comprehensive look at fitness and exercise and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-11"
-    },
-    {
-      "id": 51385,
-      "category": "health-lifestyle",
-      "title": "The Ultimate Guide to Meditation Practices for Beginners",
-      "excerpt": "Expert analysis on the latest meditation practices trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-09"
-    },
-    {
-      "id": 52626,
-      "category": "technology",
-      "title": "Why 5G Networks Matters More Than Ever in 2025",
-      "excerpt": "Breaking down 5g networks: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-08"
-    },
-    {
-      "id": 91417,
-      "category": "ai-tools",
-      "title": "How Machine Learning Platforms Can Boost Your Productivity",
-      "excerpt": "Expert analysis on the latest machine learning platforms trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-07"
-    },
-    {
-      "id": 40996,
-      "category": "ai-tools",
-      "title": "Mastering AI for Business: Tips and Best Practices",
-      "excerpt": "Expert analysis on the latest ai for business trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-06"
-    },
-    {
-      "id": 38693,
-      "category": "finance",
-      "title": "How Real Estate Investment Is Changing the Financial Landscape",
-      "excerpt": "Discover how real estate investment is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-03"
-    },
-    {
-      "id": 69442,
-      "category": "ai-tools",
-      "title": "How AI for Business Can Boost Your Productivity",
-      "excerpt": "A comprehensive look at ai for business and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-02"
-    },
-    {
-      "id": 13445,
-      "category": "technology",
-      "title": "Why Cloud Computing Matters More Than Ever in 2025",
-      "excerpt": "A comprehensive look at cloud computing and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-06-01"
-    },
-    {
-      "id": 35994,
-      "category": "technology",
-      "title": "Why IoT and Smart Devices Matters More Than Ever in 2025",
-      "excerpt": "Breaking down iot and smart devices: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-31"
-    },
-    {
-      "id": 73142,
-      "category": "finance",
-      "title": "Smart Money: Understanding Banking Technology in 2025",
-      "excerpt": "Expert analysis on the latest banking technology trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1635348729498-da31a45174d5?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-30"
-    },
-    {
-      "id": 52806,
-      "category": "health-lifestyle",
-      "title": "Mental Health: The Trend Taking 2025 by Storm",
-      "excerpt": "Discover how mental health is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-27"
-    },
-    {
-      "id": 62526,
-      "category": "ai-tools",
-      "title": "AI Writing Assistants Explained: A Complete Beginner's Guide",
-      "excerpt": "Expert analysis on the latest ai writing assistants trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-27"
-    },
-    {
-      "id": 96179,
-      "category": "technology",
-      "title": "Expert Insights: The Rise of IoT and Smart Devices",
-      "excerpt": "A comprehensive look at iot and smart devices and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-26"
-    },
-    {
-      "id": 3762,
-      "category": "finance",
-      "title": "How Banking Technology Is Changing the Financial Landscape",
-      "excerpt": "A comprehensive look at banking technology and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1591696205602-2f950c41789b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-26"
-    },
-    {
-      "id": 41689,
-      "category": "ai-tools",
-      "title": "The Rise of Machine Learning Platforms: What It Means for You",
-      "excerpt": "A comprehensive look at machine learning platforms and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-24"
-    },
-    {
-      "id": 46526,
-      "category": "finance",
-      "title": "Real Estate Investment: What Investors Need to Know",
-      "excerpt": "Everything you need to know about real estate investment to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1642797102903-74f2fa85da6a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-22"
-    },
-    {
-      "id": 71555,
-      "category": "technology",
-      "title": "Breaking: 5G Networks Is Reshaping the Tech Industry",
-      "excerpt": "Breaking down 5g networks: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-22"
-    },
-    {
-      "id": 79790,
-      "category": "technology",
-      "title": "Sustainable Technology: A Complete Guide for Tech Enthusiasts",
-      "excerpt": "Expert analysis on the latest sustainable technology trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-20"
-    },
-    {
-      "id": 27333,
-      "category": "ai-tools",
-      "title": "AI for Business Explained: A Complete Beginner's Guide",
-      "excerpt": "A comprehensive look at ai for business and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1560421683-6856ea585f8c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-18"
-    },
-    {
-      "id": 59494,
-      "category": "ai-tools",
-      "title": "Tool Review: Best Machine Learning Platforms Solutions in 2025",
-      "excerpt": "Discover how machine learning platforms is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-15"
-    },
-    {
-      "id": 12056,
-      "category": "technology",
-      "title": "Why Sustainable Technology Matters More Than Ever in 2025",
-      "excerpt": "Everything you need to know about sustainable technology to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-11"
-    },
-    {
-      "id": 94212,
-      "category": "health-lifestyle",
-      "title": "The Ultimate Guide to Wellness Technology for Beginners",
-      "excerpt": "Discover how wellness technology is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-11"
-    },
-    {
-      "id": 70206,
-      "category": "ai-tools",
-      "title": "Top AI for Business Tools Worth Your Attention",
-      "excerpt": "A comprehensive look at ai for business and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-10"
-    },
-    {
-      "id": 97572,
-      "category": "finance",
-      "title": "Retirement Planning: What Investors Need to Know",
-      "excerpt": "Everything you need to know about retirement planning to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-08"
-    },
-    {
-      "id": 31886,
-      "category": "technology",
-      "title": "Breaking: IoT and Smart Devices Is Reshaping the Tech Industry",
-      "excerpt": "Discover how iot and smart devices is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-07"
-    },
-    {
-      "id": 4800,
-      "category": "finance",
-      "title": "How Banking Technology Is Changing the Financial Landscape",
-      "excerpt": "Discover how banking technology is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-01"
-    },
-    {
-      "id": 63903,
-      "category": "technology",
-      "title": "Expert Insights: The Rise of Cybersecurity",
-      "excerpt": "Breaking down cybersecurity: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-05-01"
-    },
-    {
-      "id": 13496,
-      "category": "ai-tools",
-      "title": "The Rise of AI for Business: What It Means for You",
-      "excerpt": "A comprehensive look at ai for business and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1677698793853-2f721ed17092?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-28"
-    },
-    {
-      "id": 582,
-      "category": "health-lifestyle",
-      "title": "The Complete Fitness and Exercise Handbook",
-      "excerpt": "Everything you need to know about fitness and exercise to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-28"
-    },
-    {
-      "id": 65652,
-      "category": "health-lifestyle",
-      "title": "Science-Backed: How Productivity Improves Wellbeing",
-      "excerpt": "Everything you need to know about productivity to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-27"
-    },
-    {
-      "id": 74724,
-      "category": "technology",
-      "title": "Why Cloud Computing Matters More Than Ever in 2025",
-      "excerpt": "Everything you need to know about cloud computing to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-25"
-    },
-    {
-      "id": 21241,
-      "category": "technology",
-      "title": "Why Robotics and Automation Matters More Than Ever in 2025",
-      "excerpt": "Discover how robotics and automation is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-23"
-    },
-    {
-      "id": 26622,
-      "category": "ai-tools",
-      "title": "Tool Review: Best Voice and Speech AI Solutions in 2025",
-      "excerpt": "Everything you need to know about voice and speech ai to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-22"
-    },
-    {
-      "id": 67170,
-      "category": "technology",
-      "title": "Why Edge Computing Matters More Than Ever in 2025",
-      "excerpt": "Everything you need to know about edge computing to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-21"
-    },
-    {
-      "id": 45867,
-      "category": "health-lifestyle",
-      "title": "Mental Health: The Trend Taking 2025 by Storm",
-      "excerpt": "Breaking down mental health: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-20"
-    },
-    {
-      "id": 71585,
-      "category": "health-lifestyle",
-      "title": "The Complete Meditation Practices Handbook",
-      "excerpt": "Everything you need to know about meditation practices to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-18"
-    },
-    {
-      "id": 59953,
-      "category": "finance",
-      "title": "Smart Money: Understanding Banking Technology in 2025",
-      "excerpt": "Breaking down banking technology: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-17"
-    },
-    {
-      "id": 25321,
-      "category": "health-lifestyle",
-      "title": "Expert Tips on Fitness and Exercise for Better Living",
-      "excerpt": "Discover how fitness and exercise is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-15"
-    },
-    {
-      "id": 20156,
-      "category": "health-lifestyle",
-      "title": "Expert Tips on Healthy Recipes for Better Living",
-      "excerpt": "A comprehensive look at healthy recipes and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-13"
-    },
-    {
-      "id": 37773,
-      "category": "finance",
-      "title": "Smart Money: Understanding Fintech Innovation in 2025",
-      "excerpt": "A comprehensive look at fintech innovation and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-12"
-    },
-    {
-      "id": 19090,
-      "category": "technology",
-      "title": "Edge Computing: A Complete Guide for Tech Enthusiasts",
-      "excerpt": "Expert analysis on the latest edge computing trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-11"
-    },
-    {
-      "id": 61186,
-      "category": "ai-tools",
-      "title": "Mastering Machine Learning Platforms: Tips and Best Practices",
-      "excerpt": "Discover how machine learning platforms is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1488229297570-58520851e68c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-07"
-    },
-    {
-      "id": 46484,
-      "category": "finance",
-      "title": "How Stock Market Analysis Is Changing the Financial Landscape",
-      "excerpt": "A comprehensive look at stock market analysis and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1591696205602-2f950c41789b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-07"
-    },
-    {
-      "id": 96012,
-      "category": "finance",
-      "title": "Wealth Building: The Role of Cryptocurrency and DeFi",
-      "excerpt": "Expert analysis on the latest cryptocurrency and defi trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-05"
-    },
-    {
-      "id": 90970,
-      "category": "technology",
-      "title": "Sustainable Technology: A Complete Guide for Tech Enthusiasts",
-      "excerpt": "Expert analysis on the latest sustainable technology trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-05"
-    },
-    {
-      "id": 77161,
-      "category": "technology",
-      "title": "The Future of Robotics and Automation: What to Expect in 2025",
-      "excerpt": "Expert analysis on the latest robotics and automation trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-03"
-    },
-    {
-      "id": 71006,
-      "category": "health-lifestyle",
-      "title": "Why Nutrition and Diet Should Be Part of Your Routine",
-      "excerpt": "Discover how nutrition and diet is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-04-02"
-    },
-    {
-      "id": 40715,
-      "category": "ai-tools",
-      "title": "The Rise of AI Video Creation: What It Means for You",
-      "excerpt": "Discover how ai video creation is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-27"
-    },
-    {
-      "id": 89261,
-      "category": "health-lifestyle",
-      "title": "Why Wellness Technology Should Be Part of Your Routine",
-      "excerpt": "Expert analysis on the latest wellness technology trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1571019614242-c5c6dee1f0b9?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-26"
-    },
-    {
-      "id": 23112,
-      "category": "finance",
-      "title": "Banking Technology: What Investors Need to Know",
-      "excerpt": "A comprehensive look at banking technology and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-25"
-    },
-    {
-      "id": 18183,
-      "category": "health-lifestyle",
-      "title": "Expert Tips on Stress Management for Better Living",
-      "excerpt": "Discover how stress management is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1571019614242-c5c6dee1f0b9?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-24"
-    },
-    {
-      "id": 6455,
-      "category": "ai-tools",
-      "title": "The Rise of AI Video Creation: What It Means for You",
-      "excerpt": "Discover how ai video creation is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-22"
-    },
-    {
-      "id": 19133,
-      "category": "technology",
-      "title": "The Future of Robotics and Automation: What to Expect in 2025",
-      "excerpt": "Everything you need to know about robotics and automation to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-20"
-    },
-    {
-      "id": 85321,
-      "category": "technology",
-      "title": "Breaking: Quantum Computing Is Reshaping the Tech Industry",
-      "excerpt": "Discover how quantum computing is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-19"
-    },
-    {
-      "id": 83049,
-      "category": "technology",
-      "title": "Why Quantum Computing Matters More Than Ever in 2025",
-      "excerpt": "Discover how quantum computing is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-19"
-    },
-    {
-      "id": 70404,
-      "category": "finance",
-      "title": "Market Watch: Fintech Innovation Trends to Watch",
-      "excerpt": "Breaking down fintech innovation: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-18"
-    },
-    {
-      "id": 67546,
-      "category": "technology",
-      "title": "Why AI and Machine Learning Matters More Than Ever in 2025",
-      "excerpt": "Breaking down ai and machine learning: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-17"
-    },
-    {
-      "id": 13620,
-      "category": "ai-tools",
-      "title": "Top AI Coding Assistants Tools Worth Your Attention",
-      "excerpt": "Breaking down ai coding assistants: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-16"
-    },
-    {
-      "id": 57316,
-      "category": "technology",
-      "title": "How Edge Computing Is Transforming Our Digital World",
-      "excerpt": "Everything you need to know about edge computing to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1562408590-e32931084e23?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-16"
-    },
-    {
-      "id": 47934,
-      "category": "finance",
-      "title": "Wealth Building: The Role of Stock Market Analysis",
-      "excerpt": "Everything you need to know about stock market analysis to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-12"
-    },
-    {
-      "id": 39264,
-      "category": "ai-tools",
-      "title": "Mastering Voice and Speech AI: Tips and Best Practices",
-      "excerpt": "Everything you need to know about voice and speech ai to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1560421683-6856ea585f8c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-11"
-    },
-    {
-      "id": 4326,
-      "category": "health-lifestyle",
-      "title": "Why Work-Life Balance Should Be Part of Your Routine",
-      "excerpt": "Discover how work-life balance is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-08"
-    },
-    {
-      "id": 55670,
-      "category": "technology",
-      "title": "Edge Computing: A Complete Guide for Tech Enthusiasts",
-      "excerpt": "Breaking down edge computing: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1486312336033-3b2be87e275e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-07"
-    },
-    {
-      "id": 28261,
-      "category": "ai-tools",
-      "title": "Top Voice and Speech AI Tools Worth Your Attention",
-      "excerpt": "Breaking down voice and speech ai: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-06"
-    },
-    {
-      "id": 18078,
-      "category": "health-lifestyle",
-      "title": "Why Meditation Practices Should Be Part of Your Routine",
-      "excerpt": "A comprehensive look at meditation practices and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-03-05"
-    },
-    {
-      "id": 35691,
-      "category": "finance",
-      "title": "Global Economic Outlook: What Investors Need to Know",
-      "excerpt": "Expert analysis on the latest global economic outlook trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1639322537228-f710d8468c9a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-28"
-    },
-    {
-      "id": 99344,
-      "category": "ai-tools",
-      "title": "The Rise of AI Writing Assistants: What It Means for You",
-      "excerpt": "Discover how ai writing assistants is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-26"
-    },
-    {
-      "id": 18669,
-      "category": "technology",
-      "title": "Breaking: Cloud Computing Is Reshaping the Tech Industry",
-      "excerpt": "Everything you need to know about cloud computing to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-21"
-    },
-    {
-      "id": 10001,
-      "category": "ai-tools",
-      "title": "Top AI Automation Tools Worth Your Attention",
-      "excerpt": "Expert analysis on the latest ai automation trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1633493784811-2f2e79ac7f30?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-20"
-    },
-    {
-      "id": 68785,
-      "category": "health-lifestyle",
-      "title": "The Ultimate Guide to Healthy Recipes for Beginners",
-      "excerpt": "Everything you need to know about healthy recipes to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-19"
-    },
-    {
-      "id": 45089,
-      "category": "health-lifestyle",
-      "title": "The Complete Productivity Handbook",
-      "excerpt": "Everything you need to know about productivity to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-18"
-    },
-    {
-      "id": 72182,
-      "category": "ai-tools",
-      "title": "Mastering Machine Learning Platforms: Tips and Best Practices",
-      "excerpt": "Everything you need to know about machine learning platforms to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1633493784811-2f2e79ac7f30?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-17"
-    },
-    {
-      "id": 53024,
-      "category": "health-lifestyle",
-      "title": "Why Mental Health Should Be Part of Your Routine",
-      "excerpt": "Expert analysis on the latest mental health trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-17"
-    },
-    {
-      "id": 79447,
-      "category": "ai-tools",
-      "title": "How AI Video Creation Can Boost Your Productivity",
-      "excerpt": "Discover how ai video creation is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-16"
-    },
-    {
-      "id": 62105,
-      "category": "technology",
-      "title": "Why Cloud Computing Matters More Than Ever in 2025",
-      "excerpt": "A comprehensive look at cloud computing and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-15"
-    },
-    {
-      "id": 64823,
-      "category": "technology",
-      "title": "How Sustainable Technology Is Transforming Our Digital World",
-      "excerpt": "A comprehensive look at sustainable technology and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-13"
-    },
-    {
-      "id": 87714,
-      "category": "ai-tools",
-      "title": "The Rise of AI Writing Assistants: What It Means for You",
-      "excerpt": "Discover how ai writing assistants is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-13"
-    },
-    {
-      "id": 11068,
-      "category": "health-lifestyle",
-      "title": "The Complete Meditation Practices Handbook",
-      "excerpt": "Expert analysis on the latest meditation practices trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-13"
-    },
-    {
-      "id": 68433,
-      "category": "health-lifestyle",
-      "title": "Why Stress Management Should Be Part of Your Routine",
-      "excerpt": "Expert analysis on the latest stress management trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-12"
-    },
-    {
-      "id": 98114,
-      "category": "finance",
-      "title": "Fintech Innovation: What Investors Need to Know",
-      "excerpt": "Everything you need to know about fintech innovation to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-10"
-    },
-    {
-      "id": 28288,
-      "category": "ai-tools",
-      "title": "Tool Review: Best AI Writing Assistants Solutions in 2025",
-      "excerpt": "Breaking down ai writing assistants: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1633493784811-2f2e79ac7f30?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-08"
-    },
-    {
-      "id": 39894,
-      "category": "ai-tools",
-      "title": "How Voice and Speech AI Can Boost Your Productivity",
-      "excerpt": "Breaking down voice and speech ai: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-05"
-    },
-    {
-      "id": 3745,
-      "category": "technology",
-      "title": "Breaking: AI and Machine Learning Is Reshaping the Tech Industry",
-      "excerpt": "Everything you need to know about ai and machine learning to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-04"
-    },
-    {
-      "id": 46263,
-      "category": "technology",
-      "title": "Edge Computing: A Complete Guide for Tech Enthusiasts",
-      "excerpt": "Breaking down edge computing: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-02-01"
-    },
-    {
-      "id": 19782,
-      "category": "finance",
-      "title": "Smart Money: Understanding Cryptocurrency and DeFi in 2025",
-      "excerpt": "A comprehensive look at cryptocurrency and defi and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-30"
-    },
-    {
-      "id": 57792,
-      "category": "ai-tools",
-      "title": "How AI Automation Can Boost Your Productivity",
-      "excerpt": "Everything you need to know about ai automation to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-29"
-    },
-    {
-      "id": 37121,
-      "category": "ai-tools",
-      "title": "The Rise of AI Video Creation: What It Means for You",
-      "excerpt": "Everything you need to know about ai video creation to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-29"
-    },
-    {
-      "id": 401,
-      "category": "ai-tools",
-      "title": "AI Automation Explained: A Complete Beginner's Guide",
-      "excerpt": "Everything you need to know about ai automation to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-28"
-    },
-    {
-      "id": 42290,
-      "category": "finance",
-      "title": "Cryptocurrency and DeFi: What Investors Need to Know",
-      "excerpt": "Breaking down cryptocurrency and defi: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1591696205602-2f950c41789b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-27"
-    },
-    {
-      "id": 29453,
-      "category": "technology",
-      "title": "Breaking: Cloud Computing Is Reshaping the Tech Industry",
-      "excerpt": "Everything you need to know about cloud computing to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-26"
-    },
-    {
-      "id": 75693,
-      "category": "health-lifestyle",
-      "title": "The Complete Healthy Recipes Handbook",
-      "excerpt": "Expert analysis on the latest healthy recipes trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-23"
-    },
-    {
-      "id": 95826,
-      "category": "health-lifestyle",
-      "title": "Why Mental Health Should Be Part of Your Routine",
-      "excerpt": "Everything you need to know about mental health to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-22"
-    },
-    {
-      "id": 70400,
-      "category": "ai-tools",
-      "title": "How AI Productivity Apps Can Boost Your Productivity",
-      "excerpt": "Breaking down ai productivity apps: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-21"
-    },
-    {
-      "id": 3466,
-      "category": "health-lifestyle",
-      "title": "Expert Tips on Mental Health for Better Living",
-      "excerpt": "A comprehensive look at mental health and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-17"
-    },
-    {
-      "id": 7838,
-      "category": "health-lifestyle",
-      "title": "The Ultimate Guide to Nutrition and Diet for Beginners",
-      "excerpt": "Breaking down nutrition and diet: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-17"
-    },
-    {
-      "id": 39899,
-      "category": "health-lifestyle",
-      "title": "The Complete Mental Health Handbook",
-      "excerpt": "Expert analysis on the latest mental health trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-17"
-    },
-    {
-      "id": 44960,
-      "category": "technology",
-      "title": "Why AI and Machine Learning Matters More Than Ever in 2025",
-      "excerpt": "A comprehensive look at ai and machine learning and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-16"
-    },
-    {
-      "id": 10473,
-      "category": "ai-tools",
-      "title": "The Rise of AI for Business: What It Means for You",
-      "excerpt": "Expert analysis on the latest ai for business trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-15"
-    },
-    {
-      "id": 41676,
-      "category": "health-lifestyle",
-      "title": "The Ultimate Guide to Wellness Technology for Beginners",
-      "excerpt": "Breaking down wellness technology: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1571019614242-c5c6dee1f0b9?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-13"
-    },
-    {
-      "id": 50117,
-      "category": "ai-tools",
-      "title": "Mastering AI for Business: Tips and Best Practices",
-      "excerpt": "Everything you need to know about ai for business to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-11"
-    },
-    {
-      "id": 2214,
-      "category": "health-lifestyle",
-      "title": "The Complete Fitness and Exercise Handbook",
-      "excerpt": "Breaking down fitness and exercise: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1571019614242-c5c6dee1f0b9?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-10"
-    },
-    {
-      "id": 99197,
-      "category": "technology",
-      "title": "Expert Insights: The Rise of Web3 and Blockchain",
-      "excerpt": "Everything you need to know about web3 and blockchain to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-08"
-    },
-    {
-      "id": 88956,
-      "category": "technology",
-      "title": "The Future of 5G Networks: What to Expect in 2025",
-      "excerpt": "Everything you need to know about 5g networks to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-07"
-    },
-    {
-      "id": 46548,
-      "category": "technology",
-      "title": "Expert Insights: The Rise of Web3 and Blockchain",
-      "excerpt": "Discover how web3 and blockchain is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-06"
-    },
-    {
-      "id": 70626,
-      "category": "health-lifestyle",
-      "title": "Science-Backed: How Meditation Practices Improves Wellbeing",
-      "excerpt": "Expert analysis on the latest meditation practices trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-06"
-    },
-    {
-      "id": 27729,
-      "category": "health-lifestyle",
-      "title": "The Ultimate Guide to Work-Life Balance for Beginners",
-      "excerpt": "A comprehensive look at work-life balance and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1515894274780-0de5a3aade51?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-05"
-    },
-    {
-      "id": 13192,
-      "category": "finance",
-      "title": "Market Watch: Stock Market Analysis Trends to Watch",
-      "excerpt": "Breaking down stock market analysis: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-02"
-    },
-    {
-      "id": 93452,
-      "category": "finance",
-      "title": "Market Watch: Real Estate Investment Trends to Watch",
-      "excerpt": "Expert analysis on the latest real estate investment trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-02"
-    },
-    {
-      "id": 6830,
-      "category": "ai-tools",
-      "title": "Top AI Coding Assistants Tools Worth Your Attention",
-      "excerpt": "Discover how ai coding assistants is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-01"
-    },
-    {
-      "id": 32021,
-      "category": "technology",
-      "title": "Expert Insights: The Rise of Cybersecurity",
-      "excerpt": "Discover how cybersecurity is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600&h=400&fit=crop&fm=webp",
-      "date": "2026-01-01"
-    },
-    {
-      "id": 28842,
-      "category": "finance",
-      "title": "Wealth Building: The Role of Stock Market Analysis",
-      "excerpt": "Everything you need to know about stock market analysis to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1639322537228-f710d8468c9a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-31"
-    },
-    {
-      "id": 6229,
-      "category": "ai-tools",
-      "title": "AI Writing Assistants Explained: A Complete Beginner's Guide",
-      "excerpt": "Everything you need to know about ai writing assistants to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1488229297570-58520851e68c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-30"
-    },
-    {
-      "id": 35023,
-      "category": "finance",
-      "title": "Smart Money: Understanding Personal Finance in 2025",
-      "excerpt": "Everything you need to know about personal finance to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-29"
-    },
-    {
-      "id": 52047,
-      "category": "technology",
-      "title": "Cybersecurity: A Complete Guide for Tech Enthusiasts",
-      "excerpt": "A comprehensive look at cybersecurity and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-29"
-    },
-    {
-      "id": 4835,
-      "category": "ai-tools",
-      "title": "The Rise of AI Automation: What It Means for You",
-      "excerpt": "Breaking down ai automation: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-26"
-    },
-    {
-      "id": 43529,
-      "category": "finance",
-      "title": "How Retirement Planning Is Changing the Financial Landscape",
-      "excerpt": "Everything you need to know about retirement planning to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-25"
-    },
-    {
-      "id": 70314,
-      "category": "health-lifestyle",
-      "title": "The Complete Mental Health Handbook",
-      "excerpt": "Discover how mental health is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-25"
-    },
-    {
-      "id": 29017,
-      "category": "finance",
-      "title": "Market Watch: Global Economic Outlook Trends to Watch",
-      "excerpt": "Everything you need to know about global economic outlook to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1635348729498-da31a45174d5?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-23"
-    },
-    {
-      "id": 80423,
-      "category": "finance",
-      "title": "Navigating ESG Investing: A Beginner's Guide",
-      "excerpt": "A comprehensive look at esg investing and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-15"
-    },
-    {
-      "id": 36795,
-      "category": "ai-tools",
-      "title": "Mastering AI Productivity Apps: Tips and Best Practices",
-      "excerpt": "Breaking down ai productivity apps: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1488229297570-58520851e68c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-13"
-    },
-    {
-      "id": 93662,
-      "category": "finance",
-      "title": "Market Watch: Personal Finance Trends to Watch",
-      "excerpt": "Everything you need to know about personal finance to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-11"
-    },
-    {
-      "id": 89586,
-      "category": "finance",
-      "title": "Wealth Building: The Role of Stock Market Analysis",
-      "excerpt": "Expert analysis on the latest stock market analysis trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-09"
-    },
-    {
-      "id": 53706,
-      "category": "finance",
-      "title": "Personal Finance: What Investors Need to Know",
-      "excerpt": "Discover how personal finance is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-06"
-    },
-    {
-      "id": 89459,
-      "category": "ai-tools",
-      "title": "Mastering AI Image Generation: Tips and Best Practices",
-      "excerpt": "Everything you need to know about ai image generation to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-05"
-    },
-    {
-      "id": 235,
-      "category": "ai-tools",
-      "title": "Top AI for Business Tools Worth Your Attention",
-      "excerpt": "Expert analysis on the latest ai for business trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1655393000402-6b8b8a16f7d0?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-04"
-    },
-    {
-      "id": 15820,
-      "category": "technology",
-      "title": "Why 5G Networks Matters More Than Ever in 2025",
-      "excerpt": "Discover how 5g networks is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-04"
-    },
-    {
-      "id": 50817,
-      "category": "finance",
-      "title": "Wealth Building: The Role of Wealth Management",
-      "excerpt": "Breaking down wealth management: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-02"
-    },
-    {
-      "id": 75357,
-      "category": "technology",
-      "title": "How Cloud Computing Is Transforming Our Digital World",
-      "excerpt": "Discover how cloud computing is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-12-02"
-    },
-    {
-      "id": 38283,
-      "category": "ai-tools",
-      "title": "Top AI Automation Tools Worth Your Attention",
-      "excerpt": "Discover how ai automation is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-29"
-    },
-    {
-      "id": 44615,
-      "category": "ai-tools",
-      "title": "The Rise of Voice and Speech AI: What It Means for You",
-      "excerpt": "A comprehensive look at voice and speech ai and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-28"
-    },
-    {
-      "id": 22522,
-      "category": "ai-tools",
-      "title": "ChatGPT and Language Models Explained: A Complete Beginner's Guide",
-      "excerpt": "Discover how chatgpt and language models is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1633493784811-2f2e79ac7f30?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-26"
-    },
-    {
-      "id": 62594,
-      "category": "health-lifestyle",
-      "title": "Why Meditation Practices Should Be Part of Your Routine",
-      "excerpt": "Breaking down meditation practices: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-26"
-    },
-    {
-      "id": 83699,
-      "category": "ai-tools",
-      "title": "Top AI Image Generation Tools Worth Your Attention",
-      "excerpt": "A comprehensive look at ai image generation and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1655393000402-6b8b8a16f7d0?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-21"
-    },
-    {
-      "id": 31688,
-      "category": "finance",
-      "title": "How Fintech Innovation Is Changing the Financial Landscape",
-      "excerpt": "Breaking down fintech innovation: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-21"
-    },
-    {
-      "id": 53200,
-      "category": "health-lifestyle",
-      "title": "Science-Backed: How Wellness Technology Improves Wellbeing",
-      "excerpt": "A comprehensive look at wellness technology and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1515894274780-0de5a3aade51?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-20"
-    },
-    {
-      "id": 30417,
-      "category": "technology",
-      "title": "Breaking: Sustainable Technology Is Reshaping the Tech Industry",
-      "excerpt": "Expert analysis on the latest sustainable technology trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-20"
-    },
-    {
-      "id": 61654,
-      "category": "finance",
-      "title": "Navigating Cryptocurrency and DeFi: A Beginner's Guide",
-      "excerpt": "Everything you need to know about cryptocurrency and defi to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-20"
-    },
-    {
-      "id": 1362,
-      "category": "finance",
-      "title": "Global Economic Outlook: What Investors Need to Know",
-      "excerpt": "Everything you need to know about global economic outlook to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-18"
-    },
-    {
-      "id": 8304,
-      "category": "ai-tools",
-      "title": "AI Productivity Apps Explained: A Complete Beginner's Guide",
-      "excerpt": "A comprehensive look at ai productivity apps and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1488229297570-58520851e68c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-16"
-    },
-    {
-      "id": 45898,
-      "category": "ai-tools",
-      "title": "Mastering Voice and Speech AI: Tips and Best Practices",
-      "excerpt": "Discover how voice and speech ai is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1488229297570-58520851e68c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-16"
-    },
-    {
-      "id": 85912,
-      "category": "health-lifestyle",
-      "title": "The Complete Nutrition and Diet Handbook",
-      "excerpt": "Everything you need to know about nutrition and diet to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-15"
-    },
-    {
-      "id": 15053,
-      "category": "health-lifestyle",
-      "title": "Expert Tips on Meditation Practices for Better Living",
-      "excerpt": "Expert analysis on the latest meditation practices trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-15"
-    },
-    {
-      "id": 73756,
-      "category": "ai-tools",
-      "title": "How AI Writing Assistants Can Boost Your Productivity",
-      "excerpt": "Expert analysis on the latest ai writing assistants trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-14"
-    },
-    {
-      "id": 82150,
-      "category": "finance",
-      "title": "Market Watch: ESG Investing Trends to Watch",
-      "excerpt": "Everything you need to know about esg investing to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-12"
-    },
-    {
-      "id": 6013,
-      "category": "finance",
-      "title": "Wealth Building: The Role of Retirement Planning",
-      "excerpt": "Everything you need to know about retirement planning to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-12"
-    },
-    {
-      "id": 56872,
-      "category": "health-lifestyle",
-      "title": "Stress Management: The Trend Taking 2025 by Storm",
-      "excerpt": "Discover how stress management is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-11"
-    },
-    {
-      "id": 23155,
-      "category": "technology",
-      "title": "How Cybersecurity Is Transforming Our Digital World",
-      "excerpt": "Expert analysis on the latest cybersecurity trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-10"
-    },
-    {
-      "id": 65930,
-      "category": "technology",
-      "title": "Why 5G Networks Matters More Than Ever in 2025",
-      "excerpt": "Expert analysis on the latest 5g networks trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-09"
-    },
-    {
-      "id": 23949,
-      "category": "ai-tools",
-      "title": "How AI Video Creation Can Boost Your Productivity",
-      "excerpt": "A comprehensive look at ai video creation and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-04"
-    },
-    {
-      "id": 10528,
-      "category": "health-lifestyle",
-      "title": "Nutrition and Diet: The Trend Taking 2025 by Storm",
-      "excerpt": "Discover how nutrition and diet is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-04"
-    },
-    {
-      "id": 23652,
-      "category": "finance",
-      "title": "Smart Money: Understanding Wealth Management in 2025",
-      "excerpt": "Breaking down wealth management: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1591696205602-2f950c41789b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-11-02"
-    },
-    {
-      "id": 79501,
-      "category": "finance",
-      "title": "Navigating Stock Market Analysis: A Beginner's Guide",
-      "excerpt": "Expert analysis on the latest stock market analysis trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-31"
-    },
-    {
-      "id": 4425,
-      "category": "technology",
-      "title": "Breaking: Quantum Computing Is Reshaping the Tech Industry",
-      "excerpt": "Everything you need to know about quantum computing to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-31"
-    },
-    {
-      "id": 20984,
-      "category": "finance",
-      "title": "Real Estate Investment: What Investors Need to Know",
-      "excerpt": "Discover how real estate investment is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-29"
-    },
-    {
-      "id": 67870,
-      "category": "ai-tools",
-      "title": "Mastering AI Productivity Apps: Tips and Best Practices",
-      "excerpt": "Discover how ai productivity apps is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-29"
-    },
-    {
-      "id": 66993,
-      "category": "finance",
-      "title": "Retirement Planning: What Investors Need to Know",
-      "excerpt": "A comprehensive look at retirement planning and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-26"
-    },
-    {
-      "id": 30532,
-      "category": "technology",
-      "title": "Why Cloud Computing Matters More Than Ever in 2025",
-      "excerpt": "Expert analysis on the latest cloud computing trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-25"
-    },
-    {
-      "id": 16747,
-      "category": "finance",
-      "title": "Smart Money: Understanding Wealth Management in 2025",
-      "excerpt": "Expert analysis on the latest wealth management trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1635348729498-da31a45174d5?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-24"
-    },
-    {
-      "id": 3287,
-      "category": "ai-tools",
-      "title": "AI for Business Explained: A Complete Beginner's Guide",
-      "excerpt": "A comprehensive look at ai for business and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1655393000402-6b8b8a16f7d0?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-24"
-    },
-    {
-      "id": 60837,
-      "category": "finance",
-      "title": "Market Watch: Stock Market Analysis Trends to Watch",
-      "excerpt": "Everything you need to know about stock market analysis to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-21"
-    },
-    {
-      "id": 40520,
-      "category": "finance",
-      "title": "Smart Money: Understanding Retirement Planning in 2025",
-      "excerpt": "Discover how retirement planning is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-20"
-    },
-    {
-      "id": 46459,
-      "category": "finance",
-      "title": "Market Watch: Cryptocurrency and DeFi Trends to Watch",
-      "excerpt": "Breaking down cryptocurrency and defi: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-20"
-    },
-    {
-      "id": 5437,
-      "category": "ai-tools",
-      "title": "Voice and Speech AI Explained: A Complete Beginner's Guide",
-      "excerpt": "Breaking down voice and speech ai: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1488229297570-58520851e68c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-19"
-    },
-    {
-      "id": 64152,
-      "category": "finance",
-      "title": "Wealth Building: The Role of ESG Investing",
-      "excerpt": "Everything you need to know about esg investing to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-17"
-    },
-    {
-      "id": 10272,
-      "category": "finance",
-      "title": "Cryptocurrency and DeFi: What Investors Need to Know",
-      "excerpt": "Breaking down cryptocurrency and defi: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-15"
-    },
-    {
-      "id": 54723,
-      "category": "health-lifestyle",
-      "title": "The Complete Meditation Practices Handbook",
-      "excerpt": "Discover how meditation practices is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-14"
-    },
-    {
-      "id": 21968,
-      "category": "technology",
-      "title": "Why IoT and Smart Devices Matters More Than Ever in 2025",
-      "excerpt": "Breaking down iot and smart devices: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-14"
-    },
-    {
-      "id": 79605,
-      "category": "health-lifestyle",
-      "title": "Expert Tips on Sleep Optimization for Better Living",
-      "excerpt": "Expert analysis on the latest sleep optimization trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-12"
-    },
-    {
-      "id": 21157,
-      "category": "ai-tools",
-      "title": "Mastering AI Video Creation: Tips and Best Practices",
-      "excerpt": "Everything you need to know about ai video creation to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-11"
-    },
-    {
-      "id": 10229,
-      "category": "health-lifestyle",
-      "title": "The Complete Wellness Technology Handbook",
-      "excerpt": "Discover how wellness technology is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-09"
-    },
-    {
-      "id": 68584,
-      "category": "finance",
-      "title": "Market Watch: Personal Finance Trends to Watch",
-      "excerpt": "A comprehensive look at personal finance and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-03"
-    },
-    {
-      "id": 44709,
-      "category": "finance",
-      "title": "How Fintech Innovation Is Changing the Financial Landscape",
-      "excerpt": "Discover how fintech innovation is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-02"
-    },
-    {
-      "id": 81951,
-      "category": "technology",
-      "title": "Expert Insights: The Rise of Cloud Computing",
-      "excerpt": "Everything you need to know about cloud computing to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-10-01"
-    },
-    {
-      "id": 15513,
-      "category": "finance",
-      "title": "Smart Money: Understanding Global Economic Outlook in 2025",
-      "excerpt": "Everything you need to know about global economic outlook to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1639322537228-f710d8468c9a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-30"
-    },
-    {
-      "id": 4254,
-      "category": "ai-tools",
-      "title": "Top ChatGPT and Language Models Tools Worth Your Attention",
-      "excerpt": "A comprehensive look at chatgpt and language models and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-26"
-    },
-    {
-      "id": 25057,
-      "category": "technology",
-      "title": "Quantum Computing: A Complete Guide for Tech Enthusiasts",
-      "excerpt": "Expert analysis on the latest quantum computing trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-22"
-    },
-    {
-      "id": 5930,
-      "category": "ai-tools",
-      "title": "Tool Review: Best AI for Business Solutions in 2025",
-      "excerpt": "A comprehensive look at ai for business and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-21"
-    },
-    {
-      "id": 43868,
-      "category": "health-lifestyle",
-      "title": "The Complete Mental Health Handbook",
-      "excerpt": "Expert analysis on the latest mental health trends and their impact on everyday life.",
-      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-20"
-    },
-    {
-      "id": 34107,
-      "category": "health-lifestyle",
-      "title": "Why Healthy Recipes Should Be Part of Your Routine",
-      "excerpt": "Discover how healthy recipes is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1571019614242-c5c6dee1f0b9?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-20"
-    },
-    {
-      "id": 84361,
-      "category": "ai-tools",
-      "title": "Tool Review: Best Voice and Speech AI Solutions in 2025",
-      "excerpt": "Discover how voice and speech ai is revolutionizing the industry and what it means for you.",
-      "image": "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-16"
-    },
-    {
-      "id": 56326,
-      "category": "finance",
-      "title": "Navigating Stock Market Analysis: A Beginner's Guide",
-      "excerpt": "Everything you need to know about stock market analysis to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-15"
-    },
-    {
-      "id": 94876,
-      "category": "technology",
-      "title": "Why Quantum Computing Matters More Than Ever in 2025",
-      "excerpt": "A comprehensive look at quantum computing and why it matters in today's world.",
-      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-09"
-    },
-    {
-      "id": 59873,
-      "category": "health-lifestyle",
-      "title": "Why Fitness and Exercise Should Be Part of Your Routine",
-      "excerpt": "Everything you need to know about fitness and exercise to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1515894274780-0de5a3aade51?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-05"
-    },
-    {
-      "id": 61117,
-      "category": "finance",
-      "title": "Smart Money: Understanding Real Estate Investment in 2025",
-      "excerpt": "Everything you need to know about real estate investment to stay ahead of the curve.",
-      "image": "https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-03"
-    },
-    {
-      "id": 10866,
-      "category": "finance",
-      "title": "Retirement Planning: What Investors Need to Know",
-      "excerpt": "Breaking down retirement planning: insights, trends, and practical applications.",
-      "image": "https://images.unsplash.com/photo-1639322537228-f710d8468c9a?w=600&h=400&fit=crop&fm=webp",
-      "date": "2025-09-01"
-    }
-  ]
+  "58910": "ai-tools",
+  "30568": "technology",
+  "37462": "finance",
+  "20131": "health-lifestyle",
+  "78284": "finance",
+  "88607": "technology",
+  "26867": "finance",
+  "41067": "ai-tools",
+  "33465": "health-lifestyle",
+  "5434": "ai-tools",
+  "73147": "finance",
+  "34739": "ai-tools",
+  "86399": "health-lifestyle",
+  "88481": "health-lifestyle",
+  "84611": "health-lifestyle",
+  "22437": "health-lifestyle",
+  "51385": "health-lifestyle",
+  "52626": "technology",
+  "91417": "ai-tools",
+  "40996": "ai-tools",
+  "38693": "finance",
+  "69442": "ai-tools",
+  "13445": "technology",
+  "35994": "technology",
+  "73142": "finance",
+  "62526": "ai-tools",
+  "52806": "health-lifestyle",
+  "3762": "finance",
+  "96179": "technology",
+  "41689": "ai-tools",
+  "46526": "finance",
+  "71555": "technology",
+  "79790": "technology",
+  "27333": "ai-tools",
+  "59494": "ai-tools",
+  "12056": "technology",
+  "94212": "health-lifestyle",
+  "70206": "ai-tools",
+  "97572": "finance",
+  "31886": "technology",
+  "4800": "finance",
+  "63903": "technology",
+  "13496": "ai-tools",
+  "582": "health-lifestyle",
+  "65652": "health-lifestyle",
+  "74724": "technology",
+  "21241": "technology",
+  "26622": "ai-tools",
+  "67170": "technology",
+  "45867": "health-lifestyle",
+  "71585": "health-lifestyle",
+  "59953": "finance",
+  "25321": "health-lifestyle",
+  "20156": "health-lifestyle",
+  "37773": "finance",
+  "19090": "technology",
+  "46484": "finance",
+  "61186": "ai-tools",
+  "96012": "finance",
+  "90970": "technology",
+  "77161": "technology",
+  "71006": "health-lifestyle",
+  "40715": "ai-tools",
+  "89261": "health-lifestyle",
+  "23112": "finance",
+  "18183": "health-lifestyle",
+  "6455": "ai-tools",
+  "19133": "technology",
+  "85321": "technology",
+  "83049": "technology",
+  "70404": "finance",
+  "67546": "technology",
+  "57316": "technology",
+  "13620": "ai-tools",
+  "47934": "finance",
+  "39264": "ai-tools",
+  "4326": "health-lifestyle",
+  "55670": "technology",
+  "28261": "ai-tools",
+  "18078": "health-lifestyle",
+  "35691": "finance",
+  "99344": "ai-tools",
+  "18669": "technology",
+  "10001": "ai-tools",
+  "68785": "health-lifestyle",
+  "45089": "health-lifestyle",
+  "72182": "ai-tools",
+  "53024": "health-lifestyle",
+  "79447": "ai-tools",
+  "62105": "technology",
+  "64823": "technology",
+  "87714": "ai-tools",
+  "11068": "health-lifestyle",
+  "68433": "health-lifestyle",
+  "98114": "finance",
+  "28288": "ai-tools",
+  "39894": "ai-tools",
+  "3745": "technology",
+  "46263": "technology",
+  "19782": "finance",
+  "57792": "ai-tools",
+  "37121": "ai-tools",
+  "401": "ai-tools",
+  "42290": "finance",
+  "29453": "technology",
+  "75693": "health-lifestyle",
+  "95826": "health-lifestyle",
+  "70400": "ai-tools",
+  "3466": "health-lifestyle",
+  "7838": "health-lifestyle",
+  "39899": "health-lifestyle",
+  "44960": "technology",
+  "10473": "ai-tools",
+  "41676": "health-lifestyle",
+  "50117": "ai-tools",
+  "2214": "health-lifestyle",
+  "99197": "technology",
+  "88956": "technology",
+  "46548": "technology",
+  "70626": "health-lifestyle",
+  "27729": "health-lifestyle",
+  "13192": "finance",
+  "93452": "finance",
+  "32021": "technology",
+  "6830": "ai-tools",
+  "28842": "finance",
+  "6229": "ai-tools",
+  "35023": "finance",
+  "52047": "technology",
+  "4835": "ai-tools",
+  "43529": "finance",
+  "70314": "health-lifestyle",
+  "29017": "finance",
+  "80423": "finance",
+  "36795": "ai-tools",
+  "93662": "finance",
+  "89586": "finance",
+  "53706": "finance",
+  "89459": "ai-tools",
+  "15820": "technology",
+  "235": "ai-tools",
+  "50817": "finance",
+  "75357": "technology",
+  "38283": "ai-tools",
+  "44615": "ai-tools",
+  "22522": "ai-tools",
+  "62594": "health-lifestyle",
+  "31688": "finance",
+  "83699": "ai-tools",
+  "61654": "finance",
+  "30417": "technology",
+  "53200": "health-lifestyle",
+  "1362": "finance",
+  "8304": "ai-tools",
+  "45898": "ai-tools",
+  "85912": "health-lifestyle",
+  "15053": "health-lifestyle",
+  "73756": "ai-tools",
+  "82150": "finance",
+  "6013": "finance",
+  "56872": "health-lifestyle",
+  "23155": "technology",
+  "65930": "technology",
+  "23949": "ai-tools",
+  "10528": "health-lifestyle",
+  "23652": "finance",
+  "79501": "finance",
+  "4425": "technology",
+  "20984": "finance",
+  "67870": "ai-tools",
+  "66993": "finance",
+  "30532": "technology",
+  "16747": "finance",
+  "3287": "ai-tools",
+  "60837": "finance",
+  "40520": "finance",
+  "46459": "finance",
+  "5437": "ai-tools",
+  "64152": "finance",
+  "10272": "finance",
+  "21968": "technology",
+  "54723": "health-lifestyle",
+  "79605": "health-lifestyle",
+  "21157": "ai-tools",
+  "10229": "health-lifestyle",
+  "68584": "finance",
+  "44709": "finance",
+  "81951": "technology",
+  "15513": "finance",
+  "4254": "ai-tools",
+  "25057": "technology",
+  "5930": "ai-tools",
+  "43868": "health-lifestyle",
+  "34107": "health-lifestyle",
+  "84361": "ai-tools",
+  "56326": "finance",
+  "94876": "technology",
+  "59873": "health-lifestyle",
+  "61117": "finance",
+  "10866": "finance"
 }

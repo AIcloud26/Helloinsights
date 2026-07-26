@@ -11,16 +11,14 @@
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link rel="stylesheet" href="style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-    <script src="ads.js" defer></script>
+    <script src="ads-config.js" defer></script>
     <script src="config-loader.js"></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <img loading="lazy" decoding="async" src="logo.svg" alt="HelloInsights" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
-                <span class="logo-text" style="display:none;">HelloInsights</span>
+                <img src="logo.svg" alt="HelloInsights" class="logo-img">
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -43,9 +41,7 @@
         </div>
     </header>
     <main class="container">
-        <div data-ad-slot="article-banner">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
+        <div data-ad-slot="article-banner"></div>
         <article class="article-detail" id="articleDetail">
             <div class="loading" id="loading"></div>
         </article>

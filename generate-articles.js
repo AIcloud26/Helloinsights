@@ -319,10 +319,18 @@ async function main() {
   var existingArticles = [];
   var existingIds = [];
   try {
-    var data = fs.readFileSync('articles-list.json', 'utf8');
-    var json = JSON.parse(data);
-    existingArticles = json.articles || [];
-    existingIds = existingArticles.map(function(a) { return a.id; });
+    CATEGORIES.forEach(function(cat) {
+      var catFile = 'articles-' + cat.id + '.json';
+      if (fs.existsSync(catFile)) {
+        var data = fs.readFileSync(catFile, 'utf8');
+        var json = JSON.parse(data);
+        var arts = json.articles || [];
+        arts.forEach(function(a) {
+          existingArticles.push(a);
+          existingIds.push(a.id);
+        });
+      }
+    });
     console.log('📁 Found ' + existingArticles.length + ' existing articles\n');
   } catch(e) {
     console.log('📝 No existing articles, starting fresh\n');
@@ -389,56 +397,10 @@ async function main() {
     console.log('✅ ' + filename + ' written (' + catArticles.length + ' articles)');
   });
 
-  // ============================================
-  // 3. 写入 articles-list.json（供 category.html 等页面使用）
-  // ============================================
-  var listOutput = {
-    articles: finalArticles.map(function(a) {
-      return { id: a.id, category: a.category, title: a.title, excerpt: a.excerpt, image: a.image, date: a.date };
-    }),
-    metadata: metadata
-  };
-  fs.writeFileSync('articles-list.json', JSON.stringify(listOutput, null, 2));
-  console.log('✅ articles-list.json written');
-
-  // ============================================
-  // 4. 写入每篇文章的独立 JSON 文件（向后兼容）
-  // ============================================
-  if (!fs.existsSync('articles')) fs.mkdirSync('articles', { recursive: true });
-  var newArticleIds = {};
-  newArticles.forEach(function(a) { newArticleIds[a.id] = true; });
-  for (var i = 0; i < finalArticles.length; i++) {
-    var a = finalArticles[i];
-    var articleFile = 'articles/' + a.id + '.json';
-    if (newArticleIds[a.id] || !fs.existsSync(articleFile)) {
-      var articleData = {
-        id: a.id,
-        category: a.category,
-        title: a.title,
-        excerpt: a.excerpt,
-        image: a.image,
-        date: a.date,
-        content: a.content
-      };
-      fs.writeFileSync(articleFile, JSON.stringify(articleData, null, 2));
-    }
-  }
-  // 删除超出 maxArticles 限制的旧文章文件
-  var existingFiles = fs.readdirSync('articles').filter(function(f) { return f.endsWith('.json'); });
-  var validIds = {};
-  finalArticles.forEach(function(a) { validIds[String(a.id)] = true; });
-  for (var i = 0; i < existingFiles.length; i++) {
-    var fileId = existingFiles[i].replace('.json', '');
-    if (!validIds[fileId]) {
-      fs.unlinkSync('articles/' + existingFiles[i]);
-      console.log('   🗑️ Removed old article: ' + fileId);
-    }
-  }
-
   console.log('\n✅ Done!');
   console.log('   New: ' + newArticles.length + ' articles');
   console.log('   Total: ' + finalArticles.length + ' articles');
-  console.log('   Output: articles-index.json + 4 category files + articles-list.json + articles/*.json\n');
+  console.log('   Output: articles-index.json + 4 category files\n');
 }
 main().catch(function(error) {
   console.error('❌ Error:', error.message);

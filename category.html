@@ -8,18 +8,17 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6b35'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold' font-size='22'%3EH%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <!-- AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <!-- Ads -->
+    <script src="ads-config.js" defer></script>
     <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="style.css"></noscript>
     <script src="config-loader.js" async></script>
-    <script src="ads.js" defer></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <svg class="logo-svg" viewBox="0 0 48 48" width="48" height="48" aria-label="HelloInsights"><rect width="48" height="48" rx="10" fill="#ff6b35"/><text x="24" y="33" text-anchor="middle" fill="white" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-weight="bold" font-size="30">H</text></svg>
+                <img src="logo.svg" alt="HelloInsights" class="logo-img">
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -43,9 +42,7 @@
     </header>
     <main class="container">
         <!-- AdSense Top -->
-        <div class="ad-slot" id="ad-top">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
+        <div data-ad-slot="cat-top"></div>
         <div class="page-header" id="categoryHeader">
             <h2 class="site-tagline" id="categoryTitle">Category</h2>
             <p class="site-description" id="categoryDesc">Browse articles in this category.</p>
@@ -54,14 +51,12 @@
             <div class="loading" id="loading"></div>
         </div>
         <!-- MGID Mid -->
-        <div class="ad-slot" id="ad-mgid-mid">
+        <div data-ad-slot="cat-mid">
             <!-- MGID widget code here -->
         </div>
         <div class="pagination" id="pagination"></div>
         <!-- AdSense Bottom -->
-        <div class="ad-slot" id="ad-bottom">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
+        <div data-ad-slot="cat-bottom"></div>
     </main>
     <footer class="footer">
         <div class="footer-content">

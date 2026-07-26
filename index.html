@@ -12,18 +12,16 @@
     <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-    <link rel="preload" href="articles-index.json" as="fetch" crossorigin>
     <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="style.css"></noscript>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-    <script src="ads.js" defer></script>
+    <script src="ads-config.js" defer></script>
     <script src="config-loader.js" async></script>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-                <img src="logo.svg" alt="HelloInsights" class="logo-img" width="64" height="64">
+                <img src="logo.svg" alt="HelloInsights" class="logo-img">
             </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -46,9 +44,7 @@
         </div>
     </header>
     <main class="container">
-        <div data-ad-slot="zone-top">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
+        <div data-ad-slot="zone-top"></div>
         <div class="page-header">
             <h2 class="site-tagline">YOUR TRUSTED SOURCE FOR INSIGHTS</h2>
             <p class="site-description">Expert analysis and curated intelligence at the intersection of technology, finance, AI innovation, and modern wellness.</p>

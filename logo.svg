@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420">
-<defs><linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFB43B"/><stop offset=".55" stop-color="#FF8A2A"/><stop offset="1" stop-color="#FF5B2A"/></linearGradient></defs>
-<path d="M133 45h245c49 0 88 39 88 88v173c0 49-39 88-88 88H229l-56 42-19-42h-21c-49 0-88-39-88-88V133c0-49 39-88 88-88z" fill="url(#orange)"/>
-<path d="M141 110h55v62h57v-55c0-8 9-12 15-6l39 38v77c0 11-9 20-20 20h-34v-50h-57v50h-55z" fill="#fff"/>
-<circle cx="345" cy="80" r="10" fill="#FF9C31"/><circle cx="375" cy="55" r="7" fill="#FF9C31"/><circle cx="383" cy="103" r="7" fill="#FF9C31"/>
-<text x="590" y="275" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="150" font-weight="600" letter-spacing="-7"><tspan fill="#4B5563">Hello</tspan><tspan fill="#FF6B2C">Insights</tspan></text>
-</svg>

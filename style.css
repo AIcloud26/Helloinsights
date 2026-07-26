@@ -33,7 +33,7 @@ body {
 }
 .logo { font-size: 1.3rem; font-weight: 700; color: var(--text-dark); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
 .logo span { color: var(--primary-color); }
-.logo-img { width: 64px; height: 64px; border-radius: 10px; object-fit: contain; }
+.logo-img { max-height: 3rem; width: auto; border-radius: 10px; object-fit: contain; display: block; }
 .logo-text { font-size: 1.3rem; font-weight: 700; color: var(--text-dark); }
 .logo:hover .logo-text { color: var(--primary-color); }
 .logo-icon {
@@ -198,27 +198,23 @@ body {
 .back-to-top.visible { opacity: 1; visibility: visible; }
 .back-to-top:hover { background: var(--primary-hover); transform: translateY(-3px); }
 
-/* ========== Ad Containers ========== */
-.ad-container {
-    min-height: 0 !important;
-    max-height: 0 !important;
+/* ========== Ad Slots ========== */
+/* 广告位默认隐藏，由 ads-config.js 检测填充后显示 */
+[data-ad-slot] {
+    display: none;
+    max-width: 728px;
+    margin: 0 auto;
+    padding: 0;
     overflow: hidden;
-    border: none !important;
-    background: transparent !important;
-    margin: 0 !important;
-    padding: 0 !important;
     transition: all 0.3s ease;
 }
-.ad-container:not(:empty) {
-    min-height: auto !important;
-    max-height: none !important;
+/* JS 检测到广告填充后添加此类 */
+[data-ad-slot].ad-visible {
+    display: block !important;
     margin: 1.5rem auto !important;
-    padding: 1rem !important;
+    padding: 0.5rem !important;
 }
-.ad-container ins.adsbygoogle[data-ad-status="unfilled"],
-.ad-container:has(ins.adsbygoogle[data-ad-status="unfilled"]) {
-    display: none !important;
-}
+
 
 /* ========== Responsive — Large Screens ========== */
 @media (min-width: 1600px) {
@@ -270,7 +266,7 @@ body {
     .pagination { gap: 0.35rem; }
     .pagination .page-btn { min-width: 40px; height: 40px; font-size: 0.85rem; border-radius: 10px; }
     .back-to-top { bottom: 1.5rem; right: 1.5rem; width: 48px; height: 48px; font-size: 1.4rem; }
-    .logo-img { width: 28px; height: 28px; }
+    .logo-img { max-height: 2.2rem; }
     .logo-icon { width: 28px; height: 28px; font-size: 0.85rem; }
     .logo-text { font-size: 1.15rem; }
     .logo { font-size: 1.15rem; gap: 0.4rem; }
@@ -281,7 +277,7 @@ body {
     html { font-size: 14px; }
     .header-content { padding: 0.4rem 1rem; }
     .logo { font-size: 1rem; gap: 0.3rem; }
-    .logo-img { width: 26px; height: 26px; }
+    .logo-img { max-height: 2rem; }
     .logo-icon { width: 26px; height: 26px; font-size: 0.75rem; }
     .logo-text { font-size: 1rem; }
     .container { padding: 1.25rem 1rem; }
@@ -312,7 +308,7 @@ body {
 
 /* ========== Print ========== */
 @media print {
-    .header, .footer, .back-to-top, .share-section, .pagination, .ad-container { display: none; }
+    .header, .footer, .back-to-top, .share-section, .pagination, [data-ad-slot] { display: none; }
     body { background: white; font-size: 12pt; }
     .container { max-width: 100%; padding: 0; }
     .article-card { box-shadow: none; break-inside: avoid; }

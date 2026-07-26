@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="style.css"></noscript>
     <script src="config-loader.js" async></script>
+    <script src="ads.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -44,29 +45,22 @@
         <!-- AdSense Top -->
         <div class="ad-slot" id="ad-top">
             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
-
         <div class="page-header" id="categoryHeader">
             <h2 class="site-tagline" id="categoryTitle">Category</h2>
             <p class="site-description" id="categoryDesc">Browse articles in this category.</p>
         </div>
-
         <div class="article-grid" id="articleGrid">
             <div class="loading" id="loading"></div>
         </div>
-
         <!-- MGID Mid -->
         <div class="ad-slot" id="ad-mgid-mid">
             <!-- MGID widget code here -->
         </div>
-
         <div class="pagination" id="pagination"></div>
-
         <!-- AdSense Bottom -->
         <div class="ad-slot" id="ad-bottom">
             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
     </main>
     <footer class="footer">
@@ -102,24 +96,20 @@
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
     <script>
     if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(function() {}); }
-
     var ARTICLES_PER_PAGE = 9;
     var allArticles = [];
     var currentPage = 1;
     var currentCategory = '';
-
     var categoryNames = {
         'technology': 'Technology', 'finance': 'Finance',
         'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle'
     };
-
     var categoryDescs = {
         'technology': 'Latest innovations in software, hardware, cloud, and emerging tech.',
         'finance': 'Market trends, investment strategies, and financial insights.',
         'ai-tools': 'AI-powered tools and platforms to boost your productivity.',
         'health-lifestyle': 'Wellness tips, fitness guides, and healthy living advice.'
     };
-
     var fallbackImages = {
         'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
         'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
@@ -127,17 +117,14 @@
         'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
     };
     var defaultFallback = fallbackImages['technology'];
-
     function formatDate(dateStr) {
         if (!dateStr) return '';
         var d = new Date(dateStr + 'T00:00:00');
         var m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
         return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
     }
-
     function getFallbackImage(cat) { return fallbackImages[cat] || defaultFallback; }
     function getUrlParam(name) { return new URLSearchParams(window.location.search).get(name); }
-
     function createArticleCard(article) {
         var catName = categoryNames[article.category] || article.category;
         var fb = getFallbackImage(article.category);
@@ -152,7 +139,6 @@
             '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
             '</div></article>';
     }
-
     function renderPage(page) {
         currentPage = page;
         var totalPages = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);
@@ -175,7 +161,6 @@
         grid.innerHTML = html;
         renderPagination(allArticles.length);
     }
-
     function renderPagination(total) {
         var pages = Math.ceil(total / ARTICLES_PER_PAGE);
         var el = document.getElementById('pagination');
@@ -200,26 +185,22 @@
         else h += '<span class="page-btn disabled">›</span>';
         el.innerHTML = h;
     }
-
     function changePage(p) {
         var t = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);
         if (p < 1 || p > t) return;
         renderPage(p);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
     function toggleMenu() {
         var nav = document.getElementById('navContainer');
         if (nav) nav.classList.toggle('active');
     }
-
     function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     window.addEventListener('scroll', function() {
         var btn = document.getElementById('backToTop');
         if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
     });
-
-    /* Get category from URL and filter */
+    /* Get category from URL */
     currentCategory = getUrlParam('cat') || 'technology';
     var catName = categoryNames[currentCategory] || currentCategory;
     var catDesc = categoryDescs[currentCategory] || '';
@@ -228,7 +209,6 @@
     var descEl = document.getElementById('categoryDesc');
     if (titleEl) titleEl.textContent = catName;
     if (descEl) descEl.textContent = catDesc;
-
     /* Highlight active nav */
     var navLinks = document.querySelectorAll('.nav a');
     for (var i = 0; i < navLinks.length; i++) {
@@ -237,25 +217,26 @@
             navLinks[i].classList.add('active');
         }
     }
-
-    /* Load articles.json, then filter by category */
-    fetch('articles.json', { cache: 'force-cache' })
+    /* Load articles-index.json for version, then fetch category-specific file */
+    fetch('articles-index.json?v=' + Date.now())
         .then(function(r) { return r.json(); })
+        .then(function(index) {
+            var v = index.v || Date.now();
+            return fetch('articles-' + currentCategory + '.json?v=' + v)
+                .then(function(r) { return r.json(); });
+        })
         .then(function(data) {
-            var all = data.articles || [];
-            /* Filter by category */
-            allArticles = all.filter(function(a) { return a.category === currentCategory; });
+            allArticles = data.articles || [];
             allArticles.sort(function(a, b) {
                 if (a.date && b.date) return new Date(b.date) - new Date(a.date);
                 return (b.id || 0) - (a.id || 0);
             });
             renderPage(1);
         })
-        .catch(function() {
+        .catch(function(err) {
             var grid = document.getElementById('articleGrid');
-            if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles.</p>';
+            if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles: ' + err.message + '</p>';
         });
-
     if (typeof loadSiteConfig === 'function') {
         loadSiteConfig(function(config) {
             if (config && config.categories) {

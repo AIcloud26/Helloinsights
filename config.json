@@ -1,7 +1,7 @@
 {
   "siteName": "HelloInsights",
   "tagline": "Your Trusted Source for Insights",
-  "logoImage": "logo.png",
+  "logoImage": "logo.svg",
   "accentColor": "#ff6b35",
   "categories": [
     { "id": "technology", "name": "Technology", "desc": "The latest in tech innovation, digital trends, and cutting-edge research" },

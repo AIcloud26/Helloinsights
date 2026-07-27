@@ -35,5 +35,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add articles.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate articles [skip ci]"
+          git add articles-*.json && git diff --staged --quiet || git commit -m "Auto-generate articles [skip ci]"
           git push

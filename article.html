@@ -111,12 +111,12 @@
     <script>
         var categoryNames = {};
         var maxArticleId = 0;
-        var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop';
+        var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&fm=webp&q=80';
         var fallbackImages = {
-            'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
-            'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
-            'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
-            'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
+            'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&fm=webp&q=80',
+            'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop&fm=webp&q=80',
+            'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&fm=webp&q=80',
+            'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop&fm=webp&q=80'
         };
         function buildCategoryNames(config) {
             var names = {};
@@ -139,26 +139,27 @@
             }
             return '';
         }
-        function generateDate(articleId, maxId) {
-            var today = new Date();
-            var date = new Date(today);
-            date.setDate(date.getDate() - Math.floor((maxId - articleId) / 3));
-            return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        function generateArticleDate(id) {
+            var start = new Date('2026-01-01').getTime();
+            var offset = (id % 180) * 86400000;
+            var d = new Date(start + offset);
+            var m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
         }
-        function renderArticle(article, maxId) {
+        function renderArticle(article) {
             var container = document.getElementById('articleDetail');
             var loading = document.getElementById('loading');
             if (loading) loading.remove();
-            var date = article.date ? formatDate(article.date) : generateDate(article.id, maxId);
+            var date = article.date ? formatDate(article.date) : generateArticleDate(article.id);
             var catName = categoryNames[article.category] || article.category;
             var fallbackImg = getFallbackImage(article.category);
-            var heroImg = article.image.replace('w=600&h=400', 'w=1200&h=600') + '&fm=webp';
+            var heroImg = article.image.replace('w=600&h=400', 'w=1200&h=600') + '&fm=webp&q=80';
             var articleContent = article.content
                 ? article.content
                 : '<p>' + article.excerpt + '</p><p><em>This article is being updated. Check back soon for the full content.</em></p>';
             container.innerHTML =
                 '<div class="article-hero">' +
-                '<img src="' + heroImg + '" alt="' + article.title + '" loading="eager" fetchpriority="high" onerror="this.src=\'' + fallbackImg.replace('w=600&h=400', 'w=1200&h=600') + '&fm=webp' + '\'">' +
+                '<img src="' + heroImg + '" alt="' + article.title + '" loading="eager" fetchpriority="high" onerror="this.src=\'' + fallbackImg.replace('w=600&h=400', 'w=1200&h=600') + '&fm=webp&q=80' + '\'">' +
                 '</div>' +
                 '<div class="article-body">' +
                 '<header class="article-header">' +
@@ -189,10 +190,10 @@
                 var article = related[i];
                 var articleFallback = getFallbackImage(article.category);
                 var catName = categoryNames[article.category] || article.category;
-                var date = article.date ? formatDate(article.date) : generateDate(article.id, maxArticleId);
+                var date = article.date ? formatDate(article.date) : generateArticleDate(article.id);
                 html += '<article class="article-card">' +
                     '<div class="card-image">' +
-                    '<img src="' + article.image + '" alt="' + article.title + '" loading="lazy" onerror="this.src=\'' + articleFallback + '\'">' +
+                    '<img src="' + article.image + '" alt="' + article.title + '" width="600" height="400" loading="lazy" decoding="async" onerror="this.src=\'' + articleFallback + '\'">' +
                     '</div>' +
                     '<div class="card-content">' +
                     '<span class="card-category">' + catName + '</span>' +
@@ -242,7 +243,7 @@
                 if (!article) throw new Error('Article ' + articleId + ' not found in ' + category + ' (' + catArticles.length + ' articles)');
                 // Step 5: Render article + related
                 maxArticleId = Math.max.apply(null, catArticles.map(function(a) { return a.id; }));
-                renderArticle(article, maxArticleId);
+                renderArticle(article);
                 renderRelated(article, catArticles);
             } catch (error) {
                 console.error('Article load error:', error.message);

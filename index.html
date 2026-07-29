@@ -132,10 +132,10 @@
         'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle'
     };
     var fallbackImages = {
-        'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop',
-        'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
-        'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecf995?w=600&h=400&fit=crop',
-        'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop'
+        'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&fm=webp&q=80',
+        'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop&fm=webp&q=80',
+        'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecf995?w=600&h=400&fit=crop&fm=webp&q=80',
+        'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop&fm=webp&q=80'
     };
     var defaultFallback = fallbackImages['technology'];
     var articleIds = [];
@@ -159,7 +159,7 @@
             '<h3 class="card-title"><a href="article.html?id=' + article.id + '">' + article.title + '</a></h3>' +
             '<p class="card-excerpt">' + article.excerpt + '</p>' +
             '<div class="card-meta"><span>' + generateArticleDate(article.id) + '</span></div>' +
-            '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
+            '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More</a>' +
             '</div></article>';
     }
     function renderPagination(total) {

@@ -18,7 +18,7 @@
     <header class="header">
         <div class="header-content">
             <a href="index.html" class="logo">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 58" width="180" height="58" role="img" aria-label="HelloInsights logo" style="max-height:3rem;width:auto;display:block;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 58" width="180" height="58" role="img" aria-label="HelloInsights logo" style="max-height:2.2rem;width:auto;display:block;">
   <defs>
     <linearGradient id="orange" x1="0" y1="0" x2="0.9" y2="1">
       <stop offset="0%" stop-color="#FFB13B"/>
@@ -72,6 +72,10 @@
             <h2 class="site-tagline" id="categoryTitle">Category</h2>
             <p class="site-description" id="categoryDesc">Browse articles in this category.</p>
         </div>
+        <div id="searchInfo" style="display:none;margin-bottom:1rem;padding:.5rem 1rem;background:#fff3cd;border-radius:8px;">
+            <span id="searchText"></span>
+            <button onclick="clearSearch()" style="margin-left:10px;background:#ff6b35;color:white;border:none;padding:2px 10px;border-radius:4px;cursor:pointer;">Clear</button>
+        </div>
         <div class="article-grid" id="articleGrid">
             <div class="loading" id="loading"></div>
         </div>
@@ -118,6 +122,9 @@
     if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(function() {}); }
     var ARTICLES_PER_PAGE = 9;
     var allArticles = [];
+    var filteredArticles = [];
+    var isSearching = false;
+    var searchQuery = '';
     var currentPage = 1;
     var currentCategory = '';
     var categoryNames = {
@@ -206,11 +213,84 @@
         el.innerHTML = h;
     }
     function changePage(p) {
-        var t = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);
-        if (p < 1 || p > t) return;
-        renderPage(p);
+        if (isSearching) {
+            var t = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
+            if (p < 1 || p > t) return;
+            currentPage = p;
+            renderSearchResults(filteredArticles);
+        } else {
+            var t2 = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);
+            if (p < 1 || p > t2) return;
+            renderPage(p);
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // ===== SEARCH FUNCTIONS =====
+    function handleSearch() {
+        var input = document.getElementById('searchInput');
+        if (!input) return;
+        var q = input.value.trim();
+        searchQuery = q;
+        if (!q) { clearSearch(); return; }
+        isSearching = true;
+        currentPage = 1;
+        var lq = q.toLowerCase();
+        filteredArticles = allArticles.filter(function(a) {
+            var cn = categoryNames[a.category] || a.category;
+            return a.title.toLowerCase().indexOf(lq) !== -1 || a.excerpt.toLowerCase().indexOf(lq) !== -1 ||
+                   a.category.toLowerCase().indexOf(lq) !== -1 || cn.toLowerCase().indexOf(lq) !== -1;
+        });
+        var si = document.getElementById('searchInfo'), st = document.getElementById('searchText');
+        if (si && st) {
+            si.style.display = 'block';
+            st.textContent = 'Found ' + filteredArticles.length + ' results for "' + q + '"';
+        }
+        renderSearchResults(filteredArticles);
+    }
+    function clearSearch() {
+        isSearching = false;
+        searchQuery = '';
+        currentPage = 1;
+        var input = document.getElementById('searchInput');
+        if (input) input.value = '';
+        var si = document.getElementById('searchInfo');
+        if (si) si.style.display = 'none';
+        renderPage(1);
+    }
+    function renderSearchResults(articles) {
+        var grid = document.getElementById('articleGrid');
+        var loading = document.getElementById('loading');
+        if (loading) loading.remove();
+        if (!grid) return;
+        if (articles.length === 0) {
+            grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#666;">No articles found for "' + searchQuery + '".</p>';
+            document.getElementById('pagination').innerHTML = '';
+            return;
+        }
+        var start = (currentPage - 1) * ARTICLES_PER_PAGE;
+        var pageArticles = articles.slice(start, start + ARTICLES_PER_PAGE);
+        var html = '';
+        for (var i = 0; i < pageArticles.length; i++) html += createArticleCard(pageArticles[i]);
+        grid.innerHTML = html;
+        renderPagination(articles.length);
+    }
+    function initSearch() {
+        var input = document.getElementById('searchInput');
+        var btn = document.getElementById('searchBtn');
+        if (input) {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') { e.preventDefault(); handleSearch(); }
+            });
+        }
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                handleSearch();
+            });
+        }
+    }
+
     function toggleMenu() {
         var nav = document.getElementById('navContainer');
         if (nav) nav.classList.toggle('active');
@@ -220,6 +300,7 @@
         var btn = document.getElementById('backToTop');
         if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
     });
+
     /* Get category from URL */
     currentCategory = getUrlParam('cat') || 'technology';
     var catName = categoryNames[currentCategory] || currentCategory;
@@ -229,6 +310,7 @@
     var descEl = document.getElementById('categoryDesc');
     if (titleEl) titleEl.textContent = catName;
     if (descEl) descEl.textContent = catDesc;
+
     /* Highlight active nav */
     var navLinks = document.querySelectorAll('.nav a');
     for (var i = 0; i < navLinks.length; i++) {
@@ -237,12 +319,13 @@
             navLinks[i].classList.add('active');
         }
     }
-    /* Load articles-index.json for version, then fetch category-specific file */
-    fetch('articles-index.json?v=' + Date.now())
+
+    /* Load articles */
+    fetch('articles-index.json')
         .then(function(r) { return r.json(); })
         .then(function(index) {
             var v = index.v || Date.now();
-            return fetch('articles-' + currentCategory + '.json?v=' + v)
+            return fetch('articles-' + currentCategory + '.json')
                 .then(function(r) { return r.json(); });
         })
         .then(function(data) {
@@ -252,11 +335,13 @@
                 return (b.id || 0) - (a.id || 0);
             });
             renderPage(1);
+            initSearch();  // 绑定搜索事件
         })
         .catch(function(err) {
             var grid = document.getElementById('articleGrid');
             if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles: ' + err.message + '</p>';
         });
+
     if (typeof loadSiteConfig === 'function') {
         loadSiteConfig(function(config) {
             if (config && config.categories) {

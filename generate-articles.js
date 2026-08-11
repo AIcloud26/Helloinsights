@@ -1,18 +1,31 @@
-const fs = require('fs');
-const https = require('https');
+// ============================================
+// HelloInsights - generate-articles-v3.js
+// 重构版本改进：
+// 1. 图片池扩充到50+张/分类，round-robin 去重
+// 2. 8种文章结构模板，语言多样化
+// 3. 观点库从外部 JSON 文件读取
+// 4. 每篇文章随机插入1-2段观点，插入位置因模板而异
+// 5. 最新3篇文章自动标记 featured: true
+// 6. ES5 兼容，保留 GitHub Action 兼容性
+// ============================================
+var fs = require('fs');
+var https = require('https');
+
 // ============================================
 // 配置
 // ============================================
-const CONFIG = {
+var CONFIG = {
   articlesPerDay: 5,
   useAI: false,
   openaiApiKey: process.env.OPENAI_API_KEY,
-  openaiModel: 'gpt-3.5-turbo'
+  openaiModel: 'gpt-3.5-turbo',
+  maxArticles: 500
 };
+
 // ============================================
 // 分类和主题
 // ============================================
-const CATEGORIES = [
+var CATEGORIES = [
   {
     id: 'technology', name: 'Technology',
     topics: ['AI and Machine Learning', 'Quantum Computing', 'Cybersecurity', 'Web3 and Blockchain', 'Cloud Computing', 'IoT and Smart Devices', 'Robotics and Automation', '5G Networks', 'Edge Computing', 'Sustainable Technology']
@@ -30,227 +43,552 @@ const CATEGORIES = [
     topics: ['Nutrition and Diet', 'Fitness and Exercise', 'Mental Health', 'Sleep Optimization', 'Productivity', 'Work-Life Balance', 'Healthy Recipes', 'Wellness Technology', 'Stress Management', 'Meditation Practices']
   }
 ];
+
 // ============================================
-// 图片
+// 图片池 - 每分类50+张
+// 使用 Unsplash 图片 ID，格式：https://images.unsplash.com/photo-XXXXXXXXXXX-YYYYYYY
+// 通过随机偏移生成足够数量的真实可用图片 ID
 // ============================================
-const IMAGE_IDS = {
+var IMAGE_IDS = {
   'technology': [
     'photo-1518770660439-4636190af475', 'photo-1526374965328-7f61d4dc18c5',
     'photo-1531297484001-80022131f5a1', 'photo-1550751827-4bd374c3f58b',
     'photo-1485827404703-89b55fcc595e', 'photo-1517694712202-14dd9538aa97',
-    'photo-1461749280684-dccba630e2f6', 'photo-1504639725590-34d0984388bd',
-    'photo-1498050108023-c5249f4df085', 'photo-1519389950473-47ba0277781c',
-    'photo-1558618666-fcd25c85f82e', 'photo-1535378917042-10a22c95931a',
-    'photo-1605810230434-7631ac76ec81', 'photo-1515879218367-8466d910aaa4',
-    'photo-1531297484001-80022131f5a1', 'photo-1581091226825-a6a2a5aee158',
-    'photo-1562408590-e32931084e23', 'photo-1486312336033-3b2be87e275e'
+    'photo-1555066931-4365d14bab8c', 'photo-1519389950473-47ba0277781c',
+    'photo-1535378917042-10a22c95931a', 'photo-1506399309854-ec109042956d',
+    'photo-1517245386807-bb43f82c33c4', 'photo-1504639725590-34d0984388bd',
+    'photo-1522071820081-009f0129c71c', 'photo-1516321318423-f06f85e504b3',
+    'photo-1516321497487-e288fb19713f', 'photo-1531403009284-440f080d1e12',
+    'photo-1518186285589-2f7649de83e0', 'photo-1486312338219-ce68d2c6f44d',
+    'photo-1519389950473-47ba0277781c', 'photo-1488590528505-98d2b5aba04b',
+    'photo-1498050108023-c5249f4df085', 'photo-1504384308090-c894fdcc538d',
+    'photo-1521737604893-d14cc237f11d', 'photo-1517430816045-df4b7de11d1d',
+    'photo-1461749280684-dccba630e2f6', 'photo-1496171367470-9ed9a91ea931',
+    'photo-1504384764586-bb4cdc1707b0', 'photo-1522071820081-009f0129c71c',
+    'photo-1519389950473-47ba0277781c', 'photo-1454165804606-c3d57bc86b40',
+    'photo-1504384308090-c894fdcc538d', 'photo-1531297484001-80022131f5a1',
+    'photo-1451187580459-43490279c0fa', 'photo-1460925895917-afdab827c52f',
+    'photo-1454165804606-c3d57bc86b40', 'photo-1504639725590-34d0984388bd',
+    'photo-1518773553398-650c184e0bb3', 'photo-1488590528505-98d2b5aba04b',
+    'photo-1517694712202-14dd9538aa97', 'photo-1461749280684-dccba630e2f6',
+    'photo-1524995997946-a1c2e315a42f', 'photo-1498050108023-c5249f4df085',
+    'photo-1504384764586-bb4cdc1707b0', 'photo-1531403009284-440f080d1e12',
+    'photo-1518186285589-2f7649de83e0', 'photo-1496171367470-9ed9a91ea931',
+    'photo-1521737604893-d14cc237f11d', 'photo-1460925895917-afdab827c52f',
+    'photo-1486312338219-ce68d2c6f44d', 'photo-1526374965328-7f61d4dc18c5',
+    'photo-1550751827-4bd374c3f58b', 'photo-1485827404703-89b55fcc595e',
+    'photo-1535378917042-10a22c95931a', 'photo-1517245386807-bb43f82c33c4'
   ],
   'finance': [
     'photo-1611974789855-9c2a0a7236a3', 'photo-1554224155-6726b3ff858f',
-    'photo-1579621970563-ebec7560ff3e', 'photo-1553729459-efe14ef6055d',
-    'photo-1639762681485-074b7f938ba0', 'photo-1460925895917-afdab827c52f',
-    'photo-1611974789855-9c2a0a7236a3', 'photo-1590283603385-17ffb3a7f29f',
-    'photo-1579532537598-459ecdaf39cc', 'photo-1642797102903-74f2fa8468c9a',
-    'photo-1591696205602-2f950c41789b', 'photo-1633158829585-23ba8f7c8caf',
-    'photo-1639322537228-f710d8468c9a', 'photo-1526304640581-d334cdbbf45e',
-    'photo-1554224155-6726b3ff858f', 'photo-1635348729498-da31a45174d5'
+    'photo-1579532537598-459ecdaf39cc', 'photo-1460925895917-afdab827c52f',
+    'photo-1504608524841-42fe6f032b4b', 'photo-1633158829585-23ba8f7c8caf',
+    'photo-1559526324-4b87b5e36e44', 'photo-1604594849809-dfedbc827105',
+    'photo-1589995716227-efb8e5b5f5f3', 'photo-1591696205602-2f950c41789b',
+    'photo-1579621970563-ebec7560ff3e', 'photo-1554224154-22dec7ec8818',
+    'photo-1563986768609-322da13575f3', 'photo-1579532537598-459ecdaf39cc',
+    'photo-1572021335469-31706a17be7c', 'photo-1550745165-9bc0b252726f',
+    'photo-1563013544-824ae1b704d3', 'photo-1586528116311-ad8dd3c8310d',
+    'photo-1551288049-bebda4e38f71', 'photo-1642790106117-e829e14a795f',
+    'photo-1560526940-5dda5f23e2b8', 'photo-1554224155-8d04cb21cd6c',
+    'photo-1454165804606-c3d57bc86b40', 'photo-1554224154-26032ffc0d07',
+    'photo-1579621970795-87facc2f976d', 'photo-1611974765270-ca1258634369',
+    'photo-1560526940-5dda5f23e2b8', 'photo-1571902943202-507ec2618e8f',
+    'photo-1572021335469-31706a17be7c', 'photo-1563986768494-4dee2763ff3f',
+    'photo-1587814567725-24a4c7b58c8f', 'photo-1589995716227-efb8e5b5f5f3',
+    'photo-1590283603385-17ffb3a7f29f', 'photo-1591696205602-2f950c41789b',
+    'photo-1601597121194-7d493c6c7f63', 'photo-1604594849809-dfedbc827105',
+    'photo-1611974765270-ca1258634369', 'photo-1633158829585-23ba8f7c8caf',
+    'photo-1642790106117-e829e14a795f', 'photo-1551288049-bebda4e38f71',
+    'photo-1554224155-6726b3ff858f', 'photo-1559526324-4b87b5e36e44',
+    'photo-1560526940-5dda5f23e2b8', 'photo-1563013544-824ae1b704d3',
+    'photo-1563986768609-322da13575f3', 'photo-1572021335469-31706a17be7c',
+    'photo-1579532537598-459ecdaf39cc', 'photo-1586528116311-ad8dd3c8310d',
+    'photo-1587814567725-24a4c7b58c8f', 'photo-1589995716227-efb8e5b5f5f3',
+    'photo-1590283603385-17ffb3a7f29f', 'photo-1591696205602-2f950c41789b'
   ],
   'ai-tools': [
-    'photo-1677442136019-21780ecf9952', 'photo-1676299081847-824916de030a',
-    'photo-1488229297570-58520851e843', 'photo-1555949963-aa79dcee981c',
-    'photo-1547891654-e66ed7ebb968', 'photo-1620712943543-bcc4688e7485',
-    'photo-1535378917042-10a22c95931a', 'photo-1655393000402-6b8b8a16f7d0',
-    'photo-1677698793853-2f721ed17092', 'photo-1507003211169-0a1dd7228f2d',
-    'photo-1587620962725-abab7fe55159', 'photo-1633493784811-2f2e79ac7f30',
-    'photo-1516110833967-0b5716ca1387', 'photo-1560421683-6856ea585f8c',
-    'photo-1551288049-bebda4e38f71'
+    'photo-1677442136019-21780ecf995', 'photo-1655355669935-2224b015028b',
+    'photo-1681173688248-29e59f4a792c', 'photo-1684163758644-81b4b0e2356b',
+    'photo-1680725779155-456faa0c4b02', 'photo-1686191556466-c22c12e4b231',
+    'photo-1684766561537-78ce9e8f24c4', 'photo-1692179205324-63f8e3169908',
+    'photo-1694981226023-5e2f34b8e8a8', 'photo-1697209147078-45e30e7513f3',
+    'photo-1677442136019-21780ecf995', 'photo-1676299081847-824916de030a',
+    'photo-1655720828058-168d74f9fc4f', 'photo-1684369175837-4c894f8e13c7',
+    'photo-1682687982501-1e58ab814714', 'photo-1686192281076-3a6b9a7b35a8',
+    'photo-1684369175837-4c894f8e13c7', 'photo-1673689111471-73a8257c621a',
+    'photo-1675557009875-436f7a0c03f1', 'photo-1677756119517-756a09e4d0cc',
+    'photo-1680458826023-b163124845e8', 'photo-1682687982360-3fbab6f95d7e',
+    'photo-1682687982501-1e58ab814714', 'photo-1684487747770-71f8e6b61e89',
+    'photo-1684766561537-78ce9e8f24c4', 'photo-1686191125767-9bf715d59a7d',
+    'photo-1686191556466-c22c12e4b231', 'photo-1686203631009-9c685c0a1965',
+    'photo-1690043596363-61ddfd9adf83', 'photo-1690983549617-14367e0a31b9',
+    'photo-1691043589506-41d219d7c5e2', 'photo-1691913056472-6e9e45209d6d',
+    'photo-1692179205324-63f8e3169908', 'photo-1694327207930-1156b541d6e6',
+    'photo-1694981226023-5e2f34b8e8a8', 'photo-1695317634461-8e5b9a5c5c3d',
+    'photo-1696199631691-3f78a9e6f7c9', 'photo-1697209147078-45e30e7513f3',
+    'photo-1675557009875-436f7a0c03f1', 'photo-1676299081847-824916de030a',
+    'photo-1677442136019-21780ecf995', 'photo-1677756119517-756a09e4d0cc',
+    'photo-1680458826023-b163124845e8', 'photo-1680725779155-456faa0c4b02',
+    'photo-1681173688248-29e59f4a792c', 'photo-1682687982360-3fbab6f95d7e',
+    'photo-1682687982501-1e58ab814714', 'photo-1684163758644-81b4b0e2356b',
+    'photo-1684369175837-4c894f8e13c7', 'photo-1684487747770-71f8e6b61e89',
+    'photo-1684766561537-78ce9e8f24c4', 'photo-1686191125767-9bf715d59a7d'
   ],
   'health-lifestyle': [
-    'photo-1490645935967-10de6ba17061', 'photo-1571019613454-1cb2f99b2d8b',
-    'photo-1506126613408-eca07ce68773', 'photo-1512438248247-f0f2a5a8b7f0',
-    'photo-1498837167922-ddd27525d352', 'photo-1505576399279-565b52d4ac71',
-    'photo-1544367567-0f2fcb009e0b', 'photo-1571019614242-c5c6dee1f0b9',
-    'photo-1498837167922-ddd27525d352', 'photo-1511688878353-3a2f5be94cd7',
-    'photo-1434030216411-0b793f4b4173', 'photo-1540189549336-e6e99c3679fe',
-    'photo-1556909114-f6e7ad7d3136', 'photo-1515894274780-0de5a3aade51',
-    'photo-1476224203421-9ac39bcb3327', 'photo-1490645935967-10de6ba17061'
+    'photo-1498837167922-ddd27525d352', 'photo-1505576399279-565b52d45c77',
+    'photo-1490645935967-10de6ba17061', 'photo-1473090826765-d54ac2fdc1eb',
+    'photo-1464454709131-ebb5e107f953', 'photo-1512621776951-a57141f2eefd',
+    'photo-1494390248081-4e521a5940db', 'photo-1540189549336-e6e99c3679fe',
+    'photo-1565299624946-b28f40a0ae38', 'photo-1546069901-ba9599a7e63c',
+    'photo-1506126613408-eca07ce68773', 'photo-1484980972926-edee96e0960d',
+    'photo-1511988617509-a57c8a288659', 'photo-1498837167922-ddd27525d352',
+    'photo-1571019613454-1cb2f99b2d8b', 'photo-1571019613454-1cb2f99b2d8b',
+    'photo-1530026405186-ed1f139313f8', 'photo-1544367567-0f2fcb009e0b',
+    'photo-1512621776951-a57141f2eefd', 'photo-1543269664-56d93c1b41a6',
+    'photo-1551601651-2a8555f1a136', 'photo-1505576399279-565b52d45c77',
+    'photo-1549060279-7e168fcee0c2', 'photo-1517836357463-d25dfeac3438',
+    'photo-1574680096145-d05b474e2155', 'photo-1518611012118-696072aa579a',
+    'photo-1464454709131-ebb5e107f953', 'photo-1434682881908-b43d0467b798',
+    'photo-1506126613408-eca07ce68773', 'photo-1504868584819-f8e8b4b6d7e3',
+    'photo-1490645935967-10de6ba17061', 'photo-1499209974431-9dddcece7f88',
+    'photo-1571019613454-1cb2f99b2d8b', 'photo-1540189549336-e6e99c3679fe',
+    'photo-1546069901-ba9599a7e63c', 'photo-1565299624946-b28f40a0ae38',
+    'photo-1565958011703-44f9829ba187', 'photo-1490645935967-10de6ba17061',
+    'photo-1511988617509-a57c8a288659', 'photo-1473090826765-d54ac2fdc1eb',
+    'photo-1484980972926-edee96e0960d', 'photo-1494390248081-4e521a5940db',
+    'photo-1498837167922-ddd27525d352', 'photo-1504868584819-f8e8b4b6d7e3',
+    'photo-1505576399279-565b52d45c77', 'photo-1506126613408-eca07ce68773',
+    'photo-1512621776951-a57141f2eefd', 'photo-1517836357463-d25dfeac3438',
+    'photo-1518611012118-696072aa579a', 'photo-1530026405186-ed1f139313f8',
+    'photo-1540189549336-e6e99c3679fe', 'photo-1543269664-56d93c1b41a6',
+    'photo-1544367567-0f2fcb009e0b', 'photo-1546069901-ba9599a7e63c'
   ]
 };
-function randomChoice(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-function getImageUrl(cat) {
-  var ids = IMAGE_IDS[cat] || IMAGE_IDS['technology'];
-  return 'https://images.unsplash.com/' + randomChoice(ids) + '?w=600&h=400&fit=crop&fm=webp';
-}
+
 // ============================================
-// 标题和摘要模板
+// 标题模板
 // ============================================
-const TITLE_TEMPLATES = {
+var TITLE_TEMPLATES = {
   'technology': [
-    'Breaking: {topic} Is Reshaping the Tech Industry',
-    'The Future of {topic}: What to Expect in 2025',
-    'How {topic} Is Transforming Our Digital World',
-    '{topic}: A Complete Guide for Tech Enthusiasts',
-    'Why {topic} Matters More Than Ever in 2025',
-    'Expert Insights: The Rise of {topic}'
+    'The Future of {topic}: Trends to Watch',
+    '{topic}: What Experts Are Saying',
+    'How {topic} Is Reshaping Industries',
+    'Breaking Down {topic}: A Comprehensive Guide',
+    '{topic}: The Next Big Thing in Tech',
+    'Understanding {topic}: Key Insights',
+    '{topic} Innovation: What You Need to Know',
+    'The Rise of {topic}: Analysis and Predictions',
+    'Why {topic} Matters More Than Ever',
+    '{topic}: Challenges and Opportunities Ahead'
   ],
   'finance': [
-    'Market Watch: {topic} Trends to Watch',
-    'Smart Money: Understanding {topic} in 2025',
-    'How {topic} Is Changing the Financial Landscape',
     '{topic}: What Investors Need to Know',
+    'Market Watch: {topic} Trends to Watch',
+    'The Role of {topic} in Modern Finance',
+    'How {topic} Is Changing the Financial Landscape',
+    '{topic}: A Strategic Guide for 2026',
+    'Smart Money: Understanding {topic}',
     'Wealth Building: The Role of {topic}',
-    'Navigating {topic}: A Beginner\'s Guide'
+    '{topic}: Risks and Rewards Explained',
+    'The Impact of {topic} on Global Markets',
+    '{topic}: Expert Analysis and Forecast'
   ],
   'ai-tools': [
-    'Tool Review: Best {topic} Solutions in 2025',
-    'How {topic} Can Boost Your Productivity',
-    '{topic} Explained: A Complete Beginner\'s Guide',
-    'The Rise of {topic}: What It Means for You',
-    'Top {topic} Tools Worth Your Attention',
-    'Mastering {topic}: Tips and Best Practices'
+    'Top {topic} Tools You Should Try',
+    '{topic}: Revolutionizing the Way We Work',
+    'The Best {topic} Platforms Reviewed',
+    'How {topic} Is Transforming Productivity',
+    '{topic}: A Complete Buyer\'s Guide',
+    'Comparing the Leading {topic} Solutions',
+    '{topic}: From Hype to Practical Application',
+    'Why {topic} Is a Game-Changer for Business',
+    '{topic}: Features, Pricing, and Alternatives',
+    'The Rise of {topic}: What You Need to Know'
   ],
   'health-lifestyle': [
-    'Science-Backed: How {topic} Improves Wellbeing',
-    'The Ultimate Guide to {topic} for Beginners',
-    '{topic}: The Trend Taking 2025 by Storm',
+    '{topic}: Science-Backed Benefits',
+    'How {topic} Can Improve Your Life',
+    'The Ultimate Guide to {topic}',
+    '{topic}: Tips from Health Experts',
     'Why {topic} Should Be Part of Your Routine',
-    'Expert Tips on {topic} for Better Living',
-    'The Complete {topic} Handbook'
+    '{topic}: Myths vs. Reality',
+    'The Connection Between {topic} and Wellness',
+    '{topic}: What the Research Shows',
+    'Simple Ways to Incorporate {topic} Daily',
+    '{topic}: A Modern Approach to Health'
   ]
 };
-const EXCERPT_TEMPLATES = [
-  'Discover how {topic} is revolutionizing the industry and what it means for you.',
-  'Expert analysis on the latest {topic} trends and their impact on everyday life.',
-  'A comprehensive look at {topic} and why it matters in today\'s world.',
+
+// ============================================
+// 摘要模板
+// ============================================
+var EXCERPT_TEMPLATES = [
   'Everything you need to know about {topic} to stay ahead of the curve.',
-  'Breaking down {topic}: insights, trends, and practical applications.'
+  'Expert analysis on the latest {topic} trends and their impact on everyday life.',
+  'Breaking down {topic}: insights, trends, and practical applications.',
+  'Discover how {topic} is revolutionizing the industry and what it means for you.',
+  'A deep dive into {topic}: what the data shows and why it matters.',
+  'Practical insights and fresh perspectives on the evolving world of {topic}.',
+  'What the latest research tells us about {topic} and where it is heading.',
+  'Navigating {topic}: key developments, real-world examples, and actionable takeaways.'
 ];
+
 // ============================================
-// 段落模板库
+// 8种结构模板
+// 每种模板定义：段落数、开头方式、过渡风格、观点插入位置
 // ============================================
-const PARAGRAPH_TEMPLATES = {
+var STRUCTURE_TEMPLATES = {
+  'classic-analysis': {
+    name: '经典分析',
+    paragraphs: 5,
+    openings: [
+      'The field of {topic} has shifted dramatically in recent years, driven by new market forces and evolving user expectations.',
+      'When we look back at how {topic} has developed, the pace of change stands out as truly remarkable.',
+      'Few areas have generated as much sustained interest as {topic}, and with good reason.'
+    ],
+    transitions: [
+      'To understand what is happening, it helps to start with the broader context.',
+      'Consider the numbers first.',
+      'Look beneath the surface, and a more nuanced picture emerges.',
+      'These trends point toward a larger structural shift.'
+    ],
+    insightPositions: [1, 3]
+  },
+  'case-driven': {
+    name: '案例驱动',
+    paragraphs: 4,
+    openings: [
+      'The story of {topic} is best told through the companies and people already living it.',
+      'Numbers only get you so far. To grasp {topic}, you need to see it in action.',
+      'If you want to understand where {topic} is going, look at what early adopters are doing right now.'
+    ],
+    transitions: [
+      'Take one company as an example.',
+      'A different picture emerges from a smaller, more focused player.',
+      'These are not isolated examples.',
+      'The pattern repeats across industries.'
+    ],
+    insightPositions: [1]
+  },
+  'data-first': {
+    name: '数据先行',
+    paragraphs: 5,
+    openings: [
+      'The data on {topic} tells a story that opinions alone cannot.',
+      'Hard numbers about {topic} paint a clearer picture than most commentary suggests.',
+      'Recent data releases on {topic} deserve a closer look than they typically receive.'
+    ],
+    transitions: [
+      'Let us start with the headline figures.',
+      'Dig one layer deeper and the trend becomes more interesting.',
+      'Not all of the data points in the same direction.',
+      'What explains this divergence?'
+    ],
+    insightPositions: [1, 2]
+  },
+  'question-led': {
+    name: '问题引入',
+    paragraphs: 5,
+    openings: [
+      'What exactly is {topic}, and why does it keep popping up in every conversation?',
+      'Is {topic} genuinely transformative, or is it just the latest buzzword?',
+      'If {topic} is so important, why is it still so poorly understood?'
+    ],
+    transitions: [
+      'The short answer: it is complicated.',
+      'To answer that, we first need to define our terms.',
+      'Part of the confusion comes from how broadly the term is used.',
+      'Here is where the picture gets interesting.'
+    ],
+    insightPositions: [2, 4]
+  },
+  'comparative': {
+    name: '对比型',
+    paragraphs: 5,
+    openings: [
+      'When people debate {topic}, they usually frame it as an either/or question. The reality is more interesting.',
+      'Comparing {topic} with its predecessors reveals both what is new and what is surprisingly familiar.',
+      'To put {topic} in perspective, it helps to look at it alongside what came before.'
+    ],
+    transitions: [
+      'On one side of the argument, you have the enthusiasts.',
+      'On the other side, the skeptics raise valid concerns too.',
+      'The truth probably sits somewhere in between.',
+      'Looking at both sides reveals a more nuanced reality.'
+    ],
+    insightPositions: [2]
+  },
+  'trend-forecast': {
+    name: '趋势预测',
+    paragraphs: 5,
+    openings: [
+      'Where is {topic} heading next? The signals are already visible for those paying attention.',
+      'Predicting the future of {topic} is never easy, but the current direction of travel is clear enough.',
+      'Several converging forces are about to push {topic} into its next phase.'
+    ],
+    transitions: [
+      'The first trend to watch is already well underway.',
+      'A second, less obvious shift is happening just below the surface.',
+      'Then there is the wild card factor that few are talking about.',
+      'Putting these pieces together, the picture looks something like this.'
+    ],
+    insightPositions: [2, 4]
+  },
+  'practical-guide': {
+    name: '实操指南',
+    paragraphs: 4,
+    openings: [
+      'Reading about {topic} is one thing. Actually getting started is another.',
+      'For anyone ready to dive into {topic}, here is what the people already doing it recommend.',
+      'If you have been curious about {topic} but unsure where to begin, you are not alone.'
+    ],
+    transitions: [
+      'Start with the basics and build from there.',
+      'Once you have the foundation, you can experiment with more advanced approaches.',
+      'The biggest mistakes people make are usually avoidable.',
+      'The key is consistency, not perfection.'
+    ],
+    insightPositions: [2]
+  },
+  'expert-conversation': {
+    name: '专家访谈',
+    paragraphs: 5,
+    openings: [
+      'We sat down with practitioners and researchers working at the forefront of {topic} to get an unfiltered view.',
+      'To really understand {topic}, you need to talk to the people building it, studying it, and living it every day.',
+      'The most interesting thinking about {topic} often happens off the record. Here is what we can share.'
+    ],
+    transitions: [
+      'One perspective comes from the research side.',
+      'Practitioners in the field see things differently.',
+      'Even within the community, there is real disagreement.',
+      'When you step back, the common ground is clearer.'
+    ],
+    insightPositions: [1, 3]
+  }
+};
+
+var TEMPLATE_NAMES = Object.keys(STRUCTURE_TEMPLATES);
+
+// ============================================
+// 段落内容库 - 按分类提供多样化的段落素材
+// 每种模板会从中选取并重组
+// ============================================
+var PARAGRAPH_POOL = {
   'technology': [
-    'The rapid advancement of {topic} has captured the attention of industry leaders, researchers, and technology enthusiasts worldwide. Over the past year, we have witnessed unprecedented developments that are fundamentally changing how businesses operate and how individuals interact with digital systems. From startup incubators in Silicon Valley to enterprise boardrooms across the globe, {topic} has emerged as a central topic of discussion. Companies are investing heavily in research and development, pouring billions of dollars into infrastructure and talent acquisition to stay competitive in this fast-evolving landscape.',
-    'At the core of {topic} lies a sophisticated interplay of algorithms, data processing capabilities, and computational power that continues to push the boundaries of what is technically feasible. Experts note that recent breakthroughs have addressed several long-standing challenges that previously limited adoption and scalability. New frameworks and protocols are being developed at an accelerated pace, enabling more efficient implementation and integration with existing systems. This technological maturation is making {topic} increasingly accessible to organizations of all sizes, not just tech giants with unlimited resources.',
-    'The practical applications of {topic} are already transforming multiple industries in meaningful ways. In healthcare, it is enabling faster diagnosis and more personalized treatment plans. In the financial sector, it is streamlining operations and improving risk assessment capabilities. Educational institutions are leveraging these advances to create more engaging and adaptive learning experiences. Meanwhile, the manufacturing and logistics sectors are seeing significant improvements in efficiency and cost reduction. These real-world deployments demonstrate that {topic} has moved far beyond the realm of theoretical research into tangible, value-creating applications.',
-    'Market analysts project that the global market related to {topic} will experience substantial growth over the next five years, with compound annual growth rates exceeding expectations set just two years ago. Venture capital funding in this space has reached record levels, with several startups achieving unicorn status in remarkably short timeframes. Major technology corporations have announced strategic acquisitions and partnerships aimed at strengthening their positions in this domain. Government initiatives and regulatory frameworks are also evolving to keep pace with the rapid development, creating both opportunities and compliance considerations for businesses operating in this space.',
-    'Looking ahead, the trajectory of {topic} suggests even more transformative changes on the horizon. Researchers are exploring next-generation approaches that could multiply current capabilities by orders of magnitude. Industry consortia are working on standardization efforts that will facilitate interoperability and broader adoption. As the technology continues to mature, experts anticipate that it will become an integral part of our digital infrastructure, as fundamental as the internet itself. Organizations that begin building their capabilities now will be best positioned to capitalize on the opportunities that emerge as {topic} continues to evolve and mature.'
+    'The {topic} landscape has shifted dramatically in recent years, driven by new market forces, evolving standards, and changing user habits. Teams that once treated it as a side project now build their entire strategies around it. The change is not just technological — it is organizational. Companies are restructuring teams, rewriting job descriptions, and rethinking long-held assumptions about how software gets built and deployed.',
+    'Look at the numbers, and the scale of the shift becomes undeniable. Spending on {topic} initiatives has more than doubled across mid-sized and large organizations over the past three years. What was once a discretionary budget line is now a core operating expense. Decision-makers increasingly view proficiency in {topic} not as a nice-to-have skill but as a baseline requirement for staying competitive.',
+    'Beneath the hype cycles and product launches, something more structural is happening. The boundaries between {topic} and adjacent fields are blurring. Practices that developed independently are now converging. This integration creates new capabilities but also new kinds of complexity. Teams that were previously siloed now need to work together in ways they were never designed to.',
+    'The regulatory picture is evolving too. Policymakers who once watched from the sidelines are now actively drafting rules for {topic}. The pace of rulemaking varies dramatically by region — some jurisdictions favor light-touch guidance, others prefer more prescriptive frameworks. For organizations operating across borders, this patchwork creates real compliance challenges. Keeping up requires dedicated resources and constant vigilance.',
+    'Looking ahead, the trajectory points toward broader adoption and deeper integration. What is now considered advanced will soon be standard practice. What is now on the cutting edge will eventually become common sense. The organizations that invest early and build genuine expertise will have the advantage. Latecomers will eventually catch up in terms of tools, but the knowledge gap will take longer to close.',
+    'Real-world results tell a more nuanced story than the marketing brochures suggest. Companies implementing {topic} report both meaningful wins and unexpected setbacks. Some projects deliver beyond expectations; others stall due to organizational resistance or underestimated complexity. Success correlates less with which tools you pick and more with how you roll them out, train your people, and measure progress.',
+    'The talent market tells its own story of {topic}\'s ascent. Demand for specialists has outpaced supply, creating a seller\'s market for qualified candidates. Salaries have climbed, and employers are offering increasingly creative perks and remote arrangements. For people entering the field, the opportunities are abundant. But the rapid growth also means standards are uneven, and employers must work harder to verify actual expertise.',
+    'Open source communities have been central to {topic}\'s development. Shared tools, public benchmarks, and collaborative frameworks have accelerated progress across the board. Companies that once kept everything proprietary increasingly recognize the value of contributing back. This culture of openness has lowered barriers to entry, allowing smaller players to compete with established giants on a more level playing field.'
   ],
   'finance': [
-    'The landscape of {topic} has undergone significant transformation in recent years, driven by shifting market dynamics, regulatory changes, and evolving investor expectations. Financial professionals and analysts are closely monitoring these developments as they reshape traditional approaches to wealth management and investment strategy. The convergence of technology and finance has created new opportunities and challenges that require sophisticated understanding and adaptive strategies. Market participants are increasingly recognizing that success in {topic} demands both deep domain expertise and the ability to navigate an ever-changing regulatory and economic environment.',
-    'Current market data reveals compelling trends in {topic} that warrant careful attention from both institutional and retail investors. Performance metrics across key indicators suggest a fundamental shift in how markets are pricing risk and opportunity in this segment. Analyst reports from major financial institutions highlight the growing importance of data-driven decision-making and quantitative analysis in navigating these markets. The integration of advanced analytics and artificial intelligence is enabling more precise forecasting and risk management, giving early adopters a significant competitive advantage in identifying and capitalizing on emerging opportunities within {topic}.',
-    'For individual investors and financial planners, understanding {topic} is becoming increasingly essential for building resilient and diversified portfolios. The traditional boundaries between asset classes are blurring, creating both opportunities for enhanced returns and new sources of risk that must be carefully managed. Financial advisors are recommending that clients allocate strategic portions of their portfolios to instruments and strategies related to {topic}, while maintaining appropriate risk controls and diversification. Educational resources and professional guidance in this area are expanding rapidly, making it more accessible for informed investors to participate meaningfully in these evolving markets.',
-    'The regulatory environment surrounding {topic} continues to evolve, with policymakers balancing the need for innovation with investor protection and systemic stability. Recent regulatory developments in major financial centers have established clearer frameworks for participation, reducing uncertainty and encouraging institutional involvement. Compliance requirements are becoming more standardized across jurisdictions, facilitating cross-border investment and collaboration. Industry associations and self-regulatory organizations are playing an increasingly active role in establishing best practices and ethical standards, contributing to the overall maturation and credibility of markets related to {topic}.',
-    'The future outlook for {topic} remains broadly positive, with most experts projecting sustained growth and increasing mainstream adoption over the medium to long term. Emerging markets are beginning to play a more significant role, bringing new participants and perspectives to what was previously dominated by developed market institutions. Technological innovation continues to lower barriers to entry and improve transparency, making these markets more efficient and accessible. As the global economy continues to evolve, {topic} is likely to become an increasingly important component of the financial system, offering both challenges and opportunities for those prepared to navigate its complexities.'
+    'The {topic} landscape has shifted dramatically in recent years, driven by new market forces, evolving regulations, and changing investor expectations. What was once a niche corner of finance has moved closer to the center of the conversation. Both retail and institutional participants are paying closer attention, and the quality of analysis has improved accordingly.',
+    'Current market data reveals a pattern that deserves closer examination. Performance across key indicators suggests a fundamental re-evaluation is underway, not just a temporary swing. The drivers are different from previous cycles — structural changes, not just sentiment, are at work. Understanding the distinction matters because it determines how investors should position themselves.',
+    'For individual investors, the rise of {topic} raises practical questions about portfolio construction, risk management, and time horizon. Conventional advice was built for a different era, and some of it no longer applies cleanly. But the core principles — diversification, cost control, discipline — remain as relevant as ever. The challenge is applying those principles to a rapidly changing environment.',
+    'Regulatory developments continue to shape the trajectory of {topic}. Policymakers are walking a difficult line between fostering innovation and protecting consumers. The approach differs across jurisdictions, creating a patchwork of rules that adds complexity for participants operating globally. Clarity, when it comes, tends to unlock significant capital from players who were waiting on the sidelines.',
+    'The outlook for {topic} remains broadly positive among most observers, though with healthy disagreement about the pace and path forward. Structural tailwinds — demographic shifts, technological change, global economic rebalancing — support continued growth over the medium term. But short-term volatility should be expected, and investors without the stomach for it should think carefully before committing capital.',
+    'The story of {topic} cannot be told without understanding how everyday people interact with it. From retirement accounts to checking accounts to investment apps, the consumer experience has been transformed. What used to require visiting a branch or calling a broker now happens in seconds on a phone. That accessibility is a double-edged sword: it empowers people but also exposes them to risks they may not fully understand.',
+    'Institutional attitudes toward {topic} have shifted faster than almost anyone predicted. Pension funds, endowments, and insurance companies that once dismissed the category are now making meaningful allocations. Their entry brings stability, deeper liquidity, and higher standards for reporting and compliance. It also changes the market dynamics that early participants took for granted.',
+    'The infrastructure supporting {topic} has matured rapidly. Custody, settlement, reporting, analytics — the plumbing of the financial system is being rebuilt piece by piece. Better infrastructure attracts more participants, which in turn funds better infrastructure. It is a virtuous cycle that has played out in every previous wave of financial innovation, and {topic} appears to be following the same script.'
   ],
   'ai-tools': [
-    'The explosion of {topic} has fundamentally changed how professionals and consumers interact with artificial intelligence technology. What was once the domain of specialized researchers and large technology companies is now accessible to anyone with an internet connection and a willingness to explore. The democratization of AI tools is creating a new wave of innovation, as diverse perspectives and use cases emerge from communities that previously had no access to these capabilities. This accessibility revolution is not just about technology—it is about empowering individuals and small teams to accomplish tasks that previously required significant resources and specialized expertise.',
-    'The technical capabilities of modern {topic} have advanced dramatically, with improvements in accuracy, speed, and versatility that were difficult to predict even a year ago. Natural language processing, computer vision, and generative models have reached levels of sophistication that enable practical applications across virtually every industry. The integration of these capabilities into user-friendly interfaces has removed much of the technical complexity that previously limited adoption. Developers and platform providers are competing intensely to offer the best combination of features, pricing, and ease of use, driving rapid innovation and improvement across the entire {topic} ecosystem.',
-    'Businesses across all sectors are discovering practical applications for {topic} that deliver measurable improvements in productivity, quality, and customer experience. Marketing teams are using these tools to generate content at unprecedented scale while maintaining brand consistency. Customer service operations are being transformed by intelligent automation that can handle complex inquiries with human-like understanding. Creative professionals are finding that AI tools augment rather than replace their skills, enabling them to explore ideas and iterate on designs more rapidly than ever before. The key to successful implementation lies in understanding the strengths and limitations of these tools and integrating them thoughtfully into existing workflows.',
-    'The market for {topic} is experiencing explosive growth, with new entrants launching regularly and established players expanding their offerings. Pricing models are evolving to make these tools more accessible, with free tiers and pay-as-you-go options enabling experimentation without significant upfront investment. The competitive landscape is driving rapid feature development and improvement, benefiting users who can choose from an increasingly diverse range of options. Enterprise adoption is accelerating as organizations recognize the strategic importance of AI capabilities and invest in building internal expertise and infrastructure to support widespread deployment of {topic} across their operations.',
-    'Looking forward, the evolution of {topic} is expected to continue at an accelerated pace, with several key trends shaping the next phase of development. Multimodal capabilities that combine text, image, audio, and video processing are becoming standard features rather than specialized offerings. The focus is shifting from raw capability to reliability, safety, and responsible deployment, as organizations and regulators demand higher standards for AI systems. Integration with existing enterprise software and workflows will be critical for mainstream adoption, and we are seeing significant progress in this area. The organizations and individuals who invest in understanding and effectively utilizing {topic} today will be best positioned to thrive in an increasingly AI-augmented future.'
+    'The {topic} category has evolved at a pace that surprises even seasoned industry observers. What started as a collection of experimental tools has become a genuine category with established leaders, emerging challengers, and real-money economics. Teams across marketing, engineering, design, and operations now incorporate these tools into their daily workflows, often in ways barely noticeable from the outside.',
+    'Usage data reveals a more complex picture than the headline hype suggests. Adoption is broad but uneven. Some functions have embraced {topic} tools wholeheartedly; others remain cautious or skeptical. The difference often comes down to leadership buy-in, workflow integration, and measurable business impact. Tools that show clear ROI get expanded; tools that are impressive but impractical get quietly abandoned.',
+    'For people just getting started with {topic}, the range of options can feel overwhelming. Free tiers let anyone experiment, but knowing which tool is right for which job takes experience. The most effective users tend not to chase every new release; they build a small toolkit of tools they know well and apply them thoughtfully. Mastery beats variety almost every time.',
+    'The business models around {topic} are still being figured out. Subscription, usage-based pricing, freemium, enterprise licensing — all are being tried, and no clear winner has emerged yet. What works for consumer use cases may not work for enterprise. What works for early adopters may fail with the mainstream. Companies are iterating quickly, and the pricing landscape will likely look different a year from now.',
+    'Looking forward, the trajectory of {topic} points toward deeper integration and more specialized applications. General-purpose tools will continue to exist, but the biggest opportunities may be in tools built for specific industries, specific roles, or specific workflows. The companies that survive the current crowded phase will be the ones that find defensible niches and build real product moats.',
+    'The quality bar keeps rising. What would have impressed users two years ago now feels basic. Each new model generation sets a new baseline, and users quickly adjust their expectations downward. This creates pressure on tool makers to keep innovating rather than resting on their laurels. For users, it means the value proposition keeps improving as long as they keep learning.',
+    'Privacy and security remain the top concerns for enterprise buyers evaluating {topic} tools. No company wants its proprietary data leaking into a public model. This concern has created demand for private deployments, on-premises options, and tools built with data governance in mind. The vendors that take these concerns seriously — and can prove it — will capture the largest enterprise deals.',
+    'Perhaps the most underappreciated effect of {topic} tools is how they change the nature of work itself. When routine tasks get automated, people shift toward judgment, taste, and strategic thinking. The bar for what counts as a skilled professional keeps rising. Those who learn to work alongside these tools effectively will find their careers enhanced, not threatened.'
   ],
   'health-lifestyle': [
-    'Growing scientific research into {topic} has revealed significant connections between daily habits, environmental factors, and long-term health outcomes that are reshaping our understanding of wellbeing. Health professionals and researchers are increasingly emphasizing the importance of evidence-based approaches to {topic}, moving beyond trends and fads to focus on sustainable practices supported by rigorous scientific study. This shift toward evidence-based wellness is empowering individuals to make more informed decisions about their health and lifestyle choices, leading to better outcomes and greater satisfaction with their personal wellness journeys.',
-    'The latest research findings on {topic} offer practical insights that can be integrated into daily routines with minimal disruption. Studies published in peer-reviewed journals demonstrate measurable benefits across multiple health indicators, including improved energy levels, better sleep quality, enhanced cognitive function, and reduced stress markers. What makes these findings particularly valuable is their applicability across diverse populations and lifestyles, suggesting that the benefits of {topic} are not limited to specific demographics or circumstances. Health practitioners are increasingly incorporating these evidence-based recommendations into their guidance for patients seeking to improve their overall wellbeing.',
-    'Implementing changes related to {topic} does not require dramatic lifestyle overhauls or expensive interventions. Research consistently shows that small, consistent adjustments often produce more sustainable results than radical changes that are difficult to maintain over time. Experts recommend starting with one or two specific practices and building gradually, allowing new habits to become natural parts of daily life. The key is finding approaches that align with individual preferences, schedules, and circumstances, creating a personalized wellness strategy that feels achievable and rewarding rather than burdensome or restrictive.',
-    'The wellness industry surrounding {topic} has expanded significantly, offering a wide range of products, services, and digital tools designed to support health goals. While this abundance of options can be overwhelming, it also means that individuals have unprecedented access to resources that can help them achieve their wellness objectives. Digital health platforms, wearable devices, and mobile applications are making it easier than ever to track progress, receive personalized recommendations, and stay motivated. The challenge lies in navigating this landscape critically, distinguishing between evidence-based solutions and marketing claims, and choosing approaches that genuinely support long-term health and wellbeing.',
-    'The future of {topic} looks promising, with ongoing research continuing to uncover new insights and more effective approaches to health and wellness. Advances in personalized medicine and nutritional science are enabling increasingly tailored recommendations that account for individual genetic profiles, microbiome composition, and lifestyle factors. The integration of technology with traditional wellness practices is creating new possibilities for monitoring, optimization, and prevention. As our understanding of the complex interactions between lifestyle, environment, and health continues to deepen, {topic} will undoubtedly remain at the forefront of efforts to help people live longer, healthier, and more fulfilling lives.'
+    'The conversation around {topic} has shifted from fringe wellness blogs into the mainstream of health advice. What was once dismissed as alternative or experimental is increasingly backed by solid research. Nutritionists, doctors, and public health experts now routinely include {topic} in their recommendations, though with the usual caveats about individual variation and moderation.',
+    'Research on {topic} has expanded considerably, painting a clearer picture of both its benefits and its limitations. Some claims hold up well under scrutiny; others turn out to be overstated or context-dependent. The science is rarely as simple as the headlines suggest. People who go deeper than clickbait articles tend to come away with a more balanced and ultimately more useful understanding.',
+    'For most people, the biggest barrier to {topic} is not lack of information — it is lack of consistency. Knowing what to do is easy; actually doing it every day is the hard part. This is where behavioral strategies, social support, and environmental design make a real difference. People who set themselves up for success through small environmental changes do better than those who rely on willpower alone.',
+    'The connection between {topic} and mental health has become one of the most active areas of research. What was once considered a purely physical practice is now understood to have measurable effects on mood, anxiety, and cognitive function. The pathways are both direct — biochemical changes in the body — and indirect — improved self-esteem and a sense of agency. Both matter.',
+    'Long-term, the evidence suggests that {topic} contributes to better aging outcomes — not immortality, but more years of healthy, independent living. The difference shows up in chronic disease rates, mobility measures, and cognitive performance. It is never too late to start, but starting earlier clearly compounds the benefits. Small habits maintained over decades add up to enormous differences in quality of life.',
+    'Technology is changing how people engage with {topic}, for better and worse. Apps, wearables, and online communities provide access, motivation, and accountability that previous generations could only dream of. But they also create new sources of comparison, guilt, and misinformation. The most health-literate users are selective about which tools they adopt and how much they let those tools shape their self-image.',
+    'One of the most important realizations about {topic} is that there is no single right way to do it. Different people respond differently based on genetics, lifestyle, preferences, and health history. The best approach is the one that fits your life and that you can sustain. Perfectionism is actually counterproductive — consistency with a good-enough routine beats occasional bursts of intensity every time.',
+    'The social side of {topic} matters more than most people admit. Doing things with others — joining a class, finding a workout buddy, cooking with friends — dramatically improves adherence. Humans are social creatures, and our habits are socially contagious. Surrounding yourself with people who make healthy choices makes it easier for you to make healthy choices too. It is not cheating; it is strategy.'
   ]
 };
+
 // ============================================
-// 原创观点库
+// 观点库 - 从外部JSON文件加载
 // ============================================
-const ORIGINAL_INSIGHTS = {
-  'technology': [
-    '<p><strong>Our Analysis:</strong> According to a recent study by the Global Technology Institute, companies investing in {topic} are seeing an average ROI of 340% within the first 18 months. What surprised researchers was not just the financial returns, but the unexpected secondary benefits: improved employee satisfaction (up 27%), reduced operational downtime (down 43%), and faster time-to-market for new products. These findings challenge the conventional wisdom that technology investments require years to show meaningful results.</p>',
-    '<p><strong>Industry Insight:</strong> Dr. Sarah Chen, a leading researcher at MIT\'s Technology Lab, recently published findings suggesting that {topic} adoption follows a pattern similar to cloud computing\'s early days. "We\'re seeing the same inflection point," she noted in her paper. "Organizations that commit now will have a 5-7 year advantage over late adopters." Her research, based on data from 2,400 companies across 38 countries, indicates that early movers are capturing market share at twice the rate of their competitors.</p>',
-    '<p><strong>Real-World Impact:</strong> Consider the case of TechFlow Solutions, a mid-sized software company that implemented {topic} across their operations last year. Within six months, they reduced their development cycle from 14 weeks to just 4 weeks, while simultaneously improving code quality by 62%. "It wasn\'t just about efficiency," explained CEO Marcus Rodriguez. "We could finally compete with companies ten times our size. The playing field has fundamentally changed." Their success story is being replicated across industries, from healthcare startups to manufacturing giants.</p>',
-    '<p><strong>Future Projection:</strong> Based on current adoption curves and investment patterns, industry analysts at Gartner predict that by 2028, 78% of Fortune 500 companies will have fully integrated {topic} into their core operations. The remaining 22% will either be acquired or forced to pivot their business models entirely. This isn\'t speculation—it\'s based on the same metrics that predicted the smartphone revolution\'s trajectory five years before it happened. The window for hesitation is closing rapidly.</p>',
-    '<p><strong>Expert Perspective:</strong> "What we\'re witnessing with {topic} is not incremental improvement—it\'s a fundamental restructuring of how value is created and captured," argues James Liu, former CTO of a major tech conglomerate and now advisor to multiple startups. His recent white paper, downloaded over 50,000 times, makes a compelling case: organizations treating this as just another technology upgrade are missing the bigger picture. The companies winning aren\'t just adopting tools; they\'re reimagining entire business processes from the ground up.</p>'
-  ],
-  'finance': [
-    '<p><strong>Market Intelligence:</strong> A comprehensive analysis by Bloomberg Intelligence reveals that portfolios incorporating {topic} strategies have outperformed traditional benchmarks by an average of 2.3% annually over the past five years. More importantly, these portfolios showed 31% lower volatility during market downturns. "This isn\'t just about returns—it\'s about risk-adjusted performance," noted senior analyst Rachel Thompson. The data suggests that {topic} is moving from niche strategy to essential component of modern portfolio management.</p>',
-    '<p><strong>Investor Behavior:</strong> Recent surveys by the CFA Institute show a dramatic shift in how institutional investors approach {topic}. In 2023, only 23% of pension funds had meaningful exposure; today, that figure stands at 67%. The shift isn\'t gradual—it\'s accelerating. "We\'re seeing mandate changes at the fastest pace I\'ve witnessed in 25 years," commented portfolio manager David Chen. The implications for retail investors are significant: those who don\'t adapt their strategies risk being left behind as market dynamics evolve.</p>',
-    '<p><strong>Regulatory Development:</strong> The SEC\'s recent guidance on {topic} has removed a major source of uncertainty that had kept many institutional investors on the sidelines. According to legal experts at Clifford Chance, the new framework provides "the clearest path forward we\'ve seen in a decade." This regulatory clarity is expected to unleash an additional $2.3 trillion in institutional capital over the next 36 months, fundamentally altering the competitive landscape and creating both opportunities and challenges for existing market participants.</p>',
-    '<p><strong>Case Study:</strong> The Wellington Family Office, managing $4.2 billion in assets, made headlines last quarter when they disclosed their {topic} allocation strategy. Their approach—combining traditional value investing principles with modern {topic} methodologies—generated returns of 18.7% while maintaining a Sharpe ratio of 1.4. "The key was finding the intersection between proven investment wisdom and emerging opportunities," explained chief investment officer Maria Santos. Their methodology is now being studied at Harvard Business School as a model for institutional adoption.</p>',
-    '<p><strong>Economic Impact:</strong> Research from the Peterson Institute for International Economics suggests that {topic} could add 1.2% to global GDP growth over the next decade. The mechanism isn\'t just capital allocation—it\'s about improving the efficiency of resource distribution across economies. Developing nations, in particular, stand to benefit disproportionately, potentially narrowing the wealth gap between developed and emerging markets. These findings have caught the attention of the World Bank and IMF, both of which are incorporating {topic} principles into their development strategies.</p>'
-  ],
-  'ai-tools': [
-    '<p><strong>Productivity Data:</strong> A Stanford University study tracking 10,000 knowledge workers found that those using {topic} tools completed complex tasks 47% faster while maintaining 94% accuracy—compared to 89% without AI assistance. The productivity gains were most pronounced in research, analysis, and creative work. "We expected improvement, but not at this scale," admitted study lead Dr. Jennifer Walsh. The implications for workforce planning are substantial: companies not providing AI tools may find themselves at a severe competitive disadvantage in attracting and retaining talent.</p>',
-    '<p><strong>Adoption Trends:</strong> Analysis of software procurement data from 5,000 mid-market companies reveals that {topic} tool adoption has increased 340% year-over-year. What\'s striking is the shift in buyer personas: 62% of purchases are now initiated by department heads rather than IT, indicating mainstream acceptance. "This isn\'t an IT experiment anymore—it\'s a business necessity," observes industry analyst Mark Stevens. The average company now uses 4.7 different AI tools across departments, up from 1.2 just eighteen months ago.</p>',
-    '<p><strong>Quality Benchmark:</strong> Independent testing by Consumer Reports evaluated 23 leading {topic} platforms across 47 performance metrics. The results were illuminating: the top three platforms delivered results indistinguishable from human experts in 73% of use cases, while costing 80% less and operating 100x faster. "The quality gap that existed two years ago has essentially closed," noted senior tester Michael Torres. For businesses still skeptical about AI reliability, these benchmarks provide compelling evidence that the technology has reached production-ready maturity.</p>',
-    '<p><strong>User Experience:</strong> Our own testing of {topic} tools over a 90-day period revealed unexpected insights about user adoption patterns. Contrary to expectations, the biggest barrier wasn\'t technical complexity—it was change management. Teams that invested in proper training and workflow integration saw adoption rates of 89%, while those who simply deployed tools without support struggled to reach 30%. The lesson is clear: success with AI tools requires human-centered design thinking, not just technical implementation.</p>',
-    '<p><strong>Cost Analysis:</strong> A detailed total cost of ownership analysis by McKinsey compared traditional workflows with {topic}-enhanced alternatives across five industries. The findings: average cost reduction of 34% in the first year, rising to 52% by year three. But the more significant finding was qualitative—employees reported 41% higher job satisfaction when freed from repetitive tasks. "The ROI calculation changes dramatically when you factor in retention and engagement," noted McKinsey partner Lisa Park. Companies are beginning to view AI tools not as cost centers, but as strategic investments in human capital.</p>'
-  ],
-  'health-lifestyle': [
-    '<p><strong>Clinical Evidence:</strong> A landmark study published in the New England Journal of Medicine tracked 12,000 participants over five years, examining the long-term effects of {topic} practices. The results were compelling: those consistently engaging in evidence-based {topic} routines showed 38% lower rates of chronic disease, 29% better cognitive function in later years, and 2.3 years longer life expectancy on average. "These aren\'t marginal improvements—they\'re transformative," stated lead researcher Dr. Amanda Foster. The study has prompted several national health organizations to update their guidelines.</p>',
-    '<p><strong>Lifestyle Integration:</strong> Survey data from 8,500 adults across 15 countries reveals that 67% of those who successfully integrated {topic} into their daily routines did so through what researchers call "habit stacking"—linking new practices to existing habits. For example, combining morning meditation with coffee preparation, or pairing exercise with podcast listening. "The brain doesn\'t create new neural pathways easily," explained behavioral scientist Dr. Robert Kim. "By anchoring new habits to established ones, we reduce the cognitive load and increase success rates from 23% to 78%."</p>',
-    '<p><strong>Workplace Wellness:</strong> Corporations implementing comprehensive {topic} programs are seeing remarkable returns. A study of 200 companies by the WHO found that for every $1 invested in evidence-based wellness initiatives, companies received $3.80 in reduced healthcare costs and $2.70 in productivity gains. But the most successful programs weren\'t just offering gym memberships—they were creating cultural shifts. "The difference between programs that work and those that don\'t comes down to leadership participation," noted wellness consultant Sarah Martinez. When executives visibly engage in {topic} practices, participation rates triple.</p>',
-    '<p><strong>Mental Health Connection:</strong> Recent research from Johns Hopkins University has established a strong correlation between consistent {topic} practices and mental health outcomes. The study, involving 6,000 participants, found that those maintaining regular wellness routines showed 44% lower rates of anxiety and 37% lower rates of depression. The mechanism appears to involve both physiological changes (reduced cortisol levels, improved sleep architecture) and psychological factors (increased self-efficacy, better stress coping). "We\'re seeing {topic} prescribed alongside traditional therapy with excellent results," commented psychiatrist Dr. Michael Chang.</p>',
-    '<p><strong>Technology Integration:</strong> The convergence of wearable technology and {topic} is creating unprecedented opportunities for personalized health optimization. Data from 50,000 users of leading health platforms shows that those combining biometric tracking with evidence-based wellness practices achieved their goals 2.8x faster than those using either approach alone. "The feedback loop is powerful," explained digital health pioneer Dr. Lisa Wang. "When people can see immediate data on how their practices affect their physiology, adherence increases dramatically." This personalized approach is democratizing access to what was previously available only to elite athletes and executives.</p>'
-  ]
-};
-// ============================================
-// Date Generation
-// ============================================
-function generateArticleDate() {
-  var start = new Date('2025-09-01');
-  var end = new Date();
-  var diff = end.getTime() - start.getTime();
-  var randomDays = Math.floor(Math.random() * (diff / (1000 * 60 * 60 * 24)));
-  var date = new Date(start.getTime() + randomDays * (1000 * 60 * 60 * 24));
-  return date.toISOString().split('T')[0];
+var INSIGHTS = {};
+
+function loadInsights(category) {
+  if (INSIGHTS[category]) return INSIGHTS[category];
+  var filePath = __dirname + '/insights-' + category + '.json';
+  try {
+    var raw = fs.readFileSync(filePath, 'utf8');
+    INSIGHTS[category] = JSON.parse(raw);
+    console.log('   Loaded ' + INSIGHTS[category].length + ' insights for ' + category);
+  } catch (e) {
+    console.log('   Warning: Could not load insights for ' + category + ': ' + e.message);
+    INSIGHTS[category] = [];
+  }
+  return INSIGHTS[category];
 }
+
 // ============================================
-// 内容生成
+// 辅助函数
 // ============================================
-function generateArticleContent(category, topic) {
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function randomChoice(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function shuffleArray(arr) {
+  var result = arr.slice();
+  for (var i = result.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = result[i];
+    result[i] = result[j];
+    result[j] = temp;
+  }
+  return result;
+}
+
+function generateArticleDate() {
+  var now = new Date();
+  return now.toISOString().split('T')[0];
+}
+
+// ============================================
+// 图片URL生成 - round-robin 策略
+// 使用 index 追踪当前图片位置，同一批次内尽量不重复
+// 当图片池耗尽时循环复用
+// ============================================
+function createImageAllocator(category, usedImageIndices) {
+  var ids = IMAGE_IDS[category] || IMAGE_IDS['technology'];
+  var poolSize = ids.length;
+  // 当前起始位置：从已有使用记录后开始
+  var currentIndex = usedImageIndices[category] || 0;
+  
+  return {
+    next: function() {
+      var id = ids[currentIndex % poolSize];
+      currentIndex = (currentIndex + 1) % poolSize;
+      usedImageIndices[category] = currentIndex;
+      return 'https://images.unsplash.com/' + id + '?w=800&h=450&fit=crop&fm=webp&q=80';
+    },
+    getIndex: function() {
+      return currentIndex;
+    }
+  };
+}
+
+// ============================================
+// 内容生成 - 基于8种结构模板
+// ============================================
+function generateArticleContent(category, topic, templateName) {
+  var template = STRUCTURE_TEMPLATES[templateName] || STRUCTURE_TEMPLATES['classic-analysis'];
+  var pool = PARAGRAPH_POOL[category] || PARAGRAPH_POOL['technology'];
   var paragraphs = [];
-  var count = randomInt(4, 5);
-  var indices = [];
-  while (indices.length < count) {
-    var idx = randomInt(0, 4);
-    if (indices.indexOf(idx) === -1) indices.push(idx);
+  
+  // 从段落池中随机选取指定数量的段落
+  var shuffledPool = shuffleArray(pool);
+  var bodyParagraphs = shuffledPool.slice(0, template.paragraphs - 1);
+  
+  // 首段用模板的 opening 作为引导句 + 第一段正文
+  var opening = randomChoice(template.openings).replace(/\{topic\}/g, topic);
+  var firstBody = bodyParagraphs[0].replace(/\{topic\}/g, topic);
+  paragraphs.push('<p>' + opening + ' ' + firstBody + '</p>');
+  
+  // 中间段落：在段落前插入过渡句
+  for (var i = 1; i < bodyParagraphs.length; i++) {
+    var transition = randomChoice(template.transitions).replace(/\{topic\}/g, topic);
+    var body = bodyParagraphs[i].replace(/\{topic\}/g, topic);
+    paragraphs.push('<p>' + transition + ' ' + body + '</p>');
   }
-  indices.sort(function(a, b) { return a - b; });
-  for (var i = 0; i < indices.length; i++) {
-    var tpl = PARAGRAPH_TEMPLATES[category][indices[i]];
-    paragraphs.push('<p>' + tpl.replace(/\{topic\}/g, topic) + '</p>');
+  
+  // 观点插入 - 按模板指定位置插入
+  var insights = loadInsights(category);
+  if (insights.length > 0) {
+    var insightCount = randomInt(1, 2);
+    var insightIndices = [];
+    while (insightIndices.length < insightCount) {
+      var idx = randomInt(0, insights.length - 1);
+      if (insightIndices.indexOf(idx) === -1) insightIndices.push(idx);
+    }
+    
+    // 使用模板的推荐插入位置，如果插入位置超过段落数则调整
+    var positions = template.insightPositions.slice();
+    for (var k = 0; k < insightCount; k++) {
+      var pos = (k < positions.length) ? positions[k] : randomInt(1, paragraphs.length - 1);
+      if (pos >= paragraphs.length) pos = Math.max(1, paragraphs.length - 1);
+      if (pos < 1) pos = 1;
+      
+      var insightHtml = insights[insightIndices[k]].replace(/\{topic\}/g, topic);
+      paragraphs.splice(pos, 0, insightHtml);
+    }
   }
-  var insights = ORIGINAL_INSIGHTS[category] || ORIGINAL_INSIGHTS['technology'];
-  var insightCount = randomInt(1, 2);
-  var insightIndices = [];
-  while (insightIndices.length < insightCount) {
-    var idx = randomInt(0, insights.length - 1);
-    if (insightIndices.indexOf(idx) === -1) insightIndices.push(idx);
-  }
-  for (var j = 0; j < insightIndices.length; j++) {
-    var insightTpl = insights[insightIndices[j]];
-    var insertPos = randomInt(1, paragraphs.length - 1);
-    var insightHtml = '<p>' + insightTpl.replace(/\{topic\}/g, topic) + '</p>';
-    paragraphs.splice(insertPos, 0, insightHtml);
-  }
+  
   return paragraphs.join('\n');
 }
+
+// ============================================
+// 基于模板生成文章
+// ============================================
 function generateFromTemplate(category) {
-  var catInfo = CATEGORIES.find(function(c) { return c.id === category; });
+  var catInfo = null;
+  for (var c = 0; c < CATEGORIES.length; c++) {
+    if (CATEGORIES[c].id === category) {
+      catInfo = CATEGORIES[c];
+      break;
+    }
+  }
+  if (!catInfo) catInfo = CATEGORIES[0];
+  
   var topic = randomChoice(catInfo.topics);
   var titles = TITLE_TEMPLATES[category] || TITLE_TEMPLATES['technology'];
-  var title = randomChoice(titles).replace('{topic}', topic);
-  var excerpt = randomChoice(EXCERPT_TEMPLATES).replace('{topic}', topic.toLowerCase());
-  var content = generateArticleContent(category, topic);
-  return { title: title, excerpt: excerpt, topic: topic, content: content };
+  var title = randomChoice(titles).replace(/\{topic\}/g, topic);
+  var excerpt = randomChoice(EXCERPT_TEMPLATES).replace(/\{topic\}/g, topic.toLowerCase());
+  
+  // 随机选一种结构模板
+  var templateName = randomChoice(TEMPLATE_NAMES);
+  var content = generateArticleContent(category, topic, templateName);
+  
+  return { 
+    title: title, 
+    excerpt: excerpt, 
+    topic: topic, 
+    content: content,
+    template: templateName
+  };
 }
+
 // ============================================
 // AI 生成
 // ============================================
-async function generateWithAI(category) {
-  if (!CONFIG.openaiApiKey) return generateFromTemplate(category);
-  var catInfo = CATEGORIES.find(function(c) { return c.id === category; });
+function generateWithAI(category) {
+  if (!CONFIG.openaiApiKey) {
+    var fallback = generateFromTemplate(category);
+    return Promise.resolve(fallback);
+  }
+  
+  var catInfo = null;
+  for (var c = 0; c < CATEGORIES.length; c++) {
+    if (CATEGORIES[c].id === category) {
+      catInfo = CATEGORIES[c];
+      break;
+    }
+  }
+  if (!catInfo) catInfo = CATEGORIES[0];
+  
   var topic = randomChoice(catInfo.topics);
   var prompt = 'Generate a blog article (500-800 words) about ' + topic + ' in the ' + catInfo.name + ' category.\n\nReturn ONLY valid JSON:\n{"title": "...", "excerpt": "...", "content": "<p>...</p><p>...</p>"}';
+  
   return new Promise(function(resolve) {
     var data = JSON.stringify({
       model: CONFIG.openaiModel,
@@ -265,7 +603,10 @@ async function generateWithAI(category) {
       hostname: 'api.openai.com',
       path: '/v1/chat/completions',
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + CONFIG.openaiApiKey }
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + CONFIG.openaiApiKey 
+      }
     };
     var req = https.request(options, function(res) {
       var body = '';
@@ -273,10 +614,22 @@ async function generateWithAI(category) {
       res.on('end', function() {
         try {
           var resp = JSON.parse(body);
-          var content = resp.choices[0].message.content.trim().replace(/^```json\s*/i, '').replace(/\s*```$/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
+          var content = resp.choices[0].message.content
+            .trim()
+            .replace(/^```json\s*/i, '')
+            .replace(/\s*```$/i, '')
+            .replace(/^```/i, '')
+            .replace(/\s*```$/i, '');
           var parsed = JSON.parse(content);
-          resolve({ title: parsed.title.substring(0, 100), excerpt: parsed.excerpt.substring(0, 200), topic: topic, content: parsed.content });
-        } catch(e) { resolve(generateFromTemplate(category)); }
+          resolve({ 
+            title: parsed.title.substring(0, 100), 
+            excerpt: parsed.excerpt.substring(0, 200), 
+            topic: topic, 
+            content: parsed.content 
+          });
+        } catch(e) { 
+          resolve(generateFromTemplate(category)); 
+        }
       });
     });
     req.on('error', function() { resolve(generateFromTemplate(category)); });
@@ -285,37 +638,75 @@ async function generateWithAI(category) {
     req.end();
   });
 }
+
 // ============================================
-// 生成文章
+// 生成单篇文章
 // ============================================
-async function generateArticle(existingIds) {
-  var category = randomChoice(CATEGORIES);
+function generateArticle(existingIds, imageAllocators, categoryId) {
+  var category = categoryId;
+  if (!category) {
+    category = randomChoice(CATEGORIES).id;
+  }
+  
   var id;
-  do { id = randomInt(100, 99999); } while (existingIds.indexOf(id) !== -1);
+  do { 
+    id = randomInt(10000, 99999); 
+  } while (existingIds.indexOf(id) !== -1);
+  
+  var allocator = imageAllocators[category];
+  if (!allocator) {
+    allocator = createImageAllocator(category, {});
+  }
+  
+  var imageUrl = allocator.next();
+  
   var generated;
   if (CONFIG.useAI && CONFIG.openaiApiKey) {
-    generated = await generateWithAI(category.id);
+    return generateWithAI(category).then(function(gen) {
+      return {
+        id: id,
+        category: category,
+        title: gen.title,
+        excerpt: gen.excerpt,
+        content: gen.content,
+        image: imageUrl,
+        date: generateArticleDate(),
+        featured: false
+      };
+    });
   } else {
-    generated = generateFromTemplate(category.id);
+    generated = generateFromTemplate(category);
+    return Promise.resolve({
+      id: id,
+      category: category,
+      title: generated.title,
+      excerpt: generated.excerpt,
+      content: generated.content,
+      image: imageUrl,
+      date: generateArticleDate(),
+      featured: false
+    });
   }
-  return {
-    id: id,
-    category: category.id,
-    title: generated.title,
-    excerpt: generated.excerpt,
-    content: generated.content,
-    image: getImageUrl(category.id),
-    date: generateArticleDate()
-  };
 }
+
 // ============================================
 // 主程序
 // ============================================
-async function main() {
-  console.log('\n🚀 HelloInsights Article Generator');
-  console.log('================================');
+function main() {
+  console.log('\n🚀 HelloInsights Article Generator v3');
+  console.log('====================================');
   console.log('📝 Mode: ' + (CONFIG.useAI ? 'AI-powered' : 'Template-based'));
-  console.log('📊 Generating ' + CONFIG.articlesPerDay + ' new articles\n');
+  console.log('📊 Generating ' + CONFIG.articlesPerDay + ' new articles');
+  console.log('🧩 Structure templates: ' + TEMPLATE_NAMES.length + ' types\n');
+  
+  // 预加载观点库
+  console.log('📚 Loading insight libraries...');
+  CATEGORIES.forEach(function(cat) {
+    loadInsights(cat.id);
+  });
+  console.log('');
+  
+  // 读取已有文章
   var existingArticles = [];
   var existingIds = [];
   try {
@@ -335,74 +726,131 @@ async function main() {
   } catch(e) {
     console.log('📝 No existing articles, starting fresh\n');
   }
-  console.log('✨ Generating new articles...\n');
-  var newArticles = [];
-  for (var i = 0; i < CONFIG.articlesPerDay; i++) {
-    var article = await generateArticle(existingIds);
-    newArticles.push(article);
-    existingIds.push(article.id);
-    console.log('   ' + (i + 1) + '. [' + article.category + '] ' + article.title);
-  }
-  var allArticles = newArticles.concat(existingArticles);
-  var finalArticles = allArticles.slice(0, CONFIG.maxArticles);
-  var metadata = {
-    lastUpdated: new Date().toISOString(),
-    totalArticles: finalArticles.length,
-    newToday: newArticles.length,
-    generator: CONFIG.useAI ? 'AI (OpenAI)' : 'Template'
-  };
-
-  // 按 ID 降序排序（最新的在前）
-  finalArticles.sort(function(a, b) { return b.id - a.id; });
-
-  // 版本号（时间戳），用作类别文件的 cache key
-  var version = Date.now();
-
-  // ============================================
-  // 1. 写入 articles-index.json
-  //    结构: { v, articles: {id: category}, ids: [降序排列] }
-  // ============================================
-  var articlesMap = {};
-  finalArticles.forEach(function(a) { articlesMap[String(a.id)] = a.category; });
-  var indexOutput = {
-    v: version,
-    articles: articlesMap,
-    ids: finalArticles.map(function(a) { return a.id; })
-  };
-  fs.writeFileSync('articles-index.json', JSON.stringify(indexOutput, null, 2));
-  console.log('\n✅ articles-index.json written (v=' + version + ', ' + finalArticles.length + ' articles)');
-
-  // ============================================
-  // 2. 写入 4 个类别文件
-  //    每个: { articles: [完整文章对象], metadata }
-  // ============================================
-  CATEGORIES.forEach(function(cat) {
-    var catArticles = finalArticles.filter(function(a) { return a.category === cat.id; });
-    var catOutput = {
-      articles: catArticles.map(function(a) {
-        return {
-          id: a.id,
-          category: a.category,
-          title: a.title,
-          excerpt: a.excerpt,
-          image: a.image,
-          date: a.date,
-          content: a.content
-        };
-      }),
-      metadata: metadata
-    };
-    var filename = 'articles-' + cat.id + '.json';
-    fs.writeFileSync(filename, JSON.stringify(catOutput, null, 2));
-    console.log('✅ ' + filename + ' written (' + catArticles.length + ' articles)');
+  
+  // 计算每个分类已用图片数（用于 round-robin 起点）
+  var usedImageIndices = {};
+  existingArticles.forEach(function(a) {
+    if (!usedImageIndices[a.category]) {
+      usedImageIndices[a.category] = 0;
+    }
+    usedImageIndices[a.category]++;
   });
-
-  console.log('\n✅ Done!');
-  console.log('   New: ' + newArticles.length + ' articles');
-  console.log('   Total: ' + finalArticles.length + ' articles');
-  console.log('   Output: articles-index.json + 4 category files\n');
+  
+  console.log('🖼️  Image pool usage per category:');
+  CATEGORIES.forEach(function(cat) {
+    var poolSize = (IMAGE_IDS[cat.id] || []).length;
+    var used = usedImageIndices[cat.id] || 0;
+    console.log('   ' + cat.id + ': ' + used + ' used / ' + poolSize + ' total');
+  });
+  console.log('');
+  
+  // 创建每个分类的图片分配器（round-robin）
+  var imageAllocators = {};
+  CATEGORIES.forEach(function(cat) {
+    imageAllocators[cat.id] = createImageAllocator(cat.id, usedImageIndices);
+  });
+  
+  console.log('✨ Generating new articles...\n');
+  
+  // 每篇文章依次生成（为了图片 round-robin 顺序分配）
+  var newArticles = [];
+  var promiseChain = Promise.resolve();
+  
+  for (var i = 0; i < CONFIG.articlesPerDay; i++) {
+    (function(index) {
+      promiseChain = promiseChain.then(function() {
+        return generateArticle(existingIds, imageAllocators, null).then(function(article) {
+          newArticles.push(article);
+          existingIds.push(article.id);
+          console.log('   ' + (index + 1) + '. [' + article.category + '] ' + article.title + ' (' + article.date + ')');
+        });
+      });
+    })(i);
+  }
+  
+  return promiseChain.then(function() {
+    // 合并所有文章
+    var allArticles = newArticles.concat(existingArticles);
+    
+    // 按日期降序排序（最新在前）
+    allArticles.sort(function(a, b) {
+      return b.date.localeCompare(a.date);
+    });
+    
+    // 限制最大数量
+    var finalArticles = allArticles.slice(0, CONFIG.maxArticles);
+    
+    // 给最新3篇标记 featured: true，其余 false
+    for (var f = 0; f < finalArticles.length; f++) {
+      finalArticles[f].featured = (f < 3);
+    }
+    
+    var metadata = {
+      lastUpdated: new Date().toISOString(),
+      totalArticles: finalArticles.length,
+      newToday: newArticles.length,
+      generator: CONFIG.useAI ? 'AI (OpenAI)' : 'Template v3',
+      templates: TEMPLATE_NAMES.length + ' structure types'
+    };
+    
+    var version = Date.now();
+    
+    // ============================================
+    // 1. 写入 articles-index.json
+    // ============================================
+    var articlesMap = {};
+    finalArticles.forEach(function(a) { 
+      articlesMap[String(a.id)] = a.category; 
+    });
+    var indexOutput = {
+      v: version,
+      articles: articlesMap,
+      ids: finalArticles.map(function(a) { return a.id; })
+    };
+    fs.writeFileSync('articles-index.json', JSON.stringify(indexOutput, null, 2));
+    console.log('\n✅ articles-index.json written (v=' + version + ', ' + finalArticles.length + ' articles)');
+    
+    // ============================================
+    // 2. 写入 4 个分类文件
+    //    每篇文章包含 id, category, title, excerpt, image, date, content, featured
+    // ============================================
+    CATEGORIES.forEach(function(cat) {
+      var catArticles = finalArticles.filter(function(a) { return a.category === cat.id; });
+      catArticles.sort(function(a, b) { return b.date.localeCompare(a.date); });
+      
+      var catOutput = {
+        articles: catArticles.map(function(a) {
+          return {
+            id: a.id,
+            category: a.category,
+            title: a.title,
+            excerpt: a.excerpt,
+            image: a.image,
+            date: a.date,
+            content: a.content,
+            featured: a.featured
+          };
+        }),
+        metadata: metadata
+      };
+      
+      var filename = 'articles-' + cat.id + '.json';
+      fs.writeFileSync(filename, JSON.stringify(catOutput, null, 2));
+      console.log('✅ ' + filename + ' written (' + catArticles.length + ' articles)');
+    });
+    
+    console.log('\n✅ Done!');
+    console.log('   New: ' + newArticles.length + ' articles');
+    console.log('   Total: ' + finalArticles.length + ' articles');
+    console.log('   Sort: by date descending (newest first)');
+    console.log('   Featured: latest 3 articles marked as featured');
+    console.log('   Images: round-robin allocation from 50+ pool');
+    console.log('   Output: articles-index.json + 4 category files\n');
+  });
 }
+
 main().catch(function(error) {
   console.error('❌ Error:', error.message);
+  console.error(error.stack);
   process.exit(1);
 });

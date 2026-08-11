@@ -219,7 +219,7 @@
             jsonFile: 'articles-technology.json',
             titleSuffix: 'Technology News & Innovation Insights | HelloInsights',
             metaDesc: 'Explore the latest technology news, product reviews, digital innovation and industry insights from HelloInsights Technology.',
-            heroIntro: '',
+            heroIntro: '<p>Technology is reshaping every aspect of our lives. HelloInsights Technology covers <strong>AI, Cybersecurity, Cloud Computing, Web3, IoT, and Emerging Tech</strong>, delivering in-depth analysis of the innovations driving the future.</p><p>We go beyond product launches and press releases to explore how technology transforms industries, economies, and everyday experiences.</p>',
             gaId: 'G-TECH-XXXXXXX',
             featuredTopics: ['AI', 'Cybersecurity', 'Cloud', 'Web3', 'IoT']
         },
@@ -231,7 +231,7 @@
             jsonFile: 'articles-ai-tools.json',
             titleSuffix: 'AI Tools News & Reviews | HelloInsights',
             metaDesc: 'Explore the latest AI tools news, reviews, and artificial intelligence insights from HelloInsights AI Tools.',
-            heroIntro: '',
+            heroIntro: '<p>AI tools are redefining productivity, creativity, and decision-making. HelloInsights AI Tools covers <strong>ChatGPT, AI Image Generation, AI Coding, Automation, ML Platforms</strong>, and more — from practical reviews to strategic analysis.</p><p>We help you navigate the rapidly evolving AI landscape, so you can choose the right tools and stay ahead of the curve.</p>',
             gaId: 'G-AITOOLS-XXXXXXX',
             featuredTopics: ['ChatGPT', 'AI Image', 'AI Coding', 'Automation', 'ML Platforms']
         },
@@ -243,21 +243,50 @@
             jsonFile: 'articles-health-lifestyle.json',
             titleSuffix: 'Health & Lifestyle Insights | HelloInsights',
             metaDesc: 'Explore the latest health news, wellness tips, and lifestyle insights from HelloInsights Health & Lifestyle.',
-            heroIntro: '',
+            heroIntro: '<p>Living well starts with informed choices. HelloInsights Health & Lifestyle explores <strong>Nutrition, Fitness, Mental Health, Sleep, Wellness, and Sustainable Living</strong>, blending science-backed research with practical advice.</p><p>From the latest health breakthroughs to everyday wellness tips, we help you build a healthier, more balanced life.</p>',
             gaId: 'G-HEALTH-XXXXXXX',
             featuredTopics: ['Nutrition', 'Fitness', 'Mental Health', 'Sleep', 'Wellness']
         }
     };
-    // ===== MAIN DOMAIN TITLE/META =====
+
+    // ===== MAIN DOMAIN CONFIG =====
     var MAIN_DOMAIN_TITLE = 'HelloInsights | Technology, Finance, AI & Lifestyle Insights';
     var MAIN_DOMAIN_META = 'Explore the latest insights on technology, finance, AI tools, health, and lifestyle. Discover practical ideas, trends, and expert perspectives with HelloInsights.';
-    // ===== GA4 — Independent per subdomain =====
+    var MAIN_DOMAIN_NAME = 'HelloInsights';
+    var MAIN_DOMAIN_TAGLINE = 'TECHNOLOGY · FINANCE · AI TOOLS · HEALTH & LIFESTYLE';
+    var MAIN_DOMAIN_ABOUT = 'HelloInsights delivers curated insights across technology, finance, AI tools, and health & lifestyle. We connect ideas, trends, and expert perspectives to help you make smarter decisions.';
+    var MAIN_DOMAIN_HERO_INTRO = '<p>HelloInsights brings together curated insights across <strong>Technology, Finance, AI Tools, and Health & Lifestyle</strong> — connecting ideas, trends, and expert perspectives in one place.</p><p>From market analysis and AI breakthroughs to wellness tips and lifestyle trends, we help you discover practical ideas and stay ahead of what matters.</p>';
+    var MAIN_DOMAIN_GA_ID = 'G-Q4QHZKZT46';
+    var BASE_DOMAIN = 'helloinsights.online';
+
+    // ===== ALL CATEGORY NAMES (for main domain) =====
+    var ALL_CATEGORY_NAMES = {};
     (function() {
-        var host = window.location.hostname;
-        var sub = host.split('.')[0];
-        var cfg = SITE_CONFIGS[sub];
-        var isSubdomain = !!cfg;
-        var gaId = isSubdomain ? cfg.gaId : 'G-Q4QHZKZT46';
+        var keys = Object.keys(SITE_CONFIGS);
+        for (var i = 0; i < keys.length; i++) {
+            ALL_CATEGORY_NAMES[keys[i]] = SITE_CONFIGS[keys[i]].name;
+        }
+    })();
+
+    // ===== ALL FALLBACK IMAGES (for main domain) =====
+    var ALL_FALLBACK_IMAGES = {};
+    (function() {
+        var keys = Object.keys(SITE_CONFIGS);
+        for (var i = 0; i < keys.length; i++) {
+            ALL_FALLBACK_IMAGES[keys[i]] = SITE_CONFIGS[keys[i]].fallbackImage;
+        }
+    })();
+
+    // ===== DETECT DOMAIN =====
+    var host = window.location.hostname;
+    var sub = host.split('.')[0];
+    var IS_MAIN_DOMAIN = !SITE_CONFIGS[sub];
+    var CFG = IS_MAIN_DOMAIN ? null : SITE_CONFIGS[sub];
+    var CAT_ID = IS_MAIN_DOMAIN ? '' : sub;
+
+    // ===== GA4 =====
+    (function() {
+        var gaId = IS_MAIN_DOMAIN ? MAIN_DOMAIN_GA_ID : CFG.gaId;
         if (!gaId || gaId.indexOf('XXXXXXX') !== -1) return;
         var s = document.createElement('script');
         s.async = true;
@@ -269,65 +298,116 @@
         gtag('js', new Date());
         gtag('config', gaId);
     })();
-    // ===== Auto-detect subdomain =====
-    var host = window.location.hostname;
-    var sub = host.split('.')[0];
-    var CFG = SITE_CONFIGS[sub] || SITE_CONFIGS['finance'];
-    var IS_MAIN_DOMAIN = !SITE_CONFIGS[sub];
-    var CAT_ID = sub;
-    window.IS_SUBDOMAIN = !!SITE_CONFIGS[sub];
+
     // ===== APPLY CONFIG TO PAGE =====
     if (IS_MAIN_DOMAIN) {
         document.title = MAIN_DOMAIN_TITLE;
         document.querySelector('meta[name="description"]').setAttribute('content', MAIN_DOMAIN_META);
+        document.getElementById('siteName').textContent = MAIN_DOMAIN_NAME;
+        document.getElementById('siteTagline').textContent = MAIN_DOMAIN_TAGLINE;
+        document.getElementById('footerAboutTitle').textContent = 'About HelloInsights';
+        document.getElementById('footerAboutText').textContent = MAIN_DOMAIN_ABOUT;
+        document.getElementById('heroIntro').innerHTML = MAIN_DOMAIN_HERO_INTRO;
     } else {
         document.title = CFG.titleSuffix;
         document.querySelector('meta[name="description"]').setAttribute('content', CFG.metaDesc);
-    }
-    document.getElementById('siteName').textContent = CFG.name;
-    document.getElementById('siteTagline').textContent = CFG.tagline;
-    document.getElementById('footerAboutTitle').textContent = 'About ' + CFG.name;
-    document.getElementById('footerAboutText').textContent = CFG.aboutText;
-    // Hero Intro
-    var heroIntroEl = document.getElementById('heroIntro');
-    if (heroIntroEl && CFG.heroIntro) {
-        heroIntroEl.innerHTML = CFG.heroIntro;
-    } else if (heroIntroEl) {
-        heroIntroEl.style.display = 'none';
-    }
-    // Featured topic tags
-    var tagsEl = document.getElementById('featuredTags');
-    if (tagsEl && CFG.featuredTopics) {
-        var tagsHtml = '';
-        for (var t = 0; t < CFG.featuredTopics.length; t++) {
-            tagsHtml += '<a href="#" onclick="searchByTopic(\'' + CFG.featuredTopics[t].replace(/'/g, "\\'") + '\');return false;">' + CFG.featuredTopics[t] + '</a>';
+        document.getElementById('siteName').textContent = CFG.name;
+        document.getElementById('siteTagline').textContent = CFG.tagline;
+        document.getElementById('footerAboutTitle').textContent = 'About ' + CFG.name;
+        document.getElementById('footerAboutText').textContent = CFG.aboutText;
+        if (CFG.heroIntro) {
+            document.getElementById('heroIntro').innerHTML = CFG.heroIntro;
+        } else {
+            document.getElementById('heroIntro').style.display = 'none';
         }
-        tagsEl.innerHTML = tagsHtml;
     }
-    // Nav
-    document.getElementById('navList').innerHTML =
-        '<li><a href="index.html">Home</a></li>' +
-        '<li><a href="index.html" class="active">' + CFG.name + '</a></li>';
-    // Footer links
-    document.getElementById('footerLinks').innerHTML =
-        '<li><a href="index.html">Home</a></li>' +
-        '<li><a href="index.html">' + CFG.name + '</a></li>';
+
+    // ===== NAVIGATION =====
+    function buildSubdomainUrl(catId) {
+        return 'https://' + catId + '.' + BASE_DOMAIN;
+    }
+    (function() {
+        var navList = document.getElementById('navList');
+        if (IS_MAIN_DOMAIN) {
+            var html = '<li><a href="index.html" class="active">Home</a></li>';
+            var catKeys = Object.keys(SITE_CONFIGS);
+            for (var i = 0; i < catKeys.length; i++) {
+                var k = catKeys[i];
+                html += '<li><a href="' + buildSubdomainUrl(k) + '/index.html">' + SITE_CONFIGS[k].name + '</a></li>';
+            }
+            navList.innerHTML = html;
+        } else {
+            navList.innerHTML =
+                '<li><a href="' + buildSubdomainUrl('') + '/index.html">Home</a></li>' +
+                '<li><a href="index.html" class="active">' + CFG.name + '</a></li>';
+        }
+    })();
+
+    // ===== FOOTER LINKS =====
+    (function() {
+        var footerLinks = document.getElementById('footerLinks');
+        if (IS_MAIN_DOMAIN) {
+            var html = '<li><a href="index.html">Home</a></li>';
+            var catKeys = Object.keys(SITE_CONFIGS);
+            for (var i = 0; i < catKeys.length; i++) {
+                var k = catKeys[i];
+                html += '<li><a href="' + buildSubdomainUrl(k) + '/index.html">' + SITE_CONFIGS[k].name + '</a></li>';
+            }
+            footerLinks.innerHTML = html;
+        } else {
+            footerLinks.innerHTML =
+                '<li><a href="' + buildSubdomainUrl('') + '/index.html">Home</a></li>' +
+                '<li><a href="index.html">' + CFG.name + '</a></li>';
+        }
+    })();
+
+    // ===== FEATURED TOPIC TAGS =====
+    (function() {
+        var tagsEl = document.getElementById('featuredTags');
+        if (!tagsEl) return;
+        if (IS_MAIN_DOMAIN) {
+            // Show all category names as tags, linking to subdomain
+            var html = '';
+            var catKeys = Object.keys(SITE_CONFIGS);
+            for (var i = 0; i < catKeys.length; i++) {
+                var k = catKeys[i];
+                html += '<a href="' + buildSubdomainUrl(k) + '/index.html">' + SITE_CONFIGS[k].name + '</a>';
+            }
+            tagsEl.innerHTML = html;
+        } else if (CFG.featuredTopics) {
+            var html2 = '';
+            for (var t = 0; t < CFG.featuredTopics.length; t++) {
+                html2 += '<a href="#" onclick="searchByTopic(\'' + CFG.featuredTopics[t].replace(/'/g, "\\'") + '\');return false;">' + CFG.featuredTopics[t] + '</a>';
+            }
+            tagsEl.innerHTML = html2;
+        }
+    })();
+
     // ===== ARTICLE LOGIC =====
     var ARTICLES_PER_PAGE = 9;
     var currentPage = 1;
     var filteredArticles = [];
     var isSearching = false;
     var searchQuery = '';
-    var categoryNames = {};
-    categoryNames[CAT_ID] = CFG.name;
-    var fallbackImages = {};
-    fallbackImages[CAT_ID] = CFG.fallbackImage;
-    var defaultFallback = CFG.fallbackImage;
+    var categoryNames = IS_MAIN_DOMAIN ? ALL_CATEGORY_NAMES : {};
+    if (!IS_MAIN_DOMAIN) categoryNames[CAT_ID] = CFG.name;
+    var fallbackImages = IS_MAIN_DOMAIN ? ALL_FALLBACK_IMAGES : {};
+    if (!IS_MAIN_DOMAIN) fallbackImages[CAT_ID] = CFG.fallbackImage;
+    var defaultFallback = IS_MAIN_DOMAIN ? ALL_FALLBACK_IMAGES['finance'] : CFG.fallbackImage;
     var allArticlesCache = [];
     var latestExpanded = false;
     var featuredExpanded = false;
     var featuredArticles = [];
     var latestArticles = [];
+
+    // Build article URL (main domain links to subdomain article page)
+    function getArticleUrl(article) {
+        if (IS_MAIN_DOMAIN) {
+            return buildSubdomainUrl(article.category) + '/article.html?id=' + article.id;
+        }
+        return 'article.html?id=' + article.id;
+    }
+
     // Format date
     function formatDate(dateStr) {
         if (!dateStr) return '';
@@ -337,25 +417,30 @@
         var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
         return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
     }
+
     function getFallbackImage(cat) { return fallbackImages[cat] || defaultFallback; }
+
     function createArticleCard(article) {
         var catName = categoryNames[article.category] || article.category;
         var fb = getFallbackImage(article.category);
         var dateDisplay = formatDate(article.date);
+        var articleUrl = getArticleUrl(article);
         return '<article class="article-card">' +
             '<div class="card-image"><img src="' + article.image + '" alt="' + article.title + '" width="600" height="400" loading="lazy" decoding="async" onerror="this.src=\'' + fb + '\'"></div>' +
             '<div class="card-content">' +
             '<span class="card-category">' + catName + '</span>' +
-            '<h3 class="card-title"><a href="article.html?id=' + article.id + '">' + article.title + '</a></h3>' +
+            '<h3 class="card-title"><a href="' + articleUrl + '">' + article.title + '</a></h3>' +
             '<p class="card-excerpt">' + article.excerpt + '</p>' +
             '<div class="card-meta"><span>' + dateDisplay + '</span></div>' +
-            '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More</a>' +
+            '<a href="' + articleUrl + '" class="read-more-btn">Read More</a>' +
             '</div></article>';
     }
+
     // Inline ad banner HTML
     function createInlineAdBanner(slotId) {
         return '<div class="inline-ad-banner"><div class="ad-slot" data-ad-slot="' + slotId + '"></div></div>';
     }
+
     function renderPagination(total) {
         var pages = Math.ceil(total / ARTICLES_PER_PAGE);
         var el = document.getElementById('pagination');
@@ -380,6 +465,7 @@
         else h += '<span class="page-btn disabled">›</span>';
         el.innerHTML = h;
     }
+
     function changePage(p) {
         if (isSearching) {
             var t = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
@@ -394,6 +480,7 @@
         }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
     function handleSearch() {
         var input = document.getElementById('searchInput');
         if (!input) return;
@@ -411,12 +498,14 @@
         if (si && st) { si.style.display = 'block'; st.textContent = 'Found ' + filteredArticles.length + ' results for "' + q + '"'; }
         renderSearchResults(filteredArticles);
     }
+
     function searchByTopic(topic) {
         var input = document.getElementById('searchInput');
         if (input) input.value = topic;
         handleSearch();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
     function clearSearch() {
         isSearching = false; searchQuery = ''; currentPage = 1;
         var input = document.getElementById('searchInput');
@@ -425,15 +514,18 @@
         if (si) si.style.display = 'none';
         fetchArticlesForPage(1);
     }
+
     function initSearch() {
         var input = document.getElementById('searchInput'), btn = document.getElementById('searchBtn');
         if (input) input.addEventListener('keypress', function(e) { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } });
         if (btn) btn.addEventListener('click', function(e) { e.preventDefault(); handleSearch(); });
     }
+
     function fetchArticlesForPage(page) {
         var start = (page - 1) * ARTICLES_PER_PAGE;
         renderPageArticles(allArticlesCache.slice(start, start + ARTICLES_PER_PAGE));
     }
+
     function renderPageArticles(articles) {
         var grid = document.getElementById('articleGrid');
         var loading = document.getElementById('loading');
@@ -456,6 +548,7 @@
             window.AdConfig.renderAll();
         }
     }
+
     function renderSearchResults(articles) {
         var grid = document.getElementById('articleGrid');
         var loading = document.getElementById('loading');
@@ -480,6 +573,7 @@
             window.AdConfig.renderAll();
         }
     }
+
     // ===== Featured Insights (3 + Read More) =====
     function renderFeaturedInsights(articles) {
         featuredArticles = articles;
@@ -493,7 +587,8 @@
         for (var i = 0; i < showCount; i++) {
             var a = articles[i];
             var catName = categoryNames[a.category] || a.category;
-            html += '<a class="featured-card" href="article.html?id=' + a.id + '">' +
+            var articleUrl = getArticleUrl(a);
+            html += '<a class="featured-card" href="' + articleUrl + '">' +
                 '<p class="featured-card-title">' + a.title + '</p>' +
                 '<p class="featured-card-meta"><span class="cat">' + catName + '</span> · ' + formatDate(a.date) + '</p>' +
                 '<p class="featured-card-excerpt">' + a.excerpt + '</p>' +
@@ -512,6 +607,7 @@
         featuredExpanded = true;
         renderFeaturedInsights(featuredArticles);
     }
+
     // ===== Latest Insights (bottom, 3 + Read More) =====
     function renderLatestInsights(articles) {
         latestArticles = articles;
@@ -524,7 +620,8 @@
         for (var i = 0; i < showCount; i++) {
             var a = articles[i];
             var catName = categoryNames[a.category] || a.category;
-            html += '<a class="latest-card" href="article.html?id=' + a.id + '">' +
+            var articleUrl = getArticleUrl(a);
+            html += '<a class="latest-card" href="' + articleUrl + '">' +
                 '<p class="latest-card-title">' + a.title + '</p>' +
                 '<p class="latest-card-meta"><span class="cat">' + catName + '</span> · ' + formatDate(a.date) + '</p>' +
                 '<p class="latest-card-excerpt">' + a.excerpt + '</p>' +
@@ -543,41 +640,90 @@
         latestExpanded = true;
         renderLatestInsights(latestArticles);
     }
+
     // ===== Load Articles =====
-    fetch(CFG.jsonFile)
-        .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-        .then(function(data) {
-            allArticlesCache = data.articles || [];
-            // Sort by date descending
-            allArticlesCache.sort(function(a, b) {
-                return (b.date || '').localeCompare(a.date || '');
-            });
-            // Featured: articles with featured=true, or fallback to first 3
-            var featured = allArticlesCache.filter(function(a) { return a.featured === true; });
-            if (featured.length === 0) {
-                featured = allArticlesCache.slice(0, 3);
-            }
-            // Latest: top articles by date, excluding featured ones
-            var featuredIds = {};
-            for (var f = 0; f < featured.length; f++) featuredIds[featured[f].id] = true;
-            var latest = allArticlesCache.filter(function(a) { return !featuredIds[a.id]; }).slice(0, 12);
-            renderFeaturedInsights(featured);
-            renderLatestInsights(latest);
-            fetchArticlesForPage(1);
-            initSearch();
-        })
-        .catch(function(err) {
-            console.error('Load error:', err.message);
-            var grid = document.getElementById('articleGrid');
-            if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles: ' + err.message + '</p>';
+    function initApp(allArticles) {
+        allArticlesCache = allArticles;
+        allArticlesCache.sort(function(a, b) {
+            return (b.date || '').localeCompare(a.date || '');
         });
+        // Featured: articles with featured=true, or fallback to first 3
+        var featured = allArticlesCache.filter(function(a) { return a.featured === true; });
+        if (featured.length === 0) {
+            featured = allArticlesCache.slice(0, 3);
+        }
+        // Latest: top articles by date, excluding featured ones
+        var featuredIds = {};
+        for (var f = 0; f < featured.length; f++) featuredIds[featured[f].id] = true;
+        var latest = allArticlesCache.filter(function(a) { return !featuredIds[a.id]; }).slice(0, 12);
+        renderFeaturedInsights(featured);
+        renderLatestInsights(latest);
+        fetchArticlesForPage(1);
+        initSearch();
+    }
+
+    if (IS_MAIN_DOMAIN) {
+        // Main domain: load all 4 category JSONs in parallel, merge and sort
+        var jsonFiles = [
+            'articles-finance.json',
+            'articles-technology.json',
+            'articles-ai-tools.json',
+            'articles-health-lifestyle.json'
+        ];
+        var loadedCount = 0;
+        var mergedArticles = [];
+        var loadErrors = [];
+        for (var j = 0; j < jsonFiles.length; j++) {
+            (function(file) {
+                fetch(file)
+                    .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+                    .then(function(data) {
+                        var arts = data.articles || [];
+                        for (var k = 0; k < arts.length; k++) {
+                            mergedArticles.push(arts[k]);
+                        }
+                        loadedCount++;
+                        if (loadedCount === jsonFiles.length) {
+                            initApp(mergedArticles);
+                        }
+                    })
+                    .catch(function(err) {
+                        loadErrors.push(file + ': ' + err.message);
+                        loadedCount++;
+                        if (loadedCount === jsonFiles.length) {
+                            if (mergedArticles.length > 0) {
+                                console.warn('Partial load errors:', loadErrors);
+                                initApp(mergedArticles);
+                            } else {
+                                var grid = document.getElementById('articleGrid');
+                                if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles: ' + loadErrors.join('; ') + '</p>';
+                            }
+                        }
+                    });
+            })(jsonFiles[j]);
+        }
+    } else {
+        // Subdomain: load single category JSON
+        fetch(CFG.jsonFile)
+            .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+            .then(function(data) {
+                initApp(data.articles || []);
+            })
+            .catch(function(err) {
+                console.error('Load error:', err.message);
+                var grid = document.getElementById('articleGrid');
+                if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles: ' + err.message + '</p>';
+            });
+    }
+
     // Config loader integration
     if (typeof loadSiteConfig === 'function') {
         loadSiteConfig(function(config) {
             if (config && config.categories) {
                 for (var i = 0; i < config.categories.length; i++) {
-                    if (config.categories[i].id === CAT_ID) {
-                        categoryNames[CAT_ID] = config.categories[i].name;
+                    var catId = config.categories[i].id;
+                    if (categoryNames[catId] !== undefined) {
+                        categoryNames[catId] = config.categories[i].name;
                     }
                 }
             }

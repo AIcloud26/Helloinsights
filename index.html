@@ -378,11 +378,8 @@
     var featuredArticles = [];
     var latestArticles = [];
 
-    // Build article URL (main domain links to subdomain article page)
+    // Build article URL — always use relative path (main domain has its own article.html)
     function getArticleUrl(article) {
-        if (IS_MAIN_DOMAIN) {
-            return buildSubdomainUrl(article.category) + '/article.html?id=' + article.id;
-        }
         return 'article.html?id=' + article.id;
     }
 

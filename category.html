@@ -3,95 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Browse articles by category on HelloInsights.">
+    <meta name="description" content="Browse articles by category on HelloInsights." id="metaDesc">
+    <meta name="robots" content="index, follow">
     <title>Category - HelloInsights</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6b35'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold' font-size='22'%3EH%3C/text%3E%3C/svg%3E">
+    <!-- Dynamic canonical + OG set via JS -->
+    <link rel="canonical" href="https://www.helloinsights.online/category.html" id="canonicalUrl">
+    <meta property="og:title" content="Category - HelloInsights" id="ogTitle">
+    <meta property="og:description" content="Browse articles by category on HelloInsights." id="ogDesc">
+    <meta property="og:url" content="https://www.helloinsights.online/category.html" id="ogUrl">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="" id="ogImage">
+    <meta property="og:site_name" content="HelloInsights">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Category - HelloInsights" id="twTitle">
+    <meta name="twitter:description" content="Browse articles by category on HelloInsights." id="twDesc">
+    <meta name="twitter:image" content="" id="twImage">
+    <!-- JSON-LD: CollectionPage + BreadcrumbList (populated dynamically) -->
+    <script type="application/ld+json" id="jsonLdCollection">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "",
+        "description": "",
+        "url": ""
+    }
+    </script>
+    <script type="application/ld+json" id="jsonLdBreadcrumb">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": []
+    }
+    </script>
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <!-- Ads -->
-    <script src="ads-config.js" defer></script>
+    <!-- Critical CSS (inline) -->
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--accent-color:#ff6b35;--primary-color:var(--accent-color);--primary-hover:#e85a2a;--text-dark:#333333;--text-medium:#666666;--text-light:#999999;--bg-light:#f5f5f5;--white:#ffffff;--shadow:0 2px 10px rgba(0,0,0,0.08);--shadow-hover:0 4px 20px rgba(0,0,0,0.12);--border-radius:12px;--transition:all 0.3s ease}
+        html{font-size:16px;scroll-behavior:smooth;overflow-x:hidden}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.7;color:var(--text-dark);background-color:var(--bg-light);min-height:100vh;font-size:1rem;overflow-x:hidden}
+        .header{background:var(--white);box-shadow:var(--shadow);position:sticky;top:0;z-index:1000}
+        .header-content{max-width:1400px;margin:0 auto;padding:0.5rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+        .logo{font-size:1.3rem;font-weight:700;color:var(--text-dark);text-decoration:none;display:flex;align-items:center;gap:0.5rem}
+        .logo-img{max-height:3rem;width:auto;border-radius:10px;object-fit:contain;display:block}
+        .nav-container{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+        .nav{display:flex;gap:0.25rem;list-style:none}
+        .nav a{text-decoration:none;color:var(--text-medium);padding:0.4rem 0.8rem;border-radius:6px;transition:var(--transition);font-weight:500;font-size:0.9rem}
+        .nav a:hover,.nav a.active{color:var(--primary-color);background:rgba(255,107,53,0.1)}
+        .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;min-width:44px;min-height:44px;justify-content:center;align-items:center}
+        .menu-toggle span{width:28px;height:3px;background:var(--text-dark);border-radius:2px;transition:var(--transition)}
+        .search-box{display:flex;align-items:center;background:var(--bg-light);border-radius:10px;padding:0.6rem 1.2rem;border:1px solid transparent;transition:var(--transition)}
+        .search-box:focus-within{border-color:var(--primary-color);background:var(--white)}
+        .search-box input{border:none;background:transparent;outline:none;width:200px;font-size:1rem;color:var(--text-dark)}
+        .search-box button{background:none;border:none;cursor:pointer;color:var(--text-light);font-size:1.1rem;transition:var(--transition);min-width:44px;min-height:44px}
+        .container{max-width:1400px;margin:0 auto;padding:2.5rem 3rem}
+        .page-header{text-align:center;margin-bottom:3.5rem;padding:0 1rem}
+        .page-header h1{font-size:2.5rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-color);font-weight:900;margin-bottom:1rem;line-height:1.3}
+        .page-header .site-description{color:var(--text-medium);font-size:1.15rem;line-height:1.7;max-width:650px;margin:0 auto}
+        .article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+        .article-card{background:var(--white);border-radius:var(--border-radius);box-shadow:var(--shadow);overflow:hidden;transition:var(--transition);display:flex;flex-direction:column;contain:layout style}
+        .article-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-hover)}
+        .card-image{width:100%;aspect-ratio:3/2;overflow:hidden;background:linear-gradient(110deg,#f0f0f0 8%,#e8e8e8 18%,#f0f0f0 33%);background-size:200% 100%}
+        .card-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s ease;display:block}
+        .article-card:hover .card-image img{transform:scale(1.05)}
+        .card-content{padding:1.75rem;flex:1;display:flex;flex-direction:column}
+        .card-category{display:inline-block;background:rgba(255,107,53,0.1);color:var(--primary-color);padding:0.3rem 0.9rem;border-radius:5px;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.9rem;width:fit-content}
+        .card-title{font-size:1.25rem;font-weight:600;color:var(--text-dark);margin-bottom:0.9rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        .card-title a{text-decoration:none;color:inherit;transition:var(--transition)}
+        .card-title a:hover{color:var(--primary-color)}
+        .card-excerpt{color:var(--text-medium);font-size:0.95rem;line-height:1.65;margin-bottom:1.2rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+        .card-meta{display:flex;align-items:center;gap:1.2rem;font-size:0.9rem;color:var(--text-light);margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid #eee}
+        .card-meta span{display:flex;align-items:center;gap:0.35rem}
+        .read-more-btn{display:flex;align-items:center;justify-content:center;background:var(--primary-color);color:var(--white);text-decoration:none;padding:0.85rem 1.75rem;border-radius:10px;font-weight:500;font-size:0.95rem;transition:var(--transition);width:100%;margin-top:auto}
+        .read-more-btn:hover{background:var(--primary-hover);transform:translateY(-3px);box-shadow:0 4px 12px rgba(255,107,53,0.3)}
+        [data-ad-slot]{display:none;max-width:728px;margin:0 auto;padding:0;overflow:hidden;min-height:250px}
+        [data-ad-slot].ad-visible{display:block!important;margin:1.5rem auto!important;padding:0.5rem!important}
+        /* Skeleton */
+        .skeleton-card{background:var(--white);border-radius:var(--border-radius);box-shadow:var(--shadow);overflow:hidden}
+        .skeleton-card .sk-img{aspect-ratio:3/2;background:linear-gradient(110deg,#f0f0f0 8%,#e8e8e8 18%,#f0f0f0 33%);background-size:200% 100%;animation:shimmer 1.5s linear infinite}
+        .skeleton-card .sk-body{padding:1.75rem}
+        .skeleton-card .sk-line{height:14px;background:#eee;border-radius:4px;margin-bottom:0.75rem}
+        .skeleton-card .sk-line.w60{width:60%}
+        .skeleton-card .sk-line.w80{width:80%}
+        .skeleton-card .sk-line.w40{width:40%}
+        .skeleton-card .sk-cat{width:80px;height:24px;background:rgba(255,107,53,0.1);border-radius:5px;margin-bottom:0.9rem}
+        @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+        /* Pagination */
+        .pagination{display:flex;justify-content:center;align-items:center;gap:0.5rem;margin-top:3rem}
+        .pagination .page-btn{display:flex;align-items:center;justify-content:center;min-width:48px;height:48px;padding:0 8px;border-radius:12px;background:var(--white);color:var(--text-medium);text-decoration:none;font-weight:600;font-size:0.95rem;box-shadow:0 2px 8px rgba(0,0,0,0.08);border:1px solid rgba(0,0,0,0.04);transition:all 0.25s ease;cursor:pointer;user-select:none;line-height:1}
+        .pagination .page-btn:hover:not(.disabled):not(.active){background:rgba(255,107,53,0.08);color:var(--primary-color);transform:translateY(-2px)}
+        .pagination .page-btn.active{background:var(--primary-color);color:var(--white);padding:0 16px;box-shadow:0 4px 14px rgba(255,107,53,0.35);cursor:default}
+        .pagination .page-btn.disabled{opacity:0.35;cursor:not-allowed;pointer-events:none}
+        /* Footer */
+        .footer{background:var(--text-dark);color:var(--white);padding:3.5rem 3rem;margin-top:4rem}
+        .footer-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:3rem}
+        .footer-section h4{font-size:1.2rem;margin-bottom:1.2rem;color:var(--white)}
+        .footer-section p,.footer-section a{color:#aaa;font-size:0.95rem;line-height:1.85;text-decoration:none}
+        .footer-section a:hover{color:var(--primary-color)}
+        .footer-section ul{list-style:none}
+        .footer-section ul li{margin-bottom:0.6rem}
+        .footer-bottom{max-width:1400px;margin:2.5rem auto 0;padding-top:2rem;border-top:1px solid #444;text-align:center;color:#777;font-size:0.9rem}
+        .back-to-top{position:fixed;bottom:2.5rem;right:2.5rem;width:55px;height:55px;background:var(--primary-color);color:white;border:none;border-radius:50%;cursor:pointer;font-size:1.6rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-hover);transition:var(--transition);opacity:0;visibility:hidden;z-index:999}
+        .back-to-top.visible{opacity:1;visibility:visible}
+        .back-to-top:hover{background:var(--primary-hover);transform:translateY(-3px)}
+        a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--primary-color);outline-offset:2px;border-radius:4px}
+        @media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+        @media(max-width:1200px){.container,.header-content{padding-left:2rem;padding-right:2rem}.article-grid{grid-template-columns:repeat(2,1fr);gap:2rem}}
+        @media(max-width:768px){html{font-size:15px}.header-content{padding:0.5rem 1.25rem}.menu-toggle{display:flex}.nav-container{display:none;width:100%;flex-direction:column;gap:1rem;padding-top:1rem}.nav-container.active{display:flex}.nav{flex-direction:column;width:100%}.nav a{padding:0.8rem 1rem;text-align:center;border-bottom:1px solid #eee}.search-box{width:100%}.search-box input{width:100%}.container{padding:1.5rem 1.25rem}.article-grid{grid-template-columns:1fr;gap:1.75rem}.page-header{margin-bottom:2rem}.page-header h1{font-size:1.75rem;letter-spacing:0.08em}.page-header .site-description{font-size:1rem}.footer{padding:2.5rem 1.5rem}.footer-content{grid-template-columns:1fr;text-align:center;gap:2rem}.back-to-top{bottom:1.5rem;right:1.5rem;width:48px;height:48px;font-size:1.4rem}[data-ad-slot]{min-height:200px}.pagination .page-btn{min-width:40px;height:40px;font-size:0.85rem;border-radius:10px}}
+        @media(max-width:480px){.container{padding:1.25rem 1rem}.page-header h1{font-size:1.5rem}.pagination .page-btn{min-width:36px;height:36px;font-size:0.8rem;border-radius:8px}}
+        @media print{.header,.footer,.back-to-top,[data-ad-slot]{display:none}body{background:white}}
+    </style>
+    <!-- Full stylesheet (async) -->
     <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="style.css"></noscript>
+    <!-- Ads -->
+    <script src="ads-config.js" defer></script>
     <script src="config-loader.js" async></script>
 </head>
 <body>
-    <header class="header">
+    <header class="header" role="banner">
         <div class="header-content">
-            <a href="index.html" class="logo">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 58" width="180" height="58" role="img" aria-label="HelloInsights logo" style="max-height:2.2rem;width:auto;display:block;">
-  <defs>
-    <linearGradient id="orange" x1="0" y1="0" x2="0.9" y2="1">
-      <stop offset="0%" stop-color="#FFB13B"/>
-      <stop offset="100%" stop-color="#FF4B12"/>
-    </linearGradient>
-    <linearGradient id="hello" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1B252B"/>
-      <stop offset="100%" stop-color="#111A20"/>
-    </linearGradient>
-  </defs>
-  <path d="M7.2 11.5 C7.2 8.3 9.8 5.8 13 5.8 H39.3 C42.5 5.8 45 8.3 45 11.5 V36.8 C45 40 42.5 42.5 39.3 42.5 H22.2 L16.5 47.3 C15.8 47.9 14.7 47.4 14.7 46.5 V42.5 H13 C9.8 42.5 7.2 40 7.2 36.8 Z" fill="url(#orange)"/>
-  <path d="M15.4 12.7 H20.8 V21.2 H28.8 V12.7 H34.2 V35.5 H28.8 V26.4 H20.8 V35.5 H15.4 Z" fill="#FFFFFF"/>
-  <g fill="#FF9B27">
-    <rect x="36.3" y="4.2" width="2.2" height="2.2" rx="0.35"/>
-    <rect x="42.0" y="2.8" width="1.9" height="1.9" rx="0.3"/>
-    <rect x="39.4" y="7.5" width="2.0" height="2.0" rx="0.3"/>
-    <rect x="45.0" y="6.3" width="1.6" height="1.6" rx="0.25"/>
-    <rect x="35.0" y="9.1" width="1.6" height="1.6" rx="0.25"/>
-    <rect x="42.5" y="10.5" width="2.0" height="2.0" rx="0.3"/>
-    <rect x="46.8" y="11.8" width="1.4" height="1.4" rx="0.2"/>
-    <rect x="38.2" y="13.1" width="1.5" height="1.5" rx="0.2"/>
-  </g>
-  <text x="53.5" y="35.2" font-family="Arial, Helvetica, sans-serif" font-size="17.2" font-weight="700" letter-spacing="-0.75" fill="url(#hello)">Hello</text>
-  <text x="100.5" y="35.2" font-family="Arial, Helvetica, sans-serif" font-size="17.2" font-weight="700" letter-spacing="-0.75" fill="#FF4B12">Insights</text>
-</svg>
+            <a href="index.html" class="logo" aria-label="HelloInsights Home">
+                <img src="logo.svg" alt="HelloInsights" class="logo-img" width="48" height="48">
             </a>
-            <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="menu-toggle" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMenu()" onkeydown="if(event.keyCode===13||event.keyCode===32){event.preventDefault();toggleMenu()}">
                 <span></span><span></span><span></span>
             </div>
             <div class="nav-container" id="navContainer">
-                <nav>
+                <nav role="navigation" aria-label="Main navigation">
                     <ul class="nav">
                         <li><a href="index.html">All</a></li>
                         <li><a href="category.html?cat=technology">Technology</a></li>
                         <li><a href="category.html?cat=finance">Finance</a></li>
                         <li><a href="category.html?cat=ai-tools">AI Tools</a></li>
-                        <li><a href="category.html?cat=health-lifestyle">Health & Lifestyle</a></li>
+                        <li><a href="category.html?cat=health-lifestyle">Health &amp; Lifestyle</a></li>
                     </ul>
                 </nav>
-                <div class="search-box">
-                    <input type="text" placeholder="Search articles..." id="searchInput">
-                    <button type="button" id="searchBtn">🔍</button>
+                <div class="search-box" role="search">
+                    <input type="text" placeholder="Search articles..." id="searchInput" aria-label="Search articles">
+                    <button type="button" id="searchBtn" aria-label="Search">&#128269;</button>
                 </div>
             </div>
         </div>
     </header>
-    <main class="container">
-        <!-- AdSense Top -->
+    <main class="container" role="main">
         <div data-ad-slot="cat-top"></div>
-        <div class="page-header" id="categoryHeader">
-            <h2 class="site-tagline" id="categoryTitle">Category</h2>
+        <section class="page-header" id="categoryHeader">
+            <h1 id="categoryTitle">Category</h1>
             <p class="site-description" id="categoryDesc">Browse articles in this category.</p>
-        </div>
-        <div id="searchInfo" style="display:none;margin-bottom:1rem;padding:.5rem 1rem;background:#fff3cd;border-radius:8px;">
-            <span id="searchText"></span>
-            <button onclick="clearSearch()" style="margin-left:10px;background:#ff6b35;color:white;border:none;padding:2px 10px;border-radius:4px;cursor:pointer;">Clear</button>
-        </div>
+        </section>
         <div class="article-grid" id="articleGrid">
-            <div class="loading" id="loading"></div>
+            <!-- Skeleton placeholders -->
+            <div class="skeleton-card" aria-hidden="true"><div class="sk-img"></div><div class="sk-body"><div class="sk-cat"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line"></div><div class="sk-line w40"></div></div></div>
+            <div class="skeleton-card" aria-hidden="true"><div class="sk-img"></div><div class="sk-body"><div class="sk-cat"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line"></div><div class="sk-line w40"></div></div></div>
+            <div class="skeleton-card" aria-hidden="true"><div class="sk-img"></div><div class="sk-body"><div class="sk-cat"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line"></div><div class="sk-line w40"></div></div></div>
+            <div class="skeleton-card" aria-hidden="true"><div class="sk-img"></div><div class="sk-body"><div class="sk-cat"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line"></div><div class="sk-line w40"></div></div></div>
+            <div class="skeleton-card" aria-hidden="true"><div class="sk-img"></div><div class="sk-body"><div class="sk-cat"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line"></div><div class="sk-line w40"></div></div></div>
+            <div class="skeleton-card" aria-hidden="true"><div class="sk-img"></div><div class="sk-body"><div class="sk-cat"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line"></div><div class="sk-line w40"></div></div></div>
         </div>
-        <!-- MGID Mid -->
-        <div data-ad-slot="cat-mid">
-            <!-- MGID widget code here -->
-        </div>
-        <div class="pagination" id="pagination"></div>
-        <!-- AdSense Bottom -->
+        <div data-ad-slot="cat-mid"></div>
+        <nav class="pagination" id="pagination" aria-label="Pagination"></nav>
         <div data-ad-slot="cat-bottom"></div>
     </main>
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="footer-content">
             <div class="footer-section">
                 <h4>About HelloInsights</h4>
-                <p>Your trusted source for the latest insights in Technology, Finance, AI Tools, and Health & Lifestyle.</p>
+                <p>Your trusted source for the latest insights in Technology, Finance, AI Tools, and Health &amp; Lifestyle.</p>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
@@ -100,7 +181,7 @@
                     <li><a href="category.html?cat=technology">Technology</a></li>
                     <li><a href="category.html?cat=finance">Finance</a></li>
                     <li><a href="category.html?cat=ai-tools">AI Tools</a></li>
-                    <li><a href="category.html?cat=health-lifestyle">Health & Lifestyle</a></li>
+                    <li><a href="category.html?cat=health-lifestyle">Health &amp; Lifestyle</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -117,14 +198,12 @@
             <p>&copy; <script>document.write(new Date().getFullYear())</script> HelloInsights. All rights reserved.</p>
         </div>
     </footer>
-    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">&uarr;</button>
     <script>
     if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(function() {}); }
+
     var ARTICLES_PER_PAGE = 9;
     var allArticles = [];
-    var filteredArticles = [];
-    var isSearching = false;
-    var searchQuery = '';
     var currentPage = 1;
     var currentCategory = '';
     var categoryNames = {
@@ -138,12 +217,27 @@
         'health-lifestyle': 'Wellness tips, fitness guides, and healthy living advice.'
     };
     var fallbackImages = {
-        'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&fm=webp&q=80',
-        'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop&fm=webp&q=80',
-        'ai-tools': 'https://images.unsplash.com/photo-1677442136019-21780ecf995?w=600&h=400&fit=crop&fm=webp&q=80',
-        'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop&fm=webp&q=80'
+        'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600&h=338',
+        'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=600&h=338',
+        'ai-tools': 'https://images.unsplash.com/photo-1682687982501-1e58ab814714?auto=format&fit=crop&q=80&w=600&h=338',
+        'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&q=80&w=600&h=338'
     };
     var defaultFallback = fallbackImages['technology'];
+
+    // XSS sanitization
+    function sanitizeStr(str) {
+        if (!str) return '';
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+    }
+    function sanitizeUrl(url) {
+        if (!url) return '';
+        var cleaned = String(url).replace(/[<>"'\s]/g, '');
+        if (cleaned.indexOf('javascript:') === 0 || cleaned.indexOf('data:') === 0) return '';
+        return cleaned;
+    }
+
     function formatDate(dateStr) {
         if (!dateStr) return '';
         var d = new Date(dateStr + 'T00:00:00');
@@ -151,21 +245,36 @@
         return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
     }
     function getFallbackImage(cat) { return fallbackImages[cat] || defaultFallback; }
-    function getUrlParam(name) { return new URLSearchParams(window.location.search).get(name); }
+
+    // ES5-compatible URL param parsing
+    function getUrlParam(name) {
+        var search = window.location.search.substring(1);
+        var pairs = search.split('&');
+        for (var i = 0; i < pairs.length; i++) {
+            var pair = pairs[i].split('=');
+            if (decodeURIComponent(pair[0]) === name) return decodeURIComponent(pair[1] || '');
+        }
+        return '';
+    }
+
     function createArticleCard(article) {
-        var catName = categoryNames[article.category] || article.category;
+        var catName = sanitizeStr(categoryNames[article.category] || article.category);
+        var title = sanitizeStr(article.title);
+        var excerpt = sanitizeStr(article.excerpt);
+        var imgUrl = sanitizeUrl(article.image);
         var fb = getFallbackImage(article.category);
-        var date = article.date ? formatDate(article.date) : '';
+        var date = article.date ? sanitizeStr(formatDate(article.date)) : '';
         return '<article class="article-card">' +
-            '<div class="card-image"><img src="' + article.image + '" alt="' + article.title + '" width="600" height="400" loading="lazy" decoding="async" onerror="this.src=\'' + fb + '\'"></div>' +
+            '<div class="card-image"><img src="' + imgUrl + '" alt="' + title + '" width="600" height="338" loading="lazy" decoding="async" onerror="this.src=\'' + fb + '\'"></div>' +
             '<div class="card-content">' +
             '<span class="card-category">' + catName + '</span>' +
-            '<h3 class="card-title"><a href="article.html?id=' + article.id + '">' + article.title + '</a></h3>' +
-            '<p class="card-excerpt">' + article.excerpt + '</p>' +
+            '<h3 class="card-title"><a href="article.html?id=' + article.id + '">' + title + '</a></h3>' +
+            '<p class="card-excerpt">' + excerpt + '</p>' +
             (date ? '<div class="card-meta"><span>' + date + '</span></div>' : '') +
-            '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More</a>' +
+            '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
             '</div></article>';
     }
+
     function renderPage(page) {
         currentPage = page;
         var totalPages = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);
@@ -175,8 +284,6 @@
         var startIdx = (page - 1) * ARTICLES_PER_PAGE;
         var pageArticles = allArticles.slice(startIdx, startIdx + ARTICLES_PER_PAGE);
         var grid = document.getElementById('articleGrid');
-        var loading = document.getElementById('loading');
-        if (loading) loading.remove();
         if (!grid) return;
         if (pageArticles.length === 0) {
             grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#666;">No articles found in this category.</p>';
@@ -188,130 +295,150 @@
         grid.innerHTML = html;
         renderPagination(allArticles.length);
     }
+
     function renderPagination(total) {
         var pages = Math.ceil(total / ARTICLES_PER_PAGE);
         var el = document.getElementById('pagination');
         if (!el || pages <= 1) { if (el) el.innerHTML = ''; return; }
         var h = '';
-        if (currentPage > 1) h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage - 1) + ');return false;">‹</a>';
-        else h += '<span class="page-btn disabled">‹</span>';
+        if (currentPage > 1) h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage - 1) + ');return false;" aria-label="Previous page">&lsaquo;</a>';
+        else h += '<span class="page-btn disabled" aria-hidden="true">&lsaquo;</span>';
         var range = 2;
         var start = Math.max(2, currentPage - range);
         var end = Math.min(pages - 1, currentPage + range);
-        if (currentPage === 1) h += '<span class="page-btn active">1</span>';
+        if (currentPage === 1) h += '<span class="page-btn active" aria-current="page">1</span>';
         else h += '<a href="#" class="page-btn" onclick="changePage(1);return false;">1</a>';
-        if (start > 2) h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
+        if (start > 2) h += '<span class="page-btn disabled" style="cursor:default;">&hellip;</span>';
         for (var i = start; i <= end; i++) {
-            if (i === currentPage) h += '<span class="page-btn active">' + i + '</span>';
+            if (i === currentPage) h += '<span class="page-btn active" aria-current="page">' + i + '</span>';
             else h += '<a href="#" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>';
         }
-        if (end < pages - 1) h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
-        if (currentPage === pages) h += '<span class="page-btn active">' + pages + '</span>';
+        if (end < pages - 1) h += '<span class="page-btn disabled" style="cursor:default;">&hellip;</span>';
+        if (currentPage === pages) h += '<span class="page-btn active" aria-current="page">' + pages + '</span>';
         else h += '<a href="#" class="page-btn" onclick="changePage(' + pages + ');return false;">' + pages + '</a>';
-        if (currentPage < pages) h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">›</a>';
-        else h += '<span class="page-btn disabled">›</span>';
+        if (currentPage < pages) h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;" aria-label="Next page">&rsaquo;</a>';
+        else h += '<span class="page-btn disabled" aria-hidden="true">&rsaquo;</span>';
         el.innerHTML = h;
     }
-    function changePage(p) {
-        if (isSearching) {
-            var t = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
-            if (p < 1 || p > t) return;
-            currentPage = p;
-            renderSearchResults(filteredArticles);
-        } else {
-            var t2 = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);
-            if (p < 1 || p > t2) return;
-            renderPage(p);
-        }
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
 
-    // ===== SEARCH FUNCTIONS =====
-    function handleSearch() {
-        var input = document.getElementById('searchInput');
-        if (!input) return;
-        var q = input.value.trim();
-        searchQuery = q;
-        if (!q) { clearSearch(); return; }
-        isSearching = true;
-        currentPage = 1;
-        var lq = q.toLowerCase();
-        filteredArticles = allArticles.filter(function(a) {
-            var cn = categoryNames[a.category] || a.category;
-            return a.title.toLowerCase().indexOf(lq) !== -1 || a.excerpt.toLowerCase().indexOf(lq) !== -1 ||
-                   a.category.toLowerCase().indexOf(lq) !== -1 || cn.toLowerCase().indexOf(lq) !== -1;
-        });
-        var si = document.getElementById('searchInfo'), st = document.getElementById('searchText');
-        if (si && st) {
-            si.style.display = 'block';
-            st.textContent = 'Found ' + filteredArticles.length + ' results for "' + q + '"';
-        }
-        renderSearchResults(filteredArticles);
-    }
-    function clearSearch() {
-        isSearching = false;
-        searchQuery = '';
-        currentPage = 1;
-        var input = document.getElementById('searchInput');
-        if (input) input.value = '';
-        var si = document.getElementById('searchInfo');
-        if (si) si.style.display = 'none';
-        renderPage(1);
-    }
-    function renderSearchResults(articles) {
-        var grid = document.getElementById('articleGrid');
-        var loading = document.getElementById('loading');
-        if (loading) loading.remove();
-        if (!grid) return;
-        if (articles.length === 0) {
-            grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#666;">No articles found for "' + searchQuery + '".</p>';
-            document.getElementById('pagination').innerHTML = '';
-            return;
-        }
-        var start = (currentPage - 1) * ARTICLES_PER_PAGE;
-        var pageArticles = articles.slice(start, start + ARTICLES_PER_PAGE);
-        var html = '';
-        for (var i = 0; i < pageArticles.length; i++) html += createArticleCard(pageArticles[i]);
-        grid.innerHTML = html;
-        renderPagination(articles.length);
-    }
-    function initSearch() {
-        var input = document.getElementById('searchInput');
-        var btn = document.getElementById('searchBtn');
-        if (input) {
-            input.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') { e.preventDefault(); handleSearch(); }
-            });
-        }
-        if (btn) {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                handleSearch();
-            });
-        }
+    function changePage(p) {
+        var t = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);
+        if (p < 1 || p > t) return;
+        renderPage(p);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function toggleMenu() {
         var nav = document.getElementById('navContainer');
-        if (nav) nav.classList.toggle('active');
+        var toggle = document.querySelector('.menu-toggle');
+        if (nav) {
+            nav.classList.toggle('active');
+            if (toggle) toggle.setAttribute('aria-expanded', nav.classList.contains('active') ? 'true' : 'false');
+        }
     }
+
     function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     window.addEventListener('scroll', function() {
         var btn = document.getElementById('backToTop');
         if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
     });
 
-    /* Get category from URL */
+    function updateSEO(catName, catDesc) {
+        var catUrl = 'https://www.helloinsights.online/category.html?cat=' + currentCategory;
+
+        // Title
+        document.title = sanitizeStr(catName) + ' - HelloInsights';
+
+        // Meta description
+        var metaDesc = document.getElementById('metaDesc');
+        if (metaDesc) metaDesc.setAttribute('content', catDesc);
+
+        // Canonical
+        var canonical = document.getElementById('canonicalUrl');
+        if (canonical) canonical.setAttribute('href', catUrl);
+
+        // OG
+        var ogTitle = document.getElementById('ogTitle');
+        if (ogTitle) ogTitle.setAttribute('content', catName + ' - HelloInsights');
+        var ogDesc = document.getElementById('ogDesc');
+        if (ogDesc) ogDesc.setAttribute('content', catDesc);
+        var ogUrl = document.getElementById('ogUrl');
+        if (ogUrl) ogUrl.setAttribute('content', catUrl);
+
+        // Twitter
+        var twTitle = document.getElementById('twTitle');
+        if (twTitle) twTitle.setAttribute('content', catName + ' - HelloInsights');
+        var twDesc = document.getElementById('twDesc');
+        if (twDesc) twDesc.setAttribute('content', catDesc);
+
+        // JSON-LD CollectionPage
+        var ldCollection = document.getElementById('jsonLdCollection');
+        if (ldCollection) {
+            var schema = {
+                '@context': 'https://schema.org',
+                '@type': 'CollectionPage',
+                'name': catName + ' - HelloInsights',
+                'description': catDesc,
+                'url': catUrl,
+                'isPartOf': {
+                    '@type': 'WebSite',
+                    'name': 'HelloInsights',
+                    'url': 'https://www.helloinsights.online/'
+                }
+            };
+            ldCollection.textContent = JSON.stringify(schema);
+        }
+
+        // JSON-LD BreadcrumbList
+        var ldBreadcrumb = document.getElementById('jsonLdBreadcrumb');
+        if (ldBreadcrumb) {
+            var breadcrumb = {
+                '@context': 'https://schema.org',
+                '@type': 'BreadcrumbList',
+                'itemListElement': [
+                    {
+                        '@type': 'ListItem',
+                        'position': 1,
+                        'name': 'Home',
+                        'item': 'https://www.helloinsights.online/'
+                    },
+                    {
+                        '@type': 'ListItem',
+                        'position': 2,
+                        'name': catName,
+                        'item': catUrl
+                    }
+                ]
+            };
+            ldBreadcrumb.textContent = JSON.stringify(breadcrumb);
+        }
+    }
+
+    function showLoadError(errMsg) {
+        var grid = document.getElementById('articleGrid');
+        if (grid) {
+            grid.innerHTML = '<div style="text-align:center;grid-column:1/-1;padding:3rem;">' +
+                '<p style="color:#999;margin-bottom:1rem;">Unable to load articles. ' + sanitizeStr(errMsg) + '</p>' +
+                '<button onclick="location.reload()" style="background:#ff6b35;color:white;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:1rem;min-width:44px;min-height:44px;">Retry</button>' +
+                '</div>';
+        }
+    }
+
+    // Get category from URL
     currentCategory = getUrlParam('cat') || 'technology';
     var catName = categoryNames[currentCategory] || currentCategory;
     var catDesc = categoryDescs[currentCategory] || '';
-    document.title = catName + ' - HelloInsights';
+
+    // Set header content
     var titleEl = document.getElementById('categoryTitle');
     var descEl = document.getElementById('categoryDesc');
     if (titleEl) titleEl.textContent = catName;
     if (descEl) descEl.textContent = catDesc;
 
-    /* Highlight active nav */
+    // Update SEO
+    updateSEO(catName, catDesc);
+
+    // Highlight active nav
     var navLinks = document.querySelectorAll('.nav a');
     for (var i = 0; i < navLinks.length; i++) {
         navLinks[i].classList.remove('active');
@@ -320,13 +447,19 @@
         }
     }
 
-    /* Load articles */
-    fetch('articles-index.json')
-        .then(function(r) { return r.json(); })
+    // Load articles: fetch index for version, then category-specific file
+    fetch('articles-index.json?v=' + Date.now())
+        .then(function(r) {
+            if (!r.ok) throw new Error('index HTTP ' + r.status);
+            return r.json();
+        })
         .then(function(index) {
             var v = index.v || Date.now();
-            return fetch('articles-' + currentCategory + '.json')
-                .then(function(r) { return r.json(); });
+            return fetch('articles-' + currentCategory + '.json?v=' + v)
+                .then(function(r) {
+                    if (!r.ok) throw new Error('category HTTP ' + r.status);
+                    return r.json();
+                });
         })
         .then(function(data) {
             allArticles = data.articles || [];
@@ -335,18 +468,31 @@
                 return (b.id || 0) - (a.id || 0);
             });
             renderPage(1);
-            initSearch();  // 绑定搜索事件
         })
         .catch(function(err) {
-            var grid = document.getElementById('articleGrid');
-            if (grid) grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:3rem;color:#999;">Unable to load articles: ' + err.message + '</p>';
+            console.error('Category load error:', err.message);
+            showLoadError(err.message);
         });
 
     if (typeof loadSiteConfig === 'function') {
         loadSiteConfig(function(config) {
             if (config && config.categories) {
-                for (var i = 0; i < config.categories.length; i++)
+                for (var i = 0; i < config.categories.length; i++) {
                     categoryNames[config.categories[i].id] = config.categories[i].name;
+                }
+                // Re-render header with updated names
+                var updatedName = categoryNames[currentCategory] || currentCategory;
+                var te = document.getElementById('categoryTitle');
+                if (te) te.textContent = updatedName;
+                updateSEO(updatedName, catDesc);
+                // Re-highlight nav
+                var links = document.querySelectorAll('.nav a');
+                for (var j = 0; j < links.length; j++) {
+                    links[j].classList.remove('active');
+                    if (links[j].getAttribute('href') === 'category.html?cat=' + currentCategory) {
+                        links[j].classList.add('active');
+                    }
+                }
             }
         });
     }

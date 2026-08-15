@@ -2,403 +2,181 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6b35'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold' font-size='22'%3EH%3C/text%3E%3C/svg%3E" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Read the latest insights and articles on HelloInsights.">
+    <meta name="robots" content="index, follow">
     <title>Article - HelloInsights</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com">
-    <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <!-- ============ Subdomain Config (must run early) ============ -->
-    <script>
-    (function() {
-        var hostname = window.location.hostname;
-        var subdomain = '';
-        var parts = hostname.split('.');
-        if (parts.length > 2 && parts[0] !== 'www') {
-            subdomain = parts[0];
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ff6b35'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold' font-size='22'%3EH%3C/text%3E%3C/svg%3E">
+    <!-- Dynamic canonical + OG set via JS -->
+    <link rel="canonical" href="https://www.helloinsights.online/article.html" id="canonicalUrl">
+    <meta property="og:title" content="Article - HelloInsights" id="ogTitle">
+    <meta property="og:description" content="Read the latest insights and articles on HelloInsights." id="ogDesc">
+    <meta property="og:url" content="https://www.helloinsights.online/article.html" id="ogUrl">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="" id="ogImage">
+    <meta property="og:site_name" content="HelloInsights">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Article - HelloInsights" id="twTitle">
+    <meta name="twitter:description" content="Read the latest insights and articles on HelloInsights." id="twDesc">
+    <meta name="twitter:image" content="" id="twImage">
+    <!-- JSON-LD Article + BreadcrumbList: populated dynamically -->
+    <script type="application/ld+json" id="jsonLdArticle">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "",
+        "image": "",
+        "datePublished": "",
+        "publisher": {
+            "@type": "Organization",
+            "name": "HelloInsights",
+            "url": "https://www.helloinsights.online/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.helloinsights.online/logo.svg"
+            }
         }
-        var subCategoryMap = {
-            'technology': 'technology',
-            'finance': 'finance',
-            'ai-tools': 'ai-tools',
-            'health-lifestyle': 'health-lifestyle'
-        };
-        window.SUBDOMAIN_CATEGORY = subCategoryMap[subdomain] || null;
-        window.IS_SUBDOMAIN = !!window.SUBDOMAIN_CATEGORY;
-        if (window.IS_SUBDOMAIN) {
-            var link = document.createElement('link');
-            link.rel = 'preload';
-            link.href = 'articles-' + window.SUBDOMAIN_CATEGORY + '.json';
-            link.as = 'fetch';
-            link.crossOrigin = 'anonymous';
-            document.head.appendChild(link);
-        }
-    })();
+    }
     </script>
-    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json" id="jsonLdBreadcrumb">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": []
+    }
+    </script>
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <!-- Critical CSS (inline) -->
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--accent-color:#ff6b35;--primary-color:var(--accent-color);--primary-hover:#e85a2a;--text-dark:#333333;--text-medium:#666666;--text-light:#999999;--bg-light:#f5f5f5;--white:#ffffff;--shadow:0 2px 10px rgba(0,0,0,0.08);--shadow-hover:0 4px 20px rgba(0,0,0,0.12);--border-radius:12px;--transition:all 0.3s ease}
+        html{font-size:16px;scroll-behavior:smooth;overflow-x:hidden}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1.7;color:var(--text-dark);background-color:var(--bg-light);min-height:100vh;font-size:1rem;overflow-x:hidden}
+        .header{background:var(--white);box-shadow:var(--shadow);position:sticky;top:0;z-index:1000}
+        .header-content{max-width:1400px;margin:0 auto;padding:0.5rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+        .logo{font-size:1.3rem;font-weight:700;color:var(--text-dark);text-decoration:none;display:flex;align-items:center;gap:0.5rem}
+        .logo-img{max-height:3rem;width:auto;border-radius:10px;object-fit:contain;display:block}
+        .nav-container{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+        .nav{display:flex;gap:0.25rem;list-style:none}
+        .nav a{text-decoration:none;color:var(--text-medium);padding:0.4rem 0.8rem;border-radius:6px;transition:var(--transition);font-weight:500;font-size:0.9rem}
+        .nav a:hover,.nav a.active{color:var(--primary-color);background:rgba(255,107,53,0.1)}
+        .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;min-width:44px;min-height:44px;justify-content:center;align-items:center}
+        .menu-toggle span{width:28px;height:3px;background:var(--text-dark);border-radius:2px;transition:var(--transition)}
+        .search-box{display:flex;align-items:center;background:var(--bg-light);border-radius:10px;padding:0.6rem 1.2rem;border:1px solid transparent;transition:var(--transition)}
+        .search-box:focus-within{border-color:var(--primary-color);background:var(--white)}
+        .search-box input{border:none;background:transparent;outline:none;width:200px;font-size:1rem;color:var(--text-dark)}
+        .search-box button{background:none;border:none;cursor:pointer;color:var(--text-light);font-size:1.1rem;transition:var(--transition);min-width:44px;min-height:44px}
+        .container{max-width:1400px;margin:0 auto;padding:2.5rem 3rem}
+        .article-detail{background:var(--white);border-radius:var(--border-radius);box-shadow:var(--shadow);overflow:hidden}
+        .article-hero{width:100%;height:450px;overflow:hidden;background:linear-gradient(135deg,#f0f0f0,#e0e0e0);display:flex;align-items:center;justify-content:center}
+        .article-hero img{width:100%;height:100%;object-fit:cover;display:block}
+        .article-body{padding:3.5rem;max-width:780px;margin:0 auto}
+        .article-header{margin-bottom:2.5rem}
+        .article-header .card-category{display:inline-block;background:rgba(255,107,53,0.1);color:var(--primary-color);padding:0.3rem 0.9rem;border-radius:5px;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:1.2rem;width:fit-content}
+        .article-header h1{font-size:2.5rem;color:var(--text-dark);line-height:1.3;margin-bottom:1.2rem}
+        .article-meta{display:flex;align-items:center;gap:2rem;color:var(--text-light);font-size:1rem;padding-bottom:1.5rem;border-bottom:1px solid #eee;flex-wrap:wrap}
+        .article-content{font-size:1.0625rem;line-height:1.75;color:var(--text-medium)}
+        .article-content h2{color:var(--text-dark);font-size:1.75rem;margin:2.5rem 0 1.2rem;line-height:1.3}
+        .article-content h3{color:var(--text-dark);font-size:1.4rem;margin:2rem 0 1rem;line-height:1.3}
+        .article-content p{margin-bottom:1.5rem}
+        .article-content ul,.article-content ol{margin:1.5rem 0;padding-left:2rem}
+        .article-content li{margin-bottom:0.8rem}
+        .article-content blockquote{border-left:4px solid var(--primary-color);padding-left:1.5rem;margin:2rem 0;font-style:italic;color:var(--text-medium);font-size:1.1rem}
+        .article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+        .article-card{background:var(--white);border-radius:var(--border-radius);box-shadow:var(--shadow);overflow:hidden;transition:var(--transition);display:flex;flex-direction:column;contain:layout style}
+        .article-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-hover)}
+        .card-image{width:100%;aspect-ratio:3/2;overflow:hidden}
+        .card-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s ease;display:block}
+        .article-card:hover .card-image img{transform:scale(1.05)}
+        .card-content{padding:1.75rem;flex:1;display:flex;flex-direction:column}
+        .card-category{display:inline-block;background:rgba(255,107,53,0.1);color:var(--primary-color);padding:0.3rem 0.9rem;border-radius:5px;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.9rem;width:fit-content}
+        .card-title{font-size:1.25rem;font-weight:600;color:var(--text-dark);margin-bottom:0.9rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        .card-title a{text-decoration:none;color:inherit;transition:var(--transition)}
+        .card-title a:hover{color:var(--primary-color)}
+        .card-excerpt{color:var(--text-medium);font-size:0.95rem;line-height:1.65;margin-bottom:1.2rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+        .card-meta{display:flex;align-items:center;gap:1.2rem;font-size:0.9rem;color:var(--text-light);margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid #eee}
+        .read-more-btn{display:flex;align-items:center;justify-content:center;background:var(--primary-color);color:var(--white);text-decoration:none;padding:0.85rem 1.75rem;border-radius:10px;font-weight:500;font-size:0.95rem;transition:var(--transition);width:100%;margin-top:auto}
+        .read-more-btn:hover{background:var(--primary-hover);transform:translateY(-3px);box-shadow:0 4px 12px rgba(255,107,53,0.3)}
+        [data-ad-slot]{display:none;max-width:728px;margin:0 auto;padding:0;overflow:hidden;min-height:250px}
+        [data-ad-slot].ad-visible{display:block!important;margin:1.5rem auto!important;padding:0.5rem!important}
+        .footer{background:var(--text-dark);color:var(--white);padding:3.5rem 3rem;margin-top:4rem}
+        .footer-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:3rem}
+        .footer-section h4{font-size:1.2rem;margin-bottom:1.2rem;color:var(--white)}
+        .footer-section p,.footer-section a{color:#aaa;font-size:0.95rem;line-height:1.85;text-decoration:none}
+        .footer-section a:hover{color:var(--primary-color)}
+        .footer-section ul{list-style:none}
+        .footer-section ul li{margin-bottom:0.6rem}
+        .footer-bottom{max-width:1400px;margin:2.5rem auto 0;padding-top:2rem;border-top:1px solid #444;text-align:center;color:#777;font-size:0.9rem}
+        .back-to-top{position:fixed;bottom:2.5rem;right:2.5rem;width:55px;height:55px;background:var(--primary-color);color:white;border:none;border-radius:50%;cursor:pointer;font-size:1.6rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-hover);transition:var(--transition);opacity:0;visibility:hidden;z-index:999}
+        .back-to-top.visible{opacity:1;visibility:visible}
+        .back-to-top:hover{background:var(--primary-hover);transform:translateY(-3px)}
+        a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--primary-color);outline-offset:2px;border-radius:4px}
+        @media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+        @media(max-width:1200px){.container,.header-content{padding-left:2rem;padding-right:2rem}.article-grid{grid-template-columns:repeat(2,1fr);gap:2rem}}
+        @media(max-width:768px){html{font-size:15px}.header-content{padding:0.5rem 1.25rem}.menu-toggle{display:flex}.nav-container{display:none;width:100%;flex-direction:column;gap:1rem;padding-top:1rem}.nav-container.active{display:flex}.nav{flex-direction:column;width:100%}.nav a{padding:0.8rem 1rem;text-align:center;border-bottom:1px solid #eee}.search-box{width:100%}.search-box input{width:100%}.container{padding:1.5rem 1.25rem}.article-grid{grid-template-columns:1fr;gap:1.75rem}.article-hero{height:280px}.article-body{padding:2rem 1.5rem}.article-header h1{font-size:1.75rem}.article-content{font-size:1rem}.article-content h2{font-size:1.4rem}.footer{padding:2.5rem 1.5rem}.footer-content{grid-template-columns:1fr;text-align:center;gap:2rem}.back-to-top{bottom:1.5rem;right:1.5rem;width:48px;height:48px;font-size:1.4rem}[data-ad-slot]{min-height:200px}}
+        @media(max-width:480px){.container{padding:1.25rem 1rem}.article-hero{height:220px}.article-body{padding:1.5rem 1.25rem}.article-header h1{font-size:1.5rem}.article-content{font-size:0.95rem}}
+        @media print{.header,.footer,.back-to-top,[data-ad-slot]{display:none}body{background:white;font-size:12pt}}
+    </style>
+    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
     <script src="ads-config.js" defer></script>
     <script src="config-loader.js"></script>
-    <style>
-    /* ===== Internal Linking Sections ===== */
-    .link-section {
-        margin-top: 2.5rem;
-        padding-top: 2rem;
-        border-top: 1px solid #eee;
-    }
-    .link-section-header {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        margin-bottom: 1.5rem;
-    }
-    .link-section-header h2 {
-        font-size: 1.35rem;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin: 0;
-    }
-    .link-section-header .section-icon {
-        width: 32px;
-        height: 32px;
-        background: rgba(255,107,53,0.1);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        flex-shrink: 0;
-    }
-
-    /* --- 1. Related Articles: card grid with image --- */
-    .related-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-    }
-    .related-card {
-        background: var(--white);
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        overflow: hidden;
-        text-decoration: none;
-        color: inherit;
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-    }
-    .related-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-    }
-    .related-card-img {
-        width: 100%;
-        aspect-ratio: 16/9;
-        object-fit: cover;
-        display: block;
-    }
-    .related-card-body {
-        padding: 1.2rem 1.3rem;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-    .related-card-cat {
-        display: inline-block;
-        background: rgba(255,107,53,0.1);
-        color: #ff6b35;
-        padding: 0.2rem 0.7rem;
-        border-radius: 5px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 0.6rem;
-        width: fit-content;
-    }
-    .related-card-title {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #333;
-        line-height: 1.4;
-        margin: 0 0 0.5rem;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-    .related-card:hover .related-card-title {
-        color: #ff6b35;
-    }
-    .related-card-date {
-        font-size: 0.8rem;
-        color: #999;
-        margin-top: auto;
-    }
-
-    /* --- 2. Popular This Week: horizontal cards with thumbnail --- */
-    .popular-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.2rem;
-    }
-    .popular-card {
-        background: var(--white);
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        overflow: hidden;
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        align-items: stretch;
-        transition: all 0.3s ease;
-    }
-    .popular-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-    }
-    .popular-card-thumb {
-        width: 140px;
-        min-height: 120px;
-        object-fit: cover;
-        flex-shrink: 0;
-    }
-    .popular-card-body {
-        padding: 1rem 1.2rem;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-width: 0;
-    }
-    .popular-card-cat {
-        font-size: 0.72rem;
-        font-weight: 600;
-        color: #ff6b35;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 0.35rem;
-    }
-    .popular-card-title {
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: #333;
-        line-height: 1.4;
-        margin: 0 0 0.35rem;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-    .popular-card:hover .popular-card-title {
-        color: #ff6b35;
-    }
-    .popular-card-date {
-        font-size: 0.78rem;
-        color: #999;
-    }
-
-    /* --- 3. Recommended Reading: numbered list --- */
-    .recommended-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        counter-reset: rec-counter;
-    }
-    .recommended-list li {
-        counter-increment: rec-counter;
-        padding: 0;
-        border-bottom: 1px solid #f0f0f0;
-    }
-    .recommended-list li:last-child {
-        border-bottom: none;
-    }
-    .recommended-list a {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem 1.2rem;
-        text-decoration: none;
-        color: inherit;
-        border-radius: 10px;
-        transition: all 0.25s ease;
-    }
-    .recommended-list a:hover {
-        background: rgba(255,107,53,0.04);
-    }
-    .rec-number {
-        flex-shrink: 0;
-        width: 32px;
-        height: 32px;
-        background: linear-gradient(135deg, #ff6b35, #ff8f65);
-        color: #fff;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.85rem;
-        font-weight: 700;
-    }
-    .rec-info {
-        flex: 1;
-        min-width: 0;
-    }
-    .rec-title {
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: #333;
-        line-height: 1.4;
-        margin: 0 0 0.2rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .recommended-list a:hover .rec-title {
-        color: #ff6b35;
-    }
-    .rec-meta {
-        font-size: 0.78rem;
-        color: #999;
-    }
-    .rec-arrow {
-        flex-shrink: 0;
-        color: #ccc;
-        font-size: 1.1rem;
-        transition: color 0.2s;
-    }
-    .recommended-list a:hover .rec-arrow {
-        color: #ff6b35;
-    }
-
-    /* --- Responsive --- */
-    @media (max-width: 1024px) {
-        .related-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 768px) {
-        .link-section { margin-top: 2rem; padding-top: 1.5rem; }
-        .link-section-header h2 { font-size: 1.15rem; }
-        .related-grid { grid-template-columns: 1fr; gap: 1.2rem; }
-        .popular-grid { grid-template-columns: 1fr; }
-        .popular-card-thumb { width: 110px; min-height: 100px; }
-        .popular-card-body { padding: 0.8rem 1rem; }
-        .popular-card-title { font-size: 0.9rem; }
-        .recommended-list a { padding: 0.8rem 0.5rem; }
-        .rec-title { font-size: 0.9rem; }
-    }
-    @media (max-width: 480px) {
-        .popular-card { flex-direction: column; }
-        .popular-card-thumb { width: 100%; height: 160px; aspect-ratio: 16/9; }
-        .popular-card-body { padding: 1rem; }
-    }
-    /* ===== Article Hero Image — Constrained to content width ===== */
-    .article-hero{max-width:720px;margin:1.5rem auto 0;text-align:center;}
-    .article-hero img{width:100%;max-width:720px;height:auto;border-radius:12px;display:block;}
-    @media(max-width:768px){.article-hero{margin:1rem auto 0;}.article-hero img{border-radius:8px;}}
-    /* ===== Ad Slot Placeholders ===== */
-    .ad-slot{margin:1.2rem auto;text-align:center;min-height:250px;display:flex;align-items:center;justify-content:center;}
-    @media(max-width:768px){.ad-slot{min-height:200px;margin:0.8rem auto;}}
-    .article-ad-mid{max-width:720px;margin:1.5rem auto;}
-    </style>
 </head>
 <body>
-    <header class="header">
+    <header class="header" role="banner">
         <div class="header-content">
-            <a href="index.html" class="logo">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 58" width="180" height="58" role="img" aria-label="HelloInsights logo" style="max-height:3rem;width:auto;display:block;">
-  <defs>
-    <linearGradient id="orange" x1="0" y1="0" x2="0.9" y2="1">
-      <stop offset="0%" stop-color="#FFB13B"/>
-      <stop offset="100%" stop-color="#FF4B12"/>
-    </linearGradient>
-    <linearGradient id="hello" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1B252B"/>
-      <stop offset="100%" stop-color="#111A20"/>
-    </linearGradient>
-  </defs>
-  <path d="M7.2 11.5 C7.2 8.3 9.8 5.8 13 5.8 H39.3 C42.5 5.8 45 8.3 45 11.5 V36.8 C45 40 42.5 42.5 39.3 42.5 H22.2 L16.5 47.3 C15.8 47.9 14.7 47.4 14.7 46.5 V42.5 H13 C9.8 42.5 7.2 40 7.2 36.8 Z" fill="url(#orange)"/>
-  <path d="M15.4 12.7 H20.8 V21.2 H28.8 V12.7 H34.2 V35.5 H28.8 V26.4 H20.8 V35.5 H15.4 Z" fill="#FFFFFF"/>
-  <g fill="#FF9B27">
-    <rect x="36.3" y="4.2" width="2.2" height="2.2" rx="0.35"/>
-    <rect x="42.0" y="2.8" width="1.9" height="1.9" rx="0.3"/>
-    <rect x="39.4" y="7.5" width="2.0" height="2.0" rx="0.3"/>
-    <rect x="45.0" y="6.3" width="1.6" height="1.6" rx="0.25"/>
-    <rect x="35.0" y="9.1" width="1.6" height="1.6" rx="0.25"/>
-    <rect x="42.5" y="10.5" width="2.0" height="2.0" rx="0.3"/>
-    <rect x="46.8" y="11.8" width="1.4" height="1.4" rx="0.2"/>
-    <rect x="38.2" y="13.1" width="1.5" height="1.5" rx="0.2"/>
-  </g>
-  <text x="53.5" y="35.2" font-family="Arial, Helvetica, sans-serif" font-size="17.2" font-weight="700" letter-spacing="-0.75" fill="url(#hello)">Hello</text>
-  <text x="100.5" y="35.2" font-family="Arial, Helvetica, sans-serif" font-size="17.2" font-weight="700" letter-spacing="-0.75" fill="#FF4B12">Insights</text>
-</svg>
+            <a href="index.html" class="logo" aria-label="HelloInsights Home">
+                <img src="logo.svg" alt="HelloInsights" class="logo-img" width="48" height="48">
             </a>
-            <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="menu-toggle" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMenu()" onkeydown="if(event.keyCode===13||event.keyCode===32){event.preventDefault();toggleMenu()}">
                 <span></span><span></span><span></span>
             </div>
             <div class="nav-container" id="navContainer">
-                <nav>
-                    <ul class="nav" id="navList"></ul>
+                <nav role="navigation" aria-label="Main navigation">
+                    <ul class="nav">
+                        <li><a href="index.html">All</a></li>
+                        <li><a href="category.html?cat=technology">Technology</a></li>
+                        <li><a href="category.html?cat=finance">Finance</a></li>
+                        <li><a href="category.html?cat=ai-tools">AI Tools</a></li>
+                        <li><a href="category.html?cat=health-lifestyle">Health &amp; Lifestyle</a></li>
+                    </ul>
                 </nav>
-                <div class="search-box">
-                    <input type="text" placeholder="Search articles..." id="searchInput">
-                    <button type="button" id="searchBtn">🔍</button>
+                <div class="search-box" role="search">
+                    <input type="text" placeholder="Search articles..." id="searchInput" aria-label="Search articles">
+                    <button type="button" id="searchBtn" aria-label="Search">&#128269;</button>
                 </div>
             </div>
         </div>
     </header>
-    <main class="container">
-        <!-- Ad: Article Banner Top -->
-        <div class="ad-slot" data-ad-slot="article-banner-top"></div>
+    <main class="container" role="main">
+        <div data-ad-slot="article-banner"></div>
         <article class="article-detail" id="articleDetail">
             <div class="loading" id="loading"></div>
         </article>
-        <!-- Ad: Article Banner Mid -->
-        <div class="ad-slot article-ad-mid" data-ad-slot="article-banner-mid"></div>
-
-        <!-- ========================================== -->
-        <!-- Internal Linking: 3 Sections               -->
-        <!-- ========================================== -->
-
-        <!-- 1. Related Articles (same category, card grid) -->
-        <section class="link-section" id="relatedSection">
-            <div class="link-section-header">
-                <div class="section-icon">📌</div>
-                <h2>Related Articles</h2>
-            </div>
-            <div class="related-grid" id="relatedGrid"></div>
+        <div data-ad-slot="article-mgid"></div>
+        <div data-ad-slot="article-interstitial"></div>
+        <section style="margin-top:3rem" id="relatedSection">
+            <h2 style="margin-bottom:1.5rem;font-size:1.5rem;color:#333">Related Articles</h2>
+            <div class="article-grid" id="relatedGrid"></div>
         </section>
-
-        <!-- 2. Popular This Week (most recent, horizontal cards) -->
-        <section class="link-section" id="popularSection">
-            <div class="link-section-header">
-                <div class="section-icon">🔥</div>
-                <h2>Popular This Week</h2>
-            </div>
-            <div class="popular-grid" id="popularGrid"></div>
-        </section>
-
-        <!-- Ad removed: interstitial moved to index page -->
-
-        <!-- 3. Recommended Reading (cross-category, numbered list) -->
-        <section class="link-section" id="recommendedSection">
-            <div class="link-section-header">
-                <div class="section-icon">💡</div>
-                <h2>Recommended Reading</h2>
-            </div>
-            <ol class="recommended-list" id="recommendedList"></ol>
-        </section>
-
-        <!-- Ad removed: anchor moved to index page -->
     </main>
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="footer-content">
             <div class="footer-section">
                 <h4>About HelloInsights</h4>
-                <p id="footerAbout">Your trusted source for the latest insights in Technology, Finance, AI Tools, and Health & Lifestyle.</p>
+                <p>Your trusted source for the latest insights in Technology, Finance, AI Tools, and Health &amp; Lifestyle.</p>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
-                <ul id="footerNav"></ul>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="category.html?cat=technology">Technology</a></li>
+                    <li><a href="category.html?cat=finance">Finance</a></li>
+                    <li><a href="category.html?cat=ai-tools">AI Tools</a></li>
+                    <li><a href="category.html?cat=health-lifestyle">Health &amp; Lifestyle</a></li>
+                </ul>
             </div>
             <div class="footer-section">
                 <h4>Legal</h4>
@@ -414,66 +192,31 @@
             <p>&copy; <script>document.write(new Date().getFullYear())</script> HelloInsights. All rights reserved.</p>
         </div>
     </footer>
-    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">&uarr;</button>
     <script>
-    // ==========================================
-    // Subdomain-based Navigation & Content
-    // ==========================================
-    var categoryNames = {
-        'technology': 'Technology', 'finance': 'Finance',
-        'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle'
-    };
-    function renderNavigation() {
-        var navList = document.getElementById('navList');
-        if (!navList) return;
-        var html = '';
-        if (window.IS_SUBDOMAIN) {
-            var cat = window.SUBDOMAIN_CATEGORY;
-            html += '<li><a href="index.html" class="active">' + categoryNames[cat] + '</a></li>';
-        } else {
-            html += '<li><a href="index.html">All</a></li>';
-            html += '<li><a href="category.html?cat=technology">Technology</a></li>';
-            html += '<li><a href="category.html?cat=finance">Finance</a></li>';
-            html += '<li><a href="category.html?cat=ai-tools">AI Tools</a></li>';
-            html += '<li><a href="category.html?cat=health-lifestyle">Health & Lifestyle</a></li>';
-        }
-        navList.innerHTML = html;
-    }
-    function renderFooterNav() {
-        var footerNav = document.getElementById('footerNav');
-        var footerAbout = document.getElementById('footerAbout');
-        if (window.IS_SUBDOMAIN) {
-            var cat = window.SUBDOMAIN_CATEGORY;
-            if (footerNav) {
-                footerNav.innerHTML = '<li><a href="index.html">Home</a></li>' +
-                    '<li><a href="category.html?cat=' + cat + '">' + categoryNames[cat] + '</a></li>';
-            }
-            if (footerAbout) {
-                footerAbout.textContent = 'Your trusted source for the latest ' + categoryNames[cat] + ' news and insights.';
-            }
-        } else {
-            if (footerNav) {
-                footerNav.innerHTML = '<li><a href="index.html">Home</a></li>' +
-                    '<li><a href="category.html?cat=technology">Technology</a></li>' +
-                    '<li><a href="category.html?cat=finance">Finance</a></li>' +
-                    '<li><a href="category.html?cat=ai-tools">AI Tools</a></li>' +
-                    '<li><a href="category.html?cat=health-lifestyle">Health & Lifestyle</a></li>';
-            }
-        }
-    }
-    renderNavigation();
-    renderFooterNav();
-
-    // ==========================================
-    // Core Logic
-    // ==========================================
-    var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=450&fit=crop&fm=webp&q=80';
+    var categoryNames = {};
+    var maxArticleId = 0;
+    var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600&h=338';
     var fallbackImages = {
-        'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=450&fit=crop&fm=webp&q=80',
-        'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=450&fit=crop&fm=webp&q=80',
-        'ai-tools': 'https://images.unsplash.com/photo-1682687982501-1e58ab814714?w=800&h=450&fit=crop&fm=webp&q=80',
-        'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&h=450&fit=crop&fm=webp&q=80'
+        'technology': 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600&h=338',
+        'finance': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=600&h=338',
+        'ai-tools': 'https://images.unsplash.com/photo-1682687982501-1e58ab814714?auto=format&fit=crop&q=80&w=600&h=338',
+        'health-lifestyle': 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&q=80&w=600&h=338'
     };
+
+    // XSS sanitization
+    function sanitizeStr(str) {
+        if (!str) return '';
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+    }
+    function sanitizeUrl(url) {
+        if (!url) return '';
+        var cleaned = String(url).replace(/[<>"'\s]/g, '');
+        if (cleaned.indexOf('javascript:') === 0 || cleaned.indexOf('data:') === 0) return '';
+        return cleaned;
+    }
 
     function buildCategoryNames(config) {
         var names = {};
@@ -490,35 +233,138 @@
         return fallbackImages[category] || defaultFallback;
     }
     function formatDate(dateStr) {
-        if (!dateStr) return '';
-        var parts = dateStr.split('-');
-        if (parts.length === 3) {
-            var d = new Date(parts[0] + '-' + parts[1] + '-' + parts[2]);
-            var m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-            return m[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+        if (dateStr) {
+            var d = new Date(dateStr);
+            return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
         }
         return '';
     }
+    function generateDate(articleId, maxId) {
+        var today = new Date();
+        var date = new Date(today);
+        date.setDate(date.getDate() - Math.floor((maxId - articleId) / 3));
+        return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    }
 
-    function renderArticle(article) {
+    function updateSEO(article, catName) {
+        var title = sanitizeStr(article.title);
+        var excerpt = sanitizeStr(article.excerpt || '');
+        var imgUrl = sanitizeUrl(article.image || '');
+        var heroImg = imgUrl.replace(/w=\d+/, 'w=1200').replace(/h=\d+/, 'h=675');
+        if (heroImg.indexOf('auto=format') === -1) heroImg += '&auto=format';
+        var articleUrl = 'https://www.helloinsights.online/article.html?id=' + article.id;
+
+        // Title
+        var siteName = (typeof siteConfig !== 'undefined' && siteConfig && siteConfig.siteName) ? siteConfig.siteName : 'HelloInsights';
+        document.title = title + ' - ' + siteName;
+
+        // Canonical
+        var canonical = document.getElementById('canonicalUrl');
+        if (canonical) canonical.setAttribute('href', articleUrl);
+
+        // OG
+        var ogTitle = document.getElementById('ogTitle');
+        if (ogTitle) ogTitle.setAttribute('content', title);
+        var ogDesc = document.getElementById('ogDesc');
+        if (ogDesc) ogDesc.setAttribute('content', excerpt.substring(0, 200));
+        var ogUrl = document.getElementById('ogUrl');
+        if (ogUrl) ogUrl.setAttribute('content', articleUrl);
+        var ogImg = document.getElementById('ogImage');
+        if (ogImg) ogImg.setAttribute('content', heroImg);
+
+        // Twitter
+        var twTitle = document.getElementById('twTitle');
+        if (twTitle) twTitle.setAttribute('content', title);
+        var twDesc = document.getElementById('twDesc');
+        if (twDesc) twDesc.setAttribute('content', excerpt.substring(0, 200));
+        var twImg = document.getElementById('twImage');
+        if (twImg) twImg.setAttribute('content', heroImg);
+
+        // JSON-LD Article
+        var ldArticle = document.getElementById('jsonLdArticle');
+        if (ldArticle) {
+            var articleSchema = {
+                '@context': 'https://schema.org',
+                '@type': 'Article',
+                'headline': title,
+                'image': heroImg,
+                'datePublished': article.date || '',
+                'dateModified': article.date || '',
+                'description': excerpt.substring(0, 200),
+                'publisher': {
+                    '@type': 'Organization',
+                    'name': 'HelloInsights',
+                    'url': 'https://www.helloinsights.online/',
+                    'logo': {
+                        '@type': 'ImageObject',
+                        'url': 'https://www.helloinsights.online/logo.svg'
+                    }
+                },
+                'mainEntityOfPage': {
+                    '@type': 'WebPage',
+                    '@id': articleUrl
+                }
+            };
+            ldArticle.textContent = JSON.stringify(articleSchema);
+        }
+
+        // JSON-LD BreadcrumbList
+        var ldBreadcrumb = document.getElementById('jsonLdBreadcrumb');
+        if (ldBreadcrumb) {
+            var breadcrumbSchema = {
+                '@context': 'https://schema.org',
+                '@type': 'BreadcrumbList',
+                'itemListElement': [
+                    {
+                        '@type': 'ListItem',
+                        'position': 1,
+                        'name': 'Home',
+                        'item': 'https://www.helloinsights.online/'
+                    },
+                    {
+                        '@type': 'ListItem',
+                        'position': 2,
+                        'name': catName,
+                        'item': 'https://www.helloinsights.online/category.html?cat=' + (article.category || '')
+                    },
+                    {
+                        '@type': 'ListItem',
+                        'position': 3,
+                        'name': title
+                    }
+                ]
+            };
+            ldBreadcrumb.textContent = JSON.stringify(breadcrumbSchema);
+        }
+    }
+
+    function renderArticle(article, maxId) {
         var container = document.getElementById('articleDetail');
         var loading = document.getElementById('loading');
         if (loading) loading.remove();
-        var date = article.date ? formatDate(article.date) : '';
-        var catName = categoryNames[article.category] || article.category;
+        var date = article.date ? formatDate(article.date) : generateDate(article.id, maxId);
+        var catName = sanitizeStr(categoryNames[article.category] || article.category);
+        var title = sanitizeStr(article.title);
         var fallbackImg = getFallbackImage(article.category);
-        var heroImg = article.image.replace(/w=\d+&h=\d+/, 'w=720&h=405');
+        var heroImg = sanitizeUrl(article.image);
+        // Optimize hero image URL
+        heroImg = heroImg.replace(/w=\d+/, 'w=1200').replace(/h=\d+/, 'h=675');
+        if (heroImg.indexOf('auto=format') === -1) heroImg += '&auto=format';
+        if (heroImg.indexOf('q=') === -1) heroImg += '&q=80';
+        var fallbackOpt = fallbackImg.replace(/w=\d+/, 'w=1200').replace(/h=\d+/, 'h=675');
+
         var articleContent = article.content
             ? article.content
-            : '<p>' + article.excerpt + '</p><p><em>This article is being updated. Check back soon for the full content.</em></p>';
+            : '<p>' + sanitizeStr(article.excerpt) + '</p><p><em>This article is being updated. Check back soon for the full content.</em></p>';
+
         container.innerHTML =
             '<div class="article-hero">' +
-            '<img src="' + heroImg + '" alt="' + article.title + '" loading="eager" fetchpriority="high" onerror="this.src=\'' + fallbackImg.replace(/w=\d+&h=\d+/, 'w=720&h=405') + '\'">' +
+            '<img src="' + heroImg + '" alt="' + title + '" width="1200" height="675" fetchpriority="high" onerror="this.src=\'' + fallbackOpt + '\'">' +
             '</div>' +
             '<div class="article-body">' +
             '<header class="article-header">' +
             '<span class="card-category">' + catName + '</span>' +
-            '<h1>' + article.title + '</h1>' +
+            '<h1>' + title + '</h1>' +
             '<div class="article-meta">' +
             '<span>' + date + '</span>' +
             '</div>' +
@@ -527,118 +373,60 @@
             articleContent +
             '</div>' +
             '</div>';
-        var siteName = (siteConfig && siteConfig.siteName) ? siteConfig.siteName : 'HelloInsights';
-        document.title = article.title + ' - ' + siteName;
+
+        // Update SEO meta tags
+        updateSEO(article, catName);
     }
 
-    // ==========================================
-    // Internal Linking: 3 Sections
-    // ==========================================
-
-    // Helper: deduplicate by tracking used IDs
-    function buildUsedSet(currentId, arr) {
-        var s = {};
-        s[currentId] = true;
-        for (var i = 0; i < arr.length; i++) s[arr[i].id] = true;
-        return s;
-    }
-
-    // 1. Related Articles — same category, card grid with images
     function renderRelated(currentArticle, allArticles) {
-        var related = allArticles.filter(function(a) {
-            return a.category === currentArticle.category && a.id !== currentArticle.id;
-        }).sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); }).slice(0, 3);
-
-        var section = document.getElementById('relatedSection');
-        if (related.length === 0) { section.style.display = 'none'; return; }
-
+        var related = [];
+        for (var i = 0; i < allArticles.length; i++) {
+            if (allArticles[i].category === currentArticle.category && allArticles[i].id !== currentArticle.id) {
+                related.push(allArticles[i]);
+                if (related.length >= 3) break;
+            }
+        }
+        if (related.length === 0) {
+            document.getElementById('relatedSection').style.display = 'none';
+            return;
+        }
         var grid = document.getElementById('relatedGrid');
         var html = '';
-        var usedIds = buildUsedSet(currentArticle.id, related);
         for (var i = 0; i < related.length; i++) {
-            var a = related[i];
-            var catName = categoryNames[a.category] || a.category;
-            var fb = getFallbackImage(a.category);
-            html += '<a class="related-card" href="article.html?id=' + a.id + '">' +
-                '<img class="related-card-img" src="' + a.image + '" alt="' + a.title + '" loading="lazy" decoding="async" onerror="this.src=\'' + fb + '\'">' +
-                '<div class="related-card-body">' +
-                '<span class="related-card-cat">' + catName + '</span>' +
-                '<p class="related-card-title">' + a.title + '</p>' +
-                '<div class="related-card-date">' + formatDate(a.date) + '</div>' +
-                '</div></a>';
-        }
-        grid.innerHTML = html;
-        return usedIds;
-    }
-
-    // 2. Popular This Week — most recent across all categories, horizontal cards
-    function renderPopular(currentArticle, allArticles, usedIds) {
-        var popular = allArticles.filter(function(a) {
-            return !usedIds[a.id];
-        }).sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); }).slice(0, 4);
-
-        var section = document.getElementById('popularSection');
-        if (popular.length === 0) { section.style.display = 'none'; return usedIds; }
-
-        var grid = document.getElementById('popularGrid');
-        var html = '';
-        for (var i = 0; i < popular.length; i++) {
-            var a = popular[i];
-            usedIds[a.id] = true;
-            var catName = categoryNames[a.category] || a.category;
-            var fb = getFallbackImage(a.category);
-            html += '<a class="popular-card" href="article.html?id=' + a.id + '">' +
-                '<img class="popular-card-thumb" src="' + a.image + '" alt="' + a.title + '" loading="lazy" decoding="async" onerror="this.src=\'' + fb + '\'">' +
-                '<div class="popular-card-body">' +
-                '<div class="popular-card-cat">' + catName + '</div>' +
-                '<p class="popular-card-title">' + a.title + '</p>' +
-                '<div class="popular-card-date">' + formatDate(a.date) + '</div>' +
-                '</div></a>';
-        }
-        grid.innerHTML = html;
-        return usedIds;
-    }
-
-    // 3. Recommended Reading — cross-category first, numbered list
-    function renderRecommended(currentArticle, allArticles, usedIds) {
-        // Prefer cross-category articles
-        var crossCat = allArticles.filter(function(a) {
-            return a.category !== currentArticle.category && !usedIds[a.id];
-        }).sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
-
-        // Fallback: fill from same category if needed
-        var sameCat = allArticles.filter(function(a) {
-            return a.category === currentArticle.category && !usedIds[a.id];
-        }).sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
-
-        var picks = [];
-        for (var i = 0; i < crossCat.length && picks.length < 3; i++) picks.push(crossCat[i]);
-        for (var j = 0; j < sameCat.length && picks.length < 5; j++) picks.push(sameCat[j]);
-
-        var section = document.getElementById('recommendedSection');
-        if (picks.length === 0) { section.style.display = 'none'; return; }
-
-        var list = document.getElementById('recommendedList');
-        var html = '';
-        for (var i = 0; i < picks.length; i++) {
-            var a = picks[i];
-            var catName = categoryNames[a.category] || a.category;
-            html += '<li>' +
-                '<a href="article.html?id=' + a.id + '">' +
-                '<span class="rec-number">' + (i + 1) + '</span>' +
-                '<div class="rec-info">' +
-                '<div class="rec-title">' + a.title + '</div>' +
-                '<div class="rec-meta">' + catName + ' · ' + formatDate(a.date) + '</div>' +
+            var article = related[i];
+            var articleFallback = getFallbackImage(article.category);
+            var catName = sanitizeStr(categoryNames[article.category] || article.category);
+            var aTitle = sanitizeStr(article.title);
+            var aExcerpt = sanitizeStr(article.excerpt);
+            var aImg = sanitizeUrl(article.image);
+            var date = article.date ? formatDate(article.date) : generateDate(article.id, maxArticleId);
+            html += '<article class="article-card">' +
+                '<div class="card-image">' +
+                '<img src="' + aImg + '" alt="' + aTitle + '" width="600" height="338" loading="lazy" decoding="async" onerror="this.src=\'' + articleFallback + '\'">' +
                 '</div>' +
-                '<span class="rec-arrow">→</span>' +
-                '</a></li>';
+                '<div class="card-content">' +
+                '<span class="card-category">' + catName + '</span>' +
+                '<h3 class="card-title">' +
+                '<a href="article.html?id=' + article.id + '">' + aTitle + '</a>' +
+                '</h3>' +
+                '<p class="card-excerpt">' + aExcerpt + '</p>' +
+                '<div class="card-meta">' +
+                '<span>' + date + '</span>' +
+                '</div>' +
+                '<a href="article.html?id=' + article.id + '" class="read-more-btn">Read More...</a>' +
+                '</div>' +
+                '</article>';
         }
-        list.innerHTML = html;
+        grid.innerHTML = html;
     }
 
     function toggleMenu() {
         var nav = document.getElementById('navContainer');
-        if (nav) nav.classList.toggle('active');
+        var toggle = document.querySelector('.menu-toggle');
+        if (nav) {
+            nav.classList.toggle('active');
+            if (toggle) toggle.setAttribute('aria-expanded', nav.classList.contains('active') ? 'true' : 'false');
+        }
     }
     function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     window.addEventListener('scroll', function() {
@@ -646,69 +434,118 @@
         if (btn) btn.classList.toggle('visible', window.pageYOffset > 300);
     });
 
-    async function loadArticle() {
-        // Step 1: Load config
-        await new Promise(function(resolve) {
-            loadSiteConfig(function(config) {
-                if (config) {
-                    categoryNames = buildCategoryNames(config);
-                } else {
-                    categoryNames = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
-                }
+    // ES5 compatible article loading (no async/await)
+    function loadArticle() {
+        // Step 1: Load config for category names
+        var loadConfigPromise = new Promise(function(resolve) {
+            if (typeof loadSiteConfig === 'function') {
+                loadSiteConfig(function(config) {
+                    if (config) {
+                        categoryNames = buildCategoryNames(config);
+                    } else {
+                        categoryNames = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
+                    }
+                    resolve();
+                });
+            } else {
+                categoryNames = { 'technology': 'Technology', 'finance': 'Finance', 'ai-tools': 'AI Tools', 'health-lifestyle': 'Health & Lifestyle' };
                 resolve();
-            });
+            }
         });
 
-        // Step 2: Get article ID
-        var urlParams = new URLSearchParams(window.location.search);
-        var articleId = parseInt(urlParams.get('id')) || 1;
-
-        // Step 3: Fetch all articles
-        try {
-            var allArticlesList = [];
-            var categories = ['technology', 'finance', 'ai-tools', 'health-lifestyle'];
-            var promises = categories.map(function(c) {
-                return fetch('articles-' + c + '.json', { cache: 'force-cache' })
-                    .then(function(r) {
-                        if (!r.ok) throw new Error('HTTP ' + r.status + ' loading articles-' + c + '.json');
-                        return r.json();
-                    })
-                    .then(function(d) { return d.articles || []; })
-                    .catch(function(err) { console.warn('Failed to load ' + c + ':', err.message); return []; });
-            });
-            var results = await Promise.all(promises);
-            for (var i = 0; i < results.length; i++) {
-                allArticlesList = allArticlesList.concat(results[i]);
+        loadConfigPromise.then(function() {
+            // Step 2: Get article ID from URL (ES5 compatible, no URLSearchParams)
+            var articleId = 1;
+            var search = window.location.search.substring(1);
+            var pairs = search.split('&');
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i].split('=');
+                if (decodeURIComponent(pair[0]) === 'id') {
+                    articleId = parseInt(decodeURIComponent(pair[1])) || 1;
+                    break;
+                }
             }
 
-            var article = allArticlesList.find(function(a) { return a.id === articleId; });
-
-            // Fallback: if exact ID not found, show latest article from any category
-            if (!article && allArticlesList.length > 0) {
-                allArticlesList.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
-                article = allArticlesList[0];
-                console.warn('Article ID ' + articleId + ' not found, falling back to latest article (ID: ' + article.id + ')');
-            }
-
-            if (!article) throw new Error('No articles available. Article ID ' + articleId + ' not found in any category index.');
-
-            // Sort all by date desc
-            allArticlesList.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
-
-            renderArticle(article);
-
-            // Render 3 internal linking sections with deduplication
-            var usedIds = renderRelated(article, allArticlesList);
-            usedIds = renderPopular(article, allArticlesList, usedIds);
-            renderRecommended(article, allArticlesList, usedIds);
-        } catch (error) {
-            console.error('Error:', error);
-            var container = document.getElementById('articleDetail');
-            if (container) {
-                container.innerHTML = '<p style="text-align: center; padding: 3rem;">Unable to load article (ID: ' + articleId + '). The article may have been removed or the index is out of sync.<br><br><a href="index.html" style="color:#ff6b35;font-weight:600;">← Return to homepage</a></p>';
-            }
-        }
+            // Step 3: Fetch index
+            return fetch('articles-index.json?v=' + Date.now())
+                .then(function(r) {
+                    if (!r.ok) throw new Error('index HTTP ' + r.status);
+                    return r.json();
+                })
+                .then(function(index) {
+                    var category = index[articleId];
+                    if (!category) {
+                        // Fallback: load latest article
+                        console.warn('Article ' + articleId + ' not in index, falling back to latest');
+                        return fetch('articles-index.json?v=' + Date.now())
+                            .then(function(r) { return r.json(); })
+                            .then(function(idx) {
+                                // Find highest ID
+                                var maxId = 0;
+                                var keys = Object.keys(idx);
+                                for (var k = 0; k < keys.length; k++) {
+                                    var numKey = parseInt(keys[k]);
+                                    if (!isNaN(numKey) && numKey > maxId) maxId = numKey;
+                                }
+                                if (maxId > 0 && idx[maxId]) {
+                                    articleId = maxId;
+                                    category = idx[maxId];
+                                } else {
+                                    throw new Error('Article ' + articleId + ' not found and no fallback available');
+                                }
+                                return fetch('articles-' + category + '.json?v=' + (idx.v || Date.now()))
+                                    .then(function(r) {
+                                        if (!r.ok) throw new Error('category file HTTP ' + r.status);
+                                        return r.json();
+                                    })
+                                    .then(function(catData) {
+                                        return { catData: catData, version: idx.v || Date.now() };
+                                    });
+                            });
+                    }
+                    // Step 4: Fetch category file
+                    return fetch('articles-' + category + '.json?v=' + (index.v || Date.now()))
+                        .then(function(r) {
+                            if (!r.ok) throw new Error('category file HTTP ' + r.status);
+                            return r.json();
+                        })
+                        .then(function(catData) {
+                            return { catData: catData, version: index.v || Date.now() };
+                        });
+                })
+                .then(function(result) {
+                    var catArticles = result.catData.articles || [];
+                    var article = null;
+                    for (var i = 0; i < catArticles.length; i++) {
+                        if (catArticles[i].id === articleId) {
+                            article = catArticles[i];
+                            break;
+                        }
+                    }
+                    if (!article) {
+                        throw new Error('Article ' + articleId + ' not found in category (' + catArticles.length + ' articles)');
+                    }
+                    // Step 5: Render
+                    maxArticleId = 0;
+                    for (var i = 0; i < catArticles.length; i++) {
+                        if (catArticles[i].id > maxArticleId) maxArticleId = catArticles[i].id;
+                    }
+                    renderArticle(article, maxArticleId);
+                    renderRelated(article, catArticles);
+                })
+                .catch(function(error) {
+                    console.error('Article load error:', error.message);
+                    var container = document.getElementById('articleDetail');
+                    if (container) {
+                        container.innerHTML = '<div style="text-align:center;padding:3rem;">' +
+                            '<p style="color:#999;margin-bottom:1rem;">Unable to load article (ID: ' + articleId + '): ' + sanitizeStr(error.message) + '</p>' +
+                            '<a href="index.html" style="color:#ff6b35;text-decoration:underline;">Return to homepage</a>' +
+                            '</div>';
+                    }
+                });
+        });
     }
+
     document.addEventListener('DOMContentLoaded', loadArticle);
     </script>
 </body>

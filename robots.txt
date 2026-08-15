@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /search
+Disallow: /config.json
 
 Sitemap: https://www.helloinsights.online/sitemap.xml

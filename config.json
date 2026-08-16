@@ -1,27 +1,69 @@
 {
     "siteName": "HelloInsights",
     "siteUrl": "https://www.helloinsights.online",
+    "tagline": "Your Trusted Source for Insights",
     "accentColor": "#ff6b35",
-    "logoImage": "logo.svg",
+    "logoImage": "logo.png",
     "categories": [
-        { "id": "technology", "name": "Technology", "description": "Latest innovations in software, hardware, cloud, and emerging tech." },
-        { "id": "finance", "name": "Finance", "description": "Market trends, investment strategies, and financial insights." },
-        { "id": "ai-tools", "name": "AI Tools", "description": "AI-powered tools and platforms to boost your productivity." },
-        { "id": "health-lifestyle", "name": "Health & Lifestyle", "description": "Wellness tips, fitness guides, and healthy living advice." }
+        { "id": "technology", "name": "Technology", "desc": "The latest in tech innovation, digital trends, and cutting-edge research" },
+        { "id": "finance", "name": "Finance", "desc": "Investment strategies, market insights, and personal finance tips" },
+        { "id": "ai-tools", "name": "AI Tools", "desc": "Discover the latest artificial intelligence tools and how to use them" },
+        { "id": "health-lifestyle", "name": "Health & Lifestyle", "desc": "Wellness tips, healthy recipes, and lifestyle improvements" }
     ],
     "seo": {
-        "description": "Stay informed with newest global news and insights across technology, AI, finance, health, and lifestyle.",
-        "ogImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=630&fit=crop&q=80"
+        "description": "HelloInsights - Your trusted source for Technology, Finance, AI Tools, and Health & Lifestyle news and insights.",
+        "keywords": "technology, finance, ai tools, health, lifestyle, news, insights, helloinsights"
     },
     "footer": {
-        "about": "Your trusted source for the latest insights in Technology, Finance, AI Tools, and Health & Lifestyle."
+        "about": "Your trusted source for the latest insights in Technology, Finance, AI Tools, and Health & Lifestyle.",
+        "email": "contact@helloinsights.online",
+        "social": {
+            "twitter": "https://twitter.com/helloinsights",
+            "facebook": "https://facebook.com/helloinsights",
+            "linkedin": "https://linkedin.com/company/helloinsights"
+        }
+    },
+    "adProviders": {
+        "adsense": { "enabled": false },
+        "mgid": { "enabled": false },
+        "adx": { "enabled": false }
     },
     "adsense": {
-        "enabled": false,
-        "clientId": "ca-pub-XXXXXXXXXXXXXXXX"
+        "clientId": "ca-pub-XXXXXXXXXXXXXXXX",
+        "slots": {
+            "native-top": { "id": "", "format": "auto" },
+            "banner-mid": { "id": "", "format": "auto" },
+            "banner-bottom": { "id": "", "format": "auto" },
+            "cat-top": { "id": "", "format": "auto" },
+            "cat-mid": { "id": "", "format": "auto" },
+            "cat-bottom": { "id": "", "format": "auto" },
+            "article-bottom": { "id": "", "format": "auto" }
+        }
     },
     "mgid": {
-        "enabled": false,
-        "siteId": ""
+        "siteId": "",
+        "slots": {
+            "banner-mid": { "widgetId": "" },
+            "cat-mid": { "widgetId": "" },
+            "article-bottom": { "widgetId": "" }
+        }
+    },
+    "adx": {
+        "slots": {}
+    },
+    "slotAssignment": {
+        "index.html": {
+            "native-top": "adsense",
+            "banner-mid": "adsense",
+            "banner-bottom": "adsense"
+        },
+        "category.html": {
+            "cat-top": "adsense",
+            "cat-mid": "adsense",
+            "cat-bottom": "adsense"
+        },
+        "article.html": {
+            "article-bottom": "adsense"
+        }
     }
 }

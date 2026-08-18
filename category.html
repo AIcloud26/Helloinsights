@@ -209,6 +209,54 @@
     };
     var defaultFallback = fallbackImages['technology'];
 
+    var usedImageIds = {};
+    var altImages = {
+        'technology': [
+            'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&h=400&fit=crop'
+        ],
+        'finance': [
+            'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1604594849809-dfedbc827105?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1526304644261-830e39fabc9a?w=600&h=400&fit=crop'
+        ],
+        'ai-tools': [
+            'https://images.unsplash.com/photo-1655720828018-edd2da095b5c?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600&h=400&fit=crop'
+        ],
+        'health-lifestyle': [
+            'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-151190952532-61113c912358?w=600&h=400&fit=crop'
+        ]
+    };
+
+    function extractUnsplashId(url) {
+        if (!url) return '';
+        var m = url.match(/(photo-[a-zA-Z0-9]+)/);
+        return m ? m[1] : '';
+    }
+
+    function getUniqueImage(category, originalUrl) {
+        var pool = altImages[category] || [];
+        var origId = extractUnsplashId(originalUrl);
+        if (origId && !usedImageIds[origId]) {
+            usedImageIds[origId] = true;
+            return originalUrl;
+        }
+        for (var i = 0; i < pool.length; i++) {
+            var id = extractUnsplashId(pool[i]);
+            if (id && !usedImageIds[id]) {
+                usedImageIds[id] = true;
+                return pool[i];
+            }
+        }
+        if (origId) usedImageIds[origId] = true;
+        return originalUrl;
+    }
+
     function esc(str) {
         var div = document.createElement('div');
         div.appendChild(document.createTextNode(str || ''));
@@ -250,7 +298,9 @@
         var sideFb = getFallbackImage(side.category);
         var sideDate = side.date ? formatDate(side.date) : '';
 
-        var mainImg = main.image.replace('w=600&h=400', 'w=1200&h=600') + '&fm=webp';
+        var mainUniqueImg = getUniqueImage(main.category, main.image);
+        var sideUniqueImg = getUniqueImage(side.category, side.image);
+        var mainImg = mainUniqueImg.replace('w=600&h=400', 'w=1200&h=600') + '&fm=webp';
 
         section.innerHTML =
             '<a class="featured-main" href="article.html?id=' + main.id + '">' +
@@ -264,7 +314,7 @@
             '</a>' +
             '<div class="featured-side">' +
                 '<a class="featured-side-card" href="article.html?id=' + side.id + '">' +
-                    '<div class="card-image"><img src="' + esc(side.image) + '" alt="' + esc(side.title) + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + esc(sideFb) + '\'"></div>' +
+                    '<div class="card-image"><img src="' + esc(sideUniqueImg) + '" alt="' + esc(side.title) + '" loading="lazy" onerror="this.onerror=null;this.src=\'' + esc(sideFb) + '\'"></div>' +
                     '<div class="f-body">' +
                         '<span class="card-category">' + esc(sideCatName) + '</span>' +
                         '<div class="card-title">' + esc(side.title) + '</div>' +
@@ -279,8 +329,9 @@
         var catName = categoryNames[article.category] || article.category;
         var fb = getFallbackImage(article.category);
         var date = article.date ? formatDate(article.date) : '';
+        var img = getUniqueImage(article.category, article.image);
         return '<a class="latest-card" href="article.html?id=' + article.id + '">' +
-            '<div class="card-image"><img src="' + esc(article.image) + '" alt="' + esc(article.title) + '" width="600" height="400" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'' + esc(fb) + '\'"></div>' +
+            '<div class="card-image"><img src="' + esc(img) + '" alt="' + esc(article.title) + '" width="600" height="400" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'' + esc(fb) + '\'"></div>' +
             '<div class="f-body">' +
                 '<span class="card-category">' + esc(catName) + '</span>' +
                 '<div class="card-title">' + esc(article.title) + '</div>' +
@@ -320,22 +371,22 @@
         var el = document.getElementById('pagination');
         if (!el || pages <= 1) { if (el) el.innerHTML = ''; return; }
         var h = '';
-        if (currentPage > 1) h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage - 1) + ');return false;">‹</a>';
+        if (currentPage > 1) h += '<a href="javascript:void(0)" class="page-btn" onclick="changePage(' + (currentPage - 1) + ');return false;">‹</a>';
         else h += '<span class="page-btn disabled">‹</span>';
         var range = 2;
         var start = Math.max(2, currentPage - range);
         var end = Math.min(pages - 1, currentPage + range);
         if (currentPage === 1) h += '<span class="page-btn active">1</span>';
-        else h += '<a href="#" class="page-btn" onclick="changePage(1);return false;">1</a>';
+        else h += '<a href="javascript:void(0)" class="page-btn" onclick="changePage(1);return false;">1</a>';
         if (start > 2) h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
         for (var i = start; i <= end; i++) {
             if (i === currentPage) h += '<span class="page-btn active">' + i + '</span>';
-            else h += '<a href="#" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>';
+            else h += '<a href="javascript:void(0)" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>';
         }
         if (end < pages - 1) h += '<span class="page-btn disabled" style="cursor:default;">…</span>';
         if (currentPage === pages) h += '<span class="page-btn active">' + pages + '</span>';
-        else h += '<a href="#" class="page-btn" onclick="changePage(' + pages + ');return false;">' + pages + '</a>';
-        if (currentPage < pages) h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">›</a>';
+        else h += '<a href="javascript:void(0)" class="page-btn" onclick="changePage(' + pages + ');return false;">' + pages + '</a>';
+        if (currentPage < pages) h += '<a href="javascript:void(0)" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">›</a>';
         else h += '<span class="page-btn disabled">›</span>';
         el.innerHTML = h;
     }

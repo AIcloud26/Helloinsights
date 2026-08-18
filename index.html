@@ -293,30 +293,18 @@
     @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
 
     /* Footer */
-    .footer {
-        background: var(--text-primary); color: #ccc; padding: 48px 24px 24px;
-        margin-top: 60px;
-    }
-    .footer-inner { max-width: var(--max-w); margin: 0 auto; }
-    .footer-brand { margin-bottom: 24px; }
-    .footer-brand h3 {
-        font-size: 1.1rem; font-weight: 700; color: #fff;
-        letter-spacing: 0.05em; margin-bottom: 6px;
-    }
-    .footer-brand p { font-size: 0.875rem; color: #999; }
-    .footer-links { display: flex; gap: 48px; flex-wrap: wrap; margin-bottom: 32px; }
-    .footer-col h4 {
-        font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
-        letter-spacing: 0.05em; color: #fff; margin-bottom: 12px;
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col li { margin-bottom: 8px; }
-    .footer-col a { font-size: 0.875rem; color: #999; transition: color 0.2s; }
-    .footer-col a:hover { color: var(--accent); }
-    .footer-copy {
-        border-top: 1px solid #333; padding-top: 20px;
-        font-size: 0.8rem; color: #666;
-    }
+    .footer{background:#1a1a1a;color:#ccc;padding:3rem 0 0;margin-top:3rem}
+    .footer-content{max-width:1280px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem}
+    .footer-section h4{color:#fff;font-size:.9rem;font-weight:600;margin-bottom:1rem;text-transform:uppercase;letter-spacing:.05em}
+    .footer-section p{font-size:.88rem;line-height:1.6;color:#999}
+    .footer-section ul{list-style:none;padding:0;margin:0}
+    .footer-section li{margin-bottom:.5rem}
+    .footer-section a{color:#999;text-decoration:none;font-size:.88rem;transition:color .2s}
+    .footer-section a:hover{color:#ff6b35}
+    .footer-bottom{max-width:1280px;margin:0 auto;padding:1.5rem 2rem;border-top:1px solid #333;text-align:center}
+    .footer-bottom p{font-size:.82rem;color:#777;margin:0}
+    @media(max-width:768px){.footer-content{grid-template-columns:1fr 1fr;gap:1.5rem}}
+    @media(max-width:480px){.footer-content{grid-template-columns:1fr}}
 
     /* Back to top */
     .back-to-top {
@@ -500,40 +488,37 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <h3>HELLOINSIGHTS</h3>
-                <p>Tech, finance, AI and more.</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About HelloInsights</h4>
+                <p>Stories, ideas and useful context for a changing digital world.</p>
             </div>
-            <div class="footer-links">
-                <div class="footer-col">
-                    <h4>Explore</h4>
-                    <ul>
-                        <li><a href="category.html?cat=technology">Technology</a></li>
-                        <li><a href="category.html?cat=finance">Finance</a></li>
-                        <li><a href="category.html?cat=ai-tools">AI</a></li>
-                        <li><a href="category.html?cat=health-lifestyle">Health &amp; Lifestyle</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="privacy.html">Privacy</a></li>
-                        <li><a href="terms.html">Terms</a></li>
-                        <li><a href="cookies.html">Cookies</a></li>
-                    </ul>
-                </div>
+            <div class="footer-section">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="category.html?cat=technology">Technology</a></li>
+                    <li><a href="category.html?cat=finance">Finance</a></li>
+                    <li><a href="category.html?cat=ai-tools">AI</a></li>
+                    <li><a href="category.html?cat=health-lifestyle">Health &amp; Lifestyle</a></li>
+                </ul>
             </div>
-            <div class="footer-copy">
-                &copy; 2026 HelloInsights. All rights reserved.
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> HelloInsights. All rights reserved.</p>
         </div>
     </footer>
 
@@ -580,6 +565,97 @@
     };
     var defaultFallback = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=338&fit=crop';
 
+    // --- Image Deduplication ---
+    var usedImageIds = {};
+
+    var imagePool = {
+        'technology': [
+            'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=338&fit=crop'
+        ],
+        'finance': [
+            'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&h=338&fit=crop'
+        ],
+        'ai-tools': [
+            'https://images.unsplash.com/photo-1677442136019-21780ecf9952?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1721322800607-8539c4aa9f92?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1676299081847-824916de030a?w=600&h=338&fit=crop'
+        ],
+        'health-lifestyle': [
+            'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=338&fit=crop',
+            'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=338&fit=crop'
+        ]
+    };
+    var imagePoolIndex = {
+        'technology': 0,
+        'finance': 0,
+        'ai-tools': 0,
+        'health-lifestyle': 0
+    };
+
+    function extractUnsplashId(url) {
+        if (!url || url.indexOf('images.unsplash.com/') === -1) return null;
+        var match = url.match(/photo-[A-Za-z0-9]+/);
+        return match ? match[0] : null;
+    }
+
+    function getUniqueImage(article) {
+        var img = sanitizeUrl(article.image);
+        var cat = article.category || '';
+        var imgId = extractUnsplashId(img);
+
+        // If image is valid and not used yet, use it
+        if (img && imgId && !usedImageIds[imgId]) {
+            usedImageIds[imgId] = true;
+            return img;
+        }
+
+        // If image is empty or duplicate, try modifying w/h params first
+        if (img && imgId && usedImageIds[imgId]) {
+            var variant = img;
+            // Swap w/h values for a different crop
+            if (variant.indexOf('w=600') !== -1 && variant.indexOf('h=338') !== -1) {
+                variant = variant.replace('w=600', 'w=500').replace('h=338', 'h=280');
+                var variantId = imgId + '-v1';
+                if (!usedImageIds[variantId]) {
+                    usedImageIds[variantId] = true;
+                    return variant;
+                }
+                variant = variant.replace('w=500', 'w=700').replace('h=280', 'h=400');
+                variantId = imgId + '-v2';
+                if (!usedImageIds[variantId]) {
+                    usedImageIds[variantId] = true;
+                    return variant;
+                }
+            }
+        }
+
+        // Fall back to image pool for this category
+        var pool = imagePool[cat] || imagePool['technology'];
+        var poolLen = pool.length;
+        for (var i = 0; i < poolLen; i++) {
+            var idx = imagePoolIndex[cat] % poolLen;
+            var poolImg = pool[idx];
+            imagePoolIndex[cat] = idx + 1;
+            var poolId = extractUnsplashId(poolImg);
+            if (poolId && !usedImageIds[poolId]) {
+                usedImageIds[poolId] = true;
+                return poolImg;
+            }
+        }
+
+        // Last resort: return the default fallback
+        return getFallbackImage(cat);
+    }
+
     // --- XSS Protection ---
     function sanitizeStr(s) {
         if (typeof s !== 'string') return '';
@@ -614,7 +690,7 @@
         var cat = categoryNames[article.category] || sanitizeStr(article.category);
         var title = sanitizeStr(article.title);
         var excerpt = sanitizeStr(article.excerpt);
-        var img = sanitizeUrl(article.image);
+        var img = getUniqueImage(article);
         var fb = getFallbackImage(article.category);
         var date = generateArticleDate(article.id);
         var url = 'article.html?id=' + article.id;
@@ -633,7 +709,7 @@
         var cat = categoryNames[article.category] || sanitizeStr(article.category);
         var title = sanitizeStr(article.title);
         var excerpt = sanitizeStr(article.excerpt);
-        var img = sanitizeUrl(article.image);
+        var img = getUniqueImage(article);
         var fb = getFallbackImage(article.category);
         var date = generateArticleDate(article.id);
         var url = 'article.html?id=' + article.id;
@@ -709,7 +785,7 @@
 
         var h = '';
         if (currentPage > 1) {
-            h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage - 1) + ');return false;">&lsaquo;</a>';
+            h += '<a href="javascript:void(0)" class="page-btn" onclick="changePage(' + (currentPage - 1) + ');return false;">&lsaquo;</a>';
         } else {
             h += '<span class="page-btn disabled">&lsaquo;</span>';
         }
@@ -721,24 +797,24 @@
         if (currentPage === 1) {
             h += '<span class="page-btn active">1</span>';
         } else {
-            h += '<a href="#" class="page-btn" onclick="changePage(1);return false;">1</a>';
+            h += '<a href="javascript:void(0)" class="page-btn" onclick="changePage(1);return false;">1</a>';
         }
         if (s > 2) h += '<span class="page-btn disabled" style="cursor:default;">&hellip;</span>';
         for (var i = s; i <= e; i++) {
             if (i === currentPage) {
                 h += '<span class="page-btn active">' + i + '</span>';
             } else {
-                h += '<a href="#" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>';
+                h += '<a href="javascript:void(0)" class="page-btn" onclick="changePage(' + i + ');return false;">' + i + '</a>';
             }
         }
         if (e < pages - 1) h += '<span class="page-btn disabled" style="cursor:default;">&hellip;</span>';
         if (currentPage === pages) {
             h += '<span class="page-btn active">' + pages + '</span>';
         } else {
-            h += '<a href="#" class="page-btn" onclick="changePage(' + pages + ');return false;">' + pages + '</a>';
+            h += '<a href="javascript:void(0)" class="page-btn" onclick="changePage(' + pages + ');return false;">' + pages + '</a>';
         }
         if (currentPage < pages) {
-            h += '<a href="#" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">&rsaquo;</a>';
+            h += '<a href="javascript:void(0)" class="page-btn" onclick="changePage(' + (currentPage + 1) + ');return false;">&rsaquo;</a>';
         } else {
             h += '<span class="page-btn disabled">&rsaquo;</span>';
         }
@@ -753,7 +829,7 @@
         renderLatest();
         var target = document.getElementById('latest-section');
         if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
         }
     }
 

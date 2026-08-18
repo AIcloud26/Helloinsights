@@ -1,6 +1,16 @@
 {
   "articles": [
     {
+      "id": 72249,
+      "category": "health-lifestyle",
+      "title": "Mental Health: Myths vs. Reality",
+      "excerpt": "Navigating mental health: key developments, real-world examples, and actionable takeaways.",
+      "image": "https://images.unsplash.com/photo-1494390248081-4e521a5940db?w=800&h=450&fit=crop&fm=webp&q=80",
+      "date": "2026-08-18",
+      "content": "<p>What exactly is Mental Health, and why does it keep popping up in every conversation? The social side of Mental Health matters more than most people admit. Doing things with others — joining a class, finding a workout buddy, cooking with friends — dramatically improves adherence. Humans are social creatures, and our habits are socially contagious. Surrounding yourself with people who make healthy choices makes it easier for you to make healthy choices too. It is not cheating; it is strategy.</p>\n<p>The short answer: it is complicated. The conversation around Mental Health has shifted from fringe wellness blogs into the mainstream of health advice. What was once dismissed as alternative or experimental is increasingly backed by solid research. Nutritionists, doctors, and public health experts now routinely include Mental Health in their recommendations, though with the usual caveats about individual variation and moderation.</p>\n<p>Part of the confusion comes from how broadly the term is used. One of the most important realizations about Mental Health is that there is no single right way to do it. Different people respond differently based on genetics, lifestyle, preferences, and health history. The best approach is the one that fits your life and that you can sustain. Perfectionism is actually counterproductive — consistency with a good-enough routine beats occasional bursts of intensity every time.</p>\n<p>The short answer: it is complicated. The connection between Mental Health and mental health has become one of the most active areas of research. What was once considered a purely physical practice is now understood to have measurable effects on mood, anxiety, and cognitive function. The pathways are both direct — biochemical changes in the body — and indirect — improved self-esteem and a sense of agency. Both matter.</p>",
+      "featured": true
+    },
+    {
       "id": 12982,
       "category": "health-lifestyle",
       "title": "Simple Ways to Incorporate Meditation Practices Daily",
@@ -772,8 +782,8 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-08-17T01:08:44.407Z",
-    "totalArticles": 305,
+    "lastUpdated": "2026-08-18T01:06:12.451Z",
+    "totalArticles": 310,
     "newToday": 5,
     "generator": "Template v3",
     "templates": "8 structure types"

@@ -1,5 +1,5 @@
 {
-  "v": 1787101640087,
+  "v": 1787188019005,
   "articles": {
     "235": "ai-tools",
     "271": "health-lifestyle",
@@ -62,6 +62,7 @@
     "16380": "health-lifestyle",
     "16747": "finance",
     "17597": "ai-tools",
+    "17857": "ai-tools",
     "18078": "health-lifestyle",
     "18183": "health-lifestyle",
     "18669": "technology",
@@ -90,6 +91,7 @@
     "25057": "technology",
     "25321": "health-lifestyle",
     "25962": "ai-tools",
+    "26331": "finance",
     "26622": "ai-tools",
     "26867": "finance",
     "27024": "finance",
@@ -109,6 +111,7 @@
     "30568": "technology",
     "31073": "health-lifestyle",
     "31217": "health-lifestyle",
+    "31357": "health-lifestyle",
     "31514": "finance",
     "31688": "finance",
     "31886": "technology",
@@ -133,6 +136,7 @@
     "38283": "ai-tools",
     "38416": "technology",
     "38693": "finance",
+    "38717": "technology",
     "38751": "finance",
     "39264": "ai-tools",
     "39542": "technology",
@@ -267,6 +271,7 @@
     "79447": "ai-tools",
     "79501": "finance",
     "79605": "health-lifestyle",
+    "79778": "technology",
     "79790": "technology",
     "79990": "health-lifestyle",
     "80120": "finance",
@@ -318,6 +323,11 @@
     "99429": "finance"
   },
   "ids": [
+    17857,
+    31357,
+    79778,
+    26331,
+    38717,
     36252,
     53401,
     78239,

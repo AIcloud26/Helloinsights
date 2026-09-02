@@ -1,6 +1,16 @@
 {
   "articles": [
     {
+      "id": 56842,
+      "category": "finance",
+      "title": "How Wealth Management Is Changing the Financial Landscape",
+      "excerpt": "Navigating wealth management: key developments, real-world examples, and actionable takeaways.",
+      "image": "https://images.unsplash.com/photo-1522169799806-79cb544552bf?w=800&h=450&fit=crop&fm=webp&q=80",
+      "date": "2026-09-02",
+      "content": "<p>The data on Wealth Management tells a story that opinions alone cannot. The outlook for Wealth Management remains broadly positive among most observers, though with healthy disagreement about the pace and path forward. Structural tailwinds — demographic shifts, technological change, global economic rebalancing — support continued growth over the medium term. But short-term volatility should be expected, and investors without the stomach for it should think carefully before committing capital.</p>\n<p><strong>Dollar Dominance:</strong> The U.S. dollar's share of global currency reserves fell to 58% in 2023, the lowest level in 25 years, according to the IMF. While predictions of the dollar's demise are premature, the trend is clear. \"The dollar isn't going away,\" says currency strategist Dr. Jens Nordvig. \"But it's going to have more company. The future of the international monetary system is multipolar — the dollar, the euro, the renminbi, and maybe even digital currencies all playing significant roles.\"</p>\n<p>What explains this divergence? The infrastructure supporting Wealth Management has matured rapidly. Custody, settlement, reporting, analytics — the plumbing of the financial system is being rebuilt piece by piece. Better infrastructure attracts more participants, which in turn funds better infrastructure. It is a virtuous cycle that has played out in every previous wave of financial innovation, and Wealth Management appears to be following the same script.</p>\n<p>What explains this divergence? Institutional attitudes toward Wealth Management have shifted faster than almost anyone predicted. Pension funds, endowments, and insurance companies that once dismissed the category are now making meaningful allocations. Their entry brings stability, deeper liquidity, and higher standards for reporting and compliance. It also changes the market dynamics that early participants took for granted.</p>\n<p>Not all of the data points in the same direction. Current market data reveals a pattern that deserves closer examination. Performance across key indicators suggests a fundamental re-evaluation is underway, not just a temporary swing. The drivers are different from previous cycles — structural changes, not just sentiment, are at work. Understanding the distinction matters because it determines how investors should position themselves.</p>",
+      "featured": true
+    },
+    {
       "id": 80064,
       "category": "finance",
       "title": "Banking Technology: A Strategic Guide for 2026",
@@ -962,8 +972,8 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-09-01T03:38:23.451Z",
-    "totalArticles": 380,
+    "lastUpdated": "2026-09-02T02:56:43.847Z",
+    "totalArticles": 385,
     "newToday": 5,
     "generator": "Template v3",
     "templates": "8 structure types"

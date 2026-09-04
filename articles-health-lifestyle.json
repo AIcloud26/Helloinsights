@@ -1,6 +1,16 @@
 {
   "articles": [
     {
+      "id": 32147,
+      "category": "health-lifestyle",
+      "title": "The Ultimate Guide to Mental Health",
+      "excerpt": "What the latest research tells us about mental health and where it is heading.",
+      "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=450&fit=crop&fm=webp&q=80",
+      "date": "2026-09-04",
+      "content": "<p>The story of Mental Health is best told through the companies and people already living it. Technology is changing how people engage with Mental Health, for better and worse. Apps, wearables, and online communities provide access, motivation, and accountability that previous generations could only dream of. But they also create new sources of comparison, guilt, and misinformation. The most health-literate users are selective about which tools they adopt and how much they let those tools shape their self-image.</p>\n<p>These are not isolated examples. Long-term, the evidence suggests that Mental Health contributes to better aging outcomes — not immortality, but more years of healthy, independent living. The difference shows up in chronic disease rates, mobility measures, and cognitive performance. It is never too late to start, but starting earlier clearly compounds the benefits. Small habits maintained over decades add up to enormous differences in quality of life.</p>\n<p>The pattern repeats across industries. Research on Mental Health has expanded considerably, painting a clearer picture of both its benefits and its limitations. Some claims hold up well under scrutiny; others turn out to be overstated or context-dependent. The science is rarely as simple as the headlines suggest. People who go deeper than clickbait articles tend to come away with a more balanced and ultimately more useful understanding.</p>",
+      "featured": false
+    },
+    {
       "id": 91770,
       "category": "health-lifestyle",
       "title": "Work-Life Balance: Myths vs. Reality",
@@ -8,7 +18,7 @@
       "image": "https://images.unsplash.com/photo-1517732747537-877644b96f8b?w=800&h=450&fit=crop&fm=webp&q=80",
       "date": "2026-09-03",
       "content": "<p>Hard numbers about Work-Life Balance paint a clearer picture than most commentary suggests. For most people, the biggest barrier to Work-Life Balance is not lack of information — it is lack of consistency. Knowing what to do is easy; actually doing it every day is the hard part. This is where behavioral strategies, social support, and environmental design make a real difference. People who set themselves up for success through small environmental changes do better than those who rely on willpower alone.</p>\n<p>Let us start with the headline figures. The connection between Work-Life Balance and mental health has become one of the most active areas of research. What was once considered a purely physical practice is now understood to have measurable effects on mood, anxiety, and cognitive function. The pathways are both direct — biochemical changes in the body — and indirect — improved self-esteem and a sense of agency. Both matter.</p>\n<p>What explains this divergence? Technology is changing how people engage with Work-Life Balance, for better and worse. Apps, wearables, and online communities provide access, motivation, and accountability that previous generations could only dream of. But they also create new sources of comparison, guilt, and misinformation. The most health-literate users are selective about which tools they adopt and how much they let those tools shape their self-image.</p>\n<p>Not all of the data points in the same direction. The social side of Work-Life Balance matters more than most people admit. Doing things with others — joining a class, finding a workout buddy, cooking with friends — dramatically improves adherence. Humans are social creatures, and our habits are socially contagious. Surrounding yourself with people who make healthy choices makes it easier for you to make healthy choices too. It is not cheating; it is strategy.</p>",
-      "featured": true
+      "featured": false
     },
     {
       "id": 72153,
@@ -1022,8 +1032,8 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-09-03T02:59:44.835Z",
-    "totalArticles": 390,
+    "lastUpdated": "2026-09-04T02:58:43.866Z",
+    "totalArticles": 395,
     "newToday": 5,
     "generator": "Template v3",
     "templates": "8 structure types"

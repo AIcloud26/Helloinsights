@@ -8,7 +8,7 @@
       "image": "https://images.unsplash.com/photo-1525184782196-8e2ded604bf7?w=800&h=450&fit=crop&fm=webp&q=80",
       "date": "2026-09-05",
       "content": "<p>We sat down with practitioners and researchers working at the forefront of Real Estate Investment to get an unfiltered view. Regulatory developments continue to shape the trajectory of Real Estate Investment. Policymakers are walking a difficult line between fostering innovation and protecting consumers. The approach differs across jurisdictions, creating a patchwork of rules that adds complexity for participants operating globally. Clarity, when it comes, tends to unlock significant capital from players who were waiting on the sidelines.</p>\n<p><strong>ESG Performance:</strong> A meta-analysis by Oxford University's Saïd Business School of 200+ studies found that 58% of ESG-focused funds outperformed their non-ESG equivalents over 10-year periods. \"ESG isn't a trade-off between values and returns,\" says Professor Robert Eccles. \"It's a risk factor. You can't ignore governance quality and environmental exposure any more than you can ignore leverage or valuation.\"</p>\n<p>One perspective comes from the research side. The infrastructure supporting Real Estate Investment has matured rapidly. Custody, settlement, reporting, analytics — the plumbing of the financial system is being rebuilt piece by piece. Better infrastructure attracts more participants, which in turn funds better infrastructure. It is a virtuous cycle that has played out in every previous wave of financial innovation, and Real Estate Investment appears to be following the same script.</p>\n<p>Practitioners in the field see things differently. The outlook for Real Estate Investment remains broadly positive among most observers, though with healthy disagreement about the pace and path forward. Structural tailwinds — demographic shifts, technological change, global economic rebalancing — support continued growth over the medium term. But short-term volatility should be expected, and investors without the stomach for it should think carefully before committing capital.</p>\n<p>When you step back, the common ground is clearer. Current market data reveals a pattern that deserves closer examination. Performance across key indicators suggests a fundamental re-evaluation is underway, not just a temporary swing. The drivers are different from previous cycles — structural changes, not just sentiment, are at work. Understanding the distinction matters because it determines how investors should position themselves.</p>",
-      "featured": true
+      "featured": false
     },
     {
       "id": 39579,
@@ -1012,8 +1012,8 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-09-05T03:00:19.144Z",
-    "totalArticles": 400,
+    "lastUpdated": "2026-09-06T02:59:54.442Z",
+    "totalArticles": 405,
     "newToday": 5,
     "generator": "Template v3",
     "templates": "8 structure types"

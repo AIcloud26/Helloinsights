@@ -8,7 +8,7 @@
       "image": "https://images.unsplash.com/photo-1529119513315-c7c361862fc7?w=800&h=450&fit=crop&fm=webp&q=80",
       "date": "2026-09-11",
       "content": "<p>If you have been curious about Healthy Recipes but unsure where to begin, you are not alone. Technology is changing how people engage with Healthy Recipes, for better and worse. Apps, wearables, and online communities provide access, motivation, and accountability that previous generations could only dream of. But they also create new sources of comparison, guilt, and misinformation. The most health-literate users are selective about which tools they adopt and how much they let those tools shape their self-image.</p>\n<p>The biggest mistakes people make are usually avoidable. The conversation around Healthy Recipes has shifted from fringe wellness blogs into the mainstream of health advice. What was once dismissed as alternative or experimental is increasingly backed by solid research. Nutritionists, doctors, and public health experts now routinely include Healthy Recipes in their recommendations, though with the usual caveats about individual variation and moderation.</p>\n<p>The biggest mistakes people make are usually avoidable. Research on Healthy Recipes has expanded considerably, painting a clearer picture of both its benefits and its limitations. Some claims hold up well under scrutiny; others turn out to be overstated or context-dependent. The science is rarely as simple as the headlines suggest. People who go deeper than clickbait articles tend to come away with a more balanced and ultimately more useful understanding.</p>",
-      "featured": true
+      "featured": false
     },
     {
       "id": 91385,
@@ -1122,8 +1122,8 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-09-11T03:04:49.255Z",
-    "totalArticles": 430,
+    "lastUpdated": "2026-09-12T03:11:26.758Z",
+    "totalArticles": 435,
     "newToday": 5,
     "generator": "Template v3",
     "templates": "8 structure types"

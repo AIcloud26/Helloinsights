@@ -1,6 +1,16 @@
 {
   "articles": [
     {
+      "id": 48048,
+      "category": "health-lifestyle",
+      "title": "Mental Health: What the Research Shows",
+      "excerpt": "Discover how mental health is revolutionizing the industry and what it means for you.",
+      "image": "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&h=450&fit=crop&fm=webp&q=80",
+      "date": "2026-09-20",
+      "content": "<p>Numbers only get you so far. To grasp Mental Health, you need to see it in action. The connection between Mental Health and mental health has become one of the most active areas of research. What was once considered a purely physical practice is now understood to have measurable effects on mood, anxiety, and cognitive function. The pathways are both direct — biochemical changes in the body — and indirect — improved self-esteem and a sense of agency. Both matter.</p>\n<p>Take one company as an example. Technology is changing how people engage with Mental Health, for better and worse. Apps, wearables, and online communities provide access, motivation, and accountability that previous generations could only dream of. But they also create new sources of comparison, guilt, and misinformation. The most health-literate users are selective about which tools they adopt and how much they let those tools shape their self-image.</p>\n<p>A different picture emerges from a smaller, more focused player. The social side of Mental Health matters more than most people admit. Doing things with others — joining a class, finding a workout buddy, cooking with friends — dramatically improves adherence. Humans are social creatures, and our habits are socially contagious. Surrounding yourself with people who make healthy choices makes it easier for you to make healthy choices too. It is not cheating; it is strategy.</p>",
+      "featured": false
+    },
+    {
       "id": 99612,
       "category": "health-lifestyle",
       "title": "Sleep Optimization: Myths vs. Reality",
@@ -1252,8 +1262,8 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-09-19T03:12:12.632Z",
-    "totalArticles": 470,
+    "lastUpdated": "2026-09-20T03:28:48.216Z",
+    "totalArticles": 475,
     "newToday": 5,
     "generator": "Template v3",
     "templates": "8 structure types"
